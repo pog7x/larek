@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ViewsHistoryConfig(AppConfig):
+class CartConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "larek.apps.views_history"
+    name = "larek.apps.cart"

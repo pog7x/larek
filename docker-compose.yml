@@ -1,0 +1,46 @@
+version: "2.1"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    links:
+      - pg
+    tty: true
+    depends_on:
+      pg:
+        condition: service_healthy
+    environment:
+      - PROJECT_NAME=larek
+      - POSTGRES_USER=larek_user
+      - POSTGRES_PASSWORD=larek_password
+      - POSTGRES_HOST=pg
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=larek_db
+      - AUTO_RELOAD=true
+      - DEBUG=true
+    command: bash -c "python manage.py migrate"
+
+  pg:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=larek_user
+      - POSTGRES_PASSWORD=larek_password
+      - POSTGRES_DB=larek_db
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U larek_user -d larek_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
