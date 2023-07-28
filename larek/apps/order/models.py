@@ -27,5 +27,10 @@ class Order(models.Model):
     )
     created_at = models.DateTimeField(null=True, verbose_name="Order Created At")
 
+    def __str__(self):
+        return f"Order #{self.id}"
+
     class Meta:
         db_table = "order"
+        verbose_name = "Order"
+        verbose_name_plural = "Orders"

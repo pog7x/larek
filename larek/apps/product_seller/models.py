@@ -37,5 +37,13 @@ class ProductSeller(models.Model):
         verbose_name="Price",
     )
 
+    def __str__(self):
+        return (
+            f"{self.seller} sells {self.product}, price: {self.price}, count:"
+            f" {self.products_count}"
+        )
+
     class Meta:
         db_table = "product_seller"
+        verbose_name = "Product Seller"
+        verbose_name_plural = "Product Sellers"

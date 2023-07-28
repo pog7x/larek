@@ -24,5 +24,10 @@ class Payment(models.Model):
     )
     created_at = models.DateTimeField(null=True, verbose_name="Payment Created At")
 
+    def __str__(self):
+        return f"Payment #{self.id} for Order #{self.order.id}"
+
     class Meta:
         db_table = "payment"
+        verbose_name = "Payment"
+        verbose_name_plural = "Payments"

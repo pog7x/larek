@@ -22,5 +22,10 @@ class ViewsHistory(models.Model):
         related_name="views_history",
     )
 
+    def __str__(self):
+        return f"{self.user} - {self.product}"
+
     class Meta:
         db_table = "views_history"
+        verbose_name = "Views History"
+        verbose_name_plural = "Views History"
