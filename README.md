@@ -1,9 +1,5 @@
 # larek
 
-<p align="center">
-  <img src="./pepe.svg" alt="PEPE"/>
-</p>
-
 ```bash
 python manage.py makemigrations --no-header
 python clear_migrations.py
