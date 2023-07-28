@@ -7,5 +7,10 @@ class Role(models.Model):
         verbose_name="Role Name",
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = "role"
+        verbose_name = "Role"
+        verbose_name_plural = "Roles"

@@ -23,5 +23,10 @@ class Review(models.Model):
     )
     comment = models.TextField(max_length=999, null=True, verbose_name="Review Comment")
 
+    def __str__(self):
+        return f"{self.comment[:30]}..." if self.comment else ""
+
     class Meta:
         db_table = "review"
+        verbose_name = "Review"
+        verbose_name_plural = "Reviews"

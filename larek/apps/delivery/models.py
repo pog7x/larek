@@ -17,5 +17,10 @@ class Delivery(models.Model):
         verbose_name="Verbose",
     )
 
+    def __str__(self):
+        return self.verbose
+
     class Meta:
         db_table = "delivery"
+        verbose_name = "Delivery"
+        verbose_name_plural = "Deliveries"

@@ -31,6 +31,7 @@ class Cart(models.Model):
     order = models.ForeignKey(
         to=Order,
         default=None,
+        blank=True,
         null=True,
         on_delete=models.SET_NULL,
         verbose_name="Order",
@@ -43,5 +44,10 @@ class Cart(models.Model):
         related_name="cart",
     )
 
+    def __str__(self):
+        return f"Cart #{self.id}"
+
     class Meta:
         db_table = "cart"
+        verbose_name = "Cart"
+        verbose_name_plural = "Carts"

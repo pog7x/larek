@@ -23,5 +23,10 @@ class Seller(models.Model):
         verbose_name="Seller Email",
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = "seller"
+        verbose_name = "Seller"
+        verbose_name_plural = "Sellers"

@@ -23,5 +23,10 @@ class Product(models.Model):
         verbose_name="Description",
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = "product"
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
