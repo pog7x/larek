@@ -30,6 +30,8 @@ class Migration(migrations.Migration):
                 ("verbose", models.TextField(null=True, verbose_name="Verbose")),
             ],
             options={
+                "verbose_name": "Delivery",
+                "verbose_name_plural": "Deliveries",
                 "db_table": "delivery",
             },
         ),

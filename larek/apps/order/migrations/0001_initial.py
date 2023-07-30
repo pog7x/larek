@@ -51,6 +51,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "verbose_name": "Order",
+                "verbose_name_plural": "Orders",
                 "db_table": "order",
             },
         ),

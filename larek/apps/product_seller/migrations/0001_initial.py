@@ -57,6 +57,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "verbose_name": "Product Seller",
+                "verbose_name_plural": "Product Sellers",
                 "db_table": "product_seller",
             },
         ),

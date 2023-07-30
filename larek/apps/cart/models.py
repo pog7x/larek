@@ -1,8 +1,11 @@
 from django.db import models
 
 from larek.apps.order.models import Order
-from larek.apps.product.models import Product
-from larek.apps.seller.models import Seller
+
+# from larek.apps.product.models import Product
+from larek.apps.product_seller.models import ProductSeller
+
+# from larek.apps.seller.models import Seller
 from larek.apps.user.models import User
 
 
@@ -11,14 +14,6 @@ class Cart(models.Model):
         default=0,
         null=True,
         verbose_name="Products Count",
-    )
-    product = models.ForeignKey(
-        to=Product,
-        default=None,
-        null=True,
-        on_delete=models.SET_NULL,
-        verbose_name="Product",
-        related_name="cart",
     )
     user = models.ForeignKey(
         to=User,
@@ -37,10 +32,12 @@ class Cart(models.Model):
         verbose_name="Order",
         related_name="cart",
     )
-    seller = models.ManyToManyField(
-        to=Seller,
+    product_seller = models.ForeignKey(
+        to=ProductSeller,
         default=None,
-        verbose_name="Seller",
+        null=True,
+        on_delete=models.SET_NULL,
+        verbose_name="Product Seller",
         related_name="cart",
     )
 

@@ -27,6 +27,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "verbose_name": "Cart",
+                "verbose_name_plural": "Carts",
                 "db_table": "cart",
             },
         ),

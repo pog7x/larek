@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -90,7 +89,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "larek.wsgi.application"
-ASGI_APPLICATION = "larek.asgi.application"
 
 STORAGES = {
     "staticfiles": {
@@ -173,17 +171,13 @@ LOGGING = {
     },
     "root": {
         "handlers": ["console"],
-        "level": "WARNING",
+        "level": "INFO",
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": "INFO",
+            "level": "ERROR",
             "propagate": False,
-        },
-        "daphne": {
-            "handlers": ["console"],
-            "level": "DEBUG",
         },
     },
 }

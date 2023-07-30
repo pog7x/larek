@@ -22,6 +22,8 @@ class Migration(migrations.Migration):
                 ("name", models.TextField(max_length=30, verbose_name="Category Name")),
             ],
             options={
+                "verbose_name": "Catalog Category",
+                "verbose_name_plural": "Catalog Categories",
                 "db_table": "catalog_category",
             },
         ),

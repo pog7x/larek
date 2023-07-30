@@ -1,221 +1,306 @@
 [
-	{
-		"model": "cart.cart",
-		"pk": 1,
-		"fields": {
-			"products_count": 2,
-			"product": 2,
-			"user": 4,
-			"order": null,
-			"seller": [1]
-		}
-	},
-	{
-		"model": "catalog_category.catalogcategory",
-		"pk": 1,
-		"fields": {
-			"name": "Телевизор"
-		}
-	},
-	{
-		"model": "delivery.delivery",
-		"pk": 1,
-		"fields": {
-			"price": 500.0,
-			"order_sum": 0.0,
-			"verbose": "Express"
-		}
-	},
-	{
-		"model": "order.order",
-		"pk": 1,
-		"fields": {
-			"delivery": 1,
-			"user": 4,
-			"city_to": "Люберцы",
-			"address_to": "ул Жопа мира",
-			"created_at": "2023-07-28T12:59:46Z"
-		}
-	},
-	{
-		"model": "payment.payment",
-		"pk": 1,
-		"fields": {
-			"order": 1,
-			"sum": 4000.0,
-			"status": "DONE",
-			"created_at": "2023-07-28T13:02:17Z"
-		}
-	},
-	{
-		"model": "product.product",
-		"pk": 1,
-		"fields": {
-			"name": "LG 100500TV",
-			"catalog_category": 1,
-			"description": "Отличный телевизор"
-		}
-	},
-	{
-		"model": "product.product",
-		"pk": 2,
-		"fields": {
-			"name": "SAMSUNG 228TV-set",
-			"catalog_category": 1,
-			"description": "супер-пупер тв"
-		}
-	},
-	{
-		"model": "product_seller.productseller",
-		"pk": 1,
-		"fields": {
-			"product": 2,
-			"seller": 1,
-			"products_count": 2,
-			"price": 5000.0
-		}
-	},
-	{
-		"model": "review.review",
-		"pk": 1,
-		"fields": {
-			"product": 1,
-			"user": 4,
-			"comment": "good product"
-		}
-	},
-	{
-		"model": "review.review",
-		"pk": 2,
-		"fields": {
-			"product": 1,
-			"user": 2,
-			"comment": "like it!"
-		}
-	},
-	{
-		"model": "review.review",
-		"pk": 3,
-		"fields": {
-			"product": 1,
-			"user": 1,
-			"comment": "bad product"
-		}
-	},
-	{
-		"model": "role.role",
-		"pk": 1,
-		"fields": {
-			"name": "Администратор"
-		}
-	},
-	{
-		"model": "role.role",
-		"pk": 2,
-		"fields": {
-			"name": "Покупатель"
-		}
-	},
-	{
-		"model": "seller.seller",
-		"pk": 1,
-		"fields": {
-			"name": "Рога и копыта",
-			"phone": "7346743",
-			"address": "г Москва, ул Тверская, д 4, офис 15",
-			"email": "roga@mail.ua"
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 1,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": null,
-			"is_superuser": false,
-			"username": "john",
-			"first_name": "John",
-			"last_name": "Lennon",
-			"email": "john.lennon@gmail.com",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:20:39.128Z",
-			"role": 2,
-			"phone": "6125614256",
-			"address": "USA, NY",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 2,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": null,
-			"is_superuser": false,
-			"username": "Uhlenon",
-			"first_name": "Uha",
-			"last_name": "Lennon",
-			"email": "Uha.lennon@gmail.com",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:20:39.132Z",
-			"role": 1,
-			"phone": "7263478643",
-			"address": "Rostov",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 3,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": "2023-07-28T12:31:33.825Z",
-			"is_superuser": true,
-			"username": "admin",
-			"first_name": "",
-			"last_name": "",
-			"email": "",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:28:58.898Z",
-			"role": null,
-			"phone": null,
-			"address": "Paris",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 4,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": null,
-			"is_superuser": false,
-			"username": "client",
-			"first_name": "Buyer1",
-			"last_name": "Buyerer",
-			"email": "buyer@ya.com",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:41:25Z",
-			"role": 2,
-			"phone": "63256725365",
-			"address": "Berlin",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "views_history.viewshistory",
-		"pk": 1,
-		"fields": {
-			"product": 1,
-			"user": 1
-		}
-	}
+{
+    "model": "cart.cart",
+    "pk": 1,
+    "fields": {
+        "products_count": 20,
+        "user": null,
+        "order": null,
+        "product_seller": 1
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 2,
+    "fields": {
+        "products_count": 7,
+        "user": null,
+        "order": null,
+        "product_seller": 3
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 3,
+    "fields": {
+        "products_count": 15,
+        "user": null,
+        "order": null,
+        "product_seller": 3
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 4,
+    "fields": {
+        "products_count": 8,
+        "user": null,
+        "order": null,
+        "product_seller": 4
+    }
+},
+{
+    "model": "catalog_category.catalogcategory",
+    "pk": 1,
+    "fields": {
+        "name": "Телевизоры"
+    }
+},
+{
+    "model": "catalog_category.catalogcategory",
+    "pk": 2,
+    "fields": {
+        "name": "Игровые приставки"
+    }
+},
+{
+    "model": "delivery.delivery",
+    "pk": 1,
+    "fields": {
+        "price": 500.0,
+        "order_sum": 0.0,
+        "verbose": "Express"
+    }
+},
+{
+    "model": "order.order",
+    "pk": 1,
+    "fields": {
+        "delivery": 1,
+        "user": 4,
+        "city_to": "Люберцы",
+        "address_to": "ул Жопа мира",
+        "created_at": "2023-07-28T12:59:46Z"
+    }
+},
+{
+    "model": "payment.payment",
+    "pk": 1,
+    "fields": {
+        "order": 1,
+        "sum": 4000.0,
+        "status": "DONE",
+        "created_at": "2023-07-28T13:02:17Z"
+    }
+},
+{
+    "model": "product.product",
+    "pk": 1,
+    "fields": {
+        "name": "LG 100500TV",
+        "catalog_category": 1,
+        "description": "Отличный телевизор"
+    }
+},
+{
+    "model": "product.product",
+    "pk": 2,
+    "fields": {
+        "name": "SAMSUNG 228TV-set",
+        "catalog_category": 1,
+        "description": "супер-пупер тв"
+    }
+},
+{
+    "model": "product.product",
+    "pk": 3,
+    "fields": {
+        "name": "xbok5072",
+        "catalog_category": 2,
+        "description": "игровая приствОчка"
+    }
+},
+{
+    "model": "product_seller.productseller",
+    "pk": 1,
+    "fields": {
+        "product": 2,
+        "seller": 1,
+        "products_count": 0,
+        "price": 5000.0
+    }
+},
+{
+    "model": "product_seller.productseller",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "seller": 1,
+        "products_count": 5,
+        "price": 10000.0
+    }
+},
+{
+    "model": "product_seller.productseller",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "seller": 2,
+        "products_count": 4,
+        "price": 12121.0
+    }
+},
+{
+    "model": "product_seller.productseller",
+    "pk": 4,
+    "fields": {
+        "product": 3,
+        "seller": 2,
+        "products_count": 3,
+        "price": 7871.0
+    }
+},
+{
+    "model": "review.review",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "user": 4,
+        "comment": "good product"
+    }
+},
+{
+    "model": "review.review",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "user": 2,
+        "comment": "like it!рвыпрфмвпмфвпымапвымпрфвмыпмфывпмпфрмывпфмывпмпрвы"
+    }
+},
+{
+    "model": "review.review",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "user": 1,
+        "comment": "bad product"
+    }
+},
+{
+    "model": "role.role",
+    "pk": 1,
+    "fields": {
+        "name": "Администратор"
+    }
+},
+{
+    "model": "role.role",
+    "pk": 2,
+    "fields": {
+        "name": "Покупатель"
+    }
+},
+{
+    "model": "seller.seller",
+    "pk": 1,
+    "fields": {
+        "name": "Рога и копыта",
+        "phone": "7346743",
+        "address": "г Москва, ул Тверская, д 4, офис 15",
+        "email": "roga@mail.ua"
+    }
+},
+{
+    "model": "seller.seller",
+    "pk": 2,
+    "fields": {
+        "name": "Кулагин и партнеры",
+        "phone": "632756725",
+        "address": "Мира жопа",
+        "email": "kulagin@ex.ru"
+    }
+},
+{
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "john",
+        "first_name": "John",
+        "last_name": "Lennon",
+        "email": "john.lennon@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-28T12:20:39.128Z",
+        "role": 2,
+        "phone": "6125614256",
+        "address": "USA, NY",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "user.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Uhlenon",
+        "first_name": "Uha",
+        "last_name": "Lennon",
+        "email": "Uha.lennon@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-28T12:20:39.132Z",
+        "role": 1,
+        "phone": "7263478643",
+        "address": "Rostov",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "user.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
+        "last_login": "2023-07-28T12:31:33.825Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-28T12:28:58.898Z",
+        "role": null,
+        "phone": null,
+        "address": "Paris",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "user.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "client",
+        "first_name": "Buyer1",
+        "last_name": "Buyerer",
+        "email": "buyer@ya.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-28T12:41:25Z",
+        "role": 2,
+        "phone": "63256725365",
+        "address": "Berlin",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "views_history.viewshistory",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "user": 1
+    }
+}
 ]

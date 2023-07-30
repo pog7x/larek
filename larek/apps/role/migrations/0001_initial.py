@@ -22,6 +22,8 @@ class Migration(migrations.Migration):
                 ("name", models.TextField(max_length=30, verbose_name="Role Name")),
             ],
             options={
+                "verbose_name": "Role",
+                "verbose_name_plural": "Roles",
                 "db_table": "role",
             },
         ),

@@ -6,7 +6,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("product", "0001_initial"),
+        ("product", "0002_initial"),
     ]
 
     operations = [
@@ -41,6 +41,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "verbose_name": "Review",
+                "verbose_name_plural": "Reviews",
                 "db_table": "review",
             },
         ),

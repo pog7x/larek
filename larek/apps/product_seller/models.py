@@ -26,11 +26,6 @@ class ProductSeller(models.Model):
         null=True,
         verbose_name="Products Count",
     )
-    products_count = models.IntegerField(
-        default=0,
-        null=True,
-        verbose_name="Products Count",
-    )
     price = models.FloatField(
         default=0,
         null=True,

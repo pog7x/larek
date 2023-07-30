@@ -9,8 +9,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("auth", "0012_alter_user_first_name_max_length"),
         ("role", "0001_initial"),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
@@ -147,6 +147,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "verbose_name": "User",
+                "verbose_name_plural": "Users",
                 "db_table": "user",
             },
             managers=[
