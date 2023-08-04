@@ -881,6 +881,28 @@ var Product = function(){
     };
 };
 Product().init();
+var CatalogSorting = function(){
+    var $sortBy = $('.Sort-sortBy');
+    return {
+        init: function(e){
+            $sortBy.on('click', function(e){
+                e.preventDefault();
+                $('.Sort-sortBy').each(function() {
+                    if ( !$(this).is(e.target) ) {
+                        $(this).removeClass('Sort-sortBy_dec Sort-sortBy_inc')
+                    }
+                });
+                if ( (!$(e.target).hasClass('Sort-sortBy_dec')) && (!$(e.target).hasClass('Sort-sortBy_inc')) ) {
+                    $(e.target).addClass('Sort-sortBy_inc')
+                } else {
+                    $(e.target).toggleClass('Sort-sortBy_dec')
+                    $(e.target).toggleClass('Sort-sortBy_inc')
+                };
+            });
+        }
+    };
+};
+CatalogSorting().init();
 var ProgressPayment = function(){
     return {
         init: function(){

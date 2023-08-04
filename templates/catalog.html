@@ -75,13 +75,13 @@
             </div>
             <div class="Section-content">
                 <div class="Sort">
-                    <div class="Sort-title">Сортировать по:
+                    <div class="Sort-title">Сортировать по: {{ request.GET }}
                     </div>
                     <div class="Sort-variants">
-                        <a class="Sort-sortBy Sort-sortBy_dec" href="#">Популярности</a>
-                        <a class="Sort-sortBy" href="#">Цене</a>
-                        <a class="Sort-sortBy" href="#">Отзывам</a>
-                        <a class="Sort-sortBy Sort-sortBy_inc" href="#">Новизне</a>
+                        <a class="Sort-sortBy {% if sort_by == 'sort_popular_desc' %} Sort-sortBy_inc {% elif sort_by == 'sort_popular_asc' %} Sort-sortBy_dec {% else %}{% endif %}">Популярности</a>
+                        <a class="Sort-sortBy {% if sort_by == 'sort_price_desc' %} Sort-sortBy_inc {% elif sort_by == 'sort_price_asc' %} Sort-sortBy_dec {% else %}{% endif %}">Цене</a>
+                        <a class="Sort-sortBy {% if sort_by == 'sort_review_desc' %} Sort-sortBy_inc {% elif sort_by == 'sort_review_asc' %} Sort-sortBy_dec {% else %}{% endif %}">Отзывам</a>
+                        <a class="Sort-sortBy {% if sort_by == 'sort_id_desc' %} Sort-sortBy_inc {% elif sort_by == 'sort_id_asc' %} Sort-sortBy_dec {% else %}{% endif %}">Новизне</a>
                     </div>
                 </div>
                 <div class="Cards">
