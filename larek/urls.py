@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import path
 
 from larek.apps.cart.views import CartDeleteView, CartProductsCountView, CartView
-from larek.apps.pepe.views import pepe, pepe1
 from larek.apps.product.views import (
     CatalogView,
     ProductDetailView,
@@ -44,8 +43,6 @@ from larek.apps.user.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("pepe/", pepe),
-    path("pepe_1/", pepe1),
     # cart
     path("cart/", CartView.as_view(), name="cart"),
     path("cart/<int:cart_id>/", CartDeleteView.as_view(), name="delete_cart"),
