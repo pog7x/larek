@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     "larek.apps.order",
     "larek.apps.payment",
     "larek.apps.cart",
-    "larek.apps.pepe",
 ]
 
 AUTH_USER_MODEL = "user.User"
