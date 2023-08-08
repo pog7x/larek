@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    "rest_framework",
     "larek.apps.banner",
     "larek.apps.delivery",
     "larek.apps.discount",
@@ -175,7 +176,7 @@ LOGGING = {
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": "ERROR",
+            "level": "INFO",
             "propagate": False,
         },
     },
