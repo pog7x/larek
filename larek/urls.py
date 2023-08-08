@@ -1,74 +1,34 @@
-"""
-URL configuration for larek project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
-from larek.apps.cart.views import CartDeleteView, CartProductsCountView, CartView
-from larek.apps.product.views import (
-    CatalogView,
-    ProductDetailView,
-    about,
-    comparison,
-    index,
-    oneorder,
-    order,
-    payment,
-    paymentsomeone,
-    progresspayment,
-    sale,
-)
-from larek.apps.user.views import (
-    account,
-    email,
-    historyorder,
-    login,
-    password,
-    profile,
-    registration,
-)
+from larek.apps.cart.views import CartViewSet
+from larek.apps.catalog_category.views import CatalogCategoryViewSet
+from larek.apps.order.views import OrderViewSet
+from larek.apps.payment.views import PaymentViewSet
+from larek.apps.product.views import ProductViewSet
+from larek.apps.product_seller.views import ProductSellerViewSet
+from larek.apps.review.views import ReviewViewSet
+from larek.apps.role.views import RoleViewSet
+from larek.apps.seller.views import SellerViewSet
+from larek.apps.user.views import UserViewSet
+from larek.apps.views_history.views import ViewsHistoryViewSet
+
+router = routers.SimpleRouter(trailing_slash=False)
+
+router.register(r"cart", CartViewSet)
+router.register(r"catalog_category", CatalogCategoryViewSet)
+router.register(r"order", OrderViewSet)
+router.register(r"payment", PaymentViewSet)
+router.register(r"product", ProductViewSet)
+router.register(r"product_seller", ProductSellerViewSet)
+router.register(r"review", ReviewViewSet)
+router.register(r"role", RoleViewSet)
+router.register(r"seller", SellerViewSet)
+router.register(r"user", UserViewSet)
+router.register(r"views_history", ViewsHistoryViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # cart
-    path("cart/", CartView.as_view(), name="cart"),
-    path("cart/<int:cart_id>/", CartDeleteView.as_view(), name="delete_cart"),
-    path(
-        "cart/<int:cart_id>/products_count/",
-        CartProductsCountView.as_view(),
-        name="cart_products_count",
-    ),
-    # user
-    path("registration/", registration, name="registration"),
-    path("login/", login, name="login"),
-    path("email/", email, name="email"),
-    path("password/", password, name="password"),
-    path("account/", account, name="account"),
-    path("profile/", profile, name="profile"),
-    path("historyorder/", historyorder, name="historyorder"),
-    # product
-    path("", index, name="index"),
-    path("about/", about, name="about"),
-    path("sale/", sale, name="sale"),
-    path("catalog/", CatalogView.as_view(), name="catalog"),
-    path("comparison/", comparison, name="comparison"),
-    path("oneorder/", oneorder, name="oneorder"),
-    path("order/", order, name="order"),
-    path("payment/", payment, name="payment"),
-    path("paymentsomeone/", paymentsomeone, name="paymentsomeone"),
-    path("progresspayment/", progresspayment, name="progresspayment"),
-    path("product/<int:product_id>/", ProductDetailView.as_view(), name="product"),
+    path("api/", include((router.urls))),
 ]
