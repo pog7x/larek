@@ -1,11 +1,7 @@
 from django.db import models
 
 from larek.apps.order.models import Order
-
-# from larek.apps.product.models import Product
 from larek.apps.product_seller.models import ProductSeller
-
-# from larek.apps.seller.models import Seller
 from larek.apps.user.models import User
 
 
