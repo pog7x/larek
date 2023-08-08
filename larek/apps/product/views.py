@@ -2,8 +2,8 @@ import logging
 
 from django.shortcuts import render
 from django.views import View
+
 from larek.apps.product.forms import CatalogFilterForm
-from larek.apps.product.models import Product
 from larek.apps.product_seller.models import ProductSeller
 
 logger = logging.getLogger(__name__)
@@ -72,7 +72,7 @@ class CatalogView(View):
             price_gte, price_lte = price.split(";") if price else (None, None)
             name_like = request.GET.get("name_like")
             in_stock = request.GET.get("in_stock")
-            free_delivery = request.GET.get("free_delivery")
+            request.GET.get("free_delivery")
 
             # sorting
             order_by = "-price"

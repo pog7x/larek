@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from larek.apps.cart.views import CartDeleteView, CartProductsCountView, CartView
 from larek.apps.pepe.views import pepe, pepe1
 from larek.apps.product.views import (
     CatalogView,
@@ -40,7 +41,6 @@ from larek.apps.user.views import (
     profile,
     registration,
 )
-from larek.apps.cart.views import CartView, CartDeleteView, CartProductsCountView
 
 urlpatterns = [
     path("admin/", admin.site.urls),

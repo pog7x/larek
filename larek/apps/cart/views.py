@@ -1,10 +1,10 @@
 import logging
 
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import HttpResponse, redirect, render
 from django.views import View
+
 from larek.apps.cart.models import Cart
 from larek.apps.product_seller.models import ProductSeller
-
 
 logger = logging.getLogger(__name__)
 
