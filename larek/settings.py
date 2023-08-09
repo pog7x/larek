@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    "django_filters",
     "rest_framework",
     "larek.apps.banner",
     "larek.apps.delivery",

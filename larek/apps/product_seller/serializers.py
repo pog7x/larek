@@ -7,3 +7,4 @@ class ProductSellerSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductSeller
         fields = "__all__"
+        depth = 3
