@@ -1,9 +1,9 @@
 import os
 
-for name, folders, files in os.walk(f"{os.curdir}/larek/apps"):
+for name, folders, files in os.walk(os.curdir):
     if name.endswith("migrations"):
-        for f in files:
-            if f != "__init__.py":
-                migr_path = f"{name}/{f}"
-                print("Cleaning up migrations in:", migr_path)
+        for file in files:
+            if file != "__init__.py":
+                migr_path = f"{name}/{file}"
+                print("Cleaning up migration:", migr_path)
                 os.remove(migr_path)

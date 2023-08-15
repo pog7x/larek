@@ -7,6 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("cart", "0001_initial"),
+        ("product_seller", "0001_initial"),
         ("order", "0001_initial"),
     ]
 
@@ -22,6 +23,18 @@ class Migration(migrations.Migration):
                 related_name="cart",
                 to="order.order",
                 verbose_name="Order",
+            ),
+        ),
+        migrations.AddField(
+            model_name="cart",
+            name="product_seller",
+            field=models.ForeignKey(
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="cart",
+                to="product_seller.productseller",
+                verbose_name="Product Seller",
             ),
         ),
     ]

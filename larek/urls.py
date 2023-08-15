@@ -14,6 +14,8 @@ from larek.apps.seller.views import SellerViewSet
 from larek.apps.user.views import UserViewSet
 from larek.apps.views_history.views import ViewsHistoryViewSet
 
+from django.views.generic import TemplateView
+
 router = routers.SimpleRouter(trailing_slash=False)
 
 router.register(r"cart", CartViewSet)
@@ -31,4 +33,8 @@ router.register(r"views_history", ViewsHistoryViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include((router.urls))),
+    path("catalog/", TemplateView.as_view(template_name="catalog.html")),
+    path(
+        "product/<int:product_id>/", TemplateView.as_view(template_name="product.html")
+    ),
 ]

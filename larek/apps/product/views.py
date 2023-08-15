@@ -5,5 +5,5 @@ from larek.apps.product.serializers import ProductSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.prefetch_related("product_seller", "review")
     serializer_class = ProductSerializer

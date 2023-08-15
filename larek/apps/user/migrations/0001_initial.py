@@ -9,8 +9,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("role", "0001_initial"),
         ("auth", "0012_alter_user_first_name_max_length"),
+        ("role", "0001_initial"),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("product", "0002_initial"),
+        ("product", "0001_initial"),
     ]
 
     operations = [

@@ -952,6 +952,17 @@ select + select {
     line-height: 46px;
 }
 
+.form .filter-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 25px;
+    border-radius: 0px;
+    border: 1px solid #e0e0e0;
+    font-size: 18px;
+    background-color: #f9fafc;
+    line-height: 46px;
+}
+
 .form .form-input_error {
     border-color: #f26d7d;
 }
@@ -2135,11 +2146,6 @@ label.toggle {
     min-height: 58px;
     text-transform: uppercase;
     font-weight: 500;
-}
-
-.rangePrice {
-    display: inline-block;
-    margin-left: 10px;
 }
 
 .range .irs {

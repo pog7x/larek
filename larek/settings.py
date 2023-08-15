@@ -67,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "larek.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "larek.urls"

@@ -7,7 +7,7 @@ class ProductSellerFilter(rest_framework.FilterSet):
     in_stock = rest_framework.BooleanFilter(method="filter_in_stock")
 
     def filter_in_stock(self, queryset, name, value):
-        return queryset.filter(products_count__lte=0) if value else queryset
+        return queryset.filter(products_count__gt=0) if value is True else queryset
 
     class Meta:
         model = ProductSeller
