@@ -16,7 +16,7 @@ var mix = {
 		this.product = await this.fetchProduct(prod_id);
 
 		for (const ps of this.product.product_seller) {
-			this.price = ps.price;
+			this.price = ps.price.toLocaleString();
 			if (ps.id == this.product_seller) {
 				break;
 			}

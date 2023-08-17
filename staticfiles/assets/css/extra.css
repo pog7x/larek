@@ -558,6 +558,16 @@
     min-width: 250px;
 }
 
+.Card__product__image_link {
+    max-width: 240px;
+    max-height: 160px;
+}
+
+.Card__product__image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 @media screen and (max-width: 990px) {
     .Cards .Card {
         width: 46%;
@@ -2398,6 +2408,7 @@ a.Cart-title {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5em;
+    white-space: pre-line;
 }
 
 .Comment-avatar {
@@ -4145,6 +4156,11 @@ a.Cart-title {
 .ProductCard-photo img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.ProductCard-photo__product {
+    max-width: 230px;
+    max-height: 359px;
 }
 
 @media screen and (max-width: 990px) {

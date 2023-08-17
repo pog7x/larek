@@ -7,18 +7,18 @@
 			<div class="Product">
 				<div class="ProductCard">
 					<div class="ProductCard-look">
-						<div class="ProductCard-photo">
-							<img src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="bigGoods.png" />
+						<div class="ProductCard-photo ProductCard-photo__product">
+							<img src="https://avatars.mds.yandex.net/get-mpic/1927699/img_id2340870575975482082.jpeg/orig" alt="bigGoods.png" />
 						</div>
 						<div class="ProductCard-picts">
-							<a class="ProductCard-pict ProductCard-pict_ACTIVE" href="{% static 'assets/img/content/home/bigGoods.png' %}">
-								<img src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="bigGoods.png" />
+							<a class="ProductCard-pict ProductCard-pict_ACTIVE" href="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig">
+								<img src="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig" alt="bigGoods.png" />
 							</a>
-							<a class="ProductCard-pict" href="{% static 'assets/img/content/home/slider.png' %}">
-								<img src="{% static 'assets/img/content/home/slider.png' %}" alt="slider.png" />
+							<a class="ProductCard-pict" href="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig">
+								<img src="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig" alt="slider.png" />
 							</a>
-							<a class="ProductCard-pict" href="{% static 'assets/img/content/home/videoca.png' %}">
-								<img src="{% static 'assets/img/content/home/videoca.png' %}" alt="videoca.png" />
+							<a class="ProductCard-pict" href="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig">
+								<img src="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig" alt="videoca.png" />
 							</a>
 						</div>
 					</div>
@@ -27,7 +27,7 @@
 							<h2 class="ProductCard-title">${ product.name }$</h2>
 							<div class="ProductCard-info">
 								<div class="ProductCard-cost">
-									<div class="ProductCard-price">$${ price }$</div>
+									<div class="ProductCard-price">$ ${ price }$</div>
 								</div>
 							</div>
 						</div>
@@ -152,7 +152,7 @@
 													<div class="Order-info">
 														<div class="Order-infoType">Стоимость:</div>
 														<div class="Order-infoContent">
-                                                            <span class="Order-price">${ ps.price }$$</span>
+                                                            <span class="Order-price">${ ps.price.toLocaleString() }$$</span>
                                                         </div>
 													</div>
 												</div>
@@ -171,9 +171,6 @@
 							</div>
 						</div>
 						<div class="Tabs-block" id="reviews">
-							<header class="Section-header">
-								<h3 class="Section-title">${ product.review && product.review.length ? product.review.length : 0 }$ отзыв(а)</h3>
-							</header>
 							<div class="Comments">
 								<div class="Comment"
                                     v-for="(r, index) in product.review"
