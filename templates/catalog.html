@@ -92,7 +92,7 @@
 				<div class="Cards">
 					<div class="Card" v-for="(ps, index) in product_sellers" :key="index">
 						<a class="Card__product__image_link" :href="`/product/${ps.product.id}/?product_seller=${ps.id}`">
-							<img class="Card__product__image" src="https://avatars.mds.yandex.net/get-mpic/1927699/img_id2340870575975482082.jpeg/orig" :alt="ps.product.name" />
+							<img class="Card__product__image" :src="ps.product.images[0].image" :alt="ps.product.name" />
 						</a>
 						<div class="Card-content">
 							<strong class="Card-title">

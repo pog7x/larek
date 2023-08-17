@@ -50,4 +50,35 @@ class Migration(migrations.Migration):
                 "db_table": "product",
             },
         ),
+        migrations.CreateModel(
+            name="ProductImage",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=128)),
+                ("image", models.FileField(null=True, upload_to="product")),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="images",
+                        to="product.product",
+                        verbose_name="Product",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "Product image",
+                "verbose_name_plural": "Product images",
+                "db_table": "product_image",
+                "ordering": ["pk"],
+            },
+        ),
     ]

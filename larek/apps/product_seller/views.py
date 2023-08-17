@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class ProductSellerViewSet(viewsets.ModelViewSet):
-    queryset = ProductSeller.objects.prefetch_related("product")
+    queryset = ProductSeller.objects.prefetch_related("product", "product__images")
     ORDERING_VIEWS_HISTORY_COUNT = "product__views_history__count"
     ORDERING_REVIEW_COUNT = "product__review__count"
     ORDERING_PRODUCT_ID = "product__id"

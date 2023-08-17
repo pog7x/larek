@@ -7,6 +7,7 @@ var mix = {
 			product: {},
 			price: null,
 			product_seller: null,
+			active_photo: 0,
 		};
 	},
 	async mounted() {
@@ -23,6 +24,9 @@ var mix = {
 		}
 	},
 	methods: {
+		setActivePhoto(index) {
+			this.active_photo = index;
+		},
 		async createReviewAndFetchProduct() {
 			await this.createReview();
 			this.comment_text = null;

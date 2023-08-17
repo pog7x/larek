@@ -1,7 +1,8 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 
+from django.conf import settings
 from larek.apps.cart.views import CartViewSet
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.order.views import OrderViewSet
@@ -13,7 +14,7 @@ from larek.apps.role.views import RoleViewSet
 from larek.apps.seller.views import SellerViewSet
 from larek.apps.user.views import UserViewSet
 from larek.apps.views_history.views import ViewsHistoryViewSet
-
+from django.views.static import serve
 from django.views.generic import TemplateView
 
 router = routers.SimpleRouter(trailing_slash=False)
@@ -37,4 +38,5 @@ urlpatterns = [
     path(
         "product/<int:product_id>/", TemplateView.as_view(template_name="product.html")
     ),
+    re_path(r"^media/(?P<path>.*)$", serve),
 ]

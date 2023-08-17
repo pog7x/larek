@@ -8,17 +8,19 @@
 				<div class="ProductCard">
 					<div class="ProductCard-look">
 						<div class="ProductCard-photo ProductCard-photo__product">
-							<img src="https://avatars.mds.yandex.net/get-mpic/1927699/img_id2340870575975482082.jpeg/orig" alt="bigGoods.png" />
+							<img
+								:src="product?.images ? product.images[active_photo].image : ''"
+								:alt="product?.images ? product.images[active_photo].name : ''"
+							/>
 						</div>
 						<div class="ProductCard-picts">
-							<a class="ProductCard-pict ProductCard-pict_ACTIVE" href="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig">
-								<img src="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig" alt="bigGoods.png" />
-							</a>
-							<a class="ProductCard-pict" href="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig">
-								<img src="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig" alt="slider.png" />
-							</a>
-							<a class="ProductCard-pict" href="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig">
-								<img src="https://avatars.mds.yandex.net/get-mpic/5346941/img_id3210180719940129596.jpeg/orig" alt="videoca.png" />
+							<a
+								v-for="(image, index) in product.images" :key="index"
+								class="ProductCard-pict"
+								:class="{'ProductCard-pict_ACTIVE': active_photo === index}"
+								@click.prevent="setActivePhoto(index)"
+							>
+								<img :src="image.image" :alt="image.name" />
 							</a>
 						</div>
 					</div>
@@ -95,7 +97,8 @@
 							<p>
                                 ${ product.description }$
 							</p>
-							<img class="pict pict_right" src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="bigGoods.png" />
+							<!-- <img class="pict pict_right" src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="bigGoods.png" /> -->
+							<img class="pict pict_right" :src="product?.images ? product.images[0].image : ''" alt="bigGoods.png" />
 							<ul>
 								<li>Lorem ipsum dolor sit amet, consectetuer</li>
 								<li>adipiscing elit doli.&#32;<em>Aenean</em>&#32;commodo ligula</li>
