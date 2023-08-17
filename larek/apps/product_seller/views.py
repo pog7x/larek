@@ -2,7 +2,7 @@ import logging
 
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, viewsets
+from rest_framework import filters, viewsets, pagination
 
 from larek.apps.product_seller.filters import ProductSellerFilter
 from larek.apps.product_seller.models import ProductSeller
@@ -11,8 +11,13 @@ from larek.apps.product_seller.serializers import ProductSellerSerializer
 logger = logging.getLogger(__name__)
 
 
+class ProductSellerPagination(pagination.PageNumberPagination):
+    page_size = 9
+
+
 class ProductSellerViewSet(viewsets.ModelViewSet):
     queryset = ProductSeller.objects.prefetch_related("product", "product__images")
+
     ORDERING_VIEWS_HISTORY_COUNT = "product__views_history__count"
     ORDERING_REVIEW_COUNT = "product__review__count"
     ORDERING_PRODUCT_ID = "product__id"
@@ -27,6 +32,8 @@ class ProductSellerViewSet(viewsets.ModelViewSet):
         ORDERING_PRODUCT_ID,
         ORDERING_PRICE,
     ]
+
+    pagination_class = ProductSellerPagination
 
     def get_queryset(self):
         ordering_param: str = self.request.query_params.get("ordering")

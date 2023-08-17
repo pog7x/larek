@@ -7,7 +7,9 @@ var mix = {
 				product__name__icontains: '',
 				in_stock: '',
 				ordering: '-product__views_history__count',
+				page: 1,
 			},
+			max_count: 1,
 			product_sellers: null,
 			loading: false,
 			errored: false,
@@ -29,6 +31,7 @@ var mix = {
 		const params = Object.fromEntries(urlSearchParams.entries());
 		this.query = { ...this.query, ...params };
 		this.order_dir = this.query.ordering.startsWith('-') ? '-' : '';
+		this.changePage(this.query.page);
 		this.updateSearch();
 		this.fetchProductSeller();
 	},
@@ -45,7 +48,8 @@ var mix = {
 					params: { ...this.query },
 				})
 				.then((response) => {
-					this.product_sellers = response.data;
+					this.product_sellers = response.data.results;
+					this.max_count = response.data.count;
 				})
 				.catch((error) => {
 					console.log(error);
@@ -62,6 +66,18 @@ var mix = {
 		updateSearch() {
 			const new_search = new URLSearchParams([...Object.entries(this.query)]).toString();
 			window.history.replaceState(null, null, `?${new_search}`);
+		},
+		changePage(param) {
+			const new_page = Number(param);
+			const max_pages = Math.ceil(Number(this.max_count) / 9);
+			console.log(new_page, max_pages);
+			if (new_page <= 0 || new_page > max_pages) {
+				this.query.page = 1;
+			} else {
+				this.query.page = new_page;
+			}
+			this.fetchProductSeller();
+			this.updateSearch();
 		},
 	},
 };

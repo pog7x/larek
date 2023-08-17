@@ -38,5 +38,5 @@ urlpatterns = [
     path(
         "product/<int:product_id>/", TemplateView.as_view(template_name="product.html")
     ),
-    re_path(r"^media/(?P<path>.*)$", serve),
+    re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]

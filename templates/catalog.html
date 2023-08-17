@@ -114,20 +114,20 @@
 				</div>
 				<div class="Pagination">
 					<div class="Pagination-ins">
-						<a class="Pagination-element Pagination-element_prev" href="#">
-							<img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="prevPagination.jpg" />
+						<a class="Pagination-element Pagination-element_prev" @click.prevent="changePage(Number(query.page) - 1)">
+							<img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="previous page" />
 						</a>
-						<a class="Pagination-element Pagination-element_current" href="#">
-							<span class="Pagination-text">1</span>
+						<a class="Pagination-element Pagination-element_current">
+							<span class="Pagination-text">${ query.page }$</span>
 						</a>
-						<a class="Pagination-element" href="#">
-							<span class="Pagination-text">2</span>
+						<a class="Pagination-element">
+							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 1)">${ Number(query.page) + 1 }$</span>
 						</a>
-						<a class="Pagination-element" href="#">
-							<span class="Pagination-text">3</span>
+						<a class="Pagination-element">
+							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 2)">${ Number(query.page) + 2 }$</span>
 						</a>
-						<a class="Pagination-element Pagination-element_prev" href="#">
-							<img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="nextPagination.jpg" />
+						<a class="Pagination-element Pagination-element_prev" @click.prevent="changePage(Number(query.page) + 1)">
+							<img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="next page" />
 						</a>
 					</div>
 				</div>
