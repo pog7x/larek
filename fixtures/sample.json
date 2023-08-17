@@ -89,6 +89,34 @@
     }
 },
 {
+    "model": "catalog_category.catalogcategory",
+    "pk": 8,
+    "fields": {
+        "name": "Кухонная техника"
+    }
+},
+{
+    "model": "catalog_category.catalogcategory",
+    "pk": 9,
+    "fields": {
+        "name": "Фотоаппараты"
+    }
+},
+{
+    "model": "catalog_category.catalogcategory",
+    "pk": 10,
+    "fields": {
+        "name": "Наушники"
+    }
+},
+{
+    "model": "catalog_category.catalogcategory",
+    "pk": 11,
+    "fields": {
+        "name": "Стиральные машины"
+    }
+},
+{
     "model": "delivery.delivery",
     "pk": 1,
     "fields": {
@@ -815,7 +843,7 @@
     "pk": 5,
     "fields": {
         "password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-        "last_login": "2023-08-16T10:34:12.716Z",
+        "last_login": "2023-08-17T07:28:21.326Z",
         "is_superuser": true,
         "username": "pog7x",
         "first_name": "",
@@ -853,6 +881,22 @@
     "fields": {
         "product": 12,
         "user": 2
+    }
+},
+{
+    "model": "views_history.viewshistory",
+    "pk": 4,
+    "fields": {
+        "product": 1,
+        "user": 1
+    }
+},
+{
+    "model": "views_history.viewshistory",
+    "pk": 5,
+    "fields": {
+        "product": 1,
+        "user": 1
     }
 }
 ]

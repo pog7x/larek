@@ -22,12 +22,8 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                (
-                    "comment",
-                    models.TextField(
-                        max_length=999, null=True, verbose_name="Review Comment"
-                    ),
-                ),
+                ("comment", models.TextField(null=True, verbose_name="Review Comment")),
+                ("created_at", models.DateTimeField(auto_now_add=True, null=True)),
                 (
                     "product",
                     models.ForeignKey(

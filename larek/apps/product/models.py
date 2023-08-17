@@ -18,7 +18,6 @@ class Product(models.Model):
         related_name="product",
     )
     description = models.TextField(
-        max_length=999,
         null=True,
         verbose_name="Description",
     )

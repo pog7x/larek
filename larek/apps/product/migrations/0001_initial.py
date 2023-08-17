@@ -30,9 +30,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "description",
-                    models.TextField(
-                        max_length=999, null=True, verbose_name="Description"
-                    ),
+                    models.TextField(null=True, verbose_name="Description"),
                 ),
                 (
                     "catalog_category",

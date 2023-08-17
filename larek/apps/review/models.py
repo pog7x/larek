@@ -21,7 +21,8 @@ class Review(models.Model):
         verbose_name="User",
         related_name="review",
     )
-    comment = models.TextField(max_length=999, null=True, verbose_name="Review Comment")
+    comment = models.TextField(null=True, verbose_name="Review Comment")
+    created_at = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
         return f"{self.comment[:30]}..." if self.comment else ""
