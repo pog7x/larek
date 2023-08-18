@@ -24,6 +24,15 @@ createApp({
 		submitMainSearch() {
 			window.location.replace(`/catalog?product__name__icontains=${this.main_search}`);
 		},
+		createCart(payload) {
+			axios
+				.post('http://0.0.0.0:8000/api/cart', payload)
+				.catch((error) => {
+					console.log(error);
+					this.errored = true;
+				})
+				.finally(() => (this.loading = false));
+		},
 	},
 	mounted() {
 		this.getCatalogCategories();

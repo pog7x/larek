@@ -2,7 +2,7 @@ import logging
 
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, viewsets, pagination
+from rest_framework import filters, pagination, viewsets
 
 from larek.apps.product_seller.filters import ProductSellerFilter
 from larek.apps.product_seller.models import ProductSeller
