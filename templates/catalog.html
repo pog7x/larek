@@ -120,11 +120,11 @@
 						<a class="Pagination-element Pagination-element_current">
 							<span class="Pagination-text">[[ query.page ]]</span>
 						</a>
-						<a class="Pagination-element">
-							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 1)">[[ Number(query.page) + 1 ]]</span>
+						<a class="Pagination-element" @click.prevent="changePage(Number(query.page) + 1)">
+							<span class="Pagination-text">[[ Number(query.page) + 1 ]]</span>
 						</a>
-						<a class="Pagination-element">
-							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 2)">[[ Number(query.page) + 2 ]]</span>
+						<a class="Pagination-element" @click.prevent="changePage(Number(query.page) + 2)">
+							<span class="Pagination-text">[[ Number(query.page) + 2 ]]</span>
 						</a>
 						<a class="Pagination-element Pagination-element_prev" @click.prevent="changePage(Number(query.page) + 1)">
 							<img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="Next page" />

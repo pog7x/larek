@@ -81,7 +81,7 @@
 			<div class="wrap">
 				<div class="row Header-rowMain">
 					<div class="row-block Header-logo">
-						<a class="logo" href="index.html">
+						<a class="logo" href="/">
 							<img class="logo-image" src="{% static 'assets/img/logo.png' %}" alt="logo.png" />
 						</a>
 					</div>
@@ -157,7 +157,14 @@
 					<div class="Header-search">
 						<div class="search">
 							<form class="form form_search" @submit.prevent="submitMainSearch">
-								<input class="search-input" id="query" name="query" type="text" placeholder="NVIDIA GeForce RTX 3060" v-model="main_search"/>
+								<input
+									class="search-input"
+									id="query"
+									name="query"
+									type="text"
+									placeholder="NVIDIA GeForce RTX 3060"
+									v-model="main_search"
+								/>
 								<button class="search-button" type="submit" name="search" id="search">
 									<img src="{% static 'assets/img/icons/search.svg' %}" alt="search.svg" />
 									Поиск
@@ -173,7 +180,7 @@
 			<div class="wrap">
 				<div class="row Footer-main">
 					<div class="row-block">
-						<a class="logo Footer-logo" href="index.html">
+						<a class="logo Footer-logo" href="/">
 							<img class="logo-image" src="{% static 'assets/img/logo_footer.png' %}" alt="logo_footer.png" />
 						</a>
 						<p>

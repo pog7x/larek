@@ -35,6 +35,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include((router.urls))),
     path("catalog/", TemplateView.as_view(template_name="catalog.html")),
+    path("about/", TemplateView.as_view(template_name="about.html")),
+    path("", TemplateView.as_view(template_name="index.html")),
     path(
         "product/<int:product_id>/", TemplateView.as_view(template_name="product.html")
     ),
