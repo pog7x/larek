@@ -14,4 +14,5 @@ class ProductSellerFilter(rest_framework.FilterSet):
         fields = {
             "price": ["gte", "lte"],
             "product__name": ["icontains"],
+            "product__catalog_category__id": ["exact"],
         }
