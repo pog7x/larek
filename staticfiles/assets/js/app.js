@@ -1,5 +1,5 @@
 const { createApp } = Vue;
 createApp({
-	delimiters: ['${', '}$'],
+	delimiters: ['[[', ']]'],
 	mixins: [window.mix ? window.mix : {}],
 }).mount('#app');

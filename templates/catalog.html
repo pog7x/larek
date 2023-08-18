@@ -85,7 +85,7 @@
 							:class="[query.ordering && query.ordering.endsWith(ob.id) ? `Sort-sortBy_${order_dir_map[order_dir]}` : '']"
 							class="Sort-sortBy"
 							@click="setSort(ob.id)"
-							>${ ob.title }$
+							>[[ ob.title ]]
 						</a>
 					</div>
 				</div>
@@ -96,13 +96,13 @@
 						</a>
 						<div class="Card-content">
 							<strong class="Card-title">
-								<a :href="`/product/${ps.product.id}/?product_seller=${ps.id}`"> ${ ps.product.name }$ </a>
+								<a :href="`/product/${ps.product.id}/?product_seller=${ps.id}`"> [[ ps.product.name ]] </a>
 							</strong>
 							<div class="Card-description">
 								<div class="Card-cost">
-									<span class="Card-price">$ ${ ps.price.toLocaleString() }$</span>
+									<span class="Card-price">$ [[ ps.price.toLocaleString() ]]</span>
 								</div>
-								<div class="Card-category">${ ps.product.catalog_category.name }$</div>
+								<div class="Card-category">[[ ps.product.catalog_category.name ]]</div>
 								<div class="Card-hover">
 									<a class="Card-btn" href="#">
 										<img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="Add to cart" />
@@ -115,19 +115,19 @@
 				<div class="Pagination">
 					<div class="Pagination-ins">
 						<a class="Pagination-element Pagination-element_prev" @click.prevent="changePage(Number(query.page) - 1)">
-							<img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="previous page" />
+							<img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="Previous page" />
 						</a>
 						<a class="Pagination-element Pagination-element_current">
-							<span class="Pagination-text">${ query.page }$</span>
+							<span class="Pagination-text">[[ query.page ]]</span>
 						</a>
 						<a class="Pagination-element">
-							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 1)">${ Number(query.page) + 1 }$</span>
+							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 1)">[[ Number(query.page) + 1 ]]</span>
 						</a>
 						<a class="Pagination-element">
-							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 2)">${ Number(query.page) + 2 }$</span>
+							<span class="Pagination-text" @click.prevent="changePage(Number(query.page) + 2)">[[ Number(query.page) + 2 ]]</span>
 						</a>
 						<a class="Pagination-element Pagination-element_prev" @click.prevent="changePage(Number(query.page) + 1)">
-							<img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="next page" />
+							<img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="Next page" />
 						</a>
 					</div>
 				</div>
