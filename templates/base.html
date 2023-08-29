@@ -140,7 +140,7 @@
 								<div class="CategoriesButton-arrow"></div>
 							</div>
 							<div class="CategoriesButton-content">
-								<div class="CategoriesButton-link" v-for="(cc, index) in catalog_category" :key="index">
+								<div class="CategoriesButton-link" v-for="(cc, index) in catalogCategory" :key="index">
 									<a :href="`/catalog?product__catalog_category__id=${cc.id}`">
 										<div class="CategoriesButton-icon">
 											<img src="{% static 'assets/img/icons/departments/1.svg' %}" alt="1.svg" />
@@ -163,7 +163,7 @@
 									name="query"
 									type="text"
 									placeholder="NVIDIA GeForce RTX 3060"
-									v-model="main_search"
+									v-model="mainSearch"
 								/>
 								<button class="search-button" type="submit" name="search" id="search">
 									<img src="{% static 'assets/img/icons/search.svg' %}" alt="search.svg" />
@@ -253,7 +253,7 @@
 			<div class="Footer-copy">
 				<div class="wrap">
 					<div class="row row_space">
-						<div class="row-block">© Copyright&#32;<a href="#">Megano Store.</a>&#32;All rights reserved.</div>
+						<div class="row-block">© Copyright&#32;<a href="#">Larek Store.</a>&#32;All rights reserved.</div>
 						<div class="row-block">
 							<span>Accepted Payments</span>
 							<div class="Footer-payments">

@@ -9,18 +9,18 @@ var mix = {
 				ordering: '-product__views_history__count',
 				page: 1,
 			},
-			max_count: 1,
-			product_sellers: null,
+			maxCount: 1,
+			productSellers: null,
 			loading: false,
 			errored: false,
-			order_by: [
+			orderBy: [
 				{ id: 'product__views_history__count', title: 'Популярности' },
 				{ id: 'product__review__count', title: 'Отзывам' },
 				{ id: 'product__id', title: 'Новизне' },
 				{ id: 'price', title: 'Цене' },
 			],
-			order_dir: '-',
-			order_dir_map: {
+			orderDir: '-',
+			orderDirMap: {
 				'': 'dec',
 				'-': 'inc',
 			},
@@ -30,7 +30,7 @@ var mix = {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
 		this.query = { ...this.query, ...params };
-		this.order_dir = this.query.ordering.startsWith('-') ? '-' : '';
+		this.orderDir = this.query.ordering.startsWith('-') ? '-' : '';
 		this.changePage(this.query.page);
 		this.updateSearch();
 		this.fetchProductSeller();
@@ -48,8 +48,8 @@ var mix = {
 					params: { ...this.query },
 				})
 				.then((response) => {
-					this.product_sellers = response.data.results;
-					this.max_count = response.data.count;
+					this.productSellers = response.data.results;
+					this.maxCount = response.data.count;
 				})
 				.catch((error) => {
 					console.log(error);
@@ -58,23 +58,22 @@ var mix = {
 				.finally(() => (this.loading = false));
 		},
 		setSort(id) {
-			this.order_dir = this.order_dir === '-' && this.query.ordering.endsWith(id) ? '' : '-';
-			this.query.ordering = `${this.order_dir}${id}`;
+			this.orderDir = this.orderDir === '-' && this.query.ordering.endsWith(id) ? '' : '-';
+			this.query.ordering = `${this.orderDir}${id}`;
 			this.updateSearch();
 			this.fetchProductSeller();
 		},
 		updateSearch() {
-			const new_search = new URLSearchParams([...Object.entries(this.query)]).toString();
-			window.history.replaceState(null, null, `?${new_search}`);
+			const newSearch = new URLSearchParams([...Object.entries(this.query)]).toString();
+			window.history.replaceState(null, null, `?${newSearch}`);
 		},
 		changePage(param) {
-			const new_page = Number(param);
-			const max_pages = Math.ceil(Number(this.max_count) / 9);
-			console.log(new_page, max_pages);
-			if (new_page <= 0 || new_page > max_pages) {
+			const newPage = Number(param);
+			const maxPages = Math.ceil(Number(this.maxCount) / 9);
+			if (newPage <= 0 || newPage > maxPages) {
 				this.query.page = 1;
 			} else {
-				this.query.page = new_page;
+				this.query.page = newPage;
 			}
 			this.fetchProductSeller();
 			this.updateSearch();

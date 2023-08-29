@@ -1,35 +1,35 @@
 var mix = {
 	data() {
 		return {
-			comment_text: null,
+			commentText: null,
 			loading: false,
 			errored: false,
 			product: {},
 			price: null,
-			product_seller: null,
-			active_photo: 0,
+			productSeller: null,
+			activePhoto: 0,
 		};
 	},
 	async mounted() {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
-		this.product_seller = params.product_seller;
-		this.product = await this.fetchProduct(prod_id);
+		this.productSeller = params.productSeller;
+		this.product = await this.fetchProduct(prodID);
 
 		for (const ps of this.product.product_seller) {
 			this.price = ps.price.toLocaleString();
-			if (ps.id == this.product_seller) {
+			if (ps.id == this.productSeller) {
 				break;
 			}
 		}
 	},
 	methods: {
 		setActivePhoto(index) {
-			this.active_photo = index;
+			this.activePhoto = index;
 		},
 		async createReviewAndFetchProduct() {
 			await this.createReview();
-			this.comment_text = null;
+			this.commentText = null;
 		},
 		async fetchProduct(id) {
 			try {
@@ -41,9 +41,9 @@ var mix = {
 		},
 		async createReview() {
 			await axios
-				.post('http://0.0.0.0:8000/api/review', { comment: this.comment_text, user_id: 1, product_id: prod_id })
+				.post('http://0.0.0.0:8000/api/review', { comment: this.commentText, user_id: 1, product_id: prodID })
 				.then(async () => {
-					this.product = await this.fetchProduct(prod_id);
+					this.product = await this.fetchProduct(prodID);
 				})
 				.catch((error) => {
 					console.log(error);

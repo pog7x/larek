@@ -80,9 +80,9 @@
 					<div class="Sort-title">Сортировать по:</div>
 					<div class="Sort-variants">
 						<a
-							v-for="(ob, index) in order_by"
+							v-for="(ob, index) in orderBy"
 							:key="index"
-							:class="[query.ordering && query.ordering.endsWith(ob.id) ? `Sort-sortBy_${order_dir_map[order_dir]}` : '']"
+							:class="[query.ordering && query.ordering.endsWith(ob.id) ? `Sort-sortBy_${orderDirMap[orderDir]}` : '']"
 							class="Sort-sortBy"
 							@click="setSort(ob.id)"
 							>[[ ob.title ]]
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<div class="Cards">
-					<div class="Card" v-for="(ps, index) in product_sellers" :key="index">
+					<div class="Card" v-for="(ps, index) in productSellers" :key="index">
 						<a class="Card__product__image_link" :href="`/product/${ps.product.id}/?product_seller=${ps.id}`">
 							<img class="Card__product__image" :src="ps.product.images[0].image" :alt="ps.product.name" />
 						</a>

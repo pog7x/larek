@@ -4,8 +4,8 @@ createApp({
 	mixins: [window.mix ? window.mix : {}],
 	data() {
 		return {
-			catalog_category: {},
-			main_search: '',
+			catalogCategory: {},
+			mainSearch: '',
 		};
 	},
 	methods: {
@@ -13,7 +13,7 @@ createApp({
 			axios
 				.get('http://0.0.0.0:8000/api/catalog_category')
 				.then((response) => {
-					this.catalog_category = response.data;
+					this.catalogCategory = response.data;
 				})
 				.catch((error) => {
 					console.log(error);
@@ -22,7 +22,7 @@ createApp({
 				.finally(() => (this.loading = false));
 		},
 		submitMainSearch() {
-			window.location.replace(`/catalog?product__name__icontains=${this.main_search}`);
+			window.location.replace(`/catalog?product__name__icontains=${this.mainSearch}`);
 		},
 		createCart(payload) {
 			axios

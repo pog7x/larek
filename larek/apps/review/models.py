@@ -31,3 +31,4 @@ class Review(models.Model):
         db_table = "review"
         verbose_name = "Review"
         verbose_name_plural = "Reviews"
+        ordering = ["id"]
