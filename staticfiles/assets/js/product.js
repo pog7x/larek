@@ -13,9 +13,8 @@ var mix = {
 	async mounted() {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
-		this.productSeller = params.productSeller;
+		this.productSeller = params.product_seller;
 		this.product = await this.fetchProduct(prodID);
-
 		for (const ps of this.product.product_seller) {
 			this.price = ps.price.toLocaleString();
 			if (ps.id == this.productSeller) {

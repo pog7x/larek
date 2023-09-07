@@ -14,7 +14,12 @@ from larek.apps.product_seller.views import ProductSellerViewSet
 from larek.apps.review.views import ReviewViewSet
 from larek.apps.role.views import RoleViewSet
 from larek.apps.seller.views import SellerViewSet
-from larek.apps.user.views import UserViewSet
+from larek.apps.user.views import (
+    UserLoginView,
+    UserLogoutView,
+    UserRegistrationView,
+    UserViewSet,
+)
 from larek.apps.views_history.views import ViewsHistoryViewSet
 
 router = routers.SimpleRouter(trailing_slash=False)
@@ -34,11 +39,24 @@ router.register(r"views_history", ViewsHistoryViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include((router.urls))),
-    path("catalog/", TemplateView.as_view(template_name="catalog.html")),
-    path("about/", TemplateView.as_view(template_name="about.html")),
-    path("", TemplateView.as_view(template_name="index.html")),
     path(
-        "product/<int:product_id>/", TemplateView.as_view(template_name="product.html")
+        "catalog/",
+        TemplateView.as_view(template_name="catalog.html"),
+        name="catalog",
+    ),
+    path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
+    path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("login/", UserLoginView.as_view(), name="login"),
+    path("logout/", UserLogoutView.as_view(), name="logout"),
+    path(
+        "registration/",
+        UserRegistrationView.as_view(template_name="registration.html"),
+        name="registration",
+    ),
+    path(
+        "product/<int:product_id>/",
+        TemplateView.as_view(template_name="product.html"),
+        name="product",
     ),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]
