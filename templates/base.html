@@ -111,12 +111,8 @@
 									<img class="CartBlock-img" src="{% static 'assets/img/icons/loon-icon.svg' %}" alt="loon-icon.svg" />
 								</button>
 								<div class="dropdown-content">
-									<a class="dropdown-content-a" href="account.html">Личный кабинет</a>
-									<a class="dropdown-content-a" href="account.html">Административный раздел</a>
-									<form action="{% url 'logout' %}" method="post">
-										{% csrf_token %}
-										<input class="dropdown-content-a" type="submit" value="Выход" />
-									</form>
+									<a class="dropdown-content-a" href="{% url 'profile' %}">Personal area</a>
+									<a class="dropdown-content-a" href="{% url 'logout' %}">Exit</a>
 								</div>
 							</div>
 							<a class="CartBlock-block" href="cart.html">

@@ -1,97 +1,91 @@
-{% extends "base_product.html" %}
+{% extends "base.html" %}
+
 {% load static %}
 
 {% block content %}
 <div class="Middle Middle_top">
-    <div class="Section Section_column Section_columnLeft">
-        <div class="wrap">
-            <div class="Section-column">
-                <div class="Section-columnSection">
-                    <header class="Section-header">
-                        <strong class="Section-title">Навигация
-                        </strong>
-                    </header>
-                    <div class="Section-columnContent">
-                        <div class="NavigateProfile">
-                            <ul class="menu menu_vt">
-                                <li class="menu-item"><a class="menu-link" href="{% url 'account' %}">Личный кабинет</a>
-                                </li>
-                                <li class="menu-item_ACTIVE menu-item"><a class="menu-link"
-                                        href="{% url 'profile' %}">Профиль</a>
-                                </li>
-                                <li class="menu-item"><a class="menu-link" href="{% url 'historyorder' %}">История
-                                        заказов</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="Section-content">
-                <div class="Profile">
-                    <form class="form Profile-form" action="#" method="post">
-                        <div class="row">
-                            <div class="row-block">
-                                <div class="form-group">
-                                    <label class="form-label" for="avatar">Аватар
-                                    </label>
-                                    <div class="Profile-avatar Profile-avatar_noimg">
+	<div class="Section Section_column Section_columnLeft">
+		<div class="wrap">
+			<div class="Section-column">
+				<div class="Section-columnSection">
+					<header class="Section-header">
+						<strong class="Section-title">Navigation</strong>
+					</header>
+					<div class="Section-columnContent">
+						<div class="NavigateProfile">
+							<ul class="menu menu_vt">
+								<li class="menu-item_ACTIVE menu-item"><a class="menu-link" href="{% url 'profile' %}">Profile</a></li>
+								<li class="menu-item"><a class="menu-link" href="historyorder.html">History of orders</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="Section-content">
+				<div class="Profile">
+					<form class="form Profile-form" action="" method="post">
+						{% csrf_token %}
+						<div class="row">
+							<div class="row-block">
+								<div class="form-group">
+									<label class="form-label" for="avatar">Profile avatar</label>
+									<div class="Profile-avatar Profile-avatar_noimg">
+										<label class="Profile-fileLabel" for="avatar">
+											<img src="{% static 'assets/img/icons/upload.png' %}" alt="#.png" />Upload a photo
+										</label>
 
-                                        <label class="Profile-fileLabel" for="avatar"><img
-                                                src="{% static 'assets/img/icons/upload.png' %}" alt="#.png" />Загрузить
-                                            фото
-                                        </label>
-
-                                        <input class="Profile-file form-input" id="avatar" name="avatar" type="file"
-                                            data-validate="onlyImgAvatar" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="name">ФИО
-                                    </label>
-                                    <input class="form-input" id="name" name="name" type="text" value=""
-                                        data-validate="require" />
-                                </div>
-                            </div>
-                            <div class="row-block">
-                                <div class="form-group">
-                                    <label class="form-label" for="phone">Телефон
-                                    </label>
-                                    <input class="form-input" id="phone" name="phone" type="text"
-                                        value="+70000000000" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="mail">E-mail
-                                    </label>
-                                    <input class="form-input" id="mail" name="mail" type="text" value="send@test.test"
-                                        data-validate="require" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="password">Пароль
-                                    </label>
-                                    <input class="form-input" id="password" name="password" type="password"
-                                        placeholder="Тут можно изменить пароль" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="passwordReply">Подтверждение пароля
-                                    </label>
-                                    <input class="form-input" id="passwordReply" name="passwordReply" type="password"
-                                        placeholder="Введите пароль повторно" />
-                                </div>
-                                <div class="form-group">
-                                    <div class="Profile-btn">
-                                        <button class="btn btn_success" type="submit">Сохранить
-                                        </button>
-                                    </div>
-                                    <div class="Profile-success">Профиль успешно сохранен
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+										<input
+											class="Profile-file form-input"
+											id="avatar"
+											name="avatar"
+											type="file"
+											data-validate="onlyImgAvatar"
+										/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="first_name">First name</label>
+									<input class="form-input" id="first_name" name="first_name" type="text" value="{{ user.first_name }}"/>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="last_name">Last name</label>
+									<input class="form-input" id="last_name" name="last_name" type="text" value="{{ user.last_name }}"/>
+								</div>
+							</div>
+							<div class="row-block">
+								<div class="form-group">
+									<label class="form-label" for="phone">Phone</label>
+									<input class="form-input" id="phone" name="phone" type="text" value="{{ user.phone }}" placeholder="+70000000000" />
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="email">E-mail</label>
+									<input
+										class="form-input"
+										id="email"
+										name="email"
+										type="text"
+										value="{{ user.email }}"
+										data-validate="require"
+										placeholder="send@test.test"
+									/>
+								</div>
+								<div class="form-group">
+									<div class="Profile-btn">
+										<a style="margin-right: 20px;" class="btn btn_warning" href="{% url 'password_change' %}">Change password</a>
+										<button class="btn btn_success" type="submit">Сохранить</button>
+									</div>
+									{% if messages %}
+									{% for message in messages %}
+										<div class="Profile-success">{{ message }}</div>
+									{% endfor %}
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

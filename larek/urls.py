@@ -17,6 +17,8 @@ from larek.apps.seller.views import SellerViewSet
 from larek.apps.user.views import (
     UserLoginView,
     UserLogoutView,
+    UserPasswordChangeView,
+    UserProfileView,
     UserRegistrationView,
     UserViewSet,
 )
@@ -45,6 +47,8 @@ urlpatterns = [
         name="catalog",
     ),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
+    path("profile/", UserProfileView.as_view(), name="profile"),
+    path("password_change/", UserPasswordChangeView.as_view(), name="password_change"),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path("login/", UserLoginView.as_view(), name="login"),
     path("logout/", UserLogoutView.as_view(), name="logout"),

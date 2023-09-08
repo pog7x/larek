@@ -660,6 +660,15 @@ textarea {
     }
 }
 
+.helptext {
+    font-size: 12px;
+}
+
+.errorlist {
+    color: #f98561;
+    font-size: 12px;
+}
+
 .btn_danger {
     border-color: #f26d7d;
     color: #fff;
