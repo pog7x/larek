@@ -23,26 +23,15 @@
 			</div>
 			<div class="Section-content">
 				<div class="Profile">
-					<form class="form Profile-form" action="" method="post">
+					<form class="form Profile-form" action="" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="row">
 							<div class="row-block">
 								<div class="form-group">
-									<label class="form-label" for="avatar">Profile avatar</label>
-									<div class="Profile-avatar Profile-avatar_noimg">
-										<label class="Profile-fileLabel" for="avatar">
-											<img src="{% static 'assets/img/icons/upload.png' %}" alt="#.png" />Upload a photo
-										</label>
-
-										<input
-											class="Profile-file form-input"
-											id="avatar"
-											name="avatar"
-											type="file"
-											data-validate="onlyImgAvatar"
-										/>
-									</div>
+									{{ form.avatar }}
 								</div>
+							</div>
+							<div class="row-block">
 								<div class="form-group">
 									<label class="form-label" for="first_name">First name</label>
 									<input class="form-input" id="first_name" name="first_name" type="text" value="{{ user.first_name }}"/>
@@ -51,8 +40,6 @@
 									<label class="form-label" for="last_name">Last name</label>
 									<input class="form-input" id="last_name" name="last_name" type="text" value="{{ user.last_name }}"/>
 								</div>
-							</div>
-							<div class="row-block">
 								<div class="form-group">
 									<label class="form-label" for="phone">Phone</label>
 									<input class="form-input" id="phone" name="phone" type="text" value="{{ user.phone }}" placeholder="+70000000000" />

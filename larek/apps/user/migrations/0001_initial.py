@@ -3,14 +3,15 @@ import django.contrib.auth.validators
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
+import larek.apps.user.models
 
 
 class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("auth", "0012_alter_user_first_name_max_length"),
         ("role", "0001_initial"),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
@@ -109,6 +110,14 @@ class Migration(migrations.Migration):
                 ),
                 ("phone", models.TextField(null=True, verbose_name="User Phone")),
                 ("address", models.TextField(null=True, verbose_name="User Address")),
+                (
+                    "avatar",
+                    models.FileField(
+                        blank=True,
+                        null=True,
+                        upload_to=larek.apps.user.models.avatar_image_directory_path,
+                    ),
+                ),
                 (
                     "groups",
                     models.ManyToManyField(

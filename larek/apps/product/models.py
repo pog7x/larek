@@ -41,6 +41,9 @@ class ProductImage(models.Model):
     )
     image = models.FileField(null=True, upload_to="product")
 
+    def __str__(self):
+        return f"{self.name} | {self.product}"
+
     class Meta:
         db_table = "product_image"
         verbose_name = "Product image"

@@ -88,6 +88,12 @@ class UserLoginForm(AuthenticationForm):
     )
 
 
+class ClearableFileInputForAvatar(forms.ClearableFileInput):
+    template_name = "user/clearablefileinputforavatar.html"
+    input_text = "Change avatar"
+    clear_checkbox_label = "Clear avatar"
+
+
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
@@ -96,4 +102,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "phone", "email")
+        fields = ("avatar", "first_name", "last_name", "phone", "email")
+        widgets = {
+            "avatar": ClearableFileInputForAvatar,
+        }

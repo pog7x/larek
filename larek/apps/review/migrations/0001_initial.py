@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
                 "verbose_name": "Review",
                 "verbose_name_plural": "Reviews",
                 "db_table": "review",
+                "ordering": ["id"],
             },
         ),
     ]
