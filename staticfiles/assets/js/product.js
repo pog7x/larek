@@ -39,8 +39,21 @@ var mix = {
 			}
 		},
 		async createReview() {
+			axios.defaults.xsrfCookieName = 'csrftoken';
+			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 			await axios
-				.post('http://0.0.0.0:8000/api/review', { comment: this.commentText, user_id: 1, product_id: prodID })
+				.post(
+					'http://0.0.0.0:8000/api/review',
+					{ comment: this.commentText, product_id: prodID },
+					{
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'X-Sessionid': this.getCookie('sessionid'),
+						},
+						withCredentials: true,
+					}
+				)
 				.then(async () => {
 					this.product = await this.fetchProduct(prodID);
 				})

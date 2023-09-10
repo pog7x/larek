@@ -2415,7 +2415,9 @@ a.Cart-title {
     width: 99px;
     height: 99px;
     border-radius: 100px;
-    background: #0063d1 url("../img/icons/user_icon.svg") center center no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .Comment-rating {

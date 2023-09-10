@@ -100,6 +100,10 @@ class UserProfileForm(forms.ModelForm):
     phone = forms.CharField(required=False)
     email = forms.EmailField(required=False)
 
+    def save(self, commit=True):
+        self.instance.avatar = self.instance.avatar or "user/default_avatar.svg"
+        return super().save(commit=commit)
+
     class Meta:
         model = User
         fields = ("avatar", "first_name", "last_name", "phone", "email")

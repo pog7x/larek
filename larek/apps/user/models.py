@@ -31,6 +31,7 @@ class User(AbstractUser):
         null=True,
         blank=True,
         upload_to=avatar_image_directory_path,
+        default="user/default_avatar.svg",
     )
 
     class Meta:

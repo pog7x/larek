@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    "corsheaders",
     "django_filters",
     "rest_framework",
     "larek.apps.banner",
@@ -61,13 +62,15 @@ AUTH_USER_MODEL = "user.User"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
+    # "django.contrib.sessions.middleware.SessionMiddleware",
+    "larek.middleware.CustomSessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
+    "larek.middleware.CustomCsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "larek.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "larek.urls"
@@ -189,3 +192,22 @@ LOGGING = {
         },
     },
 }
+
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000"]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = ["http://localhost:8000"]
+CORS_ALLOWED_ORIGIN_REGEXES = ["http://localhost:8000"]
+SESSION_COOKIE_HTTPONLY = False
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "x-sessionid",
+]
