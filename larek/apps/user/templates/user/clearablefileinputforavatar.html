@@ -1,6 +1,6 @@
 {% if widget.is_initial %}
     <div class="Profile-avatar Profile-avatar_noimg">
-        <img src="{{ widget.value.url }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+        <img id="id_profile_avatar" src="{{ widget.value.url }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
     </div>
 
     {% if not widget.required %}
@@ -9,4 +9,4 @@
     {% endif %}
 {% endif %}
 
-<input type="{{ widget.type }}" name="{{ widget.name }}" style="height: 45px;">
+<input type="{{ widget.type }}" name="{{ widget.name }}" style="height: 45px;" onchange="document.getElementById('id_profile_avatar').src = window.URL.createObjectURL(this.files[0])">
