@@ -179,7 +179,7 @@
                                     :key="index"
                                 >
 									<div class="Comment-column Comment-column_pict">
-										<div class="Comment-avatar" :style="{ backgroundImage: r.user.avatar ? 'url(' + r.user.avatar + ')' : null }"></div>
+										<div class="Comment-avatar" :style="{ backgroundImage: r.user.avatar ? 'url(' + r.user.avatar + ')' : 'url(' + defaultAvatar + ')' }"></div>
 									</div>
 									<div class="Comment-column">
 										<header class="Comment-header">
@@ -222,6 +222,7 @@
 <script>
     const prodID = '{{ product_id }}'
     const userID = '{{ user.id }}'
+	const defaultAvatar = "{% static 'assets/img/icons/loon-icon.svg' %}"
 </script>
 <script src="{% static 'assets/js/product.js' %}"></script>
 {% endblock %}

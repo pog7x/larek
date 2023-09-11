@@ -1,8 +1,10 @@
-{% if widget.is_initial %}
-    <div class="Profile-avatar Profile-avatar_noimg">
-        <img id="id_profile_avatar" src="{{ widget.value.url }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
-    </div>
+{% load static %}
 
+<div class="Profile-avatar Profile-avatar_noimg">
+    <img id="id_profile_avatar" src="{% if widget.value.url %} {{ widget.value.url }} {% else %} {% static 'assets/img/icons/loon-icon.svg' %} {% endif %}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+
+{% if widget.is_initial %}
     {% if not widget.required %}
         <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}>
         <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
