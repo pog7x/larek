@@ -32,6 +32,7 @@ class User(AbstractUser):
         blank=True,
         upload_to=avatar_image_directory_path,
         default="user/default_avatar.svg",
+        verbose_name="User Avatar",
     )
 
     class Meta:

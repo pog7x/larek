@@ -31,15 +31,28 @@ class Product(models.Model):
         verbose_name_plural = "Products"
 
 
+def product_image_directory_path(instance: "Product", filename):
+    return f"product/images/{instance.pk}/{filename}"
+
+
 class ProductImage(models.Model):
-    name = models.CharField(max_length=128, null=False, blank=True)
+    name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=True,
+        verbose_name="Product Image Name",
+    )
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
         related_name="images",
         verbose_name="Product",
     )
-    image = models.FileField(null=True, upload_to="product")
+    image = models.FileField(
+        null=True,
+        upload_to=product_image_directory_path,
+        verbose_name="Product Image",
+    )
 
     def __str__(self):
         return f"{self.name} | {self.product}"
