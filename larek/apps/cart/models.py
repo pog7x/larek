@@ -36,6 +36,11 @@ class Cart(models.Model):
         verbose_name="Product Seller",
         related_name="cart",
     )
+    deleted_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Cart Deleted At",
+    )
 
     def __str__(self):
         return f"Cart #{self.id}"

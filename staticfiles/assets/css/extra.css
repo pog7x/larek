@@ -1442,6 +1442,12 @@ a.Cart-title {
     }
 }
 
+.CartBlock-img-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
 .CartBlock {
     display: flex;
     align-items: center;
