@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="Profile-avatar Profile-avatar_noimg">
-    <img id="id_profile_avatar" src="{% if widget.value.url %} {{ widget.value.url }} {% else %} {% static 'assets/img/icons/loon-icon.svg' %} {% endif %}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+    <img id="id_profile_avatar" src="{% if widget.value.url %} {{ widget.value.url }} {% else %} {% static 'assets/img/icons/loon-icon.svg' %} {% endif %}" alt="User avatar">
 </div>
 
 {% if widget.is_initial %}

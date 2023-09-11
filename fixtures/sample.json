@@ -424,7 +424,7 @@
 		"fields": {
 			"name": "honorpad1",
 			"product": 5,
-			"image": "product/images/5honorpad1.webp"
+			"image": "product/images/5/honorpad1.webp"
 		}
 	},
 	{
@@ -925,6 +925,16 @@
 		}
 	},
 	{
+		"model": "product_seller.productseller",
+		"pk": 21,
+		"fields": {
+			"product": 7,
+			"seller": 1,
+			"products_count": 6,
+			"price": 14000.0
+		}
+	},
+	{
 		"model": "review.review",
 		"pk": 1,
 		"fields": {
@@ -1351,19 +1361,19 @@
 		"pk": 5,
 		"fields": {
 			"password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-			"last_login": "2023-09-11T11:09:32.728Z",
+			"last_login": "2023-09-11T12:23:31.379Z",
 			"is_superuser": true,
 			"username": "pog7x",
 			"first_name": "",
 			"last_name": "",
-			"email": "",
+			"email": "polunin.g@mail.ru",
 			"is_staff": true,
 			"is_active": true,
 			"date_joined": "2023-08-16T10:33:50.269Z",
 			"role": null,
-			"phone": null,
+			"phone": "None",
 			"address": null,
-			"avatar": "user/default_avatar.svg",
+			"avatar": "user/avatars/5/1694435566Murky_peaks.jpg",
 			"groups": [],
 			"user_permissions": []
 		}
