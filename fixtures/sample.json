@@ -43,77 +43,88 @@
 		"model": "catalog_category.catalogcategory",
 		"pk": 1,
 		"fields": {
-			"name": "Телевизоры"
+			"name": "Телевизоры",
+			"icon": "catalog_category/icons/1/1.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 2,
 		"fields": {
-			"name": "Игровые приставки"
+			"name": "Скидки!",
+			"icon": "catalog_category/icons/2/4.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 3,
 		"fields": {
-			"name": "Мобильные телефоны"
+			"name": "Мобильные телефоны",
+			"icon": "catalog_category/icons/3/8.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 4,
 		"fields": {
-			"name": "Часы"
+			"name": "Электроника",
+			"icon": "catalog_category/icons/4/5.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 5,
 		"fields": {
-			"name": "Планшеты"
+			"name": "Микроволновые печи",
+			"icon": "catalog_category/icons/5/9.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 6,
 		"fields": {
-			"name": "Ноутбуки"
+			"name": "Торшеры",
+			"icon": "catalog_category/icons/6/11.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 7,
 		"fields": {
-			"name": "Мониторы"
+			"name": "Фурнитура",
+			"icon": "catalog_category/icons/7/7.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 8,
 		"fields": {
-			"name": "Кухонная техника"
+			"name": "Кухонная техника",
+			"icon": "catalog_category/icons/8/10.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 9,
 		"fields": {
-			"name": "Фотоаппараты"
+			"name": "Фотоаппараты",
+			"icon": "catalog_category/icons/9/6.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 10,
 		"fields": {
-			"name": "Наушники"
+			"name": "Наушники",
+			"icon": "catalog_category/icons/10/2.svg"
 		}
 	},
 	{
 		"model": "catalog_category.catalogcategory",
 		"pk": 11,
 		"fields": {
-			"name": "Стиральные машины"
+			"name": "Стиральные машины",
+			"icon": "catalog_category/icons/11/3.svg"
 		}
 	},
 	{
@@ -260,7 +271,7 @@
 		"fields": {
 			"name": "iphone1",
 			"product": 3,
-			"image": "product/iphone14pro1.webp"
+			"image": "product/images/3/iphone14pro1.webp"
 		}
 	},
 	{
@@ -269,7 +280,7 @@
 		"fields": {
 			"name": "iphone2",
 			"product": 3,
-			"image": "product/iphone14pro2.webp"
+			"image": "product/images/3/iphone14pro2.webp"
 		}
 	},
 	{
@@ -278,7 +289,7 @@
 		"fields": {
 			"name": "iphone3",
 			"product": 3,
-			"image": "product/iphone14pro3.webp"
+			"image": "product/images/3/iphone14pro3.webp"
 		}
 	},
 	{
@@ -287,7 +298,7 @@
 		"fields": {
 			"name": "iphone4",
 			"product": 3,
-			"image": "product/iphone14pro4.webp"
+			"image": "product/images/3/iphone14pro4.webp"
 		}
 	},
 	{
@@ -296,7 +307,7 @@
 		"fields": {
 			"name": "xiaomi1061",
 			"product": 1,
-			"image": "product/xiaomi_10.6.webp"
+			"image": "product/images/1/xiaomi_10.6.webp"
 		}
 	},
 	{
@@ -305,7 +316,7 @@
 		"fields": {
 			"name": "xiaomi1062",
 			"product": 1,
-			"image": "product/xiaomi_10.62.webp"
+			"image": "product/images/1/xiaomi_10.62.webp"
 		}
 	},
 	{
@@ -314,7 +325,7 @@
 		"fields": {
 			"name": "xiaomi1063",
 			"product": 1,
-			"image": "product/xiaomi_10.63.webp"
+			"image": "product/images/1/xiaomi_10.63.webp"
 		}
 	},
 	{
@@ -323,7 +334,7 @@
 		"fields": {
 			"name": "xiaomi1064",
 			"product": 1,
-			"image": "product/xiaomi_10.64.webp"
+			"image": "product/images/1/xiaomi_10.64.webp"
 		}
 	},
 	{
@@ -332,7 +343,7 @@
 		"fields": {
 			"name": "applewatch1",
 			"product": 2,
-			"image": "product/applewatch1.webp"
+			"image": "product/images/2/applewatch1.webp"
 		}
 	},
 	{
@@ -341,7 +352,7 @@
 		"fields": {
 			"name": "applewatch2",
 			"product": 2,
-			"image": "product/applewatch2.webp"
+			"image": "product/images/2/applewatch2.webp"
 		}
 	},
 	{
@@ -350,7 +361,7 @@
 		"fields": {
 			"name": "applewatch3",
 			"product": 2,
-			"image": "product/applewatch3.webp"
+			"image": "product/images/2/applewatch3.webp"
 		}
 	},
 	{
@@ -359,7 +370,7 @@
 		"fields": {
 			"name": "applewatch4",
 			"product": 2,
-			"image": "product/applewatch4.webp"
+			"image": "product/images/2/applewatch4.webp"
 		}
 	},
 	{
@@ -368,7 +379,7 @@
 		"fields": {
 			"name": "ipadmini",
 			"product": 4,
-			"image": "product/ipadmini.webp"
+			"image": "product/images/4/ipadmini.webp"
 		}
 	},
 	{
@@ -377,7 +388,7 @@
 		"fields": {
 			"name": "ipadmini2",
 			"product": 4,
-			"image": "product/ipadmini2.webp"
+			"image": "product/images/4/ipadmini2.webp"
 		}
 	},
 	{
@@ -386,7 +397,7 @@
 		"fields": {
 			"name": "ipadmini3",
 			"product": 4,
-			"image": "product/ipadmini3.webp"
+			"image": "product/images/4/ipadmini3.webp"
 		}
 	},
 	{
@@ -395,7 +406,7 @@
 		"fields": {
 			"name": "ipadmini4",
 			"product": 4,
-			"image": "product/ipadmini4.webp"
+			"image": "product/images/4/ipadmini4.webp"
 		}
 	},
 	{
@@ -404,7 +415,7 @@
 		"fields": {
 			"name": "honorpad",
 			"product": 5,
-			"image": "product/honorpad.webp"
+			"image": "product/images/5/honorpad.webp"
 		}
 	},
 	{
@@ -413,7 +424,7 @@
 		"fields": {
 			"name": "honorpad1",
 			"product": 5,
-			"image": "product/honorpad1.webp"
+			"image": "product/images/5honorpad1.webp"
 		}
 	},
 	{
@@ -422,7 +433,7 @@
 		"fields": {
 			"name": "honorpad2",
 			"product": 5,
-			"image": "product/honorpad2.webp"
+			"image": "product/images/5/honorpad2.webp"
 		}
 	},
 	{
@@ -431,7 +442,7 @@
 		"fields": {
 			"name": "honorpad3",
 			"product": 5,
-			"image": "product/honorpad3.webp"
+			"image": "product/images/5/honorpad3.webp"
 		}
 	},
 	{
@@ -440,7 +451,7 @@
 		"fields": {
 			"name": "honorpad4",
 			"product": 5,
-			"image": "product/honorpad4.webp"
+			"image": "product/images/5/honorpad4.webp"
 		}
 	},
 	{
@@ -449,25 +460,25 @@
 		"fields": {
 			"name": "teclast",
 			"product": 6,
-			"image": "product/teclast.webp"
+			"image": "product/images/6/teclast.webp"
 		}
 	},
 	{
 		"model": "product.productimage",
 		"pk": 24,
 		"fields": {
-			"name": "teclast1",
-			"product": 6,
-			"image": "product/honorpad1_SydAOyi.webp"
+			"name": "honorpad1_SydAOyi",
+			"product": 5,
+			"image": "product/images/5/honorpad1_SydAOyi.webp"
 		}
 	},
 	{
 		"model": "product.productimage",
 		"pk": 25,
 		"fields": {
-			"name": "teclast2",
-			"product": 6,
-			"image": "product/honorpad2_MgVxA0v.webp"
+			"name": "honorpad2_MgVxA0v",
+			"product": 5,
+			"image": "product/images/5/honorpad2_MgVxA0v.webp"
 		}
 	},
 	{
@@ -476,7 +487,7 @@
 		"fields": {
 			"name": "teclast3",
 			"product": 6,
-			"image": "product/teclast3.webp"
+			"image": "product/images/6/teclast3.webp"
 		}
 	},
 	{
@@ -485,7 +496,7 @@
 		"fields": {
 			"name": "teclast4",
 			"product": 6,
-			"image": "product/teclast4.webp"
+			"image": "product/images/6/teclast4.webp"
 		}
 	},
 	{
@@ -494,7 +505,7 @@
 		"fields": {
 			"name": "macbookpro",
 			"product": 7,
-			"image": "product/macbookpro.webp"
+			"image": "product/images/7/macbookpro.webp"
 		}
 	},
 	{
@@ -503,7 +514,7 @@
 		"fields": {
 			"name": "macbookpro1",
 			"product": 7,
-			"image": "product/macbookpro1.webp"
+			"image": "product/images/7/macbookpro1.webp"
 		}
 	},
 	{
@@ -512,7 +523,7 @@
 		"fields": {
 			"name": "macbookpro2",
 			"product": 7,
-			"image": "product/macbookpro2.webp"
+			"image": "product/images/7/macbookpro2.webp"
 		}
 	},
 	{
@@ -521,7 +532,7 @@
 		"fields": {
 			"name": "macbookpro3",
 			"product": 7,
-			"image": "product/macbookpro3.webp"
+			"image": "product/images/7/macbookpro3.webp"
 		}
 	},
 	{
@@ -530,7 +541,7 @@
 		"fields": {
 			"name": "aceraspire",
 			"product": 8,
-			"image": "product/aceraspire.webp"
+			"image": "product/images/8/aceraspire.webp"
 		}
 	},
 	{
@@ -539,7 +550,7 @@
 		"fields": {
 			"name": "aceraspire1",
 			"product": 8,
-			"image": "product/aceraspire1.webp"
+			"image": "product/images/8/aceraspire1.webp"
 		}
 	},
 	{
@@ -548,7 +559,7 @@
 		"fields": {
 			"name": "aceraspire2",
 			"product": 8,
-			"image": "product/aceraspire2.webp"
+			"image": "product/images/8/aceraspire2.webp"
 		}
 	},
 	{
@@ -557,7 +568,7 @@
 		"fields": {
 			"name": "aceraspire3",
 			"product": 8,
-			"image": "product/aceraspire3.webp"
+			"image": "product/images/8/aceraspire3.webp"
 		}
 	},
 	{
@@ -566,7 +577,7 @@
 		"fields": {
 			"name": "asustuf",
 			"product": 9,
-			"image": "product/asustuf.webp"
+			"image": "product/images/9/asustuf.webp"
 		}
 	},
 	{
@@ -575,7 +586,7 @@
 		"fields": {
 			"name": "asustuf1",
 			"product": 9,
-			"image": "product/asustuf1.webp"
+			"image": "product/images/9/aasustuf1.webp"
 		}
 	},
 	{
@@ -584,7 +595,7 @@
 		"fields": {
 			"name": "asustuf2",
 			"product": 9,
-			"image": "product/asustuf2.webp"
+			"image": "product/images/9/aasustuf2.webp"
 		}
 	},
 	{
@@ -593,7 +604,7 @@
 		"fields": {
 			"name": "asustuf3",
 			"product": 9,
-			"image": "product/asustuf3.webp"
+			"image": "product/images/9/aasustuf3.webp"
 		}
 	},
 	{
@@ -602,7 +613,7 @@
 		"fields": {
 			"name": "gigabyte",
 			"product": 10,
-			"image": "product/gigabyte.webp"
+			"image": "product/images/10/gigabyte.webp"
 		}
 	},
 	{
@@ -611,7 +622,7 @@
 		"fields": {
 			"name": "gigabyte1",
 			"product": 10,
-			"image": "product/gigabyte1.webp"
+			"image": "product/images/10/gigabyte1.webp"
 		}
 	},
 	{
@@ -620,7 +631,7 @@
 		"fields": {
 			"name": "gigabyte2",
 			"product": 10,
-			"image": "product/gigabyte2.webp"
+			"image": "product/images/10/gigabyte2.webp"
 		}
 	},
 	{
@@ -629,7 +640,7 @@
 		"fields": {
 			"name": "huaweimate",
 			"product": 11,
-			"image": "product/huaweimate.webp"
+			"image": "product/images/11/huaweimate.webp"
 		}
 	},
 	{
@@ -638,7 +649,7 @@
 		"fields": {
 			"name": "huaweimate1",
 			"product": 11,
-			"image": "product/huaweimate1.webp"
+			"image": "product/images/11/huaweimate1.webp"
 		}
 	},
 	{
@@ -647,7 +658,7 @@
 		"fields": {
 			"name": "huaweimate2",
 			"product": 11,
-			"image": "product/huaweimate2.webp"
+			"image": "product/images/11/huaweimate2.webp"
 		}
 	},
 	{
@@ -656,7 +667,7 @@
 		"fields": {
 			"name": "huaweimate3",
 			"product": 11,
-			"image": "product/huaweimate3.webp"
+			"image": "product/images/11/huaweimate3.webp"
 		}
 	},
 	{
@@ -665,7 +676,7 @@
 		"fields": {
 			"name": "huaweimate4",
 			"product": 11,
-			"image": "product/huaweimate4.webp"
+			"image": "product/images/11/huaweimate4.webp"
 		}
 	},
 	{
@@ -674,7 +685,7 @@
 		"fields": {
 			"name": "acerk243",
 			"product": 12,
-			"image": "product/acerk243.webp"
+			"image": "product/images/12/acerk243.webp"
 		}
 	},
 	{
@@ -683,7 +694,7 @@
 		"fields": {
 			"name": "acerk2431",
 			"product": 12,
-			"image": "product/acerk2431.webp"
+			"image": "product/images/12/acerk2431.webp"
 		}
 	},
 	{
@@ -692,7 +703,7 @@
 		"fields": {
 			"name": "acerk2432",
 			"product": 12,
-			"image": "product/acerk2432.webp"
+			"image": "product/images/12/acerk2432.webp"
 		}
 	},
 	{
@@ -701,7 +712,7 @@
 		"fields": {
 			"name": "acerk2433",
 			"product": 12,
-			"image": "product/acerk2433.webp"
+			"image": "product/images/12/acerk2433.webp"
 		}
 	},
 	{
@@ -710,7 +721,7 @@
 		"fields": {
 			"name": "acerk2434",
 			"product": 12,
-			"image": "product/acerk2434.webp"
+			"image": "product/images/12/acerk2434.webp"
 		}
 	},
 	{
@@ -1264,6 +1275,7 @@
 			"role": 2,
 			"phone": "6125614256",
 			"address": "USA, NY",
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}
@@ -1285,6 +1297,7 @@
 			"role": 1,
 			"phone": "7263478643",
 			"address": "Rostov",
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}
@@ -1306,6 +1319,7 @@
 			"role": null,
 			"phone": null,
 			"address": "Paris",
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}
@@ -1327,6 +1341,7 @@
 			"role": 2,
 			"phone": "63256725365",
 			"address": "Berlin",
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}
@@ -1336,7 +1351,7 @@
 		"pk": 5,
 		"fields": {
 			"password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-			"last_login": "2023-08-17T13:46:09.443Z",
+			"last_login": "2023-09-11T11:09:32.728Z",
 			"is_superuser": true,
 			"username": "pog7x",
 			"first_name": "",
@@ -1348,6 +1363,7 @@
 			"role": null,
 			"phone": null,
 			"address": null,
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}
@@ -1369,6 +1385,7 @@
 			"role": null,
 			"phone": null,
 			"address": null,
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}
@@ -1390,6 +1407,7 @@
 			"role": null,
 			"phone": null,
 			"address": null,
+			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
 		}

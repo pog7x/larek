@@ -31,8 +31,8 @@ class Product(models.Model):
         verbose_name_plural = "Products"
 
 
-def product_image_directory_path(instance: "Product", filename):
-    return f"product/images/{instance.pk}/{filename}"
+def product_image_directory_path(instance: "ProductImage", filename):
+    return f"product/images/{instance.product.pk}/{filename}"
 
 
 class ProductImage(models.Model):
