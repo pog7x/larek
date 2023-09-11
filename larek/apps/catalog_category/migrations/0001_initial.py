@@ -1,4 +1,5 @@
 from django.db import migrations, models
+import larek.apps.catalog_category.models
 
 
 class Migration(migrations.Migration):
@@ -19,7 +20,21 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.TextField(max_length=30, verbose_name="Category Name")),
+                (
+                    "name",
+                    models.TextField(
+                        max_length=30, verbose_name="Catalog Category Name"
+                    ),
+                ),
+                (
+                    "icon",
+                    models.FileField(
+                        blank=True,
+                        null=True,
+                        upload_to=larek.apps.catalog_category.models.catalog_category_icon_directory_path,
+                        verbose_name="Catalog Category Icon",
+                    ),
+                ),
             ],
             options={
                 "verbose_name": "Catalog Category",

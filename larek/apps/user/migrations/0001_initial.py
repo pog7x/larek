@@ -10,8 +10,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("role", "0001_initial"),
         ("auth", "0012_alter_user_first_name_max_length"),
+        ("role", "0001_initial"),
     ]
 
     operations = [
@@ -114,8 +114,10 @@ class Migration(migrations.Migration):
                     "avatar",
                     models.FileField(
                         blank=True,
+                        default="user/default_avatar.svg",
                         null=True,
                         upload_to=larek.apps.user.models.avatar_image_directory_path,
+                        verbose_name="User Avatar",
                     ),
                 ),
                 (

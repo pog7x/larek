@@ -1,5 +1,6 @@
 from django.db import migrations, models
 import django.db.models.deletion
+import larek.apps.product.models
 
 
 class Migration(migrations.Migration):
@@ -62,8 +63,20 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField(blank=True, max_length=128)),
-                ("image", models.FileField(null=True, upload_to="product")),
+                (
+                    "name",
+                    models.CharField(
+                        blank=True, max_length=128, verbose_name="Product Image Name"
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(
+                        null=True,
+                        upload_to=larek.apps.product.models.product_image_directory_path,
+                        verbose_name="Product Image",
+                    ),
+                ),
                 (
                     "product",
                     models.ForeignKey(

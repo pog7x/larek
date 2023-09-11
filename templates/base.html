@@ -146,7 +146,7 @@
 								<div class="CategoriesButton-link" v-for="(cc, index) in catalogCategory" :key="index">
 									<a :href="`/catalog?product__catalog_category__id=${cc.id}`">
 										<div class="CategoriesButton-icon">
-											<img src="{% static 'assets/img/icons/departments/1.svg' %}" alt="1.svg" />
+											<img :src="[[ cc.icon ]]" :alt="[[ cc.name ]]" style="max-width: 23px; max-height: 19px;"/>
 										</div>
 										<span class="CategoriesButton-text">[[ cc.name ]]</span>
 									</a>
