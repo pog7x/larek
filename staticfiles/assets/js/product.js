@@ -1,7 +1,7 @@
 var mix = {
 	data() {
 		return {
-			commentText: null,
+			review: { commentText: null },
 			loading: false,
 			errored: false,
 			product: {},
@@ -28,7 +28,7 @@ var mix = {
 		},
 		async createReviewAndFetchProduct() {
 			await this.createReview();
-			this.commentText = null;
+			this.review.commentText = null;
 		},
 		async fetchProduct(id) {
 			try {
@@ -44,12 +44,11 @@ var mix = {
 			await axios
 				.post(
 					'http://0.0.0.0:8000/api/review',
-					{ comment: this.commentText, product_id: prodID },
+					{ comment: this.review.commentText, product_id: prodID },
 					{
 						headers: {
 							Accept: 'application/json',
 							'Content-Type': 'application/json',
-							'X-Sessionid': this.getCookie('sessionid'),
 						},
 						withCredentials: true,
 					}

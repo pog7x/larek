@@ -1,7 +1,7 @@
 var mix = {
 	data() {
 		return {
-			carts: null,
+			carts: [],
 			cartsList: [],
 		};
 	},
@@ -17,7 +17,6 @@ var mix = {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
 				},
 				withCredentials: true,
 			});
@@ -31,7 +30,6 @@ var mix = {
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
-						'X-Sessionid': this.getCookie('sessionid'),
 					},
 					withCredentials: true,
 				})
@@ -46,7 +44,6 @@ var mix = {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
 				},
 				withCredentials: true,
 			});
@@ -62,7 +59,6 @@ var mix = {
 			}
 			let cart = await this.updateCartByID(this.carts[index].id, { products_count: this.carts[index].products_count });
 			this.carts[index].products_count = cart.products_count;
-			console.log(this.cartsList);
 			this.cartsList[index] = cart.products_count;
 		},
 		async incrementCartCount(index) {

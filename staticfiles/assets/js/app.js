@@ -4,7 +4,7 @@ createApp({
 	mixins: [window.mix ? window.mix : {}],
 	data() {
 		return {
-			catalogCategory: {},
+			catalogCategory: [],
 			mainSearch: '',
 		};
 	},
@@ -50,7 +50,6 @@ createApp({
 						headers: {
 							Accept: 'application/json',
 							'Content-Type': 'application/json',
-							'X-Sessionid': this.getCookie('sessionid'),
 						},
 						withCredentials: true,
 					}
