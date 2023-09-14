@@ -622,52 +622,6 @@
 			};
 		};
 		Profile().init();
-		var Cart = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Cart().init();
-		var Amount = function () {
-			var $amount = $('.Amount');
-			var $add = $('.Amount-add');
-			var $input = $('.Amount-input');
-			var $remove = $('.Amount-remove');
-			return {
-				init: function () {
-					$add.on('click', function (e) {
-						e.preventDefault();
-						var $inputThis = $(this).siblings($input).filter($input);
-						var value = parseFloat($inputThis.val());
-						var newValue = value + 1;
-						$inputThis.val(newValue);
-						$.ajax({
-							type: 'GET',
-							url: `/cart/${e.target.dataset.answer}/products_count/?products_count=${newValue}`,
-							success: function (res) {
-								$('.Cart-price-total').html(res);
-							},
-						});
-					});
-					$remove.on('click', function (e) {
-						e.preventDefault();
-						var $inputThis = $(this).siblings($input).filter($input);
-						var value = parseFloat($inputThis.val());
-						var newValue = value > 0 ? value - 1 : 0;
-						$inputThis.val(newValue);
-
-						$.ajax({
-							type: 'GET',
-							url: `/cart/${e.target.dataset.answer}/products_count/?products_count=${newValue}`,
-							success: function (res) {
-								$('.Cart-price-total').html(res);
-							},
-						});
-					});
-				},
-			};
-		};
-		Amount().init();
 		var Order = function () {
 			var $next = $('.Order-next'),
 				$blocks = $('.Order-block'),

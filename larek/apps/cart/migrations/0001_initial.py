@@ -25,6 +25,12 @@ class Migration(migrations.Migration):
                         default=0, null=True, verbose_name="Products Count"
                     ),
                 ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Cart Deleted At"
+                    ),
+                ),
             ],
             options={
                 "verbose_name": "Cart",

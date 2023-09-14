@@ -39,6 +39,31 @@ createApp({
 		submitMainSearch() {
 			window.location.replace(`/catalog?product__name__icontains=${this.mainSearch}`);
 		},
+		async createCart(productSellerID, productsCount) {
+			axios.defaults.xsrfCookieName = 'csrftoken';
+			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+			await axios
+				.post(
+					'http://0.0.0.0:8000/api/cart',
+					{ product_seller_id: productSellerID, products_count: productsCount },
+					{
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'X-Sessionid': this.getCookie('sessionid'),
+						},
+						withCredentials: true,
+					}
+				)
+				.then(async () => {
+					this.product = await this.fetchProduct(prodID);
+				})
+				.catch((error) => {
+					console.log(error);
+					this.errored = true;
+				})
+				.finally(() => (this.loading = false));
+		},
 	},
 	mounted() {
 		this.getCatalogCategories();

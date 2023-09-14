@@ -49,9 +49,9 @@
 											</a>
 										</li>
 										<li class="menu-item">
-											<a class="menu-link" href="#"
-												><img src="{% static 'assets/img/icons/socialHeader/in.svg' %}" alt="in.svg"
-											/></a>
+											<a class="menu-link" href="#">
+												<img src="{% static 'assets/img/icons/socialHeader/in.svg' %}" alt="in.svg"	/>
+											</a>
 										</li>
 										<li class="menu-item">
 											<a class="menu-link" href="#">
@@ -119,7 +119,7 @@
 									<a class="dropdown-content-a" href="{% url 'logout' %}">Exit</a>
 								</div>
 							</div>
-							<a class="CartBlock-block" href="cart.html">
+							<a class="CartBlock-block" href="{% url 'cart' %}">
 								<img class="CartBlock-img" src="{% static 'assets/img/icons/cart.svg' %}" alt="cart.svg" />
 								<span class="CartBlock-amount">0</span>
 							</a>

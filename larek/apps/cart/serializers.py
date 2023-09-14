@@ -5,11 +5,16 @@ from larek.apps.product_seller.serializers import ProductSellerSerializer
 
 
 class CartSerializer(serializers.ModelSerializer):
-    product_seller_id = serializers.IntegerField()
-    user_id = serializers.IntegerField()
+    product_seller_id = serializers.IntegerField(required=False)
+    user_id = serializers.IntegerField(required=False)
     product_seller = ProductSellerSerializer(required=False)
 
     class Meta:
         model = Cart
-        fields = ["product_seller", "products_count", "product_seller_id", "user_id"]
-        depth = 2
+        fields = [
+            "id",
+            "product_seller",
+            "products_count",
+            "product_seller_id",
+            "user_id",
+        ]

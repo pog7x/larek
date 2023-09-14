@@ -1,5 +1,3 @@
-import logging
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -10,8 +8,6 @@ from rest_framework import viewsets
 from larek.apps.user.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 from larek.apps.user.models import User
 from larek.apps.user.serializers import UserSerializer
-
-logger = logging.getLogger(__name__)
 
 
 class UserViewSet(viewsets.ModelViewSet):

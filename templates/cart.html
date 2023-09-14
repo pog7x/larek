@@ -1,75 +1,59 @@
-{% extends "base_product.html" %}
+{% extends "base.html" %}
+
 {% load static %}
 
 {% block content %}
 <div class="Middle Middle_top">
-    <div class="Section">
-        <div class="wrap">
-            <form class="form Cart" action="#" method="post">
-                {% for cart_entity in cart %}
-                <div class="Cart-product">
-                    <div class="Cart-block Cart-block_row">
-                        <div class="Cart-block Cart-block_pict">
-                            <a class="Cart-pict" href="{% url 'product' product_id=cart_entity.product_seller.product.id %}">
-                                <img class="Cart-img" src="{% static 'assets/img/content/home/card.jpg' %}" alt="{{ cart_entity.product_seller.product.name }}" />
+	<div class="Section">
+		<div class="wrap">
+			<form class="form Cart" action="#" method="post">
+				<div class="Cart-product" v-for="(cart, index) in carts" :key="index">
+					<div class="Cart-block Cart-block_row">
+						<div class="Cart-block Cart-block_pict">
+							<a class="Cart-pict" :href="`/product/${cart.product_seller.product.id}/?product_seller=${cart.product_seller.id}`">
+								<img class="Cart-img" :src="cart.product_seller.product.images[0].image" :alt="cart.product_seller.product.name" />
+							</a>
+						</div>
+						<div class="Cart-block Cart-block_info">
+							<a class="Cart-title" :href="`/product/${cart.product_seller.product.id}/?product_seller=${cart.product_seller.id}`">[[ cart.product_seller.product.name ]]</a>
+							<div class="Cart-desc">[[ cart.product_seller.product.description ]]</div>
+						</div>
+						<div class="Cart-block Cart-block_price">
+							<div class="Cart-price">[[ cart.product_seller.price.toLocaleString() ]]&nbsp;$</div>
+						</div>
+					</div>
+					<div class="Cart-block Cart-block_row">
+						<div class="Cart-block Cart-block_seller">
+							[[ cart.product_seller.seller.name ]]
+						</div>
+						<div class="Cart-block Cart-block_amount">
+							<div class="Cart-amount">
+								<div class="Amount">
+									<button @click="decrementCartCount(index)" class="Amount-remove" type="button"></button>
+									<input @change="updateCartCount(index)" v-model="cartsList[index]" class="Amount-input form-input" name="amount" type="text" :value="[[ cartsList[index] ]]" />
+									<button @click="incrementCartCount(index)" class="Amount-add" type="button"></button>
+								</div>
+							</div>
+						</div>
+						<div class="Cart-block Cart-block_delete">
+							<a class="Cart-delete" @click="deleteCartByID(cart.id)">
+                                <img src="{% static 'assets/img/icons/card/delete.svg' %}" alt="Delete from cart" />
                             </a>
-                        </div>
-                        <div class="Cart-block Cart-block_info">
-                            <a class="Cart-title" href="{% url 'product' product_id=cart_entity.product_seller.product.id %}">
-                                {{ cart_entity.product_seller.product.name }}
-                            </a>
-                            <div class="Cart-desc">
-                                {{ cart_entity.product_seller.product.description }}
-                            </div>
-                        </div>
-                        <div class="Cart-block Cart-block_price">
-                            <div class="Cart-price">
-                                {{ cart_entity.product_seller.price }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Cart-block Cart-block_row">
-                        <div class="Cart-block Cart-block_seller">
-                            <select name="" id="" class="form-select" cart_id="{{ cart_entity.id }}">
-                                {% for ps in cart_entity.product_seller.product.product_seller.all %}
-                                    <option
-                                        value="{{ ps.id }}"
-                                        {% if cart_entity.product_seller.seller.id == ps.seller.id %} selected
-                                        {% else %} '' {% endif %}
-                                    >{{ ps.seller.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="Cart-block Cart-block_amount">
-                            <div class="Cart-amount">
-                                <div class="Amount">
-                                    <button class="Amount-remove" type="button" data-answer="{{ cart_entity.id }}"></button>
-                                    <input class="Amount-input form-input" name="amount" type="text" value="{{ cart_entity.products_count }}" />
-                                    <button class="Amount-add" type="button" data-answer="{{ cart_entity.id }}"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="Cart-block Cart-block_delete">
-                            <a class="Cart-delete" href="{% url 'delete_cart' cart_id=cart_entity.id %}">
-                                <img src="{% static 'assets/img/icons/card/delete.svg' %}" alt="Delete {{ cart_entity.product_seller.product.name }}" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                <div class="Cart-total">
-                    <div class="Cart-block Cart-block_total">
-                        <strong class="Cart-title">Итого:</strong>
-                        <span class="Cart-price Cart-price-total">{{ total }}</span>
-                    </div>
-                    <div class="Cart-block">
-                        <a class="btn btn_success btn_lg" href="{% url 'order' %}">
-                            Оформить заказ
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+						</div>
+					</div>
+				</div>
+				<div class="Cart-total">
+					<div class="Cart-block Cart-block_total">
+						<strong class="Cart-title">Итого:</strong><span class="Cart-price">200.99$</span>
+					</div>
+					<div class="Cart-block"><a class="btn btn_success btn_lg" href="order.html">Оформить заказ</a></div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
+{% endblock %}
+
+{% block mixins %}
+<script src="{% static 'assets/js/cart.js' %}"></script>
 {% endblock %}
