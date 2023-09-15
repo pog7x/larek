@@ -49,6 +49,7 @@ var mix = {
 						headers: {
 							Accept: 'application/json',
 							'Content-Type': 'application/json',
+							'X-Sessionid': this.getCookie('sessionid'),
 						},
 						withCredentials: true,
 					}

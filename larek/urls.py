@@ -23,6 +23,7 @@ from larek.apps.user.views import (
     UserViewSet,
 )
 from larek.apps.views_history.views import ViewsHistoryViewSet
+from larek.base_views import LoginRequiredTemplateView
 
 router = routers.SimpleRouter(trailing_slash=False)
 
@@ -38,6 +39,7 @@ router.register(r"seller", SellerViewSet)
 router.register(r"user", UserViewSet)
 router.register(r"views_history", ViewsHistoryViewSet)
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include((router.urls))),
@@ -47,7 +49,11 @@ urlpatterns = [
         name="catalog",
     ),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
-    path("cart/", TemplateView.as_view(template_name="cart.html"), name="cart"),
+    path(
+        "cart/",
+        LoginRequiredTemplateView.as_view(template_name="cart.html"),
+        name="cart",
+    ),
     path("profile/", UserProfileView.as_view(), name="profile"),
     path("password_change/", UserPasswordChangeView.as_view(), name="password_change"),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),

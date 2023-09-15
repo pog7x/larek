@@ -11,13 +11,11 @@ services:
       pg:
         condition: service_healthy
     environment:
-      - PROJECT_NAME=larek
-      - POSTGRES_USER=larek_user
-      - POSTGRES_PASSWORD=larek_password
       - POSTGRES_HOST=pg
       - POSTGRES_PORT=5432
       - POSTGRES_DB=larek_db
-      - AUTO_RELOAD=true
+      - POSTGRES_USER=larek_user
+      - POSTGRES_PASSWORD=larek_password
       - DEBUG=true
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -26,9 +24,9 @@ services:
   pg:
     image: postgres:12
     environment:
+      - POSTGRES_DB=larek_db
       - POSTGRES_USER=larek_user
       - POSTGRES_PASSWORD=larek_password
-      - POSTGRES_DB=larek_db
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"

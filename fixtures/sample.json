@@ -3,40 +3,44 @@
 		"model": "cart.cart",
 		"pk": 1,
 		"fields": {
-			"products_count": 20,
-			"user": null,
+			"products_count": 5,
+			"user": 5,
 			"order": null,
-			"product_seller": 1
+			"product_seller": 9,
+			"deleted_at": null
 		}
 	},
 	{
 		"model": "cart.cart",
 		"pk": 2,
 		"fields": {
-			"products_count": 7,
-			"user": null,
+			"products_count": 9,
+			"user": 5,
 			"order": null,
-			"product_seller": 3
+			"product_seller": 7,
+			"deleted_at": null
 		}
 	},
 	{
 		"model": "cart.cart",
 		"pk": 3,
 		"fields": {
-			"products_count": 15,
-			"user": null,
+			"products_count": 4,
+			"user": 5,
 			"order": null,
-			"product_seller": 3
+			"product_seller": 3,
+			"deleted_at": null
 		}
 	},
 	{
 		"model": "cart.cart",
 		"pk": 4,
 		"fields": {
-			"products_count": 8,
-			"user": null,
+			"products_count": 3,
+			"user": 5,
 			"order": null,
-			"product_seller": 4
+			"product_seller": 4,
+			"deleted_at": null
 		}
 	},
 	{
@@ -1361,7 +1365,7 @@
 		"pk": 5,
 		"fields": {
 			"password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-			"last_login": "2023-09-11T12:23:31.379Z",
+			"last_login": "2023-09-15T08:14:57.185Z",
 			"is_superuser": true,
 			"username": "pog7x",
 			"first_name": "",

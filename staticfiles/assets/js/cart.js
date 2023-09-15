@@ -17,6 +17,7 @@ var mix = {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
+					'X-Sessionid': this.getCookie('sessionid'),
 				},
 				withCredentials: true,
 			});
@@ -30,6 +31,7 @@ var mix = {
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
+						'X-Sessionid': this.getCookie('sessionid'),
 					},
 					withCredentials: true,
 				})
@@ -44,6 +46,7 @@ var mix = {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
+					'X-Sessionid': this.getCookie('sessionid'),
 				},
 				withCredentials: true,
 			});
@@ -51,15 +54,12 @@ var mix = {
 		},
 		async updateCartCount(index) {
 			try {
-				let res = Number(this.carts[index].products_count);
-				let newRes = res > 1 ? res : 1;
-				this.carts[index].products_count = newRes;
+				let cart = await this.updateCartByID(this.carts[index].id, { products_count: this.carts[index].products_count });
+				this.carts[index].products_count = cart.products_count;
+				this.cartsList[index] = cart.products_count;
 			} catch (err) {
-				this.carts[index].products_count = 1;
+				this.carts[index].products_count = this.cartsList[index];
 			}
-			let cart = await this.updateCartByID(this.carts[index].id, { products_count: this.carts[index].products_count });
-			this.carts[index].products_count = cart.products_count;
-			this.cartsList[index] = cart.products_count;
 		},
 		async incrementCartCount(index) {
 			try {

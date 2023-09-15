@@ -4,9 +4,23 @@ createApp({
 	mixins: [window.mix ? window.mix : {}],
 	data() {
 		return {
-			catalogCategory: [],
+			catalogCategories: [],
 			mainSearch: '',
 		};
+	},
+	components: {
+		categories: {
+			template:
+				'<div class="CategoriesButton-link" v-for="(cc, index) in ccategories" :key="index"> \
+							<a :href="`/catalog?product__catalog_category__id=${cc.id}`"> \
+								<div class="CategoriesButton-icon"> \
+									<img :src="[[ cc.icon ]]" :alt="[[ cc.name ]]" style="max-width: 23px; max-height: 19px;"/> \
+								</div> \
+								<span class="CategoriesButton-text">{{ cc.name }}</span> \
+							</a> \
+						</div>',
+			props: ['ccategories'],
+		},
 	},
 	methods: {
 		getCookie(name) {
@@ -28,7 +42,7 @@ createApp({
 			axios
 				.get('http://0.0.0.0:8000/api/catalog_category')
 				.then((response) => {
-					this.catalogCategory = response.data;
+					this.catalogCategories = response.data;
 				})
 				.catch((error) => {
 					console.log(error);
