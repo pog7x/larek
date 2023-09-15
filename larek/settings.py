@@ -198,6 +198,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = ["http://localhost:8000"]
 CORS_ALLOWED_ORIGIN_REGEXES = ["http://localhost:8000"]
+SESSION_COOKIE_HTTPONLY = False
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
