@@ -1,14 +1,18 @@
 from datetime import datetime
-
-from rest_framework import status, viewsets
+import logging
+from rest_framework import status, viewsets, views
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from larek.apps.cart.models import Cart
-from larek.apps.cart.serializers import CartSerializer
+from larek.apps.cart.serializers import CartSerializer, CartTotalSerializer
 from larek.apps.product_seller.models import ProductSeller
 from larek.authentication import CustomSessionAuthentication
+from django.db.models import Sum, F
+
+
+logger = logging.getLogger(__name__)
 
 
 class CartViewSet(viewsets.ModelViewSet):
@@ -93,10 +97,36 @@ class CartViewSet(viewsets.ModelViewSet):
     def product_seller_curr_count(self, product_seller_id, request_count):
         try:
             product_seller = ProductSeller.objects.get(id=product_seller_id)
-            return (
-                product_seller.products_count
-                if request_count > product_seller.products_count
-                else request_count
-            )
+            if request_count > product_seller.products_count:
+                return product_seller.products_count
+            elif request_count < 1:
+                return 1
+            return request_count
         except ProductSeller.DoesNotExist:
             raise ValidationError({"product_seller_id": ["Not found."]})
+
+
+class CartTotalView(views.APIView):
+    authentication_classes = (CustomSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Cart.objects.prefetch_related("product_seller")
+    DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
+
+    def get(self, request, format=None):
+        res = (
+            self.queryset.filter(
+                user_id=request.user.id,
+                order_id=None,
+                deleted_at=None,
+            )
+            .values("user_id")
+            .annotate(total_products_count=Sum("products_count"))
+            .annotate(
+                total_products_price=Sum(
+                    F("products_count") * F("product_seller__price")
+                )
+            )
+        )
+        serializer = CartTotalSerializer(data=res[0] if len(res) else self.DEFAULT_RES)
+        serializer.is_valid()
+        return Response(serializer.data)

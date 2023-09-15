@@ -37,6 +37,8 @@ var mix = {
 				})
 				.then(async () => {
 					this.carts = await this.getUserCarts();
+					this.cartsList = this.carts.map((p) => p.products_count);
+					this.cartTotalData = await this.getCartTotal();
 				});
 		},
 		async updateCartByID(cartID, payload) {
@@ -52,26 +54,31 @@ var mix = {
 			});
 			return resp.data;
 		},
-		async updateCartCount(index) {
+		async updateCartCount(index, newRes = null) {
 			try {
-				let cart = await this.updateCartByID(this.carts[index].id, { products_count: this.carts[index].products_count });
+				let cart = await this.updateCartByID(this.carts[index].id, { products_count: newRes });
 				this.carts[index].products_count = cart.products_count;
-				this.cartsList[index] = cart.products_count;
 			} catch (err) {
-				this.carts[index].products_count = this.cartsList[index];
+			} finally {
+				this.cartTotalData = await this.getCartTotal();
+				this.cartsList[index] = this.carts[index].products_count;
 			}
 		},
 		async incrementCartCount(index) {
 			try {
-				this.carts[index].products_count = Number(this.carts[index].products_count) + 1;
-			} catch (err) {}
-			await this.updateCartCount(index);
+				let newRes = Number(this.cartsList[index]) + 1;
+				await this.updateCartCount(index, newRes);
+			} catch (err) {
+				this.cartsList[index] = this.carts[index].products_count;
+			}
 		},
 		async decrementCartCount(index) {
 			try {
-				this.carts[index].products_count = Number(this.carts[index].products_count) - 1;
-			} catch (err) {}
-			await this.updateCartCount(index);
+				let newRes = Number(this.cartsList[index]) - 1;
+				await this.updateCartCount(index, newRes);
+			} catch (err) {
+				this.cartsList[index] = this.carts[index].products_count;
+			}
 		},
 	},
 };

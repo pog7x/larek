@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from rest_framework import routers
 
-from larek.apps.cart.views import CartViewSet
+from larek.apps.cart.views import CartViewSet, CartTotalView
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.order.views import OrderViewSet
 from larek.apps.payment.views import PaymentViewSet
@@ -43,6 +43,7 @@ router.register(r"views_history", ViewsHistoryViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include((router.urls))),
+    path("api/cart_total", CartTotalView.as_view()),
     path(
         "catalog/",
         TemplateView.as_view(template_name="catalog.html"),

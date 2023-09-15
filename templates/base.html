@@ -119,11 +119,7 @@
 									<a class="dropdown-content-a" href="{% url 'logout' %}">Exit</a>
 								</div>
 							</div>
-							<a class="CartBlock-block" href="{% url 'cart' %}">
-								<img class="CartBlock-img" src="{% static 'assets/img/icons/cart.svg' %}" alt="cart.svg" />
-								<span class="CartBlock-amount">0</span>
-							</a>
-							<div class="CartBlock-block"><span class="CartBlock-price">0.00$</span></div>
+							<carttotal :carttotaldata="cartTotalData" :carticon="cartIcon"></carttotal>
 						</div>
 					</div>
 					{% endif %}
@@ -141,7 +137,7 @@
 						<div class="CategoriesButton">
 							<div class="CategoriesButton-title">
 								<div class="CategoriesButton-icon">
-									<img src="{% static 'assets/img/icons/allDep.svg' %}" alt="allDep.svg" />
+									<img src="{% static 'assets/img/icons/allDep.svg' %}" alt="All categories" />
 								</div>
 								<span class="CategoriesButton-text">Все категории</span>
 								<div class="CategoriesButton-arrow"></div>
@@ -274,4 +270,8 @@
 		</footer>
 		{% block mixins %}{% endblock %}
 	</body>
+
+	<script>
+		const cartIcon = "{% static 'assets/img/icons/cart.svg' %}"
+	</script>
 </html>

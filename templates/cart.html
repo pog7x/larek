@@ -30,7 +30,14 @@
 							<div class="Cart-amount">
 								<div class="Amount">
 									<button @click="decrementCartCount(index)" class="Amount-remove" type="button"></button>
-									<input @change="updateCartCount(index)" v-model="cartsList[index]" class="Amount-input form-input" name="amount" type="text" :value="[[ cartsList[index] ]]" />
+									<input
+										@change="updateCartCount(index, cartsList[index])"
+										v-model="cartsList[index]"
+										class="Amount-input form-input"
+										name="amount"
+										type="text"
+										:value="[[ cartsList[index] ]]"
+									/>
 									<button @click="incrementCartCount(index)" class="Amount-add" type="button"></button>
 								</div>
 							</div>
@@ -42,9 +49,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="Cart-total">
+				<div v-if="carts.length > 0" class="Cart-total">
 					<div class="Cart-block Cart-block_total">
-						<strong class="Cart-title">Итого:</strong><span class="Cart-price">200.99$</span>
+						<strong class="Cart-title">Итого:</strong><span class="Cart-price">[[ cartTotalData.total_products_price.toLocaleString() ]]&nbsp;$</span>
 					</div>
 					<div class="Cart-block"><a class="btn btn_success btn_lg" href="order.html">Оформить заказ</a></div>
 				</div>

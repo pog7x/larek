@@ -18,3 +18,8 @@ class CartSerializer(serializers.ModelSerializer):
             "product_seller_id",
             "user_id",
         ]
+
+
+class CartTotalSerializer(serializers.Serializer):
+    total_products_count = serializers.IntegerField()
+    total_products_price = serializers.IntegerField()
