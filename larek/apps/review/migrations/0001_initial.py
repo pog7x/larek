@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
@@ -7,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("product", "0001_initial"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -33,6 +35,17 @@ class Migration(migrations.Migration):
                         related_name="review",
                         to="product.product",
                         verbose_name="Product",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="review",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="User",
                     ),
                 ),
             ],
