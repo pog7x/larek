@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime
 
-from django.db.models import F, Sum
 from rest_framework import status, views, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -113,20 +112,7 @@ class CartTotalView(views.APIView):
     DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
 
     def get(self, request, format=None):
-        res = (
-            self.queryset.filter(
-                user_id=request.user.id,
-                order_id=None,
-                deleted_at=None,
-            )
-            .values("user_id")
-            .annotate(total_products_count=Sum("products_count"))
-            .annotate(
-                total_products_price=Sum(
-                    F("products_count") * F("product_seller__price")
-                )
-            )
-        )
+        res = Cart.cart_total_for_user(request.user.id)
         serializer = CartTotalSerializer(data=res[0] if len(res) else self.DEFAULT_RES)
         serializer.is_valid()
         return Response(serializer.data)

@@ -5,10 +5,14 @@ from larek.apps.user.models import User
 
 
 class Order(models.Model):
+    STATUS_CREATED = 1
+    STATUS_PAYMENTS_ERROR = 2
+    STATUS_COMPLETED = 3
+
     STATUSES = (
-        (1, "Created"),
-        (2, "Payment error"),
-        (3, "Paid"),
+        (STATUS_CREATED, "Created"),
+        (STATUS_PAYMENTS_ERROR, "Payment error"),
+        (STATUS_COMPLETED, "Completed"),
     )
 
     full_name = models.TextField(
@@ -55,7 +59,8 @@ class Order(models.Model):
         null=True,
         blank=True,
         choices=STATUSES,
-        default=1,
+        default=STATUS_CREATED,
+        verbose_name="Order Status",
     )
 
     def __str__(self):

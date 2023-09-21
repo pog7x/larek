@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F, Sum
 
 from larek.apps.order.models import Order
 from larek.apps.product_seller.models import ProductSeller
@@ -41,6 +42,24 @@ class Cart(models.Model):
         blank=True,
         verbose_name="Cart Deleted At",
     )
+
+    @classmethod
+    def cart_total_for_user(cls, user_id):
+        return (
+            cls.objects.prefetch_related("product_seller")
+            .filter(
+                user_id=user_id,
+                order_id=None,
+                deleted_at=None,
+            )
+            .values("user_id")
+            .annotate(total_products_count=Sum("products_count"))
+            .annotate(
+                total_products_price=Sum(
+                    F("products_count") * F("product_seller__price")
+                )
+            )
+        )
 
     def __str__(self):
         return f"Cart #{self.id}"

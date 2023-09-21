@@ -29,11 +29,19 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "status",
-                    models.TextField(max_length=30, null=True, verbose_name="Status"),
+                    models.IntegerField(
+                        blank=True,
+                        choices=[(1, "Init"), (2, "Error"), (3, "Paid")],
+                        default=1,
+                        null=True,
+                        verbose_name="Payment Status",
+                    ),
                 ),
                 (
                     "created_at",
-                    models.DateTimeField(null=True, verbose_name="Payment Created At"),
+                    models.DateTimeField(
+                        auto_now_add=True, null=True, verbose_name="Payment Created At"
+                    ),
                 ),
                 (
                     "order",
@@ -43,7 +51,7 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.SET_NULL,
                         related_name="payment",
                         to="order.order",
-                        verbose_name="Order",
+                        verbose_name="Payment Order",
                     ),
                 ),
             ],
