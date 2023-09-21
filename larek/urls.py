@@ -24,7 +24,10 @@ from larek.apps.user.views import (
     UserViewSet,
 )
 from larek.apps.views_history.views import ViewsHistoryViewSet
-from larek.base_views import LoginRequiredTemplateView
+from larek.base_views import (
+    LoginAndCartsRequiredTemplateView,
+    LoginRequiredTemplateView,
+)
 
 router = routers.SimpleRouter(trailing_slash=False)
 
@@ -74,7 +77,7 @@ urlpatterns = [
     ),
     path(
         "order/",
-        LoginRequiredTemplateView.as_view(template_name="order.html"),
+        LoginAndCartsRequiredTemplateView.as_view(template_name="order.html"),
         name="order",
     ),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
