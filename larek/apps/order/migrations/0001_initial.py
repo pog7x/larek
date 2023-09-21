@@ -30,7 +30,10 @@ class Migration(migrations.Migration):
                         max_length=150, null=True, verbose_name="Order Full Name"
                     ),
                 ),
-                ("phone", models.TextField(null=True, verbose_name="Order Phone")),
+                (
+                    "phone",
+                    models.TextField(blank=True, null=True, verbose_name="Order Phone"),
+                ),
                 ("email", models.EmailField(blank=True, max_length=254, null=True)),
                 (
                     "address",
@@ -42,6 +45,15 @@ class Migration(migrations.Migration):
                     "created_at",
                     models.DateTimeField(
                         auto_now_add=True, null=True, verbose_name="Order Created At"
+                    ),
+                ),
+                (
+                    "status",
+                    models.IntegerField(
+                        blank=True,
+                        choices=[(1, "Created"), (2, "Payment error"), (3, "Paid")],
+                        default=1,
+                        null=True,
                     ),
                 ),
                 (

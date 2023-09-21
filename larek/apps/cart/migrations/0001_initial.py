@@ -7,9 +7,9 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("order", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("product_seller", "0001_initial"),
+        ("order", "0001_initial"),
     ]
 
     operations = [
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 (
                     "deleted_at",
                     models.DateTimeField(
-                        auto_now_add=True, null=True, verbose_name="Cart Deleted At"
+                        blank=True, null=True, verbose_name="Cart Deleted At"
                     ),
                 ),
                 (
