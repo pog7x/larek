@@ -1,9 +1,16 @@
+import uuid
+
 from django.db import models
 
 from larek.apps.order.models import Order
 
 
 class Payment(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     order = models.ForeignKey(
         to=Order,
         default=None,
