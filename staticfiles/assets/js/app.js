@@ -84,6 +84,19 @@ createApp({
 				}
 			);
 		},
+		async getUserCarts() {
+			axios.defaults.xsrfCookieName = 'csrftoken';
+			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+			let resp = await axios.get('http://0.0.0.0:8000/api/cart', {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					'X-Sessionid': this.getCookie('sessionid'),
+				},
+				withCredentials: true,
+			});
+			return resp.data;
+		},
 		async getCartTotal() {
 			axios.defaults.xsrfCookieName = 'csrftoken';
 			axios.defaults.xsrfHeaderName = 'X-CSRFToken';

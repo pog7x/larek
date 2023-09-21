@@ -5,8 +5,9 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from rest_framework import routers
 
-from larek.apps.cart.views import CartViewSet, CartTotalView
+from larek.apps.cart.views import CartTotalView, CartViewSet
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
+from larek.apps.delivery.views import DeliveryViewSet
 from larek.apps.order.views import OrderViewSet
 from larek.apps.payment.views import PaymentViewSet
 from larek.apps.product.views import ProductViewSet
@@ -29,6 +30,7 @@ router = routers.SimpleRouter(trailing_slash=False)
 
 router.register(r"cart", CartViewSet)
 router.register(r"catalog_category", CatalogCategoryViewSet)
+router.register(r"delivery", DeliveryViewSet)
 router.register(r"order", OrderViewSet)
 router.register(r"payment", PaymentViewSet)
 router.register(r"product", ProductViewSet)
@@ -69,6 +71,11 @@ urlpatterns = [
         "product/<int:product_id>/",
         TemplateView.as_view(template_name="product.html"),
         name="product",
+    ),
+    path(
+        "order/",
+        LoginRequiredTemplateView.as_view(template_name="order.html"),
+        name="order",
     ),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]

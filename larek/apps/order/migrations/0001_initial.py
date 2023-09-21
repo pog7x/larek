@@ -25,20 +25,24 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "city_to",
+                    "full_name",
                     models.TextField(
-                        max_length=30, null=True, verbose_name="Order City"
+                        max_length=150, null=True, verbose_name="Order Full Name"
                     ),
                 ),
+                ("phone", models.TextField(null=True, verbose_name="Order Phone")),
+                ("email", models.EmailField(blank=True, max_length=254, null=True)),
                 (
-                    "address_to",
+                    "address",
                     models.TextField(
-                        max_length=30, null=True, verbose_name="Order Address"
+                        max_length=300, null=True, verbose_name="Order Address"
                     ),
                 ),
                 (
                     "created_at",
-                    models.DateTimeField(null=True, verbose_name="Order Created At"),
+                    models.DateTimeField(
+                        auto_now_add=True, null=True, verbose_name="Order Created At"
+                    ),
                 ),
                 (
                     "delivery",

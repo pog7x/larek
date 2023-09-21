@@ -1,6 +1,8 @@
-from datetime import datetime
 import logging
-from rest_framework import status, viewsets, views
+from datetime import datetime
+
+from django.db.models import F, Sum
+from rest_framework import status, views, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,8 +11,6 @@ from larek.apps.cart.models import Cart
 from larek.apps.cart.serializers import CartSerializer, CartTotalSerializer
 from larek.apps.product_seller.models import ProductSeller
 from larek.authentication import CustomSessionAuthentication
-from django.db.models import Sum, F
-
 
 logger = logging.getLogger(__name__)
 

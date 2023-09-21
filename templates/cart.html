@@ -6,7 +6,7 @@
 <div class="Middle Middle_top">
 	<div class="Section">
 		<div class="wrap">
-			<form class="form Cart" action="#" method="post">
+			<form class="form Cart" action="" method="post">
 				<div class="Cart-product" v-for="(cart, index) in carts" :key="index">
 					<div class="Cart-block Cart-block_row">
 						<div class="Cart-block Cart-block_pict">
@@ -53,7 +53,7 @@
 					<div class="Cart-block Cart-block_total">
 						<strong class="Cart-title">Итого:</strong><span class="Cart-price">[[ cartTotalData.total_products_price.toLocaleString() ]]&nbsp;$</span>
 					</div>
-					<div class="Cart-block"><a class="btn btn_success btn_lg" href="order.html">Оформить заказ</a></div>
+					<div class="Cart-block"><a class="btn btn_success btn_lg" href="{% url 'order' %}">Оформить заказ</a></div>
 				</div>
 			</form>
 		</div>

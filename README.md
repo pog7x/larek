@@ -1,7 +1,7 @@
 # larek
 
 ```bash
-    python manage.py makemigrations --no-header
+    python manage.py makemigrations user --no-header && python manage.py makemigrations --no-header
 
     python manage.py loaddata fixtures/sample
     python manage.py createsuperuser
