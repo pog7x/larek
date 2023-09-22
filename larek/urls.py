@@ -9,7 +9,7 @@ from larek.apps.cart.views import CartTotalView, CartViewSet
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
 from larek.apps.order.views import OrderViewSet
-from larek.apps.payment.views import PaymentViewSet
+from larek.apps.payment.views import PaymentViewSet, PaymentProcessView
 from larek.apps.product.views import ProductViewSet
 from larek.apps.product_seller.views import ProductSellerViewSet
 from larek.apps.review.views import ReviewViewSet
@@ -79,6 +79,21 @@ urlpatterns = [
         "order/",
         LoginAndCartsRequiredTemplateView.as_view(template_name="order.html"),
         name="order",
+    ),
+    path(
+        "historyorder/",
+        LoginRequiredTemplateView.as_view(template_name="historyorder.html"),
+        name="historyorder",
+    ),
+    path(
+        "payment/<uuid:payment_id>/",
+        PaymentProcessView.as_view(),
+        name="payment",
+    ),
+    path(
+        "progresspayment/<uuid:payment_id>/",
+        LoginRequiredTemplateView.as_view(template_name="progresspayment.html"),
+        name="progresspayment",
     ),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]

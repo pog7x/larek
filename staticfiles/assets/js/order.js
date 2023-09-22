@@ -24,17 +24,25 @@ var mix = {
 		this.payload.delivery_id = deliveriesIDsLen > 0 ? deliveriesIDs[deliveriesIDsLen - 1] : null;
 	},
 	methods: {
-		async createOrder() {
+		createOrder() {
 			axios.defaults.xsrfCookieName = 'csrftoken';
 			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			await axios.post('http://0.0.0.0:8000/api/order', this.payload, {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
-				},
-				withCredentials: true,
-			});
+			axios
+				.post('http://0.0.0.0:8000/api/order', this.payload, {
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						'X-Sessionid': this.getCookie('sessionid'),
+					},
+					withCredentials: true,
+				})
+				.then((response) => {
+					if (response.headers.location) {
+						window.location.replace(response.headers.location);
+					}
+				})
+				.catch((error) => {})
+				.finally();
 		},
 		async getDeliveries() {
 			resp = await axios.get('http://0.0.0.0:8000/api/delivery');

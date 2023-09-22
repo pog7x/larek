@@ -1,6 +1,7 @@
 import logging
 
 from django.db import transaction
+from django.urls import reverse
 from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -10,13 +11,14 @@ from larek.apps.order.models import Order
 from larek.apps.order.serializers import OrderSerializer
 from larek.apps.payment.models import Payment
 from larek.authentication import CustomSessionAuthentication
+from larek.permissions import UserHasCartPermission
 
 logger = logging.getLogger(__name__)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
     authentication_classes = (CustomSessionAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, UserHasCartPermission)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
@@ -24,8 +26,10 @@ class OrderViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["user_id"] = request.user.id
-        self.perform_create(serializer)
+        payment_id = self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        headers["Location"] = reverse("payment", args=[payment_id])
+
         return Response(
             serializer.data,
             status=status.HTTP_201_CREATED,
@@ -33,7 +37,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         )
 
     def perform_create(self, serializer):
-        cart_total = Cart.cart_total_for_user(self.request.user.id)
+        user_id = self.request.user.id
+        cart_total = Cart.cart_total_for_user(user_id)
         if cart_total and cart_total[0].get("total_products_count", 0) != 0:
             with transaction.atomic():
                 order = Order(**serializer.data)
@@ -43,3 +48,10 @@ class OrderViewSet(viewsets.ModelViewSet):
                     sum=cart_total[0].get("total_products_price"),
                 )
                 payment.save()
+                # Cart.objects.filter(
+                #     user_id=user_id,
+                #     order_id=None,
+                #     deleted_at=None,
+                # ).update(order_id=order.id)
+
+                return payment.id

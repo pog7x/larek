@@ -12,16 +12,6 @@ class LoginRequiredTemplateView(LoginRequiredMixin, TemplateView):
 
 class LoginAndCartsRequiredTemplateView(LoginRequiredTemplateView):
     def dispatch(self, request, *args, **kwargs):
-        if not self.check_carts_is_not_empty():
+        if not Cart.user_has_carts(user_id=request.user.id):
             return HttpResponseRedirect(reverse_lazy("catalog"))
-        if not request.user.is_authenticated:
-            return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
-
-    def check_carts_is_not_empty(self):
-        carts = Cart.objects.filter(
-            user_id=self.request.user.id,
-            deleted_at=None,
-            order_id=None,
-        )
-        return carts

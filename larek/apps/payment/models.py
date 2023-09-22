@@ -36,6 +36,11 @@ class Payment(models.Model):
         null=True,
         verbose_name="Payment Sum",
     )
+    card_number = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name="Payment Card Number",
+    )
     status = models.IntegerField(
         null=True,
         blank=True,

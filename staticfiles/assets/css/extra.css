@@ -5195,6 +5195,11 @@ input[type="submit"] {
     background-color: #fff;
 }
 
+.Section-title-empty_cart {
+    margin-left: auto;
+    margin-right: auto
+}
+
 .Section-title + .Section-control {
     padding-left: 17px;
 }

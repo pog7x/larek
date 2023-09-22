@@ -61,6 +61,16 @@ class Cart(models.Model):
             )
         )
 
+    @classmethod
+    def user_has_carts(cls, user_id):
+        return bool(
+            cls.objects.filter(
+                user_id=user_id,
+                deleted_at=None,
+                order_id=None,
+            )
+        )
+
     def __str__(self):
         return f"Cart #{self.id}"
 

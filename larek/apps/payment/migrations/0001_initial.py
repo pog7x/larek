@@ -28,6 +28,12 @@ class Migration(migrations.Migration):
                     models.FloatField(default=0, null=True, verbose_name="Payment Sum"),
                 ),
                 (
+                    "card_number",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="Payment Card Number"
+                    ),
+                ),
+                (
                     "status",
                     models.IntegerField(
                         blank=True,
