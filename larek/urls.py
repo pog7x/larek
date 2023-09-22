@@ -9,7 +9,7 @@ from larek.apps.cart.views import CartTotalView, CartViewSet
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
 from larek.apps.order.views import OrderViewSet
-from larek.apps.payment.views import PaymentViewSet, PaymentProcessView, PaymentWaitView
+from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
 from larek.apps.product.views import ProductViewSet
 from larek.apps.product_seller.views import ProductSellerViewSet
 from larek.apps.review.views import ReviewViewSet

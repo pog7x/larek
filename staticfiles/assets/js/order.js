@@ -45,7 +45,16 @@ var mix = {
 				.finally();
 		},
 		async getDeliveries() {
-			resp = await axios.get('http://0.0.0.0:8000/api/delivery');
+			axios.defaults.xsrfCookieName = 'csrftoken';
+			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+			resp = await axios.get('http://0.0.0.0:8000/api/delivery', {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					'X-Sessionid': this.getCookie('sessionid'),
+				},
+				withCredentials: true,
+			});
 			return resp.data;
 		},
 	},
