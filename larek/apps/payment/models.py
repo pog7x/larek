@@ -7,11 +7,13 @@ from larek.apps.order.models import Order
 
 class Payment(models.Model):
     STATUS_INIT = 1
-    STATUS_ERROR = 2
-    STATUS_PAID = 3
+    STATUS_PROCESSING = 2
+    STATUS_ERROR = 3
+    STATUS_PAID = 4
 
     STATUSES = (
         (STATUS_INIT, "Init"),
+        (STATUS_PROCESSING, "Processing"),
         (STATUS_ERROR, "Error"),
         (STATUS_PAID, "Paid"),
     )

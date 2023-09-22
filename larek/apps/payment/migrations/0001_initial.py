@@ -31,7 +31,12 @@ class Migration(migrations.Migration):
                     "status",
                     models.IntegerField(
                         blank=True,
-                        choices=[(1, "Init"), (2, "Error"), (3, "Paid")],
+                        choices=[
+                            (1, "Init"),
+                            (2, "Processing"),
+                            (3, "Error"),
+                            (4, "Paid"),
+                        ],
                         default=1,
                         null=True,
                         verbose_name="Payment Status",
