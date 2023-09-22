@@ -1,13 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic.edit import UpdateView
+from django.views.generic import UpdateView, DetailView
 from rest_framework import viewsets
 from django.http import HttpResponseRedirect
 import logging
 from larek.apps.payment.models import Payment
 from larek.apps.payment.serializers import PaymentSerializer
 from larek.apps.payment.forms import PaymentProcessForm
-
 
 logger = logging.getLogger(__name__)
 
@@ -26,10 +25,10 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
-        payment: Payment = self.model.objects.get(id=pk)
-        if payment.status == Payment.STATUS_PROCESSING:
+        self.object: Payment = self.model.objects.get(id=pk)
+        if self.object.status == Payment.STATUS_PROCESSING:
             return HttpResponseRedirect(reverse_lazy("progresspayment", args=[pk]))
-        elif payment.status in (Payment.STATUS_ERROR, Payment.STATUS_PAID):
+        elif self.object.status == Payment.STATUS_PAID:
             return HttpResponseRedirect(reverse_lazy("historyorder"))
         return super().dispatch(request, *args, **kwargs)
 
@@ -40,3 +39,22 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
         form.instance.status = Payment.STATUS_PROCESSING
         self.object = form.save()
         return super().form_valid(form)
+
+
+class PaymentWaitView(LoginRequiredMixin, DetailView):
+    model = Payment
+    login_url = reverse_lazy("login")
+    template_name = "progresspayment.html"
+    pk_url_kwarg = "payment_id"
+
+    def dispatch(self, request, *args, **kwargs):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        self.object: Payment = self.model.objects.get(id=pk)
+        if self.object.status == Payment.STATUS_INIT:
+            return HttpResponseRedirect(reverse_lazy("payment", args=[pk]))
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.object or self.get_object()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)

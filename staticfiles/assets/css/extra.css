@@ -4912,6 +4912,11 @@ input[type="submit"] {
     font-size: 24px;
 }
 
+.ProgressPayment-title-success {
+    color: #3cb878;
+    font-size: 24px;
+}
+
 .ProgressPayment-icon {
     display: block;
     margin-top: 50px;

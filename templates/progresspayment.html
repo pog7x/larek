@@ -7,22 +7,22 @@
     <div class="Middle-top">
         <div class="wrap">
             <div class="Middle-header">
-                <h1 class="Middle-title">Ожидание оплаты
-                </h1>
+                <h1 class="Middle-title">Ожидание оплаты</h1>
                 <ul class="breadcrumbs Middle-breadcrumbs">
-                    <li class="breadcrumbs-item"><a href="{% url 'index' %}">Home</a>
+                    <li class="breadcrumbs-item">
+                        <a href="{% url 'index' %}">Home</a>
                     </li>
-                    <li class="breadcrumbs-item breadcrumbs-item_current"><span>Ожидание оплаты</span>
+                    <li class="breadcrumbs-item breadcrumbs-item_current">
+                        <span>Ожидание оплаты</span>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="Section">
+    <div v-if="(!success && !error)" class="Section">
         <div class="wrap">
             <div class="ProgressPayment">
-                <div class="ProgressPayment-title">Ждем подтверждения оплаты платежной системой
-                </div>
+                <div class="ProgressPayment-title">Ждем подтверждения оплаты платежной системой</div>
                 <div class="ProgressPayment-icon">
                     <div class="cssload-thecube">
                         <div class="cssload-cube cssload-c1"></div>
@@ -34,5 +34,26 @@
             </div>
         </div>
     </div>
+    <div v-else-if="error" class="Section">
+        <div class="wrap">
+            <div class="ProgressPayment">
+                <div class="ProgressPayment-title">Что-то пошло не так...</div>
+            </div>
+        </div>
+    </div>
+    <div v-else-if="success" class="Section">
+        <div class="wrap">
+            <div class="ProgressPayment">
+                <div class="ProgressPayment-title-success">Заказ оплачен</div>
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block mixins %}
+<script>
+    const paymentID = '{{ object.id }}'
+</script>
+<script src="{% static 'assets/js/progresspayment.js' %}"></script>
 {% endblock %}
