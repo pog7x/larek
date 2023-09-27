@@ -11,22 +11,13 @@ var mix = {
 		};
 	},
 	mounted() {
-		this.fetchPaymentStatus();
+		this.fetchPaymentStatus(paymentID);
 		this.pollingPaymentStatus(paymentID);
 	},
 	methods: {
 		fetchPaymentStatus(paymentID) {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			axios
-				.get(`http://0.0.0.0:8000/api/payment/${paymentID}`, {
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-						'X-Sessionid': this.getCookie('sessionid'),
-					},
-					withCredentials: true,
-				})
+			this.axios
+				.get(`/api/payment/${paymentID}`)
 				.then((response) => {
 					this.status = response.data.status;
 				})

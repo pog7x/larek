@@ -1,5 +1,5 @@
 const { createApp } = Vue;
-createApp({
+const app = createApp({
 	delimiters: ['[[', ']]'],
 	mixins: [window.mix ? window.mix : {}],
 	data() {
@@ -38,24 +38,9 @@ createApp({
 		},
 	},
 	methods: {
-		getCookie(name) {
-			let cookieValue = null;
-			if (document.cookie && document.cookie !== '') {
-				const cookies = document.cookie.split(';');
-				for (let i = 0; i < cookies.length; i++) {
-					const cookie = cookies[i].trim();
-					// Does this cookie string begin with the name we want?
-					if (cookie.substring(0, name.length + 1) === name + '=') {
-						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-						break;
-					}
-				}
-			}
-			return cookieValue;
-		},
 		getCatalogCategories() {
-			axios
-				.get('http://0.0.0.0:8000/api/catalog_category')
+			this.axios
+				.get('/api/catalog_category')
 				.then((response) => {
 					this.catalogCategories = response.data;
 				})
@@ -69,46 +54,14 @@ createApp({
 			window.location.replace(`/catalog?product__name__icontains=${this.mainSearch}`);
 		},
 		async createCart(productSellerID, productsCount) {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			await axios.post(
-				'http://0.0.0.0:8000/api/cart',
-				{ product_seller_id: productSellerID, products_count: productsCount },
-				{
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-						'X-Sessionid': this.getCookie('sessionid'),
-					},
-					withCredentials: true,
-				}
-			);
+			await this.axios.post('/api/cart', { product_seller_id: productSellerID, products_count: productsCount });
 		},
 		async getUserCarts() {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			let resp = await axios.get('http://0.0.0.0:8000/api/cart', {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
-				},
-				withCredentials: true,
-			});
+			let resp = await this.axios.get('/api/cart');
 			return resp.data;
 		},
 		async getCartTotal() {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			let resp = await axios.get('http://0.0.0.0:8000/api/cart_total', {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
-				},
-				withCredentials: true,
-			});
-
+			let resp = await this.axios.get('/api/cart_total');
 			return resp.data;
 		},
 	},
@@ -117,4 +70,36 @@ createApp({
 		this.cartTotalData = await this.getCartTotal();
 		this.cartIcon = cartIcon;
 	},
-}).mount('#app');
+});
+
+function getCookie(name) {
+	let cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		const cookies = document.cookie.split(';');
+		for (let i = 0; i < cookies.length; i++) {
+			const cookie = cookies[i].trim();
+			if (cookie.substring(0, name.length + 1) === name + '=') {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
+}
+
+const axiosInstance = axios.create({
+	xsrfCookieName: 'csrftoken',
+	xsrfHeaderName: 'X-CSRFToken',
+	withCredentials: true,
+	headers: {
+		Accept: 'application/json',
+		'Content-Type': 'application/json',
+		'X-Sessionid': getCookie('sessionid'),
+	},
+});
+
+app.config.globalProperties.axios = {
+	...axiosInstance,
+};
+
+app.mount('#app');

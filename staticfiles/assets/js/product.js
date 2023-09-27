@@ -32,28 +32,15 @@ var mix = {
 		},
 		async fetchProduct(id) {
 			try {
-				const response = await axios.get(`http://0.0.0.0:8000/api/product/${id}`);
+				let response = await this.axios.get(`/api/product/${id}`);
 				return response.data;
 			} catch (error) {
 				this.errored = true;
 			}
 		},
 		async createReview() {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			await axios
-				.post(
-					'http://0.0.0.0:8000/api/review',
-					{ comment: this.review.commentText, product_id: prodID },
-					{
-						headers: {
-							Accept: 'application/json',
-							'Content-Type': 'application/json',
-							'X-Sessionid': this.getCookie('sessionid'),
-						},
-						withCredentials: true,
-					}
-				)
+			await this.axios
+				.post('/api/review', { comment: this.review.commentText, product_id: prodID })
 				.then(async () => {
 					this.product = await this.fetchProduct(prodID);
 				})

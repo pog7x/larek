@@ -11,34 +11,14 @@ var mix = {
 	},
 	methods: {
 		async deleteCartByID(cartID) {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			await axios
-				.delete(`http://0.0.0.0:8000/api/cart/${cartID}`, {
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-						'X-Sessionid': this.getCookie('sessionid'),
-					},
-					withCredentials: true,
-				})
-				.then(async () => {
-					this.carts = await this.getUserCarts();
-					this.cartsList = this.carts.map((p) => p.products_count);
-					this.cartTotalData = await this.getCartTotal();
-				});
+			await this.axios.delete(`/api/cart/${cartID}`).then(async () => {
+				this.carts = await this.getUserCarts();
+				this.cartsList = this.carts.map((p) => p.products_count);
+				this.cartTotalData = await this.getCartTotal();
+			});
 		},
 		async updateCartByID(cartID, payload) {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			resp = await axios.put(`http://0.0.0.0:8000/api/cart/${cartID}`, payload, {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
-				},
-				withCredentials: true,
-			});
+			resp = await this.axios.put(`/api/cart/${cartID}`, payload);
 			return resp.data;
 		},
 		async updateCartCount(index, newRes = null) {

@@ -25,17 +25,8 @@ var mix = {
 	},
 	methods: {
 		createOrder() {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			axios
-				.post('http://0.0.0.0:8000/api/order', this.payload, {
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-						'X-Sessionid': this.getCookie('sessionid'),
-					},
-					withCredentials: true,
-				})
+			this.axios
+				.post('/api/order', this.payload)
 				.then((response) => {
 					if (response.headers.location) {
 						window.location.replace(response.headers.location);
@@ -45,16 +36,7 @@ var mix = {
 				.finally();
 		},
 		async getDeliveries() {
-			axios.defaults.xsrfCookieName = 'csrftoken';
-			axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-			resp = await axios.get('http://0.0.0.0:8000/api/delivery', {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					'X-Sessionid': this.getCookie('sessionid'),
-				},
-				withCredentials: true,
-			});
+			resp = await this.axios.get('/api/delivery');
 			return resp.data;
 		},
 	},

@@ -43,8 +43,8 @@ var mix = {
 			this.fetchProductSeller();
 		},
 		fetchProductSeller() {
-			axios
-				.get('http://0.0.0.0:8000/api/product_seller', {
+			this.axios
+				.get('/api/product_seller', {
 					params: { ...this.query },
 				})
 				.then((response) => {
