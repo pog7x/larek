@@ -10,23 +10,18 @@ var mix = {
 			successStatus: 4,
 		};
 	},
-	mounted() {
-		this.fetchPaymentStatus(paymentID);
-		this.pollingPaymentStatus(paymentID);
+	async mounted() {
+		this.status = await this.fetchPaymentStatus(paymentID);
+		await this.pollingPaymentStatus(paymentID);
 	},
 	methods: {
-		fetchPaymentStatus(paymentID) {
-			this.axios
-				.get(`/api/payment/${paymentID}`)
-				.then((response) => {
-					this.status = response.data.status;
-				})
-				.catch((error) => {})
-				.finally();
+		async fetchPaymentStatus(paymentID) {
+			resp = await this.axios.get(`/api/payment/${paymentID}`);
+			return resp.data.status;
 		},
-		pollingPaymentStatus(paymentID) {
-			const checkPaymentStatus = (paymentId) => {
-				this.fetchPaymentStatus(paymentId);
+		async pollingPaymentStatus(paymentID) {
+			const checkPaymentStatus = async (paymentId) => {
+				this.status = await this.fetchPaymentStatus(paymentId);
 				this.success = this.status === this.successStatus;
 				this.error = this.status === this.errorStatus;
 				if (this.success || this.error) {
