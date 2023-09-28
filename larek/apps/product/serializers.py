@@ -10,6 +10,15 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = ["name", "image"]
 
 
+class ProductBaseSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(required=False, many=True)
+
+    class Meta:
+        model = Product
+        fields = ["id", "name", "catalog_category", "description", "images"]
+        depth = 2
+
+
 class ProductSerializer(serializers.ModelSerializer):
     review = ReviewSerializer(required=False, many=True)
     images = ProductImageSerializer(required=False, many=True)
