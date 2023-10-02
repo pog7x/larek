@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,11 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-339&eig$uv6*6sfhnw_h9a*0@*$4^o76w$ip#x&k(sjs!0@$&_"
+SECRET_KEY = os.getenv("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-DEBUG_PROPAGATE_EXCEPTIONS = True
+DEBUG = str(os.getenv("DEBUG", "false")).lower() == "true"
+DEBUG_PROPAGATE_EXCEPTIONS = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -41,20 +41,21 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_filters",
     "rest_framework",
+    "larek.apps.role",
+    "larek.apps.user",
     "larek.apps.banner",
     "larek.apps.delivery",
+    "larek.apps.payment",
     "larek.apps.discount",
     "larek.apps.catalog_category",
-    "larek.apps.role",
     "larek.apps.seller",
     "larek.apps.product",
-    "larek.apps.user",
     "larek.apps.product_seller",
     "larek.apps.review",
     "larek.apps.views_history",
     "larek.apps.order",
-    "larek.apps.payment",
     "larek.apps.cart",
+    "larek.apps.rmq",
 ]
 
 AUTH_USER_MODEL = "user.User"
@@ -117,11 +118,11 @@ STORAGES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "larek_db",
-        "USER": "larek_user",
-        "PASSWORD": "larek_password",
-        "HOST": "pg",
-        "PORT": "5432",
+        "NAME": os.getenv("POSTGRES_DB", ""),
+        "USER": os.getenv("POSTGRES_USER", ""),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", ""),
+        "HOST": os.getenv("POSTGRES_HOST", ""),
+        "PORT": os.getenv("POSTGRES_PORT", ""),
     }
 }
 
