@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 
 from django.db import models
 
@@ -55,6 +56,10 @@ class Payment(models.Model):
         auto_now_add=True,
         verbose_name="Payment Created At",
     )
+    paid_at = models.DateTimeField(
+        null=True,
+        verbose_name="Payment Paid At",
+    )
 
     def __str__(self):
         return f"Payment {self.id} for Order #{self.order.id}"
@@ -75,6 +80,8 @@ class Payment(models.Model):
 
         if payment.status != cls.STATUS_PROCESSING:
             raise Exception
+
+        payment.paid_at = datetime.now()
 
         if payment.card_number == "0000 0000":
             payment.status = cls.STATUS_ERROR

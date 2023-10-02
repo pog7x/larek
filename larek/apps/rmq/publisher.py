@@ -1,6 +1,7 @@
 import json
 import logging
 from dataclasses import dataclass
+
 import pika
 
 logger = logging.getLogger(__name__)

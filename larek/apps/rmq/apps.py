@@ -1,19 +1,20 @@
-from threading import Thread
 import logging
-from django.apps import AppConfig
-import pika
-from larek.apps.rmq.service import RMQService
 import os
+from threading import Thread
 
-from larek.apps.rmq.publisher import RMQPublisher, PublisherDlxQueue
+import pika
+from django.apps import AppConfig
+
 from larek.apps.rmq.consumer import RMQConsumer
+from larek.apps.rmq.publisher import PublisherDlxQueue, RMQPublisher
+from larek.apps.rmq.service import RMQService
 
 logger = logging.getLogger(__name__)
 
 RMQ_USER = os.getenv("RMQ_USER", "")
 RMQ_PASSWORD = os.getenv("RMQ_PASSWORD", "")
 RMQ_HOST = os.getenv("RMQ_HOST", "")
-RMQ_PORT = os.getenv("RMQ_PORT", "")
+RMQ_PORT = os.getenv("RMQ_PORT", 5672)
 RMQ_VHOST = os.getenv("RMQ_VHOST", "")
 
 RMQ_PAYMENT_EXCHANGE = os.getenv("RMQ_PAYMENT_EXCHANGE", "")

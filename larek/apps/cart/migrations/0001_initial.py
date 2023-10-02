@@ -8,8 +8,8 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("order", "0001_initial"),
-        ("product_seller", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ("product_seller", "0001_initial"),
     ]
 
     operations = [
