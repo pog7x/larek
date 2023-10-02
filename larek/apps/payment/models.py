@@ -6,6 +6,8 @@ from larek.apps.order.models import Order
 
 
 class Payment(models.Model):
+    PAYMENT_ID_KWARG = "payment_id"
+
     STATUS_INIT = 1
     STATUS_PROCESSING = 2
     STATUS_ERROR = 3
@@ -61,3 +63,22 @@ class Payment(models.Model):
         db_table = "payment"
         verbose_name = "Payment"
         verbose_name_plural = "Payments"
+
+    @classmethod
+    def confirm_payment(cls, data: dict):
+        if not (payment_id := data.get(cls.PAYMENT_ID_KWARG)):
+            raise Exception
+        try:
+            payment = cls.objects.get(id=payment_id)
+        except cls.DoesNotExist as err:
+            raise Exception from err
+
+        if payment.status != cls.STATUS_PROCESSING:
+            raise Exception
+
+        if payment.card_number == "0000 0000":
+            payment.status = cls.STATUS_ERROR
+        else:
+            payment.status = cls.STATUS_PAID
+
+        payment.save()

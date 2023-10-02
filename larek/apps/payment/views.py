@@ -1,6 +1,7 @@
 import logging
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
@@ -10,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from larek.apps.payment.forms import PaymentProcessForm
 from larek.apps.payment.models import Payment
 from larek.apps.payment.serializers import PaymentSerializer
+from larek.apps.rmq.apps import larek_publisher
 from larek.authentication import CustomSessionAuthentication
 
 logger = logging.getLogger(__name__)
@@ -42,9 +44,13 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
         return reverse_lazy("progresspayment", args=[self.object.id])
 
     def form_valid(self, form):
-        form.instance.status = Payment.STATUS_PROCESSING
-        self.object = form.save()
-        return super().form_valid(form)
+        with transaction.atomic():
+            form.instance.status = Payment.STATUS_PROCESSING
+            self.object = form.save()
+            larek_publisher.publish(
+                data={Payment.PAYMENT_ID_KWARG: str(form.instance.id)},
+            )
+            return super().form_valid(form)
 
 
 class PaymentWaitView(LoginRequiredMixin, DetailView):
