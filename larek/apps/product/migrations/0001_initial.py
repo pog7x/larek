@@ -12,6 +12,32 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name="Characteristic",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.TextField(
+                        max_length=30, null=True, verbose_name="Characteristic"
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "Characteristic",
+                "verbose_name_plural": "Characteristics",
+                "db_table": "characteristic",
+                "ordering": ["pk"],
+            },
+        ),
+        migrations.CreateModel(
             name="Product",
             fields=[
                 (
@@ -91,6 +117,50 @@ class Migration(migrations.Migration):
                 "verbose_name": "Product image",
                 "verbose_name_plural": "Product images",
                 "db_table": "product_image",
+                "ordering": ["pk"],
+            },
+        ),
+        migrations.CreateModel(
+            name="ProductCharacteristic",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        max_length=300, null=True, verbose_name="Description"
+                    ),
+                ),
+                (
+                    "characteristic",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="characteristic",
+                        to="product.characteristic",
+                        verbose_name="Characteristic",
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="product_characteristic",
+                        to="product.product",
+                        verbose_name="Product",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "Product Characteristic",
+                "verbose_name_plural": "Product Characteristics",
+                "db_table": "product_characteristic",
                 "ordering": ["pk"],
             },
         ),

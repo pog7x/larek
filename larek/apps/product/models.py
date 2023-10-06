@@ -62,3 +62,49 @@ class ProductImage(models.Model):
         verbose_name = "Product image"
         verbose_name_plural = "Product images"
         ordering = ["pk"]
+
+
+class Characteristic(models.Model):
+    name = models.TextField(
+        max_length=30,
+        null=True,
+        verbose_name="Characteristic",
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        db_table = "characteristic"
+        verbose_name = "Characteristic"
+        verbose_name_plural = "Characteristics"
+        ordering = ["pk"]
+
+
+class ProductCharacteristic(models.Model):
+    characteristic = models.ForeignKey(
+        Characteristic,
+        on_delete=models.CASCADE,
+        related_name="characteristic",
+        verbose_name="Characteristic",
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="product_characteristic",
+        verbose_name="Product",
+    )
+    description = models.TextField(
+        max_length=300,
+        null=True,
+        verbose_name="Description",
+    )
+
+    def __str__(self):
+        return f"{self.product} | {self.characteristic}"
+
+    class Meta:
+        db_table = "product_characteristic"
+        verbose_name = "Product Characteristic"
+        verbose_name_plural = "Product Characteristics"
+        ordering = ["pk"]
