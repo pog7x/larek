@@ -1,11 +1,13 @@
 import logging
 from datetime import datetime
 
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, views, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from larek.apps.cart.filters import CartFilter
 from larek.apps.cart.models import Cart
 from larek.apps.cart.serializers import CartSerializer, CartTotalSerializer
 from larek.apps.product_seller.models import ProductSeller
@@ -19,6 +21,8 @@ class CartViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Cart.objects.prefetch_related("product_seller")
     serializer_class = CartSerializer
+    filterset_class = CartFilter
+    filter_backends = [DjangoFilterBackend]
 
     def get_queryset(self):
         return self.queryset.filter(
@@ -56,8 +60,8 @@ class CartViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def perform_update_or_create(self, serializer):
-        product_seller_id = serializer.data["product_seller_id"]
-        request_count = int(serializer.data["products_count"])
+        product_seller_id = serializer.data.get("product_seller_id")
+        request_count = serializer.data.get("products_count", 0)
         user_id = self.request.user.id
         products_count = self.product_seller_curr_count(
             product_seller_id, request_count
@@ -87,7 +91,7 @@ class CartViewSet(viewsets.ModelViewSet):
         instance.save()
 
     def perform_update(self, instance, serializer):
-        request_count = int(serializer.validated_data["products_count"])
+        request_count = int(serializer.validated_data.get("products_count"))
         serializer.validated_data["products_count"] = self.product_seller_curr_count(
             instance.product_seller_id, request_count
         )
@@ -95,6 +99,7 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def product_seller_curr_count(self, product_seller_id, request_count):
         try:
+            request_count = int(request_count or 0)
             product_seller = ProductSeller.objects.get(id=product_seller_id)
             if request_count > product_seller.products_count:
                 return product_seller.products_count

@@ -14,7 +14,6 @@ class RMQService:
             from larek.apps.payment.models import Payment
 
             Payment.confirm_payment(data=data)
-            logger.info(f"{data} <================================================")
         except Exception:
             logger.exception(f"Updating payment {data=} into db error")
 

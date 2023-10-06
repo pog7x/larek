@@ -54,10 +54,15 @@ const app = createApp({
 			window.location.replace(`/catalog?product__name__icontains=${this.mainSearch}`);
 		},
 		async createCart(productSellerID, productsCount) {
-			await this.axios.post('/api/cart', { product_seller_id: productSellerID, products_count: productsCount });
+			let resp = await this.axios.post('/api/cart', { product_seller_id: productSellerID, products_count: productsCount });
+			return resp.data;
 		},
-		async getUserCarts() {
-			let resp = await this.axios.get('/api/cart');
+		async getUserCarts(filters = {}) {
+			let resp = await this.axios.get('/api/cart', { params: { ...filters } });
+			return resp.data;
+		},
+		async updateCartByID(cartID, payload) {
+			resp = await this.axios.put(`/api/cart/${cartID}`, payload);
 			return resp.data;
 		},
 		async getCartTotal() {

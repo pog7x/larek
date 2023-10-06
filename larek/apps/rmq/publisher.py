@@ -98,7 +98,7 @@ class RMQPublisher:
                 if self._dlx_queue and self._dlx_queue.routing_key
                 else ""
             )
-
+        logger.info(f"Publish RMQ message with {data=} and {routing_key=}")
         for _ in range(self._publish_retries):
             try:
                 self._publish(message=msg, routing_key=routing_key)

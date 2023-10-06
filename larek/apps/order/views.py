@@ -48,10 +48,10 @@ class OrderViewSet(viewsets.ModelViewSet):
                     sum=cart_total[0].get("total_products_price"),
                 )
                 payment.save()
-                # Cart.objects.filter(
-                #     user_id=user_id,
-                #     order_id=None,
-                #     deleted_at=None,
-                # ).update(order_id=order.id)
+                Cart.objects.filter(
+                    user_id=user_id,
+                    order_id=None,
+                    deleted_at=None,
+                ).update(order_id=order.id)
 
                 return payment.id

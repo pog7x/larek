@@ -1,7 +1,7 @@
 import uuid
-from datetime import datetime
 
 from django.db import models
+from django.utils import timezone
 
 from larek.apps.order.models import Order
 
@@ -81,7 +81,7 @@ class Payment(models.Model):
         if payment.status != cls.STATUS_PROCESSING:
             raise Exception
 
-        payment.paid_at = datetime.now()
+        payment.paid_at = timezone.now()
 
         if payment.card_number == "0000 0000":
             payment.status = cls.STATUS_ERROR

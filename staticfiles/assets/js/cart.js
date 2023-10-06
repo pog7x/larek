@@ -17,10 +17,6 @@ var mix = {
 				this.cartTotalData = await this.getCartTotal();
 			});
 		},
-		async updateCartByID(cartID, payload) {
-			resp = await this.axios.put(`/api/cart/${cartID}`, payload);
-			return resp.data;
-		},
 		async updateCartCount(index, newRes = null) {
 			try {
 				let cart = await this.updateCartByID(this.carts[index].id, { products_count: newRes });
