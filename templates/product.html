@@ -75,12 +75,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="ProductCard-footer">
-							<div class="ProductCard-tags">
-								<strong class="ProductCard-tagsTitle">Тэги: </strong>
-								<a href="#">Аксессуары</a>, <a href="#">Дизайн</a>,<a href="#">Игры</a>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="Tabs Tabs_default">
@@ -114,18 +108,6 @@
 								<li>quam felis, ultricies nec, pellentesque eutu</li>
 							</ul>
 							<div class="clearfix"></div>
-							<div class="table">
-								<table>
-									<tr>
-										<th>Характеристика</th>
-										<th>Значение</th>
-									</tr>
-									<tr>
-										<td>Тип устройства</td>
-										<td>Ноутбук</td>
-									</tr>
-								</table>
-							</div>
 						</div>
 						<div class="Tabs-block" id="sellers">
 							<div class="Section-content">
@@ -177,7 +159,10 @@
 								:key="index"
 								class="Product-props"
 							>
-								<div class="Product-prop"><strong>[[ pc.characteristic.name ]]</strong><span>[[ pc.description ]]</span></div>
+								<div class="Product-prop" :style="{ backgroundColor: index % 2 == 0 ? '#DCDCDC' : 'transparent' }">
+									<strong>[[ pc.characteristic.name ]]</strong>
+									<span>[[ pc.description ]]</span>
+								</div>
 							</div>
 						</div>
 						<div class="Tabs-block" id="reviews">

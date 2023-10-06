@@ -3716,6 +3716,23 @@ a.Cart-title {
     font-size: 18px;
 }
 
+.Order-info_ok {
+    color: #228B22;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.Order-info_ok .Order-infoType {
+    font-weight: 600;
+    color: #228B22;
+}
+
+.Order-info_ok .Order-infoContent {
+    color: #228B22;
+    font-size: 18px;
+}
+
 .Order_anons {
     border: 1px solid #e0e0e0;
     padding: 20px;
@@ -3861,8 +3878,7 @@ a.Cart-title {
 
 .Product-prop strong {
     font-size: 14px;
-    font-weight: 400;
-    color: #acacac;
+    font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
@@ -4210,25 +4226,6 @@ a.Cart-title {
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 17px;
-}
-
-.ProductCard-footer {
-    margin-top: 30px;
-    padding-top: 37px;
-
-    display: flex;
-    align-items: center;
-}
-
-@media screen and (max-width: 480px) {
-    .ProductCard-footer {
-        display: block;
-        text-align: center;
-    }
-
-    .ProductCard-footer .btn {
-        width: 100%;
-    }
 }
 
 .ProductCard-payment {
@@ -4786,35 +4783,6 @@ input[type="submit"] {
     padding: 10px 30px;
     cursor: pointer;
     color: rgb(0, 99, 209);
-}
-
-
-
-
-
-
-
-
-
-
-
-.ProductCard-tags {
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 2.1px;
-    color: #71747a;
-}
-
-.ProductCard-tags a {
-    display: inline-block;
-    color: #a8aab4;
-}
-
-@media screen and (min-width: 990px) {
-    .ProductCard-tags a:hover {
-        color: #71747a;
-    }
 }
 
 .Profile {

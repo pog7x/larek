@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                     models.IntegerField(
                         blank=True,
                         choices=[
-                            (1, "Created"),
+                            (1, "Waiting pay"),
                             (2, "Payment error"),
                             (3, "Completed"),
                         ],

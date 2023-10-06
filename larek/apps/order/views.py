@@ -1,11 +1,14 @@
 import logging
+from typing import Any
 
 from django.db import transaction
+from django.db.models.query import QuerySet
 from django.urls import reverse
 from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from larek.apps.cart.models import Cart
 from larek.apps.order.models import Order
 from larek.apps.order.serializers import OrderSerializer
@@ -55,3 +58,28 @@ class OrderViewSet(viewsets.ModelViewSet):
                 ).update(order_id=order.id)
 
                 return payment.id
+
+
+class HistoryOrderView(ListView):
+    model = Order
+    template_name = "historyorder.html"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        qs = (
+            Order.objects.prefetch_related("payment")
+            .filter(user_id=self.request.user.id)
+            .order_by("-id")
+        )
+        return qs
+
+
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = "oneorder.html"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        qs = Order.objects.prefetch_related(
+            "payment",
+            "cart",
+        ).filter(user_id=self.request.user.id)
+        return qs
