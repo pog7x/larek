@@ -6,7 +6,7 @@ var mix = {
 				price__lte: '50000',
 				product__name__icontains: '',
 				in_stock: '',
-				ordering: '-product__views_history__count',
+				ordering: '-popularity',
 				page: 1,
 			},
 			maxCount: 1,
@@ -14,7 +14,7 @@ var mix = {
 			loading: false,
 			errored: false,
 			orderBy: [
-				{ id: 'product__views_history__count', title: 'Популярности' },
+				{ id: 'popularity', title: 'Популярности' },
 				{ id: 'product__review__count', title: 'Отзывам' },
 				{ id: 'product__id', title: 'Новизне' },
 				{ id: 'price', title: 'Цене' },

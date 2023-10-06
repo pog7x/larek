@@ -19,7 +19,7 @@ class ProductSellerViewSet(viewsets.ModelViewSet):
         products_count__gt=0,
     )
 
-    ORDERING_VIEWS_HISTORY_COUNT = "product__views_history__count"
+    ORDERING_VIEWS_HISTORY_COUNT = "popularity"
     ORDERING_REVIEW_COUNT = "product__review__count"
     ORDERING_PRODUCT_ID = "product__id"
     ORDERING_PRICE = "price"
@@ -41,7 +41,9 @@ class ProductSellerViewSet(viewsets.ModelViewSet):
 
         if ordering_param:
             if ordering_param.endswith(self.ORDERING_VIEWS_HISTORY_COUNT):
-                queryset = queryset.annotate(Sum("product__views_history"))
+                queryset = queryset.annotate(
+                    popularity=Sum("product__views_history__count", default=0)
+                )
             elif ordering_param.endswith(self.ORDERING_REVIEW_COUNT):
                 queryset = queryset.annotate(Count("product__review"))
 
