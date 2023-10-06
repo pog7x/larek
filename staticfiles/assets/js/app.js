@@ -58,16 +58,22 @@ const app = createApp({
 			return resp.data;
 		},
 		async getUserCarts(filters = {}) {
-			let resp = await this.axios.get('/api/cart', { params: { ...filters } });
-			return resp.data;
+			try {
+				let resp = await this.axios.get('/api/cart', { params: { ...filters } });
+				return resp.data;
+			} catch {
+				return [];
+			}
 		},
 		async updateCartByID(cartID, payload) {
 			resp = await this.axios.put(`/api/cart/${cartID}`, payload);
 			return resp.data;
 		},
 		async getCartTotal() {
-			let resp = await this.axios.get('/api/cart_total');
-			return resp.data;
+			try {
+				let resp = await this.axios.get('/api/cart_total');
+				return resp.data;
+			} catch {}
 		},
 	},
 	async mounted() {

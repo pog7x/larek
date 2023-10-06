@@ -159,7 +159,8 @@
 			"delivery": 1,
 			"user": 4,
 			"address": "ул Жопа мира",
-			"created_at": "2023-07-28T12:59:46Z"
+			"created_at": "2023-07-28T12:59:46Z",
+			"status": 1
 		}
 	},
 	{
@@ -727,6 +728,1071 @@
 			"name": "acerk2434",
 			"product": 12,
 			"image": "product/images/12/acerk2434.webp"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 1,
+		"fields": {
+			"name": "Размер"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 2,
+		"fields": {
+			"name": "Цвет"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 3,
+		"fields": {
+			"name": "Материал"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 4,
+		"fields": {
+			"name": "Объем"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 5,
+		"fields": {
+			"name": "Вес"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 6,
+		"fields": {
+			"name": "Тип"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 7,
+		"fields": {
+			"name": "Совместимость"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 8,
+		"fields": {
+			"name": "Комплектация"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 9,
+		"fields": {
+			"name": "Дата"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 10,
+		"fields": {
+			"name": "Гарантийный срок"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 11,
+		"fields": {
+			"name": "Срок службы"
+		}
+	},
+	{
+		"model": "product.characteristic",
+		"pk": 12,
+		"fields": {
+			"name": "Операционная система"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 1,
+		"fields": {
+			"characteristic": 1,
+			"product": 1,
+			"description": "0"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 2,
+		"fields": {
+			"characteristic": 2,
+			"product": 1,
+			"description": "Черный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 3,
+		"fields": {
+			"characteristic": 3,
+			"product": 1,
+			"description": "стекло"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 4,
+		"fields": {
+			"characteristic": 5,
+			"product": 1,
+			"description": "206 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 5,
+		"fields": {
+			"characteristic": 12,
+			"product": 1,
+			"description": "Android 12"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 6,
+		"fields": {
+			"characteristic": 6,
+			"product": 1,
+			"description": "Классический"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 7,
+		"fields": {
+			"characteristic": 8,
+			"product": 1,
+			"description": "кабель для зарядки, документация"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 8,
+		"fields": {
+			"characteristic": 9,
+			"product": 1,
+			"description": "6 октября 2023"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 9,
+		"fields": {
+			"characteristic": 10,
+			"product": 1,
+			"description": "1 год"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 10,
+		"fields": {
+			"characteristic": 11,
+			"product": 1,
+			"description": "нет данных"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 13,
+		"fields": {
+			"characteristic": 1,
+			"product": 2,
+			"description": "5х16.50х2см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 14,
+		"fields": {
+			"characteristic": 2,
+			"product": 2,
+			"description": "Черный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 15,
+		"fields": {
+			"characteristic": 3,
+			"product": 2,
+			"description": "пластик"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 16,
+		"fields": {
+			"characteristic": 5,
+			"product": 2,
+			"description": "100 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 17,
+		"fields": {
+			"characteristic": 12,
+			"product": 2,
+			"description": "Android 13"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 18,
+		"fields": {
+			"characteristic": 6,
+			"product": 2,
+			"description": "Современный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 19,
+		"fields": {
+			"characteristic": 8,
+			"product": 2,
+			"description": "кабель для зарядки, документация"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 20,
+		"fields": {
+			"characteristic": 9,
+			"product": 2,
+			"description": "4 марта 2023"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 21,
+		"fields": {
+			"characteristic": 10,
+			"product": 2,
+			"description": "2 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 22,
+		"fields": {
+			"characteristic": 11,
+			"product": 2,
+			"description": "7 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 23,
+		"fields": {
+			"characteristic": 1,
+			"product": 3,
+			"description": "8.80х16.50х3 см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 24,
+		"fields": {
+			"characteristic": 2,
+			"product": 3,
+			"description": "Белый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 25,
+		"fields": {
+			"characteristic": 3,
+			"product": 3,
+			"description": "метал"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 26,
+		"fields": {
+			"characteristic": 5,
+			"product": 3,
+			"description": "248 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 27,
+		"fields": {
+			"characteristic": 12,
+			"product": 3,
+			"description": "OS 17"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 28,
+		"fields": {
+			"characteristic": 6,
+			"product": 3,
+			"description": "Новый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 29,
+		"fields": {
+			"characteristic": 8,
+			"product": 3,
+			"description": "кабель для зарядки, наушники"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 30,
+		"fields": {
+			"characteristic": 9,
+			"product": 3,
+			"description": "6 октября 2023"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 31,
+		"fields": {
+			"characteristic": 10,
+			"product": 3,
+			"description": "4 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 32,
+		"fields": {
+			"characteristic": 11,
+			"product": 3,
+			"description": "7 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 33,
+		"fields": {
+			"characteristic": 1,
+			"product": 4,
+			"description": "8.80х1.50х15 см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 34,
+		"fields": {
+			"characteristic": 2,
+			"product": 4,
+			"description": "Синий"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 35,
+		"fields": {
+			"characteristic": 3,
+			"product": 4,
+			"description": "Пластмасса"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 36,
+		"fields": {
+			"characteristic": 5,
+			"product": 4,
+			"description": "319 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 37,
+		"fields": {
+			"characteristic": 12,
+			"product": 4,
+			"description": "Android 10"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 38,
+		"fields": {
+			"characteristic": 6,
+			"product": 4,
+			"description": "-"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 39,
+		"fields": {
+			"characteristic": 8,
+			"product": 4,
+			"description": "инструкция"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 40,
+		"fields": {
+			"characteristic": 9,
+			"product": 4,
+			"description": "6 ноября 2021"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 41,
+		"fields": {
+			"characteristic": 10,
+			"product": 4,
+			"description": "5 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 42,
+		"fields": {
+			"characteristic": 11,
+			"product": 4,
+			"description": "6 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 43,
+		"fields": {
+			"characteristic": 1,
+			"product": 5,
+			"description": "8.80х16.50х3 см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 44,
+		"fields": {
+			"characteristic": 2,
+			"product": 5,
+			"description": "Бордовый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 45,
+		"fields": {
+			"characteristic": 3,
+			"product": 5,
+			"description": "камень"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 46,
+		"fields": {
+			"characteristic": 5,
+			"product": 5,
+			"description": "165 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 47,
+		"fields": {
+			"characteristic": 12,
+			"product": 5,
+			"description": "Windows 11"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 48,
+		"fields": {
+			"characteristic": 6,
+			"product": 5,
+			"description": "Europe"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 49,
+		"fields": {
+			"characteristic": 8,
+			"product": 5,
+			"description": "пульт управления"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 50,
+		"fields": {
+			"characteristic": 9,
+			"product": 5,
+			"description": "31 декабря 2020"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 51,
+		"fields": {
+			"characteristic": 10,
+			"product": 5,
+			"description": "2 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 52,
+		"fields": {
+			"characteristic": 11,
+			"product": 5,
+			"description": "3 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 53,
+		"fields": {
+			"characteristic": 1,
+			"product": 6,
+			"description": "14х10х10 см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 54,
+		"fields": {
+			"characteristic": 2,
+			"product": 6,
+			"description": "Красный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 55,
+		"fields": {
+			"characteristic": 3,
+			"product": 6,
+			"description": "дерево"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 56,
+		"fields": {
+			"characteristic": 5,
+			"product": 6,
+			"description": "1 кг"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 57,
+		"fields": {
+			"characteristic": 12,
+			"product": 6,
+			"description": "Linux Debian"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 58,
+		"fields": {
+			"characteristic": 6,
+			"product": 6,
+			"description": "Classic"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 59,
+		"fields": {
+			"characteristic": 8,
+			"product": 6,
+			"description": "транспортировочные болты"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 60,
+		"fields": {
+			"characteristic": 9,
+			"product": 6,
+			"description": "20 августа 2023"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 61,
+		"fields": {
+			"characteristic": 10,
+			"product": 6,
+			"description": "8 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 62,
+		"fields": {
+			"characteristic": 11,
+			"product": 6,
+			"description": "12 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 63,
+		"fields": {
+			"characteristic": 1,
+			"product": 7,
+			"description": "11.80х27.40х11 см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 64,
+		"fields": {
+			"characteristic": 2,
+			"product": 7,
+			"description": "Черно-белый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 65,
+		"fields": {
+			"characteristic": 3,
+			"product": 7,
+			"description": "Резина, стекло"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 66,
+		"fields": {
+			"characteristic": 5,
+			"product": 7,
+			"description": "701 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 67,
+		"fields": {
+			"characteristic": 12,
+			"product": 7,
+			"description": "Android 24.7"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 68,
+		"fields": {
+			"characteristic": 6,
+			"product": 7,
+			"description": "Печатный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 69,
+		"fields": {
+			"characteristic": 8,
+			"product": 7,
+			"description": "силовой кабель, колесо"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 70,
+		"fields": {
+			"characteristic": 9,
+			"product": 7,
+			"description": "25 января 2014"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 71,
+		"fields": {
+			"characteristic": 10,
+			"product": 7,
+			"description": "1.5 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 72,
+		"fields": {
+			"characteristic": 11,
+			"product": 7,
+			"description": "2 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 73,
+		"fields": {
+			"characteristic": 1,
+			"product": 8,
+			"description": "ш11 д12  в17"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 74,
+		"fields": {
+			"characteristic": 2,
+			"product": 8,
+			"description": "Серый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 75,
+		"fields": {
+			"characteristic": 3,
+			"product": 8,
+			"description": "золото"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 76,
+		"fields": {
+			"characteristic": 5,
+			"product": 8,
+			"description": "1.5 кг"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 77,
+		"fields": {
+			"characteristic": 12,
+			"product": 8,
+			"description": "Android 43"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 78,
+		"fields": {
+			"characteristic": 6,
+			"product": 8,
+			"description": "Золотой"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 79,
+		"fields": {
+			"characteristic": 8,
+			"product": 8,
+			"description": "Запасные части"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 80,
+		"fields": {
+			"characteristic": 9,
+			"product": 8,
+			"description": "14 мая 2023"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 81,
+		"fields": {
+			"characteristic": 10,
+			"product": 8,
+			"description": "14 лет"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 82,
+		"fields": {
+			"characteristic": 11,
+			"product": 8,
+			"description": "14 месяцев"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 83,
+		"fields": {
+			"characteristic": 1,
+			"product": 9,
+			"description": "17х100х37 мм"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 84,
+		"fields": {
+			"characteristic": 2,
+			"product": 9,
+			"description": "Серебристый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 85,
+		"fields": {
+			"characteristic": 3,
+			"product": 9,
+			"description": "асфальт"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 86,
+		"fields": {
+			"characteristic": 5,
+			"product": 9,
+			"description": "156 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 88,
+		"fields": {
+			"characteristic": 6,
+			"product": 9,
+			"description": "Неоклассический"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 89,
+		"fields": {
+			"characteristic": 8,
+			"product": 9,
+			"description": "заярдка, плеер"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 90,
+		"fields": {
+			"characteristic": 9,
+			"product": 9,
+			"description": "21 сентбря 2019"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 91,
+		"fields": {
+			"characteristic": 10,
+			"product": 9,
+			"description": "2 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 92,
+		"fields": {
+			"characteristic": 11,
+			"product": 9,
+			"description": "3 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 93,
+		"fields": {
+			"characteristic": 1,
+			"product": 10,
+			"description": "14 х 15 х 65 см"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 94,
+		"fields": {
+			"characteristic": 2,
+			"product": 10,
+			"description": "Голубой"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 95,
+		"fields": {
+			"characteristic": 3,
+			"product": 10,
+			"description": "Железо"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 96,
+		"fields": {
+			"characteristic": 5,
+			"product": 10,
+			"description": "51 г"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 97,
+		"fields": {
+			"characteristic": 12,
+			"product": 10,
+			"description": "Symbian 11"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 98,
+		"fields": {
+			"characteristic": 6,
+			"product": 10,
+			"description": "Постоянный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 99,
+		"fields": {
+			"characteristic": 8,
+			"product": 10,
+			"description": "наушники, микрофон"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 100,
+		"fields": {
+			"characteristic": 9,
+			"product": 10,
+			"description": "14 марта 2021"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 101,
+		"fields": {
+			"characteristic": 10,
+			"product": 10,
+			"description": "2 год"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 102,
+		"fields": {
+			"characteristic": 11,
+			"product": 10,
+			"description": "4 года"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 103,
+		"fields": {
+			"characteristic": 1,
+			"product": 11,
+			"description": "высота - 900\nширина - 500\nдлина - 98"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 104,
+		"fields": {
+			"characteristic": 2,
+			"product": 11,
+			"description": "Коричневый"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 105,
+		"fields": {
+			"characteristic": 3,
+			"product": 11,
+			"description": "титан"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 106,
+		"fields": {
+			"characteristic": 5,
+			"product": 11,
+			"description": "11 кг"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 107,
+		"fields": {
+			"characteristic": 12,
+			"product": 11,
+			"description": "-"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 108,
+		"fields": {
+			"characteristic": 6,
+			"product": 11,
+			"description": "Шарообразный"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 109,
+		"fields": {
+			"characteristic": 8,
+			"product": 11,
+			"description": "ручки"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 110,
+		"fields": {
+			"characteristic": 9,
+			"product": 11,
+			"description": "6 декабря 2024"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 111,
+		"fields": {
+			"characteristic": 10,
+			"product": 11,
+			"description": "6 месяцев"
+		}
+	},
+	{
+		"model": "product.productcharacteristic",
+		"pk": 112,
+		"fields": {
+			"characteristic": 11,
+			"product": 11,
+			"description": "3 года"
 		}
 	},
 	{
@@ -1366,7 +2432,7 @@
 		"pk": 5,
 		"fields": {
 			"password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-			"last_login": "2023-09-20T08:30:00.267Z",
+			"last_login": "2023-10-06T13:39:13.411Z",
 			"is_superuser": true,
 			"username": "pog7x",
 			"first_name": "Georgy",

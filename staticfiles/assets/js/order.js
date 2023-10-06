@@ -36,8 +36,10 @@ var mix = {
 				.finally();
 		},
 		async getDeliveries() {
-			resp = await this.axios.get('/api/delivery');
-			return resp.data;
+			try {
+				resp = await this.axios.get('/api/delivery');
+				return resp.data;
+			} catch {}
 		},
 	},
 };

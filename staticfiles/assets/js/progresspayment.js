@@ -16,8 +16,10 @@ var mix = {
 	},
 	methods: {
 		async fetchPaymentStatus(paymentID) {
-			resp = await this.axios.get(`/api/payment/${paymentID}`);
-			return resp.data.status;
+			try {
+				resp = await this.axios.get(`/api/payment/${paymentID}`);
+				return resp.data.status;
+			} catch {}
 		},
 		async pollingPaymentStatus(paymentID) {
 			const checkPaymentStatus = async (paymentId) => {
