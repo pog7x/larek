@@ -2504,45 +2504,5 @@
 			"groups": [],
 			"user_permissions": []
 		}
-	},
-	{
-		"model": "views_history.viewshistory",
-		"pk": 1,
-		"fields": {
-			"product": 1,
-			"user": 1
-		}
-	},
-	{
-		"model": "views_history.viewshistory",
-		"pk": 2,
-		"fields": {
-			"product": 7,
-			"user": 4
-		}
-	},
-	{
-		"model": "views_history.viewshistory",
-		"pk": 3,
-		"fields": {
-			"product": 12,
-			"user": 2
-		}
-	},
-	{
-		"model": "views_history.viewshistory",
-		"pk": 4,
-		"fields": {
-			"product": 1,
-			"user": 1
-		}
-	},
-	{
-		"model": "views_history.viewshistory",
-		"pk": 5,
-		"fields": {
-			"product": 1,
-			"user": 1
-		}
 	}
 ]

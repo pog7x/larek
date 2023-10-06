@@ -56,7 +56,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "paid_at",
-                    models.DateTimeField(null=True, verbose_name="Payment Paid At"),
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Payment Paid At"
+                    ),
                 ),
                 (
                     "order",

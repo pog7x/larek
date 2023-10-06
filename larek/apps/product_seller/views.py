@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, pagination, viewsets
 
@@ -41,7 +41,7 @@ class ProductSellerViewSet(viewsets.ModelViewSet):
 
         if ordering_param:
             if ordering_param.endswith(self.ORDERING_VIEWS_HISTORY_COUNT):
-                queryset = queryset.annotate(Count("product__views_history"))
+                queryset = queryset.annotate(Sum("product__views_history"))
             elif ordering_param.endswith(self.ORDERING_REVIEW_COUNT):
                 queryset = queryset.annotate(Count("product__review"))
 
