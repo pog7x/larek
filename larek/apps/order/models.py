@@ -5,12 +5,12 @@ from larek.apps.user.models import User
 
 
 class Order(models.Model):
-    STATUS_CREATED = 1
+    STATUS_WAITING_PAY = 1
     STATUS_PAYMENTS_ERROR = 2
     STATUS_COMPLETED = 3
 
     STATUSES = (
-        (STATUS_CREATED, "Created"),
+        (STATUS_WAITING_PAY, "Waiting pay"),
         (STATUS_PAYMENTS_ERROR, "Payment error"),
         (STATUS_COMPLETED, "Completed"),
     )
@@ -59,12 +59,15 @@ class Order(models.Model):
         null=True,
         blank=True,
         choices=STATUSES,
-        default=STATUS_CREATED,
+        default=STATUS_WAITING_PAY,
         verbose_name="Order Status",
     )
 
     def __str__(self):
         return f"Order #{self.id}"
+
+    def status_verbose(self):
+        return dict(self.STATUSES)[self.status]
 
     class Meta:
         db_table = "order"

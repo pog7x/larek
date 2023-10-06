@@ -3716,6 +3716,23 @@ a.Cart-title {
     font-size: 18px;
 }
 
+.Order-info_ok {
+    color: #228B22;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.Order-info_ok .Order-infoType {
+    font-weight: 600;
+    color: #228B22;
+}
+
+.Order-info_ok .Order-infoContent {
+    color: #228B22;
+    font-size: 18px;
+}
+
 .Order_anons {
     border: 1px solid #e0e0e0;
     padding: 20px;
