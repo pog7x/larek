@@ -21,6 +21,11 @@ class ViewsHistory(models.Model):
         verbose_name="User",
         related_name="views_history",
     )
+    count = models.IntegerField(
+        default=1,
+        null=True,
+        verbose_name="Count",
+    )
 
     def __str__(self):
         return f"{self.user} - {self.product}"
