@@ -7,8 +7,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("product", "0001_initial"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "count",
-                    models.IntegerField(default=0, null=True, verbose_name="Count"),
+                    models.IntegerField(default=1, null=True, verbose_name="Count"),
                 ),
                 (
                     "product",

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from larek.apps.product.models import Product, ProductImage, ProductCharacteristic
+from larek.apps.product.models import Product, ProductCharacteristic, ProductImage
 from larek.apps.review.serializers import ReviewSerializer
 
 

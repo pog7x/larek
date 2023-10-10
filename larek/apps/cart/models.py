@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import F, Sum
 
 from larek.apps.order.models import Order
 from larek.apps.product_seller.models import ProductSeller
@@ -53,10 +52,10 @@ class Cart(models.Model):
                 deleted_at=None,
             )
             .values("user_id")
-            .annotate(total_products_count=Sum("products_count"))
+            .annotate(total_products_count=models.Sum("products_count"))
             .annotate(
-                total_products_price=Sum(
-                    F("products_count") * F("product_seller__price")
+                total_products_price=models.Sum(
+                    models.F("products_count") * models.F("product_seller__price")
                 )
             )
         )

@@ -4,11 +4,12 @@ from typing import Any
 from django.db import transaction
 from django.db.models.query import QuerySet
 from django.urls import reverse
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
+
 from larek.apps.cart.models import Cart
 from larek.apps.order.models import Order
 from larek.apps.order.serializers import OrderSerializer

@@ -5,10 +5,11 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from rest_framework import routers
 
+from larek.apps.banner.views import BannerProductSellerListView
 from larek.apps.cart.views import CartTotalView, CartViewSet
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
-from larek.apps.order.views import OrderViewSet, HistoryOrderView, OrderDetailView
+from larek.apps.order.views import HistoryOrderView, OrderDetailView, OrderViewSet
 from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
 from larek.apps.product.views import ProductViewSet
 from larek.apps.product_seller.views import ProductSellerViewSet
@@ -61,6 +62,7 @@ urlpatterns = [
         name="cart",
     ),
     path("profile/", UserProfileView.as_view(), name="profile"),
+    path("", BannerProductSellerListView.as_view(), name="index"),
     path("password_change/", UserPasswordChangeView.as_view(), name="password_change"),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path("login/", UserLoginView.as_view(), name="login"),

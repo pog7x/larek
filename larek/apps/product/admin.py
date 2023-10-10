@@ -1,10 +1,10 @@
 from django.contrib import admin
 
 from larek.apps.product.models import (
-    Product,
-    ProductImage,
     Characteristic,
+    Product,
     ProductCharacteristic,
+    ProductImage,
 )
 
 admin.site.register(Product)

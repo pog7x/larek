@@ -5555,6 +5555,18 @@ input[type="submit"] {
     min-width: 320px;
 }
 
+.Slider-img{
+    max-width: 376px;
+    max-height: 100%;
+    
+}
+
+.img__slider__limited-edition {
+    max-width: 305px;
+    max-height: 203px;
+    object-fit: contain;
+}
+
 @media screen and (max-width: 480px) {
     .Slider_main .Slider-box {
         padding-bottom: 40px;
