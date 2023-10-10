@@ -1,5 +1,185 @@
 [
 	{
+		"model": "banner.bannerproductseller",
+		"pk": 1,
+		"fields": {
+			"product_seller": 2,
+			"type": 1,
+			"expired_at": "2024-10-09T17:38:34Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 2,
+		"fields": {
+			"product_seller": 4,
+			"type": 1,
+			"expired_at": "2024-10-09T18:19:23Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 3,
+		"fields": {
+			"product_seller": 17,
+			"type": 2,
+			"expired_at": "2024-10-10T05:21:14Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 4,
+		"fields": {
+			"product_seller": 7,
+			"type": 3,
+			"expired_at": "2024-10-09T21:15:17Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 5,
+		"fields": {
+			"product_seller": 14,
+			"type": 3,
+			"expired_at": "2024-10-09T21:16:58Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 6,
+		"fields": {
+			"product_seller": 16,
+			"type": 3,
+			"expired_at": "2024-10-09T21:15:17Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 7,
+		"fields": {
+			"product_seller": 12,
+			"type": 3,
+			"expired_at": "2024-10-09T21:15:17Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 8,
+		"fields": {
+			"product_seller": 21,
+			"type": 3,
+			"expired_at": "2024-10-09T17:38:34Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 9,
+		"fields": {
+			"product_seller": 11,
+			"type": 3,
+			"expired_at": "2024-10-10T17:38:34Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 10,
+		"fields": {
+			"product_seller": 17,
+			"type": 3,
+			"expired_at": "2024-10-09T21:15:17Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 11,
+		"fields": {
+			"product_seller": 21,
+			"type": 1,
+			"expired_at": "2024-10-09T17:38:34Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 12,
+		"fields": {
+			"product_seller": 19,
+			"type": 1,
+			"expired_at": "2024-10-09T21:16:58Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 13,
+		"fields": {
+			"product_seller": 10,
+			"type": 4,
+			"expired_at": "2024-10-10T21:16:58Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 14,
+		"fields": {
+			"product_seller": 16,
+			"type": 4,
+			"expired_at": "2024-10-09T18:19:23Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 15,
+		"fields": {
+			"product_seller": 17,
+			"type": 4,
+			"expired_at": "2024-10-10T18:19:23Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 16,
+		"fields": {
+			"product_seller": 17,
+			"type": 2,
+			"expired_at": "2023-10-09T17:17:16Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 17,
+		"fields": {
+			"product_seller": 11,
+			"type": 4,
+			"expired_at": "2024-10-10T17:38:34Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 18,
+		"fields": {
+			"product_seller": 13,
+			"type": 4,
+			"expired_at": "2024-10-09T21:16:58Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 19,
+		"fields": {
+			"product_seller": 8,
+			"type": 4,
+			"expired_at": "2024-10-09T05:21:14Z"
+		}
+	},
+	{
+		"model": "banner.bannerproductseller",
+		"pk": 20,
+		"fields": {
+			"product_seller": 15,
+			"type": 3,
+			"expired_at": "2025-10-10T21:16:58Z"
+		}
+	},
+	{
 		"model": "cart.cart",
 		"pk": 1,
 		"fields": {
@@ -2444,7 +2624,7 @@
 		"pk": 5,
 		"fields": {
 			"password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-			"last_login": "2023-10-06T17:35:26.924Z",
+			"last_login": "2023-10-10T05:19:12.972Z",
 			"is_superuser": true,
 			"username": "pog7x",
 			"first_name": "Georgy",
@@ -2503,6 +2683,42 @@
 			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
+		}
+	},
+	{
+		"model": "views_history.viewshistory",
+		"pk": 1,
+		"fields": {
+			"product": 8,
+			"user": 5,
+			"count": 2
+		}
+	},
+	{
+		"model": "views_history.viewshistory",
+		"pk": 2,
+		"fields": {
+			"product": 10,
+			"user": 5,
+			"count": 1
+		}
+	},
+	{
+		"model": "views_history.viewshistory",
+		"pk": 3,
+		"fields": {
+			"product": 11,
+			"user": 5,
+			"count": 1
+		}
+	},
+	{
+		"model": "views_history.viewshistory",
+		"pk": 4,
+		"fields": {
+			"product": 3,
+			"user": 5,
+			"count": 1
 		}
 	}
 ]

@@ -1,8 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
+
 from larek.apps.product.models import Product
-from larek.apps.views_history.models import ViewsHistory
 from larek.apps.product.serializers import ProductSerializer
+from larek.apps.views_history.models import ViewsHistory
 
 
 class ProductViewSet(viewsets.ModelViewSet):

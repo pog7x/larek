@@ -43,7 +43,7 @@ class ProductImage(models.Model):
         verbose_name="Product Image Name",
     )
     product = models.ForeignKey(
-        Product,
+        to=Product,
         on_delete=models.CASCADE,
         related_name="images",
         verbose_name="Product",
@@ -83,13 +83,13 @@ class Characteristic(models.Model):
 
 class ProductCharacteristic(models.Model):
     characteristic = models.ForeignKey(
-        Characteristic,
+        to=Characteristic,
         on_delete=models.CASCADE,
         related_name="characteristic",
         verbose_name="Characteristic",
     )
     product = models.ForeignKey(
-        Product,
+        to=Product,
         on_delete=models.CASCADE,
         related_name="product_characteristic",
         verbose_name="Product",
