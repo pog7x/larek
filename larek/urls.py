@@ -48,23 +48,28 @@ router.register(r"views_history", ViewsHistoryViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # API
     path("api/", include((router.urls))),
     path("api/cart_total", CartTotalView.as_view()),
+    # Home page
+    path("", BannerProductSellerListView.as_view(), name="index"),
+    # Catalog
     path(
         "catalog/",
         TemplateView.as_view(template_name="catalog.html"),
         name="catalog",
     ),
+    # About
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
+    # Cart
     path(
         "cart/",
         LoginRequiredTemplateView.as_view(template_name="cart.html"),
         name="cart",
     ),
+    # Profile
     path("profile/", UserProfileView.as_view(), name="profile"),
-    path("", BannerProductSellerListView.as_view(), name="index"),
     path("password_change/", UserPasswordChangeView.as_view(), name="password_change"),
-    path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path("login/", UserLoginView.as_view(), name="login"),
     path("logout/", UserLogoutView.as_view(), name="logout"),
     path(
@@ -72,11 +77,13 @@ urlpatterns = [
         UserRegistrationView.as_view(template_name="registration.html"),
         name="registration",
     ),
+    # Product detail
     path(
         "product/<int:product_id>/",
         TemplateView.as_view(template_name="product.html"),
         name="product",
     ),
+    # Order
     path(
         "order/",
         LoginAndCartsRequiredTemplateView.as_view(template_name="order.html"),
@@ -84,6 +91,7 @@ urlpatterns = [
     ),
     path("historyorder/", HistoryOrderView.as_view(), name="historyorder"),
     path("oneorder/<int:pk>", OrderDetailView.as_view(), name="oneorder"),
+    # Payment
     path(
         "payment/<uuid:payment_id>/",
         PaymentProcessView.as_view(),
@@ -94,5 +102,6 @@ urlpatterns = [
         PaymentWaitView.as_view(),
         name="progresspayment",
     ),
+    # Mediafiles
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]
