@@ -1,13 +1,39 @@
-# larek
+# LAREK
+
+## Database scheme
+
+![database scheme](images/db_scheme.png 'Database scheme')
+
+## Processing payments via RMQ
+
+![processing payments via RMQ](images/payment_rmq.png 'Processing payments via RMQ')
+
+## Make migrations
 
 ```bash
-    python manage.py makemigrations user --no-header && python manage.py makemigrations --no-header
+python manage.py makemigrations user --no-header && python manage.py makemigrations --no-header
+```
 
-    python manage.py loaddata fixtures/sample
-    python manage.py createsuperuser
-    python manage.py dumpdata banner cart catalog_category delivery order payment product product_seller review role seller user views_history --format json --indent 4 --verbosity 1 -o fixtures/sample.json -e admin
-    python clear_migrations.py
-    autoflake --verbose --recursive --remove-all-unused-imports --remove-unused-variables --in-place --exclude venv,migrations .
-    isort .
-    black .
+## Format code
+
+```bash
+chmod +x scripts/format.sh && ./scripts/format.sh
+```
+
+## Clear migrations script
+
+```bash
+python clear_migrations.py
+```
+
+## Load fixtures
+
+```bash
+python manage.py loaddata fixtures/sample
+```
+
+## Dump DB data to fixtures
+
+```bash
+python manage.py dumpdata banner cart catalog_category delivery order payment product product_seller review role seller user views_history --format json --indent 4 --verbosity 1 -o fixtures/sample.json -e admin
 ```

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 
 for name, folders, files in os.walk(os.curdir):
