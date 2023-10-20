@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %}Cart{% endblock %}
+
 {% block content %}
 <div class="Middle Middle_top">
 	<div class="Section">
@@ -19,7 +21,7 @@
 							<div class="Cart-desc">[[ cart.product_seller.product.description ]]</div>
 						</div>
 						<div class="Cart-block Cart-block_price">
-							<div class="Cart-price">[[ cart.product_seller.price.toLocaleString() ]]&nbsp;$</div>
+							<div class="Cart-price">$&nbsp;[[ cart.product_seller.price.toLocaleString() ]]</div>
 						</div>
 					</div>
 					<div class="Cart-block Cart-block_row">
@@ -51,7 +53,7 @@
 				</div>
 				<div class="Cart-total">
 					<div class="Cart-block Cart-block_total">
-						<strong class="Cart-title">Итого:</strong><span class="Cart-price">[[ cartTotalData.total_products_price.toLocaleString() ]]&nbsp;$</span>
+						<strong class="Cart-title">Итого:</strong><span class="Cart-price">$&nbsp;[[ cartTotalData.total_products_price.toLocaleString() ]]</span>
 					</div>
 					<div class="Cart-block"><a class="btn btn_success btn_lg" href="{% url 'order' %}">Оформить заказ</a></div>
 				</div>

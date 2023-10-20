@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+
 {% load static %}
+
+{% block title %}Product{% endblock %}
+
 {% block content %}
 <div class="Middle Middle_top">
 	<div class="Section">
@@ -57,7 +61,7 @@
 							</div>
 							<div v-else class="ProductCard-cartElement">
 								<a @click="createProductCart()" class="btn btn_primary" href="#modal_open">
-									<img class="btn-icon" src="{% static 'assets/img/icons/card/cart_white.svg' %}" alt="cart_white.svg" />
+									<img class="btn-icon" src="{% static 'assets/img/icons/card/cart_white.svg' %}" alt="Add to cart" />
 									<span class="btn-content">В&nbsp;корзину</span>
 								</a>
 							</div>
@@ -119,7 +123,7 @@
 										<div class="Order-personal">
 											<div class="row">
 												<div class="row-block">
-													<a class="Order-title" href="oneorder.html"> [[ ps.seller.name ]] </a>
+													<a class="Order-title" :href="`/product/${ps.product.id}/?product_seller=${ps.id}`"> [[ ps.seller.name ]] </a>
 													<div class="ProductCard-cartElement" style="margin-top: 10px">
 														<a class="btn btn_primary" :href="`/product/${ps.product.id}/?product_seller=${ps.id}`">
 															<img
@@ -175,14 +179,14 @@
 										<div class="Comment-avatar" :style="{ backgroundImage: r.user.avatar ? 'url(' + r.user.avatar + ')' : 'url(' + defaultAvatar + ')' }"></div>
 									</div>
 									<div class="Comment-column">
-										<header class="Comment-header">
+										<div class="Comment-header">
 											<div>
 												<strong class="Comment-title">[[ r.user.username ]]</strong>
                                                 <span class="Comment-date">
 													[[ r.created_at ]]
                                                 </span>
 											</div>
-										</header>
+										</div>
 										<div class="Comment-content">
                                             [[ r.comment ]]
 										</div>
@@ -191,9 +195,9 @@
 							</div>
 							{% if user.is_authenticated %}
 								<div class="Tabs-addComment">
-									<header class="Section-header Section-header_product">
+									<div class="Section-header Section-header_product">
 										<h3 class="Section-title">Добавить отзыв</h3>
-									</header>
+									</div>
 									<form class="form" @submit.prevent="createReviewAndFetchProduct">
 										<div class="form-group">
 											<textarea class="form-textarea" name="review" id="review" placeholder="Отзыв" v-model="review.commentText"></textarea>

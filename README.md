@@ -4,9 +4,15 @@
 
 ![database scheme](images/db_scheme.png 'Database scheme')
 
-## Processing payments via RMQ
+## Processing payments via RabbitMQ
 
 ![processing payments via RMQ](images/payment_rmq.png 'Processing payments via RMQ')
+
+## Run docker and load fixtures
+
+```bash
+docker-compose up -d && docker-compose exec app python manage.py loaddata fixtures/sample
+```
 
 ## Make migrations
 

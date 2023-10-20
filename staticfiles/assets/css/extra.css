@@ -3053,6 +3053,18 @@ a.Cart-title {
     margin-bottom: 18px;
 }
 
+.Footer-menu-block {
+    display: flex;
+}
+
+.Footer-menu-block .Footer-menu {
+    padding-right: 20px;
+}
+
+.Footer-menu .menu-item {
+    width: 100px;
+}
+
 .Footer-menu {
     margin-left: 0px;
     padding-left: 0;
@@ -3077,6 +3089,11 @@ a.Cart-title {
     .Footer-logo img {
         max-width: 100%;
     }
+
+    .Footer-menu-block {
+        display: block;
+    }
+    
 }
 
 .Footer-search {

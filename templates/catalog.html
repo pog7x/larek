@@ -2,15 +2,17 @@
 
 {% load static %}
 
+{% block title %}Catalog{% endblock %}
+
 {% block content %}
 <div class="Middle Middle_top">
 	<div class="Section Section_column Section_columnLeft">
 		<div class="wrap">
 			<div class="Section-column">
 				<div class="Section-columnSection">
-					<header class="Section-header">
+					<h1 class="Section-header">
 						<strong class="Section-title">Фильтр</strong>
-					</header>
+					</h1>
 					<div class="Section-columnContent">
 						<form class="form" @submit.prevent="filterForm">
 							<div class="form-group">

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Order #{{ object.id }}{% endblock %}
+
 {% block content %}
 <div class="Middle Middle_top">
     <div class="Middle-top">
@@ -86,7 +88,7 @@
                                         <div class="Cart-desc">{{ cart.product_seller.product.description }}</div>
                                     </div>
                                     <div class="Cart-block Cart-block_price">
-                                        <div class="Cart-price">{{ cart.product_seller.price }}&nbsp;$</div>
+                                        <div class="Cart-price">$&nbsp;{{ cart.product_seller.price_to_str }}</div>
                                     </div>
                                 </div>
                                 <div class="Cart-block Cart-block_row">
@@ -98,7 +100,7 @@
                                 <div class="Cart-block Cart-block_total">
                                     <strong class="Cart-title">
                                         Итого:
-                                        <span class="Cart-price">{{ object.payment.all.0.sum }}&nbsp;$</span>
+                                        <span class="Cart-price">$&nbsp;{{ object.payment.all.0.sum_to_str }}</span>
                                     </strong>
                                 </div>
                                 {% if object.payment.all.0.need_pay %}
