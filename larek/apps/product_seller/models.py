@@ -42,3 +42,6 @@ class ProductSeller(models.Model):
         db_table = "product_seller"
         verbose_name = "Product Seller"
         verbose_name_plural = "Product Seller"
+
+    def price_to_str(self):
+        return f"{self.price:,.0f}"

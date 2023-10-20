@@ -3,7 +3,7 @@
 	{% load static %}
 
 	<head>
-		<title>{% block title %}Larek{% endblock %}</title>
+		<title>Larek | {% block title %}{% endblock %}</title>
 		<meta name="description" content="Описание страницы" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
@@ -45,22 +45,22 @@
 									<ul class="menu menu_img menu_smallImg ControlPanel-menu">
 										<li class="menu-item">
 											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/tw.svg' %}" alt="tw.svg" />
+												<img src="{% static 'assets/img/icons/socialHeader/tw.svg' %}" alt="Twitter" />
 											</a>
 										</li>
 										<li class="menu-item">
 											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/in.svg' %}" alt="in.svg"	/>
+												<img src="{% static 'assets/img/icons/socialHeader/in.svg' %}" alt="LinkedIn" />
 											</a>
 										</li>
 										<li class="menu-item">
 											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/pt.svg' %}" alt="pt.svg" />
+												<img src="{% static 'assets/img/icons/socialHeader/pt.svg' %}" alt="Pinterest" />
 											</a>
 										</li>
 										<li class="menu-item">
 											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/mail.svg' %}" alt="mail.svg" />
+												<img src="{% static 'assets/img/icons/socialHeader/mail.svg' %}" alt="Email" />
 											</a>
 										</li>
 									</ul>
@@ -84,7 +84,7 @@
 				<div class="row Header-rowMain">
 					<div class="row-block Header-logo">
 						<a class="logo" href="{% url 'index' %}">
-							<img class="logo-image" src="{% static 'assets/img/logo.png' %}" alt="logo.png" />
+							<img class="logo-image" src="{% static 'assets/img/logo.png' %}" alt="To home page" />
 						</a>
 					</div>
 					<nav class="row-block row-block_right Header-menu">
@@ -96,9 +96,6 @@
 								<li class="menu-item">
 									<span class="menu-label menu-label_success">Скидки</span>
 									<a class="menu-link" href="{% url 'catalog' %}">Каталог</a>
-								</li>
-								<li class="menu-item">
-									<a class="menu-link" href="comparison.html">Сравнение</a>
 								</li>
 							</ul>
 						</div>
@@ -148,7 +145,7 @@
 						</div>
 					</div>
 					<div class="Header-searchLink">
-						<img src="{% static 'assets/img/icons/search.svg' %}" alt="search.svg" />
+						<img src="{% static 'assets/img/icons/search.svg' %}" alt="Products search" />
 					</div>
 					<div class="Header-search">
 						<div class="search">
@@ -162,7 +159,7 @@
 									v-model="mainSearch"
 								/>
 								<button class="search-button" type="submit" name="search" id="search">
-									<img src="{% static 'assets/img/icons/search.svg' %}" alt="search.svg" />
+									<img src="{% static 'assets/img/icons/search.svg' %}" alt="Products search" />
 									Поиск
 								</button>
 							</form>
@@ -177,7 +174,7 @@
 				<div class="row Footer-main">
 					<div class="row-block">
 						<a class="logo Footer-logo" href="{% url 'index' %}">
-							<img class="logo-image" src="{% static 'assets/img/logo_footer.png' %}" alt="logo_footer.png" />
+							<img class="logo-image" src="{% static 'assets/img/logo_footer.png' %}" alt="To home page" />
 						</a>
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet
@@ -186,62 +183,52 @@
 						<ul class="menu menu_img menu_smallImg Footer-menuSoc">
 							<li class="menu-item">
 								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/fb.svg' %}" alt="fb.svg" />
+									<img src="{% static 'assets/img/icons/socialFooter/fb.svg' %}" alt="Facebook" />
 								</a>
 							</li>
 							<li class="menu-item">
 								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/tw.svg' %}" alt="tw.svg" />
+									<img src="{% static 'assets/img/icons/socialFooter/tw.svg' %}" alt="Twitter" />
 								</a>
 							</li>
 							<li class="menu-item">
 								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/in.svg' %}" alt="in.svg" />
+									<img src="{% static 'assets/img/icons/socialFooter/in.svg' %}" alt="LinkedIn" />
 								</a>
 							</li>
 							<li class="menu-item">
 								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/pt.svg' %}" alt="pt.svg" />
+									<img src="{% static 'assets/img/icons/socialFooter/pt.svg' %}" alt="Pinterest" />
 								</a>
 							</li>
 							<li class="menu-item">
 								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/mail.svg' %}" alt="mail.svg" />
+									<img src="{% static 'assets/img/icons/socialFooter/mail.svg' %}" alt="Email" />
 								</a>
 							</li>
 						</ul>
 					</div>
 					<div class="row-block">
 						<strong class="Footer-title">Useful Links </strong>
-						<ul class="menu menu_vt Footer-menu">
-							<li class="menu-item"><a class="menu-link" href="#">Checkout</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">My Cart</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Delivery</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Order Info</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Terms</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Conditions</a></li>
-						</ul>
+						<div class="Footer-menu-block">
+							<ul class="menu menu_vt Footer-menu">
+								<li class="menu-item"><a class="menu-link" href="{% url 'index' %}">Home</a></li>
+								<li class="menu-item"><a class="menu-link" href="{% url 'catalog' %}">Catalog</a></li>
+								<li class="menu-item"><a class="menu-link" href="{% url 'about' %}">About Us</a></li>
+							</ul>
+							<ul class="menu menu_vt Footer-menu">
+								<li class="menu-item"><a class="menu-link" href="{% url 'profile' %}">Profile</a></li>
+								<li class="menu-item"><a class="menu-link" href="{% url 'historyorder' %}">Orders history</a></li>
+								<li class="menu-item"><a class="menu-link" href="{% url 'cart' %}">My Cart</a></li>
+							</ul>
+						</div>
 					</div>
 					<div class="row-block">
-						<strong class="Footer-title">My Account </strong>
-						<ul class="menu menu_vt Footer-menu">
-							<li class="menu-item"><a class="menu-link" href="#">Accessories</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Bags</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Cameras</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Clothings</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Electronics</a></li>
-							<li class="menu-item"><a class="menu-link" href="#">Fashion</a></li>
-						</ul>
-					</div>
-					<div class="row-block">
-						<strong class="Footer-title">Contacts </strong>
+						<strong class="Footer-title">Contacts</strong>
 						<p>
-							Phone: 8.800.200.600<br />
-							Email: Support@ninzio.com<br />
-							Skype: techno<br />
-							Address: New York, north<br />
-							Avenue 26/7<br />
-							0057
+							Phone: 8-800-200-600<br />
+							Email: support@larek.com<br />
+							Address: New York, north Avenue 26/7 0057<br />
 						</p>
 					</div>
 				</div>
@@ -249,19 +236,23 @@
 			<div class="Footer-copy">
 				<div class="wrap">
 					<div class="row row_space">
-						<div class="row-block">© Copyright&#32;<a href="#">Larek Store.</a>&#32;All rights reserved.</div>
+						<div class="row-block">
+							© Copyright&#32;
+							<a href="#">Larek Store.</a>
+							&#32;All rights reserved.
+						</div>
 						<div class="row-block">
 							<span>Accepted Payments</span>
 							<div class="Footer-payments">
-								<div><img src="{% static 'assets/img/payments/visa.png' %}" alt="visa.png" /></div>
-								<div><img src="{% static 'assets/img/payments/mastercard.png' %}" alt="mastercard.png" /></div>
-								<div><img src="{% static 'assets/img/payments/paypal.png' %}" alt="paypal.png" /></div>
-								<div><img src="{% static 'assets/img/payments/american.png' %}" alt="american.png" /></div>
-								<div><img src="{% static 'assets/img/payments/electron.png' %}" alt="electron.png" /></div>
-								<div><img src="{% static 'assets/img/payments/maestro.png' %}" alt="maestro.png" /></div>
-								<div><img src="{% static 'assets/img/payments/delta.png' %}" alt="delta.png" /></div>
-								<div><img src="{% static 'assets/img/payments/e.png' %}" alt="e.png" /></div>
-								<div><img src="{% static 'assets/img/payments/dk.png' %}" alt="dk.png" /></div>
+								<div><img src="{% static 'assets/img/payments/visa.png' %}" alt="Visa" /></div>
+								<div><img src="{% static 'assets/img/payments/mastercard.png' %}" alt="Mastercard" /></div>
+								<div><img src="{% static 'assets/img/payments/paypal.png' %}" alt="PayPal" /></div>
+								<div><img src="{% static 'assets/img/payments/american.png' %}" alt="American" /></div>
+								<div><img src="{% static 'assets/img/payments/electron.png' %}" alt="Electron" /></div>
+								<div><img src="{% static 'assets/img/payments/maestro.png' %}" alt="Maestro" /></div>
+								<div><img src="{% static 'assets/img/payments/delta.png' %}" alt="Delta" /></div>
+								<div><img src="{% static 'assets/img/payments/e.png' %}" alt="E" /></div>
+								<div><img src="{% static 'assets/img/payments/dk.png' %}" alt="DK" /></div>
 							</div>
 						</div>
 					</div>
