@@ -184,7 +184,7 @@
 		"pk": 1,
 		"fields": {
 			"products_count": 5,
-			"user": 5,
+			"user": 1,
 			"order": 1,
 			"product_seller": 9,
 			"deleted_at": null
@@ -195,7 +195,7 @@
 		"pk": 2,
 		"fields": {
 			"products_count": 9,
-			"user": 5,
+			"user": 1,
 			"order": 1,
 			"product_seller": 7,
 			"deleted_at": null
@@ -206,7 +206,7 @@
 		"pk": 3,
 		"fields": {
 			"products_count": 4,
-			"user": 5,
+			"user": 1,
 			"order": null,
 			"product_seller": 3,
 			"deleted_at": null
@@ -217,7 +217,7 @@
 		"pk": 4,
 		"fields": {
 			"products_count": 3,
-			"user": 5,
+			"user": 1,
 			"order": null,
 			"product_seller": 4,
 			"deleted_at": null
@@ -337,7 +337,7 @@
 			"phone": "+3467543223",
 			"email": "seesoon@gmail.com",
 			"delivery": 1,
-			"user": 5,
+			"user": 1,
 			"address": "​Александровский сад, Манежная улица, 2-10, Москва",
 			"created_at": "2023-07-28T12:59:46Z",
 			"status": 1
@@ -2202,7 +2202,7 @@
 		"pk": 1,
 		"fields": {
 			"product": 3,
-			"user": 4,
+			"user": 1,
 			"comment": "Но есть одно НО!!! При заказе был выбор с какой сим картой телефон, 1 вариант: нано-сим+ е-сим, либо е-сим+ е- сим, естественно я выбрала привычный всем вариант с нано- сим!!!!! И какой вы думаете мне приехал телефон???? С двумя е-сим!!!!! Без возможности вставить нано сим , потому что там даже некуда вставлять ее!!!!! Очень отвратительное и безответственное отношение к покупателям!!! Так что будьте внимательны при заказе!!!!!",
 			"created_at": "2023-07-12T11:42:27.166Z"
 		}
@@ -2212,7 +2212,7 @@
 		"pk": 2,
 		"fields": {
 			"product": 2,
-			"user": 2,
+			"user": 1,
 			"comment": "Быстрая и сочная передача цвета.\r\nВ этой IPS матрице чёрный цвет ровный, засветов не заметно. Присутствует гибкая настройка изображения с отличными пресетами (то, что на старом выставлял вручную, тут предложил \"из коробки\"). Отклик 1мс. Ножка основания смотрится круто",
 			"created_at": "2023-07-12T11:42:27.166Z"
 		}
@@ -2252,7 +2252,7 @@
 		"pk": 6,
 		"fields": {
 			"product": 3,
-			"user": 2,
+			"user": 1,
 			"comment": "Очень рада, что появилась данная модель Apple iPhone. Модель полность оправдала мои ожидания, качество камеры обалденной, огромный плюс в том, что можно без проблем снимать в темное время суток и все будет хорошо видно на видео, чего не скажешь о 13 iPhone. И хоть цена и немного кусалась, но я решилась на данное приобретение. Отдельная благодарность менеджерам, связались быстро и все подсказали.",
 			"created_at": "2023-07-12T11:42:27.166Z"
 		}
@@ -2442,7 +2442,7 @@
 		"pk": 26,
 		"fields": {
 			"product": 3,
-			"user": 7,
+			"user": 1,
 			"comment": "Отличный телефон! Фиолетовый цвет!!!!! - ОГОНЬ!!! Пришла версия для Японии, одна наносит-сим, вторая - esim. Переносила с другого айфона и некоторые санкционные приложения не доступны более в магазине App Store, но без проблем все залила с помощью утилиты imazing.\r\nКамеры отличные, испробовала широкоугольную - это нечто!\r\nПерешла с iPhone XR.Заказывала у продавца в PRO STORE. Переживала, писала и звонила им, т.к приложение Яндекс маркет зависает и я не могла отследить, где находится заказ. Но в этот раз все пришло вовремя, без задержек а самое главное новый не поддельный айфон. Написано что для страны ZA. Расшифровала для Сингапура. Перенесла все данные, приложения Сбербанка, в контакте скачала через ноут imazing. Все работает как и раньше. Этого продавца советую. В прошлый раз заказывала мужу 13 про Макс, но его не доставили в нужный день, сказали, задержут на неопределеный срок и поэтому я отменила заказ. И боялась в этот раз делать покупку. Но рискнула. Все окЭкран шик, перешел с 12 про, казалось что лучше уже некуда, но айфон удивил. Очень классный цвет - рамка теперь черная, линзы черные - красота! Работает все естественно идеально и очень быстро, камеры не сказать что сильно изменились, но все-таки стали получше, особенно заметно лучше стала фронталка. Анимация у острова прикольная.",
 			"created_at": "2023-08-17T09:24:27.166Z"
 		}
@@ -2535,151 +2535,19 @@
 		"model": "user.user",
 		"pk": 1,
 		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": null,
-			"is_superuser": false,
-			"username": "john",
-			"first_name": "John",
-			"last_name": "Lennon",
-			"email": "john.lennon@gmail.com",
-			"is_staff": false,
+			"password": "pbkdf2_sha256$600000$r5MGJTMBiDauQtFtLP56UI$cB2i2hVy+TOg0xmea54v+dqoQQuUqqqzHyRimDa+j20=",
+			"last_login": "2023-10-20T09:06:28Z",
+			"is_superuser": true,
+			"username": "noname",
+			"first_name": "Dave",
+			"last_name": "Bradfield",
+			"email": "seesoon@drf.com",
+			"is_staff": true,
 			"is_active": true,
-			"date_joined": "2023-07-28T12:20:39.128Z",
-			"role": 2,
-			"phone": "6125614256",
-			"address": "USA, NY",
-			"avatar": "user/default_avatar.svg",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 2,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": null,
-			"is_superuser": false,
-			"username": "Uhlenon",
-			"first_name": "Uha",
-			"last_name": "Lennon",
-			"email": "Uha.lennon@gmail.com",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:20:39.132Z",
+			"date_joined": "2023-10-20T08:55:35Z",
 			"role": 1,
-			"phone": "7263478643",
-			"address": "Rostov",
-			"avatar": "user/default_avatar.svg",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 3,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": "2023-07-28T12:31:33.825Z",
-			"is_superuser": true,
-			"username": "admin",
-			"first_name": "",
-			"last_name": "",
-			"email": "",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:28:58.898Z",
-			"role": null,
-			"phone": null,
-			"address": "Paris",
-			"avatar": "user/default_avatar.svg",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 4,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$gsH08ORaCr1b3pgqYJaNg3$99E8FcpTv8ZqUwwqtXNn4dVLgTjuLDDacBsYA/svU2U=",
-			"last_login": null,
-			"is_superuser": false,
-			"username": "client",
-			"first_name": "Buyer1",
-			"last_name": "Buyerer",
-			"email": "buyer@ya.com",
-			"is_staff": false,
-			"is_active": true,
-			"date_joined": "2023-07-28T12:41:25Z",
-			"role": 2,
-			"phone": "63256725365",
-			"address": "Berlin",
-			"avatar": "user/default_avatar.svg",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 5,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$fZKro77VJ171PvJ23c1gem$xUb+tjKynUGQHbCKdohAN0F98Ti5wAYTfYgjZCFPD4U=",
-			"last_login": "2023-10-10T05:19:12.972Z",
-			"is_superuser": true,
-			"username": "pog7x",
-			"first_name": "Georgy",
-			"last_name": "adsdas",
-			"email": "polunin.g@mail.ru",
-			"is_staff": true,
-			"is_active": true,
-			"date_joined": "2023-08-16T10:33:50.269Z",
-			"role": null,
-			"phone": "17266715267",
-			"address": "г Москва, ул Академика Анохина, д 42 к 1, кв 32",
-			"avatar": "user/avatars/5/1694435566Murky_peaks.jpg",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 6,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$vQaN5F7hjW2AwrTRi9CJvi$5lRSKOn6dfAMFjkuLTVoMhJcX+RWii7j/DTu2d4kMLA=",
-			"last_login": null,
-			"is_superuser": true,
-			"username": "adm",
-			"first_name": "",
-			"last_name": "",
-			"email": "",
-			"is_staff": true,
-			"is_active": true,
-			"date_joined": "2023-08-17T09:21:51.285Z",
-			"role": null,
-			"phone": null,
-			"address": null,
-			"avatar": "user/default_avatar.svg",
-			"groups": [],
-			"user_permissions": []
-		}
-	},
-	{
-		"model": "user.user",
-		"pk": 7,
-		"fields": {
-			"password": "pbkdf2_sha256$600000$P7zonPQD15dJjj9XE6sWpK$EYM1nqQxNtoHODRwmtY8Ae1zbSFUDBYv5SFDntFoomY=",
-			"last_login": "2023-08-17T09:22:51.072Z",
-			"is_superuser": true,
-			"username": "qwerty",
-			"first_name": "",
-			"last_name": "",
-			"email": "",
-			"is_staff": true,
-			"is_active": true,
-			"date_joined": "2023-08-17T09:22:42.684Z",
-			"role": null,
-			"phone": null,
-			"address": null,
+			"phone": "+1 631-465-2569",
+			"address": "USA, New York, Hicksville, 1513 Abia Martin Drive",
 			"avatar": "user/default_avatar.svg",
 			"groups": [],
 			"user_permissions": []
@@ -2690,7 +2558,7 @@
 		"pk": 1,
 		"fields": {
 			"product": 8,
-			"user": 5,
+			"user": 1,
 			"count": 2
 		}
 	},
@@ -2699,7 +2567,7 @@
 		"pk": 2,
 		"fields": {
 			"product": 10,
-			"user": 5,
+			"user": 1,
 			"count": 1
 		}
 	},
@@ -2708,7 +2576,7 @@
 		"pk": 3,
 		"fields": {
 			"product": 11,
-			"user": 5,
+			"user": 1,
 			"count": 1
 		}
 	},
@@ -2717,7 +2585,7 @@
 		"pk": 4,
 		"fields": {
 			"product": 3,
-			"user": 5,
+			"user": 1,
 			"count": 1
 		}
 	}
