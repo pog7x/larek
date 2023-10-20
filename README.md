@@ -8,12 +8,6 @@
 
 ![processing payments via RMQ](images/payment_rmq.png 'Processing payments via RMQ')
 
-## Run docker and load fixtures
-
-```bash
-docker-compose up -d && docker-compose exec app python manage.py loaddata fixtures/sample
-```
-
 ## Make migrations
 
 ```bash
@@ -36,6 +30,10 @@ python clear_migrations.py
 
 ```bash
 python manage.py loaddata fixtures/sample
+```
+
+```bash
+docker-compose exec app python manage.py loaddata fixtures/sample
 ```
 
 ## Dump DB data to fixtures
