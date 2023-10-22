@@ -76,7 +76,7 @@
                         </div>
                         <div class="Cart Cart_order">
                             {% for cart in object.cart.all %}
-                            <div class="Cart-product">
+                            <div class="Cart-product {% if cart.products_count < 1 and object.status != object.STATUS_COMPLETED %}Cart-product__sold-out{% endif %}">
                                 <div class="Cart-block Cart-block_row">
                                     <div class="Cart-block Cart-block_pict">
                                         <a class="Cart-pict" href="/product/{{ cart.product_seller.product.id }}/?product_seller={{ cart.product_seller.id }}">
@@ -100,7 +100,7 @@
                                 <div class="Cart-block Cart-block_total">
                                     <strong class="Cart-title">
                                         Итого:
-                                        <span class="Cart-price">$&nbsp;{{ object.payment.all.0.sum_to_str }}</span>
+                                        <span class="Cart-price">$&nbsp;{{ object.total_products_price }}</span>
                                     </strong>
                                 </div>
                                 {% if object.payment.all.0.need_pay %}

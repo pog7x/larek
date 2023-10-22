@@ -142,7 +142,12 @@
                                 </div>
                             </div>
                             <div class="Cart Cart_order">
-                                <div class="Cart-product" v-for="(cart, index) in carts" :key="index">
+                                <div
+                                    v-for="(cart, index) in carts"
+                                    :class="{'Cart-product__sold-out': cart.products_count < 1}"
+                                    :key="index"
+                                    class="Cart-product"
+                                >
                                     <div class="Cart-block Cart-block_row">
                                         <div class="Cart-block Cart-block_pict">
                                             <a class="Cart-pict" :href="`/product/${cart.product_seller.product.id}/?product_seller=${cart.product_seller.id}`">

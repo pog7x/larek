@@ -1,7 +1,7 @@
 import logging
 from typing import Any
 
-from django.db import transaction
+from django.db import models, transaction
 from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.views.generic.detail import DetailView
@@ -30,15 +30,20 @@ class OrderViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data["user_id"] = request.user.id
-        payment_id = self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        headers["Location"] = reverse("payment", args=[payment_id])
+        if payment_id := self.perform_create(serializer):
+            headers = self.get_success_headers(serializer.data)
+            headers["Location"] = reverse("payment", args=[payment_id])
 
-        return Response(
-            serializer.data,
-            status=status.HTTP_201_CREATED,
-            headers=headers,
-        )
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED,
+                headers=headers,
+            )
+        else:
+            return Response(
+                data={"error": "validation error"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
     def perform_create(self, serializer):
         user_id = self.request.user.id
@@ -67,8 +72,14 @@ class HistoryOrderView(ListView):
 
     def get_queryset(self) -> QuerySet[Any]:
         qs = (
-            Order.objects.prefetch_related("payment")
+            Order.objects.prefetch_related("payment", "cart", "cart__product_seller")
             .filter(user_id=self.request.user.id)
+            .annotate(
+                total_products_price=models.Sum(
+                    models.F("cart__products_count")
+                    * models.F("cart__product_seller__price")
+                )
+            )
             .order_by("-id")
         )
         return qs
@@ -79,8 +90,17 @@ class OrderDetailView(DetailView):
     template_name = "oneorder.html"
 
     def get_queryset(self) -> QuerySet[Any]:
-        qs = Order.objects.prefetch_related(
-            "payment",
-            "cart",
-        ).filter(user_id=self.request.user.id)
+        qs = (
+            Order.objects.prefetch_related(
+                "payment",
+                "cart",
+            )
+            .filter(user_id=self.request.user.id)
+            .annotate(
+                total_products_price=models.Sum(
+                    models.F("cart__products_count")
+                    * models.F("cart__product_seller__price")
+                )
+            )
+        )
         return qs

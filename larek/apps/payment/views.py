@@ -42,6 +42,15 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
             return HttpResponseRedirect(reverse_lazy("historyorder"))
         return super().dispatch(request, *args, **kwargs)
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        cart_total = Cart.cart_total_for_user_order(
+            self.request.user.id, self.object.order_id
+        )
+        self.object.sum = cart_total[0].get("total_products_price")
+        self.object.save()
+        return super().get(request, *args, **kwargs)
+
     def get_success_url(self, **kwargs):
         return reverse_lazy("progresspayment", args=[self.object.id])
 

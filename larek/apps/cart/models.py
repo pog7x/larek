@@ -66,6 +66,23 @@ class Cart(models.Model):
         )
 
     @classmethod
+    def cart_total_for_user_order(cls, user_id, order_id):
+        return (
+            cls.objects.prefetch_related("product_seller")
+            .filter(
+                user_id=user_id,
+                order_id=order_id,
+            )
+            .values("user_id")
+            .annotate(total_products_count=models.Sum("products_count"))
+            .annotate(
+                total_products_price=models.Sum(
+                    models.F("products_count") * models.F("product_seller__price")
+                )
+            )
+        )
+
+    @classmethod
     def user_has_carts(cls, user_id):
         return bool(
             cls.objects.filter(
