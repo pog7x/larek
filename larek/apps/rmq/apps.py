@@ -25,6 +25,7 @@ RMQ_PAYMENT_DLX_EXCHANGE = os.getenv("RMQ_PAYMENT_DLX_EXCHANGE", "")
 RMQ_PAYMENT_DLX_QUEUE = os.getenv("RMQ_PAYMENT_DLX_QUEUE", "")
 RMQ_PAYMENT_DLX_ROUTING_KEY = os.getenv("RMQ_PAYMENT_DLX_ROUTING_KEY", "")
 
+X_MESSAGE_TTL = 30 * 1000
 
 larek_publisher = RMQPublisher(
     user=RMQ_USER,
@@ -36,7 +37,7 @@ larek_publisher = RMQPublisher(
     dlx_queue=PublisherDlxQueue(
         queue_name=RMQ_PAYMENT_DLX_QUEUE,
         arguments={
-            "x-message-ttl": 30 * 1000,
+            "x-message-ttl": X_MESSAGE_TTL,
             "x-dead-letter-exchange": RMQ_PAYMENT_EXCHANGE,
             "x-dead-letter-routing-key": RMQ_PAYMENT_ROUTING_KEY,
         },
@@ -61,6 +62,7 @@ class RmqConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "larek.apps.rmq"
     _connection, _channel = None, None
+    CONSUMER_NAME = "Larek Payments Consumer"
 
     def ready(self):
         try:
@@ -71,12 +73,12 @@ class RmqConfig(AppConfig):
                 daemon=True,
                 target=larek_consumer.connect_and_start,
                 kwargs={
-                    "consume_params": {"consumer_tag": "Larek Payments Consumer"},
+                    "consume_params": {"consumer_tag": self.CONSUMER_NAME},
                 },
             )
             thr.start()
         except Exception as err:
-            logger.exception(f"!RMQ Config exception {err}")
+            logger.exception(f"RabbitmQ Config exception {err}")
 
     def _set_rmq(self):
         if not (self._connection and self._channel):

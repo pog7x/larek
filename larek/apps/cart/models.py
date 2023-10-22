@@ -1,8 +1,13 @@
-from django.db import models
+import logging
+
+from django.db import connection, models
 
 from larek.apps.order.models import Order
+from larek.apps.payment.models import Payment
 from larek.apps.product_seller.models import ProductSeller
 from larek.apps.user.models import User
+
+log = logging.getLogger(__name__)
 
 
 class Cart(models.Model):
@@ -69,6 +74,26 @@ class Cart(models.Model):
                 order_id=None,
             )
         )
+
+    @classmethod
+    def decrease_products_count(cls, order_id):
+        # fmt: off
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"""
+                    UPDATE cart AS cart_upd 
+                    SET products_count = p_s.products_count 
+                    FROM cart 
+                    INNER JOIN product_seller AS p_s ON cart.product_seller_id = p_s.id 
+                    INNER JOIN cart AS cart_order ON cart_order.product_seller_id = p_s.id 
+                    LEFT JOIN payment AS pmnt ON pmnt.order_id = cart.order_id 
+                    WHERE cart_upd.product_seller_id = p_s.id 
+                    AND cart_order.order_id = {order_id} 
+                    AND (cart_upd.order_id IS null OR pmnt.status IN ({Payment.STATUS_INIT},{Payment.STATUS_ERROR})) 
+                    AND cart_order.order_id <> COALESCE(cart_upd.order_id,0) 
+                    AND cart_upd.products_count > p_s.products_count;
+                """
+            )
 
     def __str__(self):
         return f"Cart #{self.id}"
