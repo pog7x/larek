@@ -8,9 +8,11 @@ from django.views.generic import DetailView, UpdateView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
+from larek.apps.cart.models import Cart
 from larek.apps.payment.forms import PaymentProcessForm
 from larek.apps.payment.models import Payment
 from larek.apps.payment.serializers import PaymentSerializer
+from larek.apps.product_seller.models import ProductSeller
 from larek.apps.rmq.apps import larek_publisher
 from larek.authentication import CustomSessionAuthentication
 
@@ -46,7 +48,8 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         with transaction.atomic():
             form.instance.status = Payment.STATUS_PROCESSING
-            self.object = form.save()
+            ProductSeller.decrease_products_count(order_id=form.instance.order_id)
+            Cart.decrease_products_count(order_id=form.instance.order_id)
             larek_publisher.publish(
                 data={Payment.PAYMENT_ID_KWARG: str(form.instance.id)},
             )
