@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 
 
 class Cart(models.Model):
-    products_count = models.IntegerField(
+    products_count = models.PositiveIntegerField(
         default=0,
         null=True,
         verbose_name="Products Count",

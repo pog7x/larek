@@ -66,12 +66,11 @@ class OrderViewSet(viewsets.ModelViewSet):
                 return payment.id
 
 
-class HistoryOrderView(ListView):
+class BaseHistoryOrderView:
     model = Order
-    template_name = "historyorder.html"
 
     def get_queryset(self) -> QuerySet[Any]:
-        qs = (
+        return (
             Order.objects.prefetch_related("payment", "cart", "cart__product_seller")
             .filter(user_id=self.request.user.id)
             .annotate(
@@ -82,25 +81,11 @@ class HistoryOrderView(ListView):
             )
             .order_by("-id")
         )
-        return qs
 
 
-class OrderDetailView(DetailView):
-    model = Order
+class HistoryOrderView(BaseHistoryOrderView, ListView):
+    template_name = "historyorder.html"
+
+
+class OrderDetailView(BaseHistoryOrderView, DetailView):
     template_name = "oneorder.html"
-
-    def get_queryset(self) -> QuerySet[Any]:
-        qs = (
-            Order.objects.prefetch_related(
-                "payment",
-                "cart",
-            )
-            .filter(user_id=self.request.user.id)
-            .annotate(
-                total_products_price=models.Sum(
-                    models.F("cart__products_count")
-                    * models.F("cart__product_seller__price")
-                )
-            )
-        )
-        return qs
