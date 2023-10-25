@@ -56,21 +56,14 @@
                                         <div class="Order-infoType">Оплата:</div>
                                         <div class="Order-infoContent">Онлайн картой</div>
                                     </div>
-                                    <div class="Order-info Order-info_status">
+                                    <div class="Order-info Order-info_status {% if object.is_error %}Order-info_error{% else %}Order-info_ok{% endif %}">
                                         <div class="Order-infoType">Статус:</div>
                                         <div class="Order-infoContent">{{ object.status_verbose }}</div>
                                     </div>
-                                    {% if object.payment.all.0.is_error %}
-                                    <div class="Order-info Order-info_error">
+                                    <div class="Order-info {% if object.payment.all.0.is_error %}Order-info_error{% else %}Order-info_ok{% endif %}">
                                         <div class="Order-infoType">Статус платежа:</div>
                                         <div class="Order-infoContent">{{ object.payment.all.0.status_verbose }}</div>
                                     </div>
-                                    {% else %}
-                                    <div class="Order-info Order-info_ok">
-                                        <div class="Order-infoType">Статус платежа:</div>
-                                        <div class="Order-infoContent">{{ object.payment.all.0.status_verbose }}</div>
-                                    </div>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>

@@ -6,8 +6,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("product", "0001_initial"),
         ("seller", "0001_initial"),
+        ("product", "0001_initial"),
     ]
 
     operations = [
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "products_count",
-                    models.IntegerField(
+                    models.PositiveIntegerField(
                         default=0, null=True, verbose_name="Products Count"
                     ),
                 ),

@@ -55,6 +55,7 @@ class Migration(migrations.Migration):
                             (1, "Waiting pay"),
                             (2, "Payment error"),
                             (3, "Completed"),
+                            (4, "Order is not actual"),
                         ],
                         default=1,
                         null=True,

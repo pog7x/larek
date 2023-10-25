@@ -21,7 +21,7 @@ class ProductSeller(models.Model):
         verbose_name="Seller",
         related_name="product_seller",
     )
-    products_count = models.IntegerField(
+    products_count = models.PositiveIntegerField(
         default=0,
         null=True,
         verbose_name="Products Count",
@@ -33,10 +33,7 @@ class ProductSeller(models.Model):
     )
 
     def __str__(self):
-        return (
-            f"{self.seller} sells {self.product}, price: {self.price}, count:"
-            f" {self.products_count}"
-        )
+        return f"#{self.id} | Seller #{self.seller.id} Product {str(self.product)}"
 
     class Meta:
         db_table = "product_seller"

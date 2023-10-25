@@ -8,11 +8,13 @@ class Order(models.Model):
     STATUS_WAITING_PAY = 1
     STATUS_PAYMENTS_ERROR = 2
     STATUS_COMPLETED = 3
+    STATUS_NOT_ACTUAL = 4
 
     STATUSES = (
         (STATUS_WAITING_PAY, "Waiting pay"),
         (STATUS_PAYMENTS_ERROR, "Payment error"),
         (STATUS_COMPLETED, "Completed"),
+        (STATUS_NOT_ACTUAL, "Order is not actual"),
     )
 
     full_name = models.TextField(
@@ -65,6 +67,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order #{self.id}"
+
+    def is_error(self):
+        return self.status in (self.STATUS_PAYMENTS_ERROR, self.STATUS_NOT_ACTUAL)
 
     def status_verbose(self):
         return dict(self.STATUSES)[self.status]

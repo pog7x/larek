@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from larek.apps.cart.models import Cart
+from larek.apps.order.models import Order
 from larek.apps.payment.forms import PaymentProcessForm
 from larek.apps.payment.models import Payment
 from larek.apps.payment.serializers import PaymentSerializer
@@ -55,14 +56,20 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
         return reverse_lazy("progresspayment", args=[self.object.id])
 
     def form_valid(self, form):
-        with transaction.atomic():
-            form.instance.status = Payment.STATUS_PROCESSING
-            ProductSeller.decrease_products_count(order_id=form.instance.order_id)
-            Cart.decrease_products_count(order_id=form.instance.order_id)
-            larek_publisher.publish(
-                data={Payment.PAYMENT_ID_KWARG: str(form.instance.id)},
-            )
-            return super().form_valid(form)
+        try:
+            with transaction.atomic():
+                form.instance.status = Payment.STATUS_PROCESSING
+                ProductSeller.decrease_products_count(order_id=form.instance.order_id)
+                Cart.decrease_products_count(order_id=form.instance.order_id)
+                larek_publisher.publish(
+                    data={Payment.PAYMENT_ID_KWARG: str(form.instance.id)},
+                )
+                return super().form_valid(form)
+        except:
+            order = Order.objects.get(id=form.instance.order_id)
+            order.status = Order.STATUS_NOT_ACTUAL
+            order.save()
+            return HttpResponseRedirect(reverse_lazy("historyorder"))
 
 
 class PaymentWaitView(LoginRequiredMixin, DetailView):

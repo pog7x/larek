@@ -8,8 +8,8 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("product_seller", "0001_initial"),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("order", "0001_initial"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "products_count",
-                    models.IntegerField(
+                    models.PositiveIntegerField(
                         default=0, null=True, verbose_name="Products Count"
                     ),
                 ),
