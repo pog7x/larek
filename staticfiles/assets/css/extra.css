@@ -959,17 +959,6 @@
     top: 50%;
 }
 
-.Card-pin {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 26px;
-    height: 26px;
-    background: url("../img/icons/pin.svg") center center no-repeat;
-    background-size: contain;
-    z-index: 10;
-}
-
 .Card-footer {
     margin-top: 11px;
 }
@@ -988,15 +977,6 @@
     align-items: center;
     text-align: center;
     padding: 30px;
-}
-
-.Card-quote-text,
-.Card-link-text {
-    background: url("../img/icons/quote.svg") center top no-repeat;
-    padding-top: 72px;
-    font-size: 20px;
-    line-height: 1.8em;
-    font-weight: 400;
 }
 
 .Card-quote-author,

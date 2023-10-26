@@ -20,12 +20,13 @@ var mix = {
 		async updateCartCount(index, newRes = null) {
 			try {
 				let cart = await this.updateCartByID(this.carts[index].id, { products_count: newRes });
+				if (this.carts[index].products_count === cart.products_count) {
+					return;
+				}
 				this.carts[index].products_count = cart.products_count;
-			} catch (err) {
-			} finally {
-				this.cartTotalData = await this.getCartTotal();
-				this.cartsList[index] = this.carts[index].products_count;
-			}
+			} catch (err) {}
+			this.cartTotalData = await this.getCartTotal();
+			this.cartsList[index] = this.carts[index].products_count;
 		},
 		async incrementCartCount(index) {
 			try {
