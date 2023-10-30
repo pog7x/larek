@@ -40,7 +40,7 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
         if self.object.status == Payment.STATUS_PROCESSING:
             return HttpResponseRedirect(reverse_lazy("progresspayment", args=[pk]))
         elif self.object.status == Payment.STATUS_PAID:
-            return HttpResponseRedirect(reverse_lazy("historyorder"))
+            return HttpResponseRedirect(reverse_lazy("orders_history"))
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
@@ -69,7 +69,7 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
             order = Order.objects.get(id=form.instance.order_id)
             order.status = Order.STATUS_NOT_ACTUAL
             order.save()
-            return HttpResponseRedirect(reverse_lazy("historyorder"))
+            return HttpResponseRedirect(reverse_lazy("orders_history"))
 
 
 class PaymentWaitView(LoginRequiredMixin, DetailView):

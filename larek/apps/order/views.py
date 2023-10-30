@@ -66,7 +66,7 @@ class OrderViewSet(viewsets.ModelViewSet):
                 return payment.id
 
 
-class BaseHistoryOrderView:
+class BaseOrdersHistoryView:
     model = Order
 
     def get_queryset(self) -> QuerySet[Any]:
@@ -83,9 +83,9 @@ class BaseHistoryOrderView:
         )
 
 
-class HistoryOrderView(BaseHistoryOrderView, ListView):
-    template_name = "historyorder.html"
+class OrdersHistoryView(BaseOrdersHistoryView, ListView):
+    template_name = "orders_history.html"
 
 
-class OrderDetailView(BaseHistoryOrderView, DetailView):
+class OrderDetailView(BaseOrdersHistoryView, DetailView):
     template_name = "oneorder.html"

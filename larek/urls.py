@@ -15,7 +15,7 @@ from larek.apps.banner.views import BannerProductSellerListView
 from larek.apps.cart.views import CartTotalView, CartViewSet
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
-from larek.apps.order.views import HistoryOrderView, OrderDetailView, OrderViewSet
+from larek.apps.order.views import OrderDetailView, OrdersHistoryView, OrderViewSet
 from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
 from larek.apps.product.views import ProductViewSet
 from larek.apps.product_seller.views import ProductSellerViewSet
@@ -115,7 +115,7 @@ urlpatterns = [
         LoginAndCartsRequiredTemplateView.as_view(template_name="order.html"),
         name="order",
     ),
-    path("historyorder/", HistoryOrderView.as_view(), name="historyorder"),
+    path("orders_history/", OrdersHistoryView.as_view(), name="orders_history"),
     path("oneorder/<int:pk>", OrderDetailView.as_view(), name="oneorder"),
     # Payment
     path(
