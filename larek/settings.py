@@ -211,6 +211,6 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
     "x-sessionid",
 ]
-CORS_EXPOSE_HEADERS = [
-    "Location",
-]
+CORS_EXPOSE_HEADERS = ["Location"]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
