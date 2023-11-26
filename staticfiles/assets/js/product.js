@@ -15,16 +15,19 @@ var mix = {
 	async mounted() {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
+		var _productSellerID = this.productSellerID;
 		this.productSellerID = params.product_seller;
 		this.product = await this.fetchProduct(prodID);
-		this.userCarts = await this.getUserCarts({ product_seller_id: this.productSellerID });
-		this.cartProductsCount = this.userCarts[0]?.products_count;
 		for (const ps of this.product.product_seller) {
 			this.price = ps.price.toLocaleString();
+			_productSellerID = ps.id;
 			if (ps.id == this.productSellerID) {
 				break;
 			}
 		}
+		this.productSellerID = _productSellerID;
+		this.userCarts = await this.getUserCarts({ product_seller_id: this.productSellerID });
+		this.cartProductsCount = this.userCarts[0]?.products_count;
 	},
 	methods: {
 		setActivePhoto(index) {
