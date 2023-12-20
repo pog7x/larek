@@ -18,7 +18,7 @@ from larek.apps.delivery.views import DeliveryViewSet
 from larek.apps.order.views import OrderDetailView, OrdersHistoryView, OrderViewSet
 from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
 from larek.apps.product.views import ProductViewSet
-from larek.apps.product_seller.views import ProductSellerViewSet
+from larek.apps.product_seller.views import ProductSellerListView, ProductSellerViewSet
 from larek.apps.review.views import ReviewViewSet
 from larek.apps.role.views import RoleViewSet
 from larek.apps.seller.views import SellerViewSet
@@ -65,6 +65,7 @@ urlpatterns = [
         TemplateView.as_view(template_name="catalog.html"),
         name="catalog",
     ),
+    path("catalog_1/", ProductSellerListView.as_view(), name="catalog_1"),
     # About
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     # Cart

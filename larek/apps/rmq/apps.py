@@ -65,20 +65,21 @@ class RmqConfig(AppConfig):
     CONSUMER_NAME = "Larek Payments Consumer"
 
     def ready(self):
-        try:
-            self._set_rmq()
-            larek_publisher.connect()
-            thr = Thread(
-                name="mq_thread",
-                daemon=True,
-                target=larek_consumer.connect_and_start,
-                kwargs={
-                    "consume_params": {"consumer_tag": self.CONSUMER_NAME},
-                },
-            )
-            thr.start()
-        except Exception as err:
-            logger.exception(f"RabbitmQ Config exception {err}")
+        pass
+        # try:
+        #     self._set_rmq()
+        #     larek_publisher.connect()
+        #     thr = Thread(
+        #         name="mq_thread",
+        #         daemon=True,
+        #         target=larek_consumer.connect_and_start,
+        #         kwargs={
+        #             "consume_params": {"consumer_tag": self.CONSUMER_NAME},
+        #         },
+        #     )
+        #     thr.start()
+        # except Exception as err:
+        #     logger.exception(f"RabbitmQ Config exception {err}")
 
     def _set_rmq(self):
         if not (self._connection and self._channel):
