@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load humanize %}
 {% block title %}Order #{{ object.id }}{% endblock %}
 
 {% block content %}
@@ -81,7 +81,7 @@
                                         <div class="Cart-desc">{{ cart.product_seller.product.description }}</div>
                                     </div>
                                     <div class="Cart-block Cart-block_price">
-                                        <div class="Cart-price">$&nbsp;{{ cart.product_seller.price_to_str }}</div>
+                                        <div class="Cart-price">${{ cart.product_seller.price|floatformat|intcomma }}</div>
                                     </div>
                                 </div>
                                 <div class="Cart-block Cart-block_row">
@@ -93,7 +93,7 @@
                                 <div class="Cart-block Cart-block_total">
                                     <strong class="Cart-title">
                                         Итого:
-                                        <span class="Cart-price">$&nbsp;{{ object.total_products_price }}</span>
+                                        <span class="Cart-price">${{ object.total_products_price|floatformat|intcomma }}</span>
                                     </strong>
                                 </div>
                                 {% if object.payment.all.0.need_pay %}

@@ -5,7 +5,7 @@
 <div class="Cards">
     {% for ps in product_seller_list %}
     <div class="Card">
-        <a class="Card__product__image_link" href="{% url 'product' product_id=ps.product.id %}?product_seller={{ ps.id }}">
+        <a class="Card__product__image_link" href="{% url 'product_seller' pk=ps.id %}">
             <img
                 class="Card__product__image"
                 src="{% get_media_prefix %}{{ ps.product.images.all.0.image }}"
@@ -14,7 +14,7 @@
         </a>
         <div class="Card-content">
             <strong class="Card-title">
-                <a href="{% url 'product' product_id=ps.product.id %}?product_seller={{ ps.id }}">{{ ps.product.name }}</a>
+                <a href="{% url 'product_seller' pk=ps.id %}">{{ ps.product.name }}</a>
             </strong>
             <div class="Card-description">
                 <div class="Card-cost">

@@ -29,14 +29,13 @@ class BannerProductSellerListView(ListView):
         main_slider, limited_offers, popular_goods, limited_edition = [], [], [], []
 
         for banner in banners:
-            logger.info(f"{banner.is_main_slider} {banner.type}")
-            if banner.is_main_slider():
+            if banner.is_main_slider:
                 main_slider.append(banner)
-            elif banner.is_limited_offers():
+            elif banner.is_limited_offers:
                 limited_offers.append(banner)
-            elif banner.is_popular_goods():
+            elif banner.is_popular_goods:
                 popular_goods.append(banner)
-            elif banner.is_limited_edition():
+            elif banner.is_limited_edition:
                 limited_edition.append(banner)
 
         ctx["main_slider"] = main_slider

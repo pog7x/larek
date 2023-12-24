@@ -1,13 +1,16 @@
 import logging
+from typing import Any
 
 from django.core.paginator import InvalidPage
 from django.db.models import Count, Sum
-from django.http import Http404, HttpRequest
+from django.http import Http404, HttpRequest, HttpResponse
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django_filters.rest_framework import DjangoFilterBackend
 from django_htmx.middleware import HtmxDetails
 from rest_framework import filters, pagination, viewsets
 
+from larek.apps.cart.models import Cart
 from larek.apps.product_seller.filters import ProductSellerFilter
 from larek.apps.product_seller.models import ProductSeller
 from larek.apps.product_seller.serializers import ProductSellerSerializer
@@ -97,11 +100,14 @@ class ProductSellerListView(ListView):
     def get(self, request: HtmxHttpRequest, *args, **kwargs):
         # if request.htmx:
         #     log.info(f"{request.GET} <===HTMX====GET")
-        #     self.template_name = "product_seller.html"
         # else:
         #     log.info(f"{request.GET} <=======")
-
         return super().get(request, *args, **kwargs)
+
+    def get_template_names(self):
+        if self.request.htmx:
+            self.template_name = "product_seller.html"
+        return super().get_template_names()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -168,3 +174,11 @@ class ProductSellerListView(ListView):
             return (paginator, page, page.object_list, page.has_other_pages())
         except InvalidPage as err:
             raise Http404(f"Invalid page {page_number} {err}.")
+
+
+class ProductSellerDetailView(DetailView):
+    model = ProductSeller
+    queryset = ProductSeller.objects.prefetch_related(
+        "product", "product__review", "product__product_characteristic"
+    )
+    template_name = "product_1.html"

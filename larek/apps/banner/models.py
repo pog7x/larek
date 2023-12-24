@@ -38,14 +38,18 @@ class BannerProductSeller(models.Model):
     def for_countdown(self):
         return self.expired_at.strftime("%d.%m.%Y %H:%M")
 
+    @property
     def is_main_slider(self):
         return int(self.type) == self.Type.MAIN_SLIDER
 
+    @property
     def is_limited_offers(self):
         return int(self.type) == self.Type.LIMITED_OFFERS
 
+    @property
     def is_popular_goods(self):
         return int(self.type) == self.Type.POPULAR_GOODS
 
+    @property
     def is_limited_edition(self):
         return int(self.type) == self.Type.LIMITED_EDITION

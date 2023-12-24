@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load humanize %}
 
 {% block title %}Orders history{% endblock %}
 
@@ -53,7 +54,7 @@
                                         <div class="Order-info">
                                             <div class="Order-infoType">Общая стоимость:</div>
                                             <div class="Order-infoContent">
-                                                <span class="Order-price">$&nbsp;{{ order.total_products_price }}</span>
+                                                <span class="Order-price">${{ order.total_products_price|floatformat|intcomma }}</span>
                                             </div>
                                         </div>
                                         <div class="Order-info Order-info_status {% if order.is_error %}Order-info_error{% else %}Order-info_ok{% endif %}">

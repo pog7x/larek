@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_filters",
     "django_htmx",
     "rest_framework",
+    "utils",
     "larek.apps.role",
     "larek.apps.user",
     "larek.apps.banner",

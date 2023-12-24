@@ -12,14 +12,23 @@ from django.views.static import serve
 from rest_framework import routers
 
 from larek.apps.banner.views import BannerProductSellerListView
-from larek.apps.cart.views import CartTotalView, CartViewSet
+from larek.apps.cart.views import (
+    CartCreateView,
+    CartTotalView,
+    CartViewSet,
+    CartItemView,
+)
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
 from larek.apps.order.views import OrderDetailView, OrdersHistoryView, OrderViewSet
 from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
 from larek.apps.product.views import ProductViewSet
-from larek.apps.product_seller.views import ProductSellerListView, ProductSellerViewSet
-from larek.apps.review.views import ReviewViewSet
+from larek.apps.product_seller.views import (
+    ProductSellerDetailView,
+    ProductSellerListView,
+    ProductSellerViewSet,
+)
+from larek.apps.review.views import ReviewCreateView, ReviewViewSet
 from larek.apps.role.views import RoleViewSet
 from larek.apps.seller.views import SellerViewSet
 from larek.apps.user.views import (
@@ -60,12 +69,12 @@ urlpatterns = [
     # Home page
     path("", BannerProductSellerListView.as_view(), name="index"),
     # Catalog
-    path(
-        "catalog/",
-        TemplateView.as_view(template_name="catalog.html"),
-        name="catalog",
-    ),
-    path("catalog_1/", ProductSellerListView.as_view(), name="catalog_1"),
+    # path(
+    #     "catalog/",
+    #     TemplateView.as_view(template_name="catalog.html"),
+    #     name="catalog",
+    # ),
+    path("catalog/", ProductSellerListView.as_view(), name="catalog"),
     # About
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     # Cart
@@ -74,6 +83,8 @@ urlpatterns = [
         LoginRequiredTemplateView.as_view(template_name="cart.html"),
         name="cart",
     ),
+    path("cart_change/", CartCreateView.as_view(), name="cart_change"),
+    path("cart/<int:pk>/", CartItemView.as_view(), name="cart_item"),
     # Profile
     path("profile/", UserProfileView.as_view(), name="profile"),
     path("login/", UserLoginView.as_view(), name="login"),
@@ -110,6 +121,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="product.html"),
         name="product",
     ),
+    path(
+        "product_seller/<int:pk>/",
+        ProductSellerDetailView.as_view(),
+        name="product_seller",
+    ),
     # Order
     path(
         "order/",
@@ -128,6 +144,11 @@ urlpatterns = [
         "progresspayment/<uuid:payment_id>/",
         PaymentWaitView.as_view(),
         name="progresspayment",
+    ),
+    path(
+        "review/",
+        ReviewCreateView.as_view(),
+        name="create_review",
     ),
     # Mediafiles
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
