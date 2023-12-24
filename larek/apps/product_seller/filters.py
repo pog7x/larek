@@ -1,13 +1,13 @@
-from django_filters import rest_framework
+from django_filters import FilterSet, rest_framework
 
 from larek.apps.product_seller.models import ProductSeller
 
 
-class ProductSellerFilter(rest_framework.FilterSet):
-    in_stock = rest_framework.BooleanFilter(method="filter_in_stock")
+class ProductSellerFilter(FilterSet):
+    in_stock = rest_framework.CharFilter(method="filter_in_stock")
 
     def filter_in_stock(self, queryset, name, value):
-        return queryset.filter(products_count__gt=0) if value is True else queryset
+        return queryset.filter(products_count__gt=0) if value == "on" else queryset
 
     class Meta:
         model = ProductSeller

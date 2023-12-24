@@ -1,21 +1,21 @@
 import logging
-import json
 from datetime import datetime
 from typing import Any
+
 from django.db.models.query import QuerySet
-from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponseBadRequest, QueryDict
+from django.views.generic import CreateView, ListView, TemplateView, View
 from django.views.generic.detail import (
     SingleObjectMixin,
     SingleObjectTemplateResponseMixin,
 )
-from django_htmx.http import trigger_client_event
-from django.views.generic import DeleteView, View, CreateView, ListView, TemplateView
 from django_filters.rest_framework import DjangoFilterBackend
+from django_htmx.http import trigger_client_event
 from rest_framework import status, views, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
 from larek.apps.cart.filters import CartFilter
 from larek.apps.cart.forms import CartCreateForm, CartUpdateForm
 from larek.apps.cart.models import Cart

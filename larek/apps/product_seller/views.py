@@ -1,16 +1,14 @@
 import logging
-from typing import Any
 
 from django.core.paginator import InvalidPage
 from django.db.models import Count, Sum
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django_filters.rest_framework import DjangoFilterBackend
 from django_htmx.middleware import HtmxDetails
 from rest_framework import filters, pagination, viewsets
 
-from larek.apps.cart.models import Cart
 from larek.apps.product_seller.filters import ProductSellerFilter
 from larek.apps.product_seller.models import ProductSeller
 from larek.apps.product_seller.serializers import ProductSellerSerializer
@@ -66,15 +64,6 @@ class ProductSellerViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-from django import forms
-
-
-class ProductSellerListForm(forms.Form):
-    price__gte = forms.IntegerField(required=False)
-    price__lte = forms.IntegerField(required=False)
-    product__name__icontains = forms.CharField(required=False)
-
-
 class ProductSellerListView(ListView):
     model = ProductSeller
 
@@ -98,10 +87,7 @@ class ProductSellerListView(ListView):
     }
 
     def get(self, request: HtmxHttpRequest, *args, **kwargs):
-        # if request.htmx:
-        #     log.info(f"{request.GET} <===HTMX====GET")
-        # else:
-        #     log.info(f"{request.GET} <=======")
+        self.ordering = self.request.GET.get("ordering") or f"-{self.ordering}"
         return super().get(request, *args, **kwargs)
 
     def get_template_names(self):
@@ -116,19 +102,23 @@ class ProductSellerListView(ListView):
         return context
 
     def get_queryset(self):
-        price__gte = self.request.GET.get("price__gte") or "1"
-        price__lte = self.request.GET.get("price__lte") or "50000"
-        product__name__icontains = self.request.GET.get("product__name__icontains", "")
+        price_gte = self.request.GET.get("price_gte") or "1"
+        price_lte = self.request.GET.get("price_lte") or "50000"
+        product_name = self.request.GET.get("product_name", "")
         in_stock = self.request.GET.get("in_stock") == "on"
-
-        self.ordering = self.request.GET.get("ordering") or f"-{self.ordering}"
+        catalog_category = self.request.GET.get("catalog_category")
 
         queryset = self.queryset.filter(
-            price__gte=price__gte,
-            price__lte=price__lte,
-            product__name__icontains=product__name__icontains,
+            price__gte=price_gte,
+            price__lte=price_lte,
+            product__name__icontains=product_name,
             products_count__gt=0 if in_stock else -1,
         )
+
+        if catalog_category:
+            queryset = queryset.filter(
+                product__catalog_category__id=catalog_category,
+            )
 
         return self._ordering(queryset)
 

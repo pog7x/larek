@@ -14,12 +14,12 @@ from rest_framework import routers
 from larek.apps.banner.views import BannerProductSellerListView
 from larek.apps.cart.views import (
     CartCreateView,
-    CartTotalView,
-    CartViewSet,
     CartItemView,
     CartListView,
     CartTotalHeaderView,
     CartTotalListView,
+    CartTotalView,
+    CartViewSet,
 )
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
@@ -45,7 +45,6 @@ from larek.apps.user.views import (
 from larek.apps.views_history.views import ViewsHistoryViewSet
 from larek.base_views import (
     LoginAndCartsRequiredTemplateView,
-    LoginRequiredTemplateView,
 )
 
 router = routers.SimpleRouter(trailing_slash=False)

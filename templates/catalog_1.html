@@ -19,10 +19,11 @@
 							hx-target="#product-seller"
 							hx-push-url="true"
 							hx-include="this"
-							hx-trigger="submit, change, orderingChanged, pageChanged, input from:#title delay:400ms, changed from:#price"
+							hx-trigger="submit, change, orderingChanged, pageChanged, input from:#title delay:400ms"
 						>	
 							<input type="hidden" name="ordering" id="form-ordering" value="{{ request.GET.ordering }}" />
 							<input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}" />
+							<input type="hidden" name="catalog_category" value="{{ request.GET.catalog_category }}" />
 							<div class="form-group">
 								<div class="range Section-columnRange">
 									<input
@@ -32,22 +33,22 @@
 										data-type="double"
 										data-min="1"
 										data-max="50000"
-										data-from="{{ request.GET.price__gte }}"
-										data-to="{{ request.GET.price__lte }}"
+										data-from="{{ request.GET.price_gte }}"
+										data-to="{{ request.GET.price_lte }}"
 									/>
 								</div>
-								<label for="price__gte">Цена от:</label>
-								<input class="filter-input form-input_full" name="price__gte" id="price"/>
-								<label for="price__lte">Цена до:</label>
-								<input class="filter-input form-input_full" name="price__lte" id="price"/>
+								<label for="price_gte">Цена от:</label>
+								<input class="filter-input form-input_full" name="price_gte" id="price"/>
+								<label for="price_lte">Цена до:</label>
+								<input class="filter-input form-input_full" name="price_lte" id="price"/>
 							</div>
 							<div class="form-group">
 								<input
 									class="filter-input form-input_full"
 									id="title"
-									name="product__name__icontains"
+									name="product_name"
 									type="text"
-									value="{{ request.GET.product__name__icontains }}"
+									value="{{ request.GET.product_name }}"
 									placeholder="Название"
 								/>
 							</div>

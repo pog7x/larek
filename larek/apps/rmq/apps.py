@@ -1,6 +1,5 @@
 import logging
 import os
-from threading import Thread
 
 import pika
 from django.apps import AppConfig

@@ -244,12 +244,12 @@
 
 					$line.ionRangeSlider({
 						onStart: function (data) {
-							$('input[name=price__gte]').val(data.from);
-							$('input[name=price__lte]').val(data.to);
+							$('input[name=price_gte]').val(data.from);
+							$('input[name=price_lte]').val(data.to);
 						},
 						onChange: function (data) {
-							$('input[name=price__gte]').val(data.from);
-							$('input[name=price__lte]').val(data.to);
+							$('input[name=price_gte]').val(data.from);
+							$('input[name=price_lte]').val(data.to);
 						},
 					});
 				},

@@ -1,6 +1,6 @@
 from django import template
-from django.template.defaultfilters import stringfilter, floatformat
 from django.contrib.humanize.templatetags.humanize import intcomma
+from django.template.defaultfilters import floatformat, stringfilter
 
 register = template.Library()
 
