@@ -150,10 +150,11 @@ urlpatterns = [
         PaymentWaitView.as_view(),
         name="progresspayment",
     ),
+    # Review
     path(
         "review/",
         ReviewCreateView.as_view(),
-        name="create_review",
+        name="review_create",
     ),
     # Mediafiles
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),

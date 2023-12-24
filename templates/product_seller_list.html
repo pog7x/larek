@@ -3,7 +3,7 @@
 {% load static %}
 
 <div class="Cards">
-    {% for ps in product_seller_list %}
+    {% for ps in object_list %}
         <div class="Card">
             <a class="Card__product__image_link" href="{% url 'product_seller' pk=ps.id %}">
                 <img

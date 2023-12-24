@@ -65,19 +65,10 @@ class ProductSellerViewSet(viewsets.ModelViewSet):
 
 
 class ProductSellerListView(ListView):
-    model = ProductSeller
-
     ORDERING_POPULARITY = "popularity"
     ORDERING_REVIEW_COUNT = "product__review__count"
     ORDERING_PRODUCT_ID = "product__id"
     ORDERING_PRICE = "price"
-
-    template_name = "catalog_1.html"
-    context_object_name = "product_seller_list"
-    paginate_by = 8
-    ordering = ORDERING_POPULARITY
-
-    queryset = ProductSeller.objects.prefetch_related("product", "product__images")
 
     ORDERING_MAP = {
         ORDERING_POPULARITY: "Популярности",
@@ -86,13 +77,19 @@ class ProductSellerListView(ListView):
         ORDERING_PRICE: "Цене",
     }
 
+    model = ProductSeller
+    template_name = "catalog_1.html"
+    paginate_by = 8
+    ordering = ORDERING_POPULARITY
+    queryset = ProductSeller.objects.prefetch_related("product", "product__images")
+
     def get(self, request: HtmxHttpRequest, *args, **kwargs):
         self.ordering = self.request.GET.get("ordering") or f"-{self.ordering}"
         return super().get(request, *args, **kwargs)
 
     def get_template_names(self):
         if self.request.htmx:
-            self.template_name = "product_seller.html"
+            self.template_name = "product_seller_list.html"
         return super().get_template_names()
 
     def get_context_data(self, **kwargs):
@@ -171,4 +168,4 @@ class ProductSellerDetailView(DetailView):
     queryset = ProductSeller.objects.prefetch_related(
         "product", "product__review", "product__product_characteristic"
     )
-    template_name = "product_1.html"
+    template_name = "product_seller_detail.html"

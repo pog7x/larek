@@ -154,7 +154,7 @@
 								{% endfor %}
 							</div>
 							{% if user.is_authenticated %}
-								{% include "create_review.html" with product_id=object.product.id %}
+								{% include "review_create.html" with product_id=object.product.id %}
 							{% endif %}
 						</div>
 					</div>

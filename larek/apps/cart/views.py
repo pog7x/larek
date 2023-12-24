@@ -193,7 +193,7 @@ class CartChangeMixin:
 class CartCreateView(CartChangeMixin, CreateView):
     model = Cart
     form_class = CartCreateForm
-    template_name = "change_cart.html"
+    template_name = "cart_change.html"
 
     def post(self, request, *args, **kwargs):
         form = self.form_class({**request.POST.dict(), "user_id": request.user.id})
@@ -232,7 +232,7 @@ class CartItemView(
     View,
 ):
     model = Cart
-    template_name = "change_cart.html"
+    template_name = "cart_change.html"
 
     def delete(self, request, *args, **kwargs):
         self.object: Cart = self.get_object()

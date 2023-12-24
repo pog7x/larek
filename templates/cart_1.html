@@ -40,11 +40,7 @@
 							</div>
 							<div class="Cart-block Cart-block_row">
 								{% if cart.products_count > 0 %}
-									<div
-										hx-get="{% url 'cart_change' %}?product_seller_id={{ cart.product_seller.id }}"
-										hx-swap="innerHTML"
-										hx-trigger="load"
-									></div>
+									{% include 'cart_change.html' with cart=cart product_seller_id=cart.product_seller.id %}
 								{% endif %}
 							</div>
 						</div>
