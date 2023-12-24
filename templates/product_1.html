@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% load humanize %}
+{% load stringfilters %}
 
 {% block title %}{{ object.product.name }}{% endblock %}
 
@@ -34,7 +34,7 @@
 							<h2 class="ProductCard-title">{{ object.product.name }}</h2>
 							<div class="ProductCard-info">
 								<div class="ProductCard-cost">
-									<div class="ProductCard-price">${{ object.price|floatformat|intcomma }}</div>
+									<div class="ProductCard-price">${{ object.price|commaprice }}</div>
 								</div>
 							</div>
 						</div>
@@ -102,9 +102,8 @@
 																{{ ps.seller.name }}
 															</a>
 															{% if user.is_authenticated %}
-																{% if object.products_count > 0 %}
+																{% if ps.products_count > 0 %}
 																	<div
-																		class="ProductCard-cart"
 																		hx-get="{% url 'cart_change' %}?product_seller_id={{ ps.id }}"
 																		hx-swap="innerHTML"
 																		hx-trigger="load"
@@ -126,7 +125,7 @@
 															<div class="Order-info">
 																<div class="Order-infoType">Стоимость:</div>
 																<div class="Order-infoContent">
-																	<span class="Order-price">${{ ps.price|floatformat|intcomma }}</span>
+																	<span class="Order-price">${{ ps.price|commaprice }}</span>
 																</div>
 															</div>
 														</div>

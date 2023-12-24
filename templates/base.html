@@ -116,7 +116,11 @@
 									<a class="dropdown-content-a" href="{% url 'logout' %}">Exit</a>
 								</div>
 							</div>
-							<carttotal :carttotaldata="cartTotalData" :carticon="cartIcon"></carttotal>
+							<div
+								hx-get="{% url 'cart_total_header' %}"
+								hx-swap="innerHTML"
+								hx-trigger="load, update_cart_total from:body delay:250ms"
+							></div>
 						</div>
 					</div>
 					{% endif %}
@@ -149,16 +153,15 @@
 					</div>
 					<div class="Header-search">
 						<div class="search">
-							<form class="form form_search" @submit.prevent="submitMainSearch">
+							<form class="form form_search" method="get" action="{% url 'catalog' %}">
 								<input
 									class="search-input"
 									id="query"
-									name="query"
+									name="product__name__icontains"
 									type="text"
 									placeholder="NVIDIA GeForce RTX 3060"
-									v-model="mainSearch"
 								/>
-								<button class="search-button" type="submit" name="search" id="search">
+								<button class="search-button" type="submit" id="search">
 									<img src="{% static 'assets/img/icons/search.svg' %}" alt="Products search" />
 									Поиск
 								</button>
@@ -261,8 +264,4 @@
 		</footer>
 		{% block mixins %}{% endblock %}
 	</body>
-
-	<script>
-		const cartIcon = "{% static 'assets/img/icons/cart.svg' %}"
-	</script>
 </html>

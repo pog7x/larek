@@ -18,7 +18,7 @@ class CartCreateForm(forms.ModelForm):
 
 
 class CartUpdateForm(forms.ModelForm):
-    products_count = forms.IntegerField(required=True, min_value=1)
+    products_count = forms.IntegerField(required=True)
 
     class Meta:
         model = Cart

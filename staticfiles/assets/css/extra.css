@@ -1349,7 +1349,6 @@ a.Cart-title {
 
 @media screen and (max-width: 990px) {
     .Cart-block_seller {
-        margin-left: 0 !important;
         width: 100%;
     }
 }
@@ -1357,6 +1356,16 @@ a.Cart-title {
 @media screen and (max-width: 600px) {
     .Cart-block_seller {
         margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .Cart-block_seller {
+        justify-content: center;
+    }
+
+    .Cart-block_seller {
+        margin-left: 0;
     }
 }
 

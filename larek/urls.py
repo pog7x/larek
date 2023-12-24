@@ -17,6 +17,9 @@ from larek.apps.cart.views import (
     CartTotalView,
     CartViewSet,
     CartItemView,
+    CartListView,
+    CartTotalHeaderView,
+    CartTotalListView,
 )
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
@@ -78,13 +81,16 @@ urlpatterns = [
     # About
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     # Cart
-    path(
-        "cart/",
-        LoginRequiredTemplateView.as_view(template_name="cart.html"),
-        name="cart",
-    ),
+    # path(
+    #     "cart/",
+    #     LoginRequiredTemplateView.as_view(template_name="cart.html"),
+    #     name="cart",
+    # ),
     path("cart_change/", CartCreateView.as_view(), name="cart_change"),
     path("cart/<int:pk>/", CartItemView.as_view(), name="cart_item"),
+    path("cart/", CartListView.as_view(), name="cart"),
+    path("cart_total_header/", CartTotalHeaderView.as_view(), name="cart_total_header"),
+    path("cart_total_list/", CartTotalListView.as_view(), name="cart_total_list"),
     # Profile
     path("profile/", UserProfileView.as_view(), name="profile"),
     path("login/", UserLoginView.as_view(), name="login"),

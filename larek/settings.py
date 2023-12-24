@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    "django.contrib.humanize",
     "corsheaders",
     "django_filters",
     "django_htmx",

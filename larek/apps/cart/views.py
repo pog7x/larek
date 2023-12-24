@@ -1,12 +1,16 @@
 import logging
+import json
 from datetime import datetime
-
+from typing import Any
+from django.db.models.query import QuerySet
+from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponseBadRequest, QueryDict
 from django.views.generic.detail import (
     SingleObjectMixin,
     SingleObjectTemplateResponseMixin,
 )
-from django.views.generic import DeleteView, View, CreateView
+from django_htmx.http import trigger_client_event
+from django.views.generic import DeleteView, View, CreateView, ListView, TemplateView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, views, viewsets
 from rest_framework.exceptions import ValidationError
@@ -131,6 +135,7 @@ class CartTotalView(views.APIView):
 
 class CartChangeMixin:
     model = Cart
+    TRIGGER_CLIENT_EVENT = "update_cart_total"
 
     def _fetch_cart(self, product_seller_id):
         try:
@@ -195,11 +200,14 @@ class CartCreateView(CartChangeMixin, CreateView):
 
         if form.is_valid():
             self.object = self._perform_update_or_create(form)
-            return self.render_to_response(
-                context={
-                    "cart": self.object,
-                    "product_seller_id": form.cleaned_data.get("product_seller_id"),
-                },
+            return trigger_client_event(
+                response=self.render_to_response(
+                    context={
+                        "cart": self.object,
+                        "product_seller_id": form.cleaned_data.get("product_seller_id"),
+                    },
+                ),
+                name=self.TRIGGER_CLIENT_EVENT,
             )
         else:
             return HttpResponseBadRequest(form.errors)
@@ -230,35 +238,82 @@ class CartItemView(
         self.object: Cart = self.get_object()
         self._perform_deleted_at(self.object)
         product_seller_id = self.object.product_seller.id
-        return self.render_to_response(
-            context={
-                "cart": self._fetch_cart(product_seller_id),
-                "product_seller_id": product_seller_id,
-            },
+        return trigger_client_event(
+            response=self.render_to_response(
+                context={
+                    "cart": self._fetch_cart(product_seller_id),
+                    "product_seller_id": product_seller_id,
+                },
+            ),
+            name=self.TRIGGER_CLIENT_EVENT,
         )
 
     def put(self, request, *args, **kwargs):
         self.object: Cart = self.get_object()
-        logger.info(f"{QueryDict(request.body)} <<<<<<<<<<<<<<<<<<<<<<<<")
         form = CartUpdateForm(QueryDict(request.body).dict(), instance=self.object)
+        product_seller_id = self.object.product_seller.id
 
         if form.is_valid():
-            product_seller_id = self.object.product_seller.id
-            self.object.products_count = self._product_seller_curr_count(
-                product_seller_id, form.cleaned_data["products_count"]
-            )
-            self.object.save()
-            return self.render_to_response(
+            products_count = form.cleaned_data["products_count"]
+        else:
+            products_count = 1
+
+        self.object.products_count = self._product_seller_curr_count(
+            product_seller_id, products_count
+        )
+
+        self.object.save()
+        return trigger_client_event(
+            response=self.render_to_response(
                 context={
                     "cart": self.object,
                     "product_seller_id": product_seller_id,
                 },
-            )
-
-        else:
-            return HttpResponseBadRequest(form.errors)
+            ),
+            name=self.TRIGGER_CLIENT_EVENT,
+        )
 
     def _perform_deleted_at(self, instance: Cart):
         instance.deleted_at = datetime.now()
         instance.save()
         return instance
+
+
+class CartListView(ListView):
+    model = Cart
+    queryset = Cart.objects.prefetch_related(
+        "product_seller",
+        "product_seller__seller",
+        "product_seller__product",
+        "product_seller__product__images",
+    ).filter(
+        deleted_at=None,
+        order_id=None,
+    )
+    template_name = "cart_1.html"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        self.queryset = self.queryset.filter(user_id=self.request.user.id)
+        return super().get_queryset()
+
+
+class CartTotalHeaderView(TemplateView):
+    template_name = "cart_total_header.html"
+    DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        res = Cart.cart_total_for_user(self.request.user.id)
+        return super().get_context_data(
+            **(res[0] if res else self.DEFAULT_RES), **kwargs
+        )
+
+
+class CartTotalListView(TemplateView):
+    template_name = "cart_total_list.html"
+    DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        res = Cart.cart_total_for_user(self.request.user.id)
+        return super().get_context_data(
+            **(res[0] if res else self.DEFAULT_RES), **kwargs
+        )

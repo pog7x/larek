@@ -106,7 +106,7 @@ class Cart(models.Model):
                     LEFT JOIN payment AS pmnt ON pmnt.order_id = cart.order_id 
                     WHERE cart_upd.product_seller_id = p_s.id 
                     AND cart_order.order_id = {order_id} 
-                    AND (cart_upd.order_id IS null OR pmnt.status IN ({Payment.STATUS_INIT},{Payment.STATUS_ERROR})) 
+                    AND (cart_upd.order_id IS null OR pmnt.status IN ({Payment.STATUS_INIT}, {Payment.STATUS_ERROR})) 
                     AND cart_order.order_id <> COALESCE(cart_upd.order_id,0) 
                     AND cart_upd.products_count > p_s.products_count;
                 """
