@@ -23,7 +23,12 @@ from larek.apps.cart.views import (
 )
 from larek.apps.catalog_category.views import CatalogCategoryViewSet
 from larek.apps.delivery.views import DeliveryViewSet
-from larek.apps.order.views import OrderDetailView, OrdersHistoryView, OrderViewSet
+from larek.apps.order.views import (
+    OrderCreateView,
+    OrderDetailView,
+    OrdersHistoryView,
+    OrderViewSet,
+)
 from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
 from larek.apps.product.views import ProductViewSet
 from larek.apps.product_seller.views import (
@@ -43,9 +48,6 @@ from larek.apps.user.views import (
     UserViewSet,
 )
 from larek.apps.views_history.views import ViewsHistoryViewSet
-from larek.base_views import (
-    LoginAndCartsRequiredTemplateView,
-)
 
 router = routers.SimpleRouter(trailing_slash=False)
 
@@ -66,25 +68,15 @@ router.register(r"views_history", ViewsHistoryViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     # API
-    path("api/", include((router.urls))),
+    path("api/", include(router.urls)),
     path("api/cart_total", CartTotalView.as_view()),
     # Home page
     path("", BannerProductSellerListView.as_view(), name="index"),
     # Catalog
-    # path(
-    #     "catalog/",
-    #     TemplateView.as_view(template_name="catalog.html"),
-    #     name="catalog",
-    # ),
     path("catalog/", ProductSellerListView.as_view(), name="catalog"),
     # About
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     # Cart
-    # path(
-    #     "cart/",
-    #     LoginRequiredTemplateView.as_view(template_name="cart.html"),
-    #     name="cart",
-    # ),
     path("cart_change/", CartCreateView.as_view(), name="cart_change"),
     path("cart/<int:pk>/", CartItemView.as_view(), name="cart_item"),
     path("cart/", CartListView.as_view(), name="cart"),
@@ -132,11 +124,7 @@ urlpatterns = [
         name="product_seller",
     ),
     # Order
-    path(
-        "order/",
-        LoginAndCartsRequiredTemplateView.as_view(template_name="order.html"),
-        name="order",
-    ),
+    path("order/", OrderCreateView.as_view(), name="order"),
     path("orders_history/", OrdersHistoryView.as_view(), name="orders_history"),
     path("oneorder/<int:pk>", OrderDetailView.as_view(), name="oneorder"),
     # Payment
@@ -151,11 +139,7 @@ urlpatterns = [
         name="progresspayment",
     ),
     # Review
-    path(
-        "review/",
-        ReviewCreateView.as_view(),
-        name="review_create",
-    ),
+    path("review/", ReviewCreateView.as_view(), name="review_create"),
     # Mediafiles
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]

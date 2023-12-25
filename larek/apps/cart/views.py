@@ -124,11 +124,9 @@ class CartTotalView(views.APIView):
     authentication_classes = (CustomSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
     queryset = Cart.objects.prefetch_related("product_seller")
-    DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
 
     def get(self, request, format=None):
-        res = Cart.cart_total_for_user(request.user.id)
-        serializer = CartTotalSerializer(data=res[0] if len(res) else self.DEFAULT_RES)
+        serializer = CartTotalSerializer(data=Cart.cart_total_for_user(request.user.id))
         serializer.is_valid()
         return Response(serializer.data)
 
@@ -299,21 +297,15 @@ class CartListView(ListView):
 
 class CartTotalHeaderView(TemplateView):
     template_name = "cart_total_header.html"
-    DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         res = Cart.cart_total_for_user(self.request.user.id)
-        return super().get_context_data(
-            **(res[0] if res else self.DEFAULT_RES), **kwargs
-        )
+        return super().get_context_data(**res, **kwargs)
 
 
 class CartTotalListView(TemplateView):
     template_name = "cart_total_list.html"
-    DEFAULT_RES = {"total_products_count": 0, "total_products_price": 0}
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         res = Cart.cart_total_for_user(self.request.user.id)
-        return super().get_context_data(
-            **(res[0] if res else self.DEFAULT_RES), **kwargs
-        )
+        return super().get_context_data(**res, **kwargs)

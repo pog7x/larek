@@ -48,8 +48,9 @@ class Cart(models.Model):
     )
 
     @classmethod
-    def cart_total_for_user(cls, user_id):
-        return (
+    def cart_total_for_user(cls, user_id) -> dict:
+        default = {"total_products_count": 0, "total_products_price": 0}
+        res = (
             cls.objects.prefetch_related("product_seller")
             .filter(
                 user_id=user_id,
@@ -64,6 +65,7 @@ class Cart(models.Model):
                 )
             )
         )
+        return res[0] if res else default
 
     @classmethod
     def cart_total_for_user_order(cls, user_id, order_id):

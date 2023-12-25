@@ -1,10 +1,6 @@
-import logging
-
 from django import forms
 
 from larek.apps.cart.models import Cart
-
-log = logging.getLogger(__name__)
 
 
 class CartCreateForm(forms.ModelForm):

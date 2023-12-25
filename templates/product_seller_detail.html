@@ -104,6 +104,7 @@
 															{% if user.is_authenticated %}
 																{% if ps.products_count > 0 %}
 																	<div
+																		class="ProductCard-cart"
 																		hx-get="{% url 'cart_change' %}?product_seller_id={{ ps.id }}"
 																		hx-swap="innerHTML"
 																		hx-trigger="load"
