@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load stringfilters %}
 
 {% block title %}Home{% endblock %}
 
@@ -60,7 +61,7 @@
 									</strong>
 									<div class="Card-description">
 										<div class="Card-cost">
-											<span class="Card-price">$ {{ banner.product_seller.price_to_str }}</span>
+											<span class="Card-price">${{ banner.product_seller.price|commaprice }}</span>
 										</div>
 										<div class="Card-category">{{ banner.product_seller.product.catalog_category }}</div>
 									</div>
@@ -115,7 +116,7 @@
 									</strong>
 									<div class="Card-description">
 										<div class="Card-cost">
-											<span class="Card-price">$ {{ banner.product_seller.price_to_str }}</span>
+											<span class="Card-price">${{ banner.product_seller.price|commaprice }}</span>
 										</div>
 										<div class="Card-category">{{ banner.product_seller.product.catalog_category }}</div>
 									</div>
@@ -154,7 +155,7 @@
 												</strong>
 												<div class="Card-description">
 													<div class="Card-cost">
-														<span class="Card-price">$ {{ banner.product_seller.price_to_str }}</span>
+														<span class="Card-price">${{ banner.product_seller.price|commaprice }}</span>
 													</div>
 													<div class="Card-category">{{ banner.product_seller.product.catalog_category }}</div>
 												</div>
