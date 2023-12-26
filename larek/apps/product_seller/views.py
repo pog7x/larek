@@ -3,7 +3,7 @@ from django.db.models import Count, Sum
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-
+from larek.apps.views_history.models import ViewsHistory
 from larek.apps.product_seller.models import ProductSeller
 
 
@@ -112,3 +112,19 @@ class ProductSellerDetailView(DetailView):
         "product", "product__review", "product__product_characteristic"
     )
     template_name = "product_seller_detail.html"
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self._set_views_history(self.object)
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+    def _set_views_history(self, instance):
+        views, created = ViewsHistory.objects.get_or_create(
+            product_seller_id=instance.id,
+            user_id=self.request.user.id or None,
+        )
+
+        if not created:
+            views.count += 1
+            views.save()
