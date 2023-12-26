@@ -2,11 +2,7 @@
 
 ## Database scheme
 
-![database scheme](images/db_scheme.png 'Database scheme')
-
-## Processing payments via RabbitMQ
-
-![processing payments via RMQ](images/payment_rmq.png 'Processing payments via RMQ')
+![database scheme](docs/db_scheme.png 'Database scheme')
 
 ## Make migrations
 
