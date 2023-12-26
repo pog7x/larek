@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "django_htmx",
-    "utils",
+    "larek.apps.utils",
     "larek.apps.role",
     "larek.apps.user",
     "larek.apps.banner",
