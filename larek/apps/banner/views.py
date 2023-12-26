@@ -1,21 +1,16 @@
-import logging
 from datetime import datetime
-from typing import Any
 
-from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
 
 from larek.apps.banner.models import Banner
 
-logger = logging.getLogger(__name__)
-
 
 class BannerListView(ListView):
     model = Banner
-    template_name = "index.html"
+    template_name = "banners_list.html"
     context_object_name = "banners"
 
-    def get_queryset(self) -> QuerySet[Any]:
+    def get_queryset(self):
         qs = self.model.objects.prefetch_related("product_seller").filter(
             expired_at__gt=datetime.now(),
         )

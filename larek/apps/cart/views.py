@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.db.models.query import QuerySet
 from django.http import HttpResponseBadRequest, QueryDict
 from django.views.generic import CreateView, ListView, TemplateView, View
 from django.views.generic.detail import (

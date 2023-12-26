@@ -21,7 +21,7 @@ class ProductSellerListView(ListView):
     }
 
     model = ProductSeller
-    template_name = "catalog.html"
+    template_name = "product_seller_catalog.html"
     paginate_by = 8
     ordering = ORDERING_POPULARITY
     queryset = ProductSeller.objects.prefetch_related("product", "product__images")
