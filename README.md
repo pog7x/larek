@@ -1,9 +1,5 @@
 # LAREK
 
-## Database scheme
-
-![database scheme](docs/db_scheme.png 'Database scheme')
-
 ## Make migrations
 
 ```bash

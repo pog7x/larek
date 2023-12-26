@@ -4,14 +4,11 @@
 
 	<head>
 		<title>Larek | {% block title %}{% endblock %}</title>
-		<meta name="description" content="Описание страницы" />
+		<meta name="description" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
 		<link type="image/png" sizes="32x32" rel="icon" href="{% static 'favicon.png' %}" />
-		<script src="{% static 'assets/js/htmx.min.js' %}"></script>
-		<script src="{% static 'assets/plg/vue/vue.global.prod.js' %}"></script>
-		<script src="{% static 'assets/plg/axios/axios.min.js' %}"></script>
 
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Regular.woff' %}" as="font" crossorigin />
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Italic.woff' %}" as="font" crossorigin />
@@ -24,13 +21,13 @@
 		<link rel="stylesheet" href="{% static 'assets/css/basic.css' %}" />
 		<link rel="stylesheet" href="{% static 'assets/css/extra.css' %}" />
 
-		<script src="{% static 'assets/plg/CountDown/countdown.js' %}"></script>
-		<script defer src="{% static 'assets/js/app.js' %}"></script>
-		<script defer src="{% static 'assets/plg/jQuery/jquery-3.7.0.min.js' %}"></script>
-		<script defer src="{% static 'assets/plg/form/jquery.form.js' %}"></script>
-		<script defer src="{% static 'assets/plg/form/jquery.maskedinput.min.js' %}"></script>
-		<script defer src="{% static 'assets/plg/range/ion.rangeSlider.min.js' %}"></script>
-		<script defer src="{% static 'assets/plg/Slider/slick.min.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/htmx.min.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/CountDown/countdown.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/jQuery/jquery-3.7.0.min.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/form/jquery.form.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/form/jquery.maskedinput.min.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/range/ion.rangeSlider.min.js' %}"></script>
+		<script defer src="{% static 'assets/pkg/Slider/slick.min.js' %}"></script>
 		<script defer src="{% static 'assets/js/scripts.js' %}"></script>
 	</head>
 
