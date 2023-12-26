@@ -10,13 +10,13 @@ from larek.apps.product_seller.models import ProductSeller
 class ProductSellerListView(ListView):
     ORDERING_POPULARITY = "popularity"
     ORDERING_REVIEW_COUNT = "product__review__count"
-    ORDERING_PRODUCT_ID = "product__id"
+    ORDERING_ID = "id"
     ORDERING_PRICE = "price"
 
     ORDERING_MAP = {
         ORDERING_POPULARITY: "Популярности",
         ORDERING_REVIEW_COUNT: "Отзывам",
-        ORDERING_PRODUCT_ID: "Новизне",
+        ORDERING_ID: "Новизне",
         ORDERING_PRICE: "Цене",
     }
 
@@ -66,7 +66,7 @@ class ProductSellerListView(ListView):
         if ordering := self.get_ordering():
             if ordering.endswith(self.ORDERING_POPULARITY):
                 queryset = queryset.annotate(
-                    popularity=Sum("product__views_history__count", default=0)
+                    popularity=Sum("views_history__count", default=0)
                 )
             elif ordering.endswith(self.ORDERING_REVIEW_COUNT):
                 queryset = queryset.annotate(Count("product__review"))
