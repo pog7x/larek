@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="Cart-block Cart-block_row">
-                                    <div class="Cart-block Cart-block_amount">{{ cart.products_count }} шт.</div>
+                                    <div class="Cart-block Cart-block_amount">{{ cart.products_count }}&nbsp;шт.</div>
                                 </div>
                             </div>
                             {% endfor %}
@@ -98,7 +98,7 @@
                                 </div>
                                 {% if object.payment.all.0.need_pay %}
                                 <div class="Cart-block">
-                                    <a class="btn btn_primary btn_lg" href="{% url 'payment' payment_id=object.payment.all.0.id %}">Оплатить</a>
+                                    <a class="btn btn_primary btn_lg" href="{% url 'payment' pk=object.payment.all.0.id %}">Оплатить</a>
                                 </div>
                                 {% endif %}
                             </div>

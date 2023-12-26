@@ -30,12 +30,6 @@ class ReviewCreateView(CreateView):
     template_name = "review_detail.html"
 
     def post(self, request, *args, **kwargs):
-        if request.htmx:
-            log.info(f"{request.POST} {self.request.user.id}<<<<HTMX review")
-        else:
-            log.info(f"{request.POST} <<<< review")
-        self.object = None
-
         form = self.form_class({**request.POST.dict(), "user_id": request.user.id})
         if form.is_valid():
             self.object = form.save()

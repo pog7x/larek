@@ -1,0 +1,40 @@
+<div id="payment-wait">
+    {% if object.status == 2 %}
+        <div
+            class="Section"
+            hx-get="{% url 'progresspayment' pk=object.id %}"
+            hx-trigger="every 3.2s"
+            hx-target="#payment-wait"
+        >
+            <div class="wrap">
+                <div class="ProgressPayment">
+                    <div class="ProgressPayment-title">Ожидайте подтверждения оплаты платежной системой</div>
+                    <div class="ProgressPayment-icon">
+                        <div class="cssload-thecube">
+                            <div class="cssload-cube cssload-c1"></div>
+                            <div class="cssload-cube cssload-c2"></div>
+                            <div class="cssload-cube cssload-c4"></div>
+                            <div class="cssload-cube cssload-c3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif object.status == 3 %}
+        <div class="Section">
+            <div class="wrap">
+                <div class="ProgressPayment">
+                    <div class="ProgressPayment-title">Что-то пошло не так...</div>
+                </div>
+            </div>
+        </div>
+    {% elif object.status == 4 %}
+        <div class="Section">
+            <div class="wrap">
+                <div class="ProgressPayment">
+                    <div class="ProgressPayment-title-success">Заказ оплачен</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -72,7 +72,7 @@
                             <div class="form-group">
                                 <div>
                                     <label class="toggle">
-                                        <input type="radio" name="delivery" id="order-delivery" value="{{ delivery.id }}" checked/>
+                                        <input type="radio" name="delivery_id" id="order-delivery" value="{{ delivery.id }}" checked/>
                                         <span class="toggle-box"></span>
                                         <span class="toggle-text">{{ delivery.verbose }} (Price: ${{ delivery.price }})</span>
                                     </label>
@@ -173,7 +173,7 @@
                                             </div>
                                         </div>
                                         <div class="Cart-block Cart-block_row">
-                                            <div class="Cart-block Cart-block_amount">{{  cart.products_count }} шт.</div>
+                                            <div class="Cart-block Cart-block_amount">{{  cart.products_count }}&nbsp;шт.</div>
                                         </div>
                                     </div>
                                 {% endfor %}

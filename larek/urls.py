@@ -128,15 +128,9 @@ urlpatterns = [
     path("orders_history/", OrdersHistoryView.as_view(), name="orders_history"),
     path("oneorder/<int:pk>", OrderDetailView.as_view(), name="oneorder"),
     # Payment
+    path("payment/<uuid:pk>/", PaymentProcessView.as_view(), name="payment"),
     path(
-        "payment/<uuid:payment_id>/",
-        PaymentProcessView.as_view(),
-        name="payment",
-    ),
-    path(
-        "progresspayment/<uuid:payment_id>/",
-        PaymentWaitView.as_view(),
-        name="progresspayment",
+        "progresspayment/<uuid:pk>/", PaymentWaitView.as_view(), name="progresspayment"
     ),
     # Review
     path("review/", ReviewCreateView.as_view(), name="review_create"),

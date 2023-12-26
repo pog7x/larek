@@ -32,19 +32,18 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy("login")
     form_class = PaymentProcessForm
     template_name = "payment.html"
-    pk_url_kwarg = "payment_id"
 
     def dispatch(self, request, *args, **kwargs):
-        pk = self.kwargs.get(self.pk_url_kwarg)
-        self.object: Payment = self.model.objects.get(id=pk)
+        self.object = self.get_object()
         if self.object.status == Payment.STATUS_PROCESSING:
-            return HttpResponseRedirect(reverse_lazy("progresspayment", args=[pk]))
+            return HttpResponseRedirect(
+                reverse_lazy("progresspayment", args=[self.object.id])
+            )
         elif self.object.status == Payment.STATUS_PAID:
             return HttpResponseRedirect(reverse_lazy("orders_history"))
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
         cart_total = Cart.cart_total_for_user_order(
             self.request.user.id, self.object.order_id
         )
@@ -61,9 +60,6 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
                 form.instance.status = Payment.STATUS_PROCESSING
                 ProductSeller.decrease_products_count(order_id=form.instance.order_id)
                 Cart.decrease_products_count(order_id=form.instance.order_id)
-                larek_publisher.publish(
-                    data={Payment.PAYMENT_ID_KWARG: str(form.instance.id)},
-                )
                 return super().form_valid(form)
         except:
             order = Order.objects.get(id=form.instance.order_id)
@@ -75,17 +71,19 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
 class PaymentWaitView(LoginRequiredMixin, DetailView):
     model = Payment
     login_url = reverse_lazy("login")
-    template_name = "progresspayment.html"
-    pk_url_kwarg = "payment_id"
+    template_name = "progresspayment_1.html"
 
     def dispatch(self, request, *args, **kwargs):
-        pk = self.kwargs.get(self.pk_url_kwarg)
-        self.object: Payment = self.model.objects.get(id=pk)
+        self.object = self.get_object()
         if self.object.status == Payment.STATUS_INIT:
-            return HttpResponseRedirect(reverse_lazy("payment", args=[pk]))
+            return HttpResponseRedirect(reverse_lazy("payment", args=[self.object.id]))
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        self.object = self.object or self.get_object()
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+    def get_template_names(self) -> list[str]:
+        if self.request.htmx:
+            self.template_name = "payment_wait.html"
+        return super().get_template_names()

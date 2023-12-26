@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load stringfilters %}
 
 {% block title %}Payment{% endblock %}
 
@@ -9,7 +10,7 @@
     <div class="Middle-top">
         <div class="wrap">
             <div class="Middle-header">
-                <h1 class="Middle-title">Оплата $ {{ object.sum_to_str }}</h1>
+                <h1 class="Middle-title">Оплата ${{ object.sum|commaprice }}</h1>
                 <ul class="breadcrumbs Middle-breadcrumbs">
                     <li class="breadcrumbs-item">
                         <a href="{% url 'index' %}">Home</a>
