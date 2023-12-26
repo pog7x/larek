@@ -46,14 +46,6 @@
 			var $body = $('body');
 			function refresh() {
 				if (window.innerWidth < 991) {
-					// $('.menuModal').each(function(){
-					//     var $this = $(this);
-					//     setTimeout(function(){
-					//         if ($this.attr('height') > 0) {
-					//             $this.css('height', 0);
-					//         }
-					//     }, 100);
-					// });
 					$('.menuModal').css('height', 0);
 					$menuMain.css('position', 'absolute');
 					menuHeight = $('.menu_main').outerHeight();
@@ -70,12 +62,10 @@
 				init: function () {
 					if (window.innerWidth < 991) {
 						$('.menuModal').css('height', menuHeight);
-						// Меню для мобильных
 						$('.menuTrigger').each(function () {
 							$($(this).attr('href')).css('height', 0);
 						});
 					}
-
 					$('.menuTrigger').click(function (e) {
 						var $this = $(this),
 							href = $this.attr('href');
@@ -208,7 +198,6 @@
 							$('[href="' + $this.attr('id') + '"]').removeClass('trigger_OPEN');
 						}
 					}
-
 					$trigger.click(function (e) {
 						e.preventDefault();
 
@@ -229,7 +218,6 @@
 						$body.addClass('Site_modalOPEN');
 						$this.addClass('trigger_OPEN');
 					});
-
 					$modal.click(modalClick);
 				},
 			};
@@ -256,25 +244,6 @@
 			};
 		};
 		range().init();
-		var table = function () {
-			return {
-				init: function () {},
-			};
-		};
-		table().init();
-		//END
-		var PanelAdd = function () {
-			return {
-				init: function () {},
-			};
-		};
-		PanelAdd().init();
-		var ControlPanel = function () {
-			return {
-				init: function () {},
-			};
-		};
-		ControlPanel().init();
 		var Slider = function () {
 			let $block = $('.Slider').not('.Slider_carousel'),
 				$container = $block.children('.Slider-box'),
@@ -360,12 +329,6 @@
 			};
 		};
 		Slider().init();
-		var CartBlock = function () {
-			return {
-				init: function () {},
-			};
-		};
-		CartBlock().init();
 		var CategoriesButton = function () {
 			return {
 				init: function () {
@@ -396,30 +359,6 @@
 			};
 		};
 		CategoriesButton().init();
-		var Middle = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Middle().init();
-		var Section = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Section().init();
-		var BannersHome = function () {
-			return {
-				init: function () {},
-			};
-		};
-		BannersHome().init();
-		var Card = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Card().init();
 		var CountDown = function () {
 			var $blocks = $('.CountDown');
 			function getTimeRemaining(endtime) {
@@ -463,78 +402,6 @@
 			};
 		};
 		CountDown().init();
-		var Rating = function () {
-			return {
-				init: function () {
-					$('.Rating_input:not(.Rating_inputClick)').on('click', function () {
-						$(this).addClass('Rating_inputClick');
-					});
-				},
-			};
-		};
-		Rating().init();
-		var Choice = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Choice().init();
-		var Map = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Map().init();
-		var Pagination = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Pagination().init();
-		var Sort = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Sort().init();
-		var Compare = function () {
-			var $compare = $('.Compare');
-			var $products = $compare.find('.Compare-products');
-			var $checkDifferent = $('.Compare-checkDifferent input');
-			return {
-				init: function () {
-					$products.on('scroll', function () {
-						var $this = $(this);
-						$products.each(function () {
-							$(this)[0].scrollLeft = $this[0].scrollLeft;
-						});
-					});
-					$checkDifferent.on('change', function () {
-						var $this = $(this),
-							$rowsHide = $this.closest($compare).find('.Compare-row_hide');
-						if ($this.prop('checked')) {
-							$rowsHide.hide(0);
-						} else {
-							$rowsHide.show(0);
-						}
-					});
-					$checkDifferent.trigger('change');
-				},
-			};
-		};
-		Compare().init();
-		var Sort = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Sort().init();
-		var NavigateProfile = function () {
-			return {
-				init: function () {},
-			};
-		};
-		NavigateProfile().init();
 		var Profile = function () {
 			var $avatar = $('.Profile-avatar');
 			return {
@@ -616,12 +483,6 @@
 			};
 		};
 		Order().init();
-		var Account = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Account().init();
 		var Payment = function () {
 			return {
 				init: function () {
@@ -659,17 +520,6 @@
 			var $tabsBlock = $('.Tabs-block');
 			return {
 				init: function () {
-					// var $steps = $('.Tabs_steps');
-					// var $step = $steps.find($tabsLink).not($steps.find($tabs).find($tabsLink));
-					// var $blocks = $steps.find($tabsBlock).not($steps.find($tabs).find($tabsBlock));
-					// $blocks.hide(0);
-					// var href = $step.eq(0).attr('href');
-					// var $active = $(href);
-					// var $links= $step.add($step.siblings($tabsLink));
-					// $links.removeClass('Tabs-link_ACTIVE');
-					// $step.eq(0).addClass('Tabs-link_ACTIVE');
-					// $active.show(0);
-
 					$tabsLink.on('click', function (e) {
 						var $this = $(this);
 						var href = $this.attr('href');
@@ -711,27 +561,6 @@
 			};
 		};
 		Tabs().init();
-		// setTimeout(function(){
-		//     $('body').css('opacity', '1');
-		// }, 100);
-		// var ProductCard = function () {
-		// 	var $picts = $('.ProductCard-pict');
-		// 	var $photo = $('.ProductCard-photo');
-		// 	return {
-		// 		init: function () {
-		// 			$picts.on('click', function (e) {
-		// 				e.preventDefault();
-		// 				var $this = $(this);
-		// 				var href = $this.attr('href');
-		// 				$photo.empty();
-		// 				$photo.append('<img src="' + href + '" />');
-		// 				$picts.removeClass('ProductCard-pict_ACTIVE');
-		// 				$this.addClass('ProductCard-pict_ACTIVE');
-		// 			});
-		// 		},
-		// 	};
-		// };
-		// ProductCard().init();
 		var Comments = function () {
 			return {
 				init: function () {
@@ -749,18 +578,6 @@
 			};
 		};
 		Comments().init();
-		var Product = function () {
-			return {
-				init: function () {},
-			};
-		};
-		Product().init();
-		var ProgressPayment = function () {
-			return {
-				init: function () {},
-			};
-		};
-		ProgressPayment().init();
 		var Categories = function () {
 			return {
 				init: function () {
@@ -782,7 +599,5 @@
 			};
 		};
 		Categories().init();
-		//ENDion.js
-		//END
 	});
 })(jQuery);
