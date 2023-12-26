@@ -114,11 +114,6 @@ urlpatterns = [
     ),
     # Product detail
     path(
-        "product/<int:product_id>/",
-        TemplateView.as_view(template_name="product.html"),
-        name="product",
-    ),
-    path(
         "product_seller/<int:pk>/",
         ProductSellerDetailView.as_view(),
         name="product_seller",

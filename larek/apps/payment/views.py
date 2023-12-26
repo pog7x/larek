@@ -71,7 +71,7 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
 class PaymentWaitView(LoginRequiredMixin, DetailView):
     model = Payment
     login_url = reverse_lazy("login")
-    template_name = "progresspayment_1.html"
+    template_name = "progresspayment.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()

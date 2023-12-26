@@ -288,7 +288,7 @@ class CartListView(ListView):
         deleted_at=None,
         order_id=None,
     )
-    template_name = "cart_1.html"
+    template_name = "cart.html"
 
     def get_queryset(self) -> QuerySet[Any]:
         self.queryset = self.queryset.filter(user_id=self.request.user.id)
