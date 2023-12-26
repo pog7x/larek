@@ -7,7 +7,8 @@ from django.views.generic.detail import (
     SingleObjectTemplateResponseMixin,
 )
 from django_htmx.http import trigger_client_event
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from larek.apps.cart.forms import CartCreateForm, CartUpdateForm
 from larek.apps.cart.models import Cart
 from larek.apps.product_seller.models import ProductSeller
@@ -70,10 +71,11 @@ class CartChangeMixin:
             raise ValueError("product_seller_id is not found")
 
 
-class CartCreateView(CartChangeMixin, CreateView):
+class CartCreateView(LoginRequiredMixin, CartChangeMixin, CreateView):
     model = Cart
     form_class = CartCreateForm
     template_name = "cart_change.html"
+    login_url = reverse_lazy("login")
 
     def post(self, request, *args, **kwargs):
         form = self.form_class({**request.POST.dict(), "user_id": request.user.id})
@@ -106,6 +108,7 @@ class CartCreateView(CartChangeMixin, CreateView):
 
 
 class CartItemView(
+    LoginRequiredMixin,
     SingleObjectMixin,
     CartChangeMixin,
     SingleObjectTemplateResponseMixin,
@@ -113,6 +116,7 @@ class CartItemView(
 ):
     model = Cart
     template_name = "cart_change.html"
+    login_url = reverse_lazy("login")
 
     def delete(self, request, *args, **kwargs):
         self.object: Cart = self.get_object()
@@ -159,7 +163,7 @@ class CartItemView(
         return instance
 
 
-class CartListView(ListView):
+class CartListView(LoginRequiredMixin, ListView):
     model = Cart
     queryset = Cart.objects.prefetch_related(
         "product_seller",
@@ -171,22 +175,25 @@ class CartListView(ListView):
         order_id=None,
     )
     template_name = "cart.html"
+    login_url = reverse_lazy("login")
 
     def get_queryset(self):
         self.queryset = self.queryset.filter(user_id=self.request.user.id)
         return super().get_queryset()
 
 
-class CartTotalHeaderView(TemplateView):
+class CartTotalHeaderView(LoginRequiredMixin, TemplateView):
     template_name = "cart_total_header.html"
+    login_url = reverse_lazy("login")
 
     def get_context_data(self, **kwargs):
         res = Cart.cart_total_for_user(self.request.user.id)
         return super().get_context_data(**res, **kwargs)
 
 
-class CartTotalListView(TemplateView):
+class CartTotalListView(LoginRequiredMixin, TemplateView):
     template_name = "cart_total_list.html"
+    login_url = reverse_lazy("login")
 
     def get_context_data(self, **kwargs):
         res = Cart.cart_total_for_user(self.request.user.id)

@@ -6,7 +6,8 @@ from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from larek.apps.cart.models import Cart
 from larek.apps.delivery.models import Delivery
 from larek.apps.order.forms import OrderCreateForm
@@ -31,18 +32,21 @@ class BaseOrdersHistoryView:
         )
 
 
-class OrdersHistoryView(BaseOrdersHistoryView, ListView):
+class OrdersHistoryView(LoginRequiredMixin, BaseOrdersHistoryView, ListView):
     template_name = "orders_history.html"
+    login_url = reverse_lazy("login")
 
 
-class OrderDetailView(BaseOrdersHistoryView, DetailView):
+class OrderDetailView(LoginRequiredMixin, BaseOrdersHistoryView, DetailView):
     template_name = "order_item.html"
+    login_url = reverse_lazy("login")
 
 
-class OrderCreateView(CreateView):
+class OrderCreateView(LoginRequiredMixin, CreateView):
     model = Order
     form_class = OrderCreateForm
     template_name = "order_create.html"
+    login_url = reverse_lazy("login")
 
     def post(self, request: HttpRequest, *args: str, **kwargs):
         self.object = None
