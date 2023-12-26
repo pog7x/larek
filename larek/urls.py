@@ -6,10 +6,9 @@ from django.contrib.auth.views import (
     PasswordResetDoneView,
     PasswordResetView,
 )
-from django.urls import include, path, re_path
+from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.views.static import serve
-from rest_framework import routers
 
 from larek.apps.banner.views import BannerProductSellerListView
 from larek.apps.cart.views import (
@@ -18,58 +17,28 @@ from larek.apps.cart.views import (
     CartListView,
     CartTotalHeaderView,
     CartTotalListView,
-    CartTotalView,
-    CartViewSet,
 )
-from larek.apps.catalog_category.views import CatalogCategoryViewSet
-from larek.apps.delivery.views import DeliveryViewSet
 from larek.apps.order.views import (
     OrderCreateView,
     OrderDetailView,
     OrdersHistoryView,
-    OrderViewSet,
 )
-from larek.apps.payment.views import PaymentProcessView, PaymentViewSet, PaymentWaitView
-from larek.apps.product.views import ProductViewSet
+from larek.apps.payment.views import PaymentProcessView, PaymentWaitView
 from larek.apps.product_seller.views import (
     ProductSellerDetailView,
     ProductSellerListView,
-    ProductSellerViewSet,
 )
-from larek.apps.review.views import ReviewCreateView, ReviewViewSet
-from larek.apps.role.views import RoleViewSet
-from larek.apps.seller.views import SellerViewSet
+from larek.apps.review.views import ReviewCreateView
 from larek.apps.user.views import (
     UserLoginView,
     UserLogoutView,
     UserPasswordChangeView,
     UserProfileView,
     UserRegistrationView,
-    UserViewSet,
 )
-from larek.apps.views_history.views import ViewsHistoryViewSet
-
-router = routers.SimpleRouter(trailing_slash=False)
-
-router.register(r"cart", CartViewSet)
-router.register(r"catalog_category", CatalogCategoryViewSet)
-router.register(r"delivery", DeliveryViewSet)
-router.register(r"order", OrderViewSet)
-router.register(r"payment", PaymentViewSet)
-router.register(r"product", ProductViewSet)
-router.register(r"product_seller", ProductSellerViewSet)
-router.register(r"review", ReviewViewSet)
-router.register(r"role", RoleViewSet)
-router.register(r"seller", SellerViewSet)
-router.register(r"user", UserViewSet)
-router.register(r"views_history", ViewsHistoryViewSet)
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # API
-    path("api/", include(router.urls)),
-    path("api/cart_total", CartTotalView.as_view()),
     # Home page
     path("", BannerProductSellerListView.as_view(), name="index"),
     # Catalog

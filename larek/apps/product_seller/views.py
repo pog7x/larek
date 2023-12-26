@@ -1,67 +1,10 @@
-import logging
-
 from django.core.paginator import InvalidPage
 from django.db.models import Count, Sum
-from django.http import Http404, HttpRequest
+from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django_filters.rest_framework import DjangoFilterBackend
-from django_htmx.middleware import HtmxDetails
-from rest_framework import filters, pagination, viewsets
 
-from larek.apps.product_seller.filters import ProductSellerFilter
 from larek.apps.product_seller.models import ProductSeller
-from larek.apps.product_seller.serializers import ProductSellerSerializer
-
-
-class HtmxHttpRequest(HttpRequest):
-    htmx: HtmxDetails
-
-
-log = logging.getLogger(__name__)
-
-
-class ProductSellerPagination(pagination.PageNumberPagination):
-    page_size = 9
-
-
-class ProductSellerViewSet(viewsets.ModelViewSet):
-    queryset = ProductSeller.objects.prefetch_related(
-        "product",
-        "product__images",
-    ).filter(
-        products_count__gt=0,
-    )
-
-    ORDERING_VIEWS_HISTORY_COUNT = "popularity"
-    ORDERING_REVIEW_COUNT = "product__review__count"
-    ORDERING_PRODUCT_ID = "product__id"
-    ORDERING_PRICE = "price"
-
-    serializer_class = ProductSellerSerializer
-    pagination_class = ProductSellerPagination
-    filterset_class = ProductSellerFilter
-    filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
-    ordering_fields = [
-        ORDERING_VIEWS_HISTORY_COUNT,
-        ORDERING_REVIEW_COUNT,
-        ORDERING_PRODUCT_ID,
-        ORDERING_PRICE,
-    ]
-
-    def get_queryset(self):
-        ordering_param: str = self.request.query_params.get("ordering")
-        queryset = self.queryset
-
-        if ordering_param:
-            if ordering_param.endswith(self.ORDERING_VIEWS_HISTORY_COUNT):
-                queryset = queryset.annotate(
-                    popularity=Sum("product__views_history__count", default=0)
-                )
-            elif ordering_param.endswith(self.ORDERING_REVIEW_COUNT):
-                queryset = queryset.annotate(Count("product__review"))
-
-        return queryset
 
 
 class ProductSellerListView(ListView):
@@ -83,7 +26,7 @@ class ProductSellerListView(ListView):
     ordering = ORDERING_POPULARITY
     queryset = ProductSeller.objects.prefetch_related("product", "product__images")
 
-    def get(self, request: HtmxHttpRequest, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         self.ordering = self.request.GET.get("ordering") or f"-{self.ordering}"
         return super().get(request, *args, **kwargs)
 

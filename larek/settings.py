@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "corsheaders",
-    "django_filters",
     "django_htmx",
-    "rest_framework",
     "utils",
     "larek.apps.role",
     "larek.apps.user",
@@ -57,7 +55,6 @@ INSTALLED_APPS = [
     "larek.apps.views_history",
     "larek.apps.order",
     "larek.apps.cart",
-    "larek.apps.rmq",
 ]
 
 AUTH_USER_MODEL = "user.User"
@@ -65,12 +62,12 @@ AUTH_USER_MODEL = "user.User"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    # "django.contrib.sessions.middleware.SessionMiddleware",
-    "larek.middleware.CustomSessionMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    # "larek.middleware.CustomSessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    # "django.middleware.csrf.CsrfViewMiddleware",
-    "larek.middleware.CustomCsrfViewMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    # "larek.middleware.CustomCsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",

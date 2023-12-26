@@ -1,30 +1,14 @@
-import logging
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 
 from larek.apps.cart.models import Cart
 from larek.apps.order.models import Order
 from larek.apps.payment.forms import PaymentProcessForm
 from larek.apps.payment.models import Payment
-from larek.apps.payment.serializers import PaymentSerializer
 from larek.apps.product_seller.models import ProductSeller
-from larek.apps.rmq.apps import larek_publisher
-from larek.authentication import CustomSessionAuthentication
-
-logger = logging.getLogger(__name__)
-
-
-class PaymentViewSet(viewsets.ModelViewSet):
-    authentication_classes = (CustomSessionAuthentication,)
-    permission_classes = (IsAuthenticated,)
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
 
 
 class PaymentProcessView(LoginRequiredMixin, UpdateView):
