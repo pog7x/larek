@@ -3,6 +3,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = [
@@ -11,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="BannerProductSeller",
+            name="Banner",
             fields=[
                 (
                     "id",
@@ -46,16 +47,16 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="banner_product_seller",
+                        related_name="banner",
                         to="product_seller.productseller",
                         verbose_name="Product Seller",
                     ),
                 ),
             ],
             options={
-                "verbose_name": "Banner Product",
-                "verbose_name_plural": "Banner Product",
-                "db_table": "banner_product",
+                "verbose_name": "Banner",
+                "verbose_name_plural": "Banners",
+                "db_table": "banner",
             },
         ),
     ]

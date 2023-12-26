@@ -10,7 +10,7 @@ from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.views.static import serve
 
-from larek.apps.banner.views import BannerProductSellerListView
+from larek.apps.banner.views import BannerListView
 from larek.apps.cart.views import (
     CartCreateView,
     CartItemView,
@@ -18,11 +18,7 @@ from larek.apps.cart.views import (
     CartTotalHeaderView,
     CartTotalListView,
 )
-from larek.apps.order.views import (
-    OrderCreateView,
-    OrderDetailView,
-    OrdersHistoryView,
-)
+from larek.apps.order.views import OrderCreateView, OrderDetailView, OrdersHistoryView
 from larek.apps.payment.views import PaymentProcessView, PaymentWaitView
 from larek.apps.product_seller.views import (
     ProductSellerDetailView,
@@ -40,7 +36,7 @@ from larek.apps.user.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Home page
-    path("", BannerProductSellerListView.as_view(), name="index"),
+    path("", BannerListView.as_view(), name="index"),
     # Catalog
     path("catalog/", ProductSellerListView.as_view(), name="catalog"),
     # About

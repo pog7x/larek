@@ -4,6 +4,7 @@ import larek.apps.product.models
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = [

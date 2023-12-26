@@ -3,7 +3,7 @@ from django.db import models
 from larek.apps.product_seller.models import ProductSeller
 
 
-class BannerProductSeller(models.Model):
+class Banner(models.Model):
     class Type(models.IntegerChoices):
         MAIN_SLIDER = 1
         LIMITED_OFFERS = 2
@@ -14,7 +14,7 @@ class BannerProductSeller(models.Model):
         to=ProductSeller,
         null=True,
         on_delete=models.CASCADE,
-        related_name="banner_product_seller",
+        related_name="banner",
         verbose_name="Product Seller",
     )
     type = models.IntegerField(
@@ -31,9 +31,9 @@ class BannerProductSeller(models.Model):
         return f"{self.type} :: {self.product_seller}"
 
     class Meta:
-        db_table = "banner_product"
-        verbose_name = "Banner Product"
-        verbose_name_plural = "Banner Product"
+        db_table = "banner"
+        verbose_name = "Banner"
+        verbose_name_plural = "Banners"
 
     def for_countdown(self):
         return self.expired_at.strftime("%d.%m.%Y %H:%M")

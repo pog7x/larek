@@ -1,4 +1,5 @@
 import json
+
 from django.db import models, transaction
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse
@@ -74,15 +75,13 @@ class OrderCreateView(CreateView):
         }
 
         if self.request.method in ("POST", "PUT"):
-            kwargs.update(
-                {
-                    "data": {
-                        **self.request.POST.dict(),
-                        "user_id": self.request.user.id,
-                    },
-                    "files": self.request.FILES,
-                }
-            )
+            kwargs.update({
+                "data": {
+                    **self.request.POST.dict(),
+                    "user_id": self.request.user.id,
+                },
+                "files": self.request.FILES,
+            })
         return kwargs
 
     def perform_create(self, form: OrderCreateForm):

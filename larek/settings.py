@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_htmx",
     "larek.apps.utils",
-    "larek.apps.role",
     "larek.apps.user",
     "larek.apps.banner",
     "larek.apps.delivery",

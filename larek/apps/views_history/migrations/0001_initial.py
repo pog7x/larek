@@ -4,11 +4,12 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = [
+        ("product_seller", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("product", "0001_initial"),
     ]
 
     operations = [
@@ -29,13 +30,13 @@ class Migration(migrations.Migration):
                     models.IntegerField(default=1, null=True, verbose_name="Count"),
                 ),
                 (
-                    "product",
+                    "product_seller",
                     models.ForeignKey(
                         default=None,
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="views_history",
-                        to="product.product",
+                        to="product_seller.productseller",
                         verbose_name="Product",
                     ),
                 ),

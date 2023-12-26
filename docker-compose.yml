@@ -7,11 +7,8 @@ services:
       - "8000:8000"
     links:
       - pg
-      - rmq
     depends_on:
       pg:
-        condition: service_healthy
-      rmq:
         condition: service_healthy
     environment:
       - DEBUG=false
@@ -22,20 +19,6 @@ services:
       - POSTGRES_DB=larek_db
       - POSTGRES_USER=larek_user
       - POSTGRES_PASSWORD=larek_password
-
-      - RMQ_USER=larek_rmq
-      - RMQ_PASSWORD=larek_password
-      - RMQ_HOST=rmq
-      - RMQ_PORT=5672
-      - RMQ_VHOST=/
-
-      - RMQ_PAYMENT_EXCHANGE=larek.handle.payment.exchange
-      - RMQ_PAYMENT_QUEUE=larek.handle.payment.queue
-      - RMQ_PAYMENT_ROUTING_KEY=larek.handle.payment.key
-
-      - RMQ_PAYMENT_DLX_EXCHANGE=larek.handle.payment.dlx.exchange
-      - RMQ_PAYMENT_DLX_QUEUE=larek.handle.payment.dlx.queue
-      - RMQ_PAYMENT_DLX_ROUTING_KEY=larek.handle.payment.dlx.key
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
      - .:/app/
@@ -54,25 +37,3 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
-  rmq:
-    image: rabbitmq:3.11-management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=larek_rmq
-      - RABBITMQ_DEFAULT_PASS=larek_password
-    ports:
-      - 35672:15672
-      - 25672:5672
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
-  #     PGADMIN_DEFAULT_PASSWORD: root
-  #   ports:
-  #     - "5050:80"

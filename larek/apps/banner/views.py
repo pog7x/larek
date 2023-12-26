@@ -5,13 +5,13 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
 
-from larek.apps.banner.models import BannerProductSeller
+from larek.apps.banner.models import Banner
 
 logger = logging.getLogger(__name__)
 
 
-class BannerProductSellerListView(ListView):
-    model = BannerProductSeller
+class BannerListView(ListView):
+    model = Banner
     template_name = "index.html"
     context_object_name = "banners"
 
