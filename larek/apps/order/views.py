@@ -1,13 +1,13 @@
 import json
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models, transaction
 from django.http import HttpRequest, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+
 from larek.apps.cart.models import Cart
 from larek.apps.delivery.models import Delivery
 from larek.apps.order.forms import OrderCreateForm
@@ -84,15 +84,13 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         }
 
         if self.request.method in ("POST", "PUT"):
-            kwargs.update(
-                {
-                    "data": {
-                        **self.request.POST.dict(),
-                        "user_id": self.request.user.id,
-                    },
-                    "files": self.request.FILES,
-                }
-            )
+            kwargs.update({
+                "data": {
+                    **self.request.POST.dict(),
+                    "user_id": self.request.user.id,
+                },
+                "files": self.request.FILES,
+            })
         return kwargs
 
     def perform_create(self, form: OrderCreateForm):

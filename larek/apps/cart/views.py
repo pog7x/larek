@@ -1,14 +1,15 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseBadRequest, QueryDict
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, TemplateView, View
 from django.views.generic.detail import (
     SingleObjectMixin,
     SingleObjectTemplateResponseMixin,
 )
 from django_htmx.http import trigger_client_event
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+
 from larek.apps.cart.forms import CartCreateForm, CartUpdateForm
 from larek.apps.cart.models import Cart
 from larek.apps.product_seller.models import ProductSeller

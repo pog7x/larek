@@ -3,8 +3,9 @@ from django.db.models import Count, Sum
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from larek.apps.views_history.models import ViewsHistory
+
 from larek.apps.product_seller.models import ProductSeller
+from larek.apps.views_history.models import ViewsHistory
 
 
 class ProductSellerListView(ListView):

@@ -1,7 +1,8 @@
-from django.http import HttpResponseBadRequest
-from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseBadRequest
 from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
+
 from larek.apps.review.forms import CreateReviewForm
 from larek.apps.review.models import Review
 

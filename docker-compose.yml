@@ -7,8 +7,11 @@ services:
       - "8000:8000"
     links:
       - pg
+      - rmq
     depends_on:
       pg:
+        condition: service_healthy
+      rmq:
         condition: service_healthy
     environment:
       - DEBUG=false
@@ -19,7 +22,9 @@ services:
       - POSTGRES_DB=larek_db
       - POSTGRES_USER=larek_user
       - POSTGRES_PASSWORD=larek_password
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+      - RMQ_URL=amqp://larek_rmq:larek_password@rmq:5672/
+    command: bash -c "python manage.py migrate && celery -A larek worker -l info --detach && python manage.py runserver 0.0.0.0:8000"
     volumes:
      - .:/app/
 
@@ -36,4 +41,18 @@ services:
       test: [ "CMD-SHELL", "pg_isready -U larek_user -d larek_db" ]
       interval: 5s
       timeout: 5s
+      retries: 5
+
+  rmq:
+    image: rabbitmq:3.11-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=larek_rmq
+      - RABBITMQ_DEFAULT_PASS=larek_password
+    ports:
+      - 35672:15672
+      - 25672:5672
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 10s
+      timeout: 10s
       retries: 5

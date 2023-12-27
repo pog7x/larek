@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
@@ -8,7 +7,7 @@ from larek.apps.cart.models import Cart
 from larek.apps.order.models import Order
 from larek.apps.payment.forms import PaymentProcessForm
 from larek.apps.payment.models import Payment
-from larek.apps.product_seller.models import ProductSeller
+from larek.apps.payment.tasks import confirm_payment
 
 
 class PaymentInitView(LoginRequiredMixin, UpdateView):
@@ -40,12 +39,10 @@ class PaymentInitView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         try:
-            with transaction.atomic():
-                form.instance.status = Payment.STATUS_PROCESSING
-                ProductSeller.decrease_products_count(order_id=form.instance.order_id)
-                Cart.decrease_products_count(order_id=form.instance.order_id)
-                return super().form_valid(form)
-        except:
+            form.instance.status = Payment.STATUS_PROCESSING
+            confirm_payment.apply_async(args=(form.instance.id,), countdown=60)
+            return super().form_valid(form)
+        except Exception:
             order = Order.objects.get(id=form.instance.order_id)
             order.status = Order.STATUS_NOT_ACTUAL
             order.save()
