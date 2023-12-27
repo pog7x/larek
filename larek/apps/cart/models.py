@@ -49,7 +49,8 @@ class Cart(models.Model):
 
     @classmethod
     def cart_total_for_user(cls, user_id):
-        return (
+        default = {"total_products_count": 0, "total_products_price": 0}
+        res = (
             cls.objects.prefetch_related("product_seller")
             .filter(
                 user_id=user_id,
@@ -64,6 +65,7 @@ class Cart(models.Model):
                 )
             )
         )
+        return res[0] if res else default
 
     @classmethod
     def cart_total_for_user_order(cls, user_id, order_id):
@@ -106,7 +108,7 @@ class Cart(models.Model):
                     LEFT JOIN payment AS pmnt ON pmnt.order_id = cart.order_id 
                     WHERE cart_upd.product_seller_id = p_s.id 
                     AND cart_order.order_id = {order_id} 
-                    AND (cart_upd.order_id IS null OR pmnt.status IN ({Payment.STATUS_INIT},{Payment.STATUS_ERROR})) 
+                    AND (cart_upd.order_id IS null OR pmnt.status IN ({Payment.STATUS_INIT}, {Payment.STATUS_ERROR})) 
                     AND cart_order.order_id <> COALESCE(cart_upd.order_id,0) 
                     AND cart_upd.products_count > p_s.products_count;
                 """

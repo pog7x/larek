@@ -1,7 +1,6 @@
 import uuid
 
-from django.db import models, transaction
-from django.utils import timezone
+from django.db import models
 
 from larek.apps.order.models import Order
 
@@ -78,31 +77,3 @@ class Payment(models.Model):
 
     def need_pay(self):
         return self.status in (self.STATUS_INIT, self.STATUS_ERROR)
-
-    @classmethod
-    def confirm_payment(cls, data: dict):
-        if not (payment_id := data.get(cls.PAYMENT_ID_KWARG)):
-            raise Exception
-        try:
-            payment = cls.objects.get(id=payment_id)
-            order = Order.objects.get(id=payment.order.id)
-        except cls.DoesNotExist as err:
-            raise Exception from err
-
-        if payment.status != cls.STATUS_PROCESSING:
-            raise Exception
-
-        with transaction.atomic():
-            if payment.card_number == "0000 0000":
-                payment.status = cls.STATUS_ERROR
-                order.status = Order.STATUS_PAYMENTS_ERROR
-            else:
-                payment.paid_at = timezone.now()
-                payment.status = cls.STATUS_PAID
-                order.status = Order.STATUS_COMPLETED
-
-            payment.save()
-            order.save()
-
-    def sum_to_str(self):
-        return f"{self.sum:,.0f}"

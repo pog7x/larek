@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from larek.apps.banner.models import BannerProductSeller
+from larek.apps.banner.models import Banner
 
-admin.site.register(BannerProductSeller)
+admin.site.register(Banner)

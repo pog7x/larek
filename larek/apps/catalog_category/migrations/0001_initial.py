@@ -3,6 +3,7 @@ import larek.apps.catalog_category.models
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = []

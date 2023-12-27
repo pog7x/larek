@@ -1,6 +1,6 @@
 [
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 1,
 		"fields": {
 			"product_seller": 2,
@@ -9,7 +9,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 2,
 		"fields": {
 			"product_seller": 4,
@@ -18,7 +18,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 3,
 		"fields": {
 			"product_seller": 17,
@@ -27,7 +27,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 4,
 		"fields": {
 			"product_seller": 7,
@@ -36,7 +36,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 5,
 		"fields": {
 			"product_seller": 14,
@@ -45,7 +45,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 6,
 		"fields": {
 			"product_seller": 16,
@@ -54,7 +54,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 7,
 		"fields": {
 			"product_seller": 12,
@@ -63,7 +63,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 8,
 		"fields": {
 			"product_seller": 21,
@@ -72,7 +72,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 9,
 		"fields": {
 			"product_seller": 11,
@@ -81,7 +81,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 10,
 		"fields": {
 			"product_seller": 17,
@@ -90,7 +90,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 11,
 		"fields": {
 			"product_seller": 21,
@@ -99,7 +99,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 12,
 		"fields": {
 			"product_seller": 19,
@@ -108,7 +108,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 13,
 		"fields": {
 			"product_seller": 10,
@@ -117,7 +117,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 14,
 		"fields": {
 			"product_seller": 16,
@@ -126,7 +126,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 15,
 		"fields": {
 			"product_seller": 17,
@@ -135,7 +135,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 16,
 		"fields": {
 			"product_seller": 17,
@@ -144,7 +144,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 17,
 		"fields": {
 			"product_seller": 11,
@@ -153,7 +153,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 18,
 		"fields": {
 			"product_seller": 13,
@@ -162,7 +162,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 19,
 		"fields": {
 			"product_seller": 8,
@@ -171,7 +171,7 @@
 		}
 	},
 	{
-		"model": "banner.bannerproductseller",
+		"model": "banner.banner",
 		"pk": 20,
 		"fields": {
 			"product_seller": 15,
@@ -2448,20 +2448,6 @@
 		}
 	},
 	{
-		"model": "role.role",
-		"pk": 1,
-		"fields": {
-			"name": "Администратор"
-		}
-	},
-	{
-		"model": "role.role",
-		"pk": 2,
-		"fields": {
-			"name": "Покупатель"
-		}
-	},
-	{
 		"model": "seller.seller",
 		"pk": 1,
 		"fields": {
@@ -2545,7 +2531,6 @@
 			"is_staff": true,
 			"is_active": true,
 			"date_joined": "2023-10-20T08:55:35Z",
-			"role": 1,
 			"phone": "+1 631-465-2569",
 			"address": "USA, New York, Hicksville, 1513 Abia Martin Drive",
 			"avatar": "user/default_avatar.svg",
@@ -2557,7 +2542,7 @@
 		"model": "views_history.viewshistory",
 		"pk": 1,
 		"fields": {
-			"product": 8,
+			"product_seller": 8,
 			"user": 1,
 			"count": 2
 		}
@@ -2566,7 +2551,7 @@
 		"model": "views_history.viewshistory",
 		"pk": 2,
 		"fields": {
-			"product": 10,
+			"product_seller": 10,
 			"user": 1,
 			"count": 1
 		}
@@ -2575,7 +2560,7 @@
 		"model": "views_history.viewshistory",
 		"pk": 3,
 		"fields": {
-			"product": 11,
+			"product_seller": 11,
 			"user": 1,
 			"count": 1
 		}
@@ -2584,7 +2569,7 @@
 		"model": "views_history.viewshistory",
 		"pk": 4,
 		"fields": {
-			"product": 3,
+			"product_seller": 3,
 			"user": 1,
 			"count": 1
 		}

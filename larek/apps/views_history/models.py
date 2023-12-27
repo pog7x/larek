@@ -1,12 +1,12 @@
 from django.db import models
 
-from larek.apps.product.models import Product
+from larek.apps.product_seller.models import ProductSeller
 from larek.apps.user.models import User
 
 
 class ViewsHistory(models.Model):
-    product = models.ForeignKey(
-        to=Product,
+    product_seller = models.ForeignKey(
+        to=ProductSeller,
         default=None,
         null=True,
         on_delete=models.CASCADE,

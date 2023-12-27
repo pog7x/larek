@@ -1,0 +1,14 @@
+{% load static %}
+{% load stringfilters %}
+
+{% if user.is_authenticated %}
+    <div class="CartBlock">
+        <a class="CartBlock-block" href="{% url 'cart' %}">
+            <img class="CartBlock-img" src="{% static 'assets/img/icons/cart.svg' %}" alt="cart.svg"/>
+            <span class="CartBlock-amount">{{ total_products_count }}</span>
+        </a>
+        <div class="CartBlock-block">
+            <span class="CartBlock-price">${{ total_products_price|commaprice }}</span> 
+        </div>
+    </div>
+{% endif %}

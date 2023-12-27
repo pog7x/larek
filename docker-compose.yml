@@ -23,20 +23,8 @@ services:
       - POSTGRES_USER=larek_user
       - POSTGRES_PASSWORD=larek_password
 
-      - RMQ_USER=larek_rmq
-      - RMQ_PASSWORD=larek_password
-      - RMQ_HOST=rmq
-      - RMQ_PORT=5672
-      - RMQ_VHOST=/
-
-      - RMQ_PAYMENT_EXCHANGE=larek.handle.payment.exchange
-      - RMQ_PAYMENT_QUEUE=larek.handle.payment.queue
-      - RMQ_PAYMENT_ROUTING_KEY=larek.handle.payment.key
-
-      - RMQ_PAYMENT_DLX_EXCHANGE=larek.handle.payment.dlx.exchange
-      - RMQ_PAYMENT_DLX_QUEUE=larek.handle.payment.dlx.queue
-      - RMQ_PAYMENT_DLX_ROUTING_KEY=larek.handle.payment.dlx.key
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      - RMQ_URL=amqp://larek_rmq:larek_password@rmq:5672/
+    command: bash -c "python manage.py migrate && celery -A larek worker -l info --detach && python manage.py runserver 0.0.0.0:8000"
     volumes:
      - .:/app/
 
@@ -68,11 +56,3 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
-
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
-  #     PGADMIN_DEFAULT_PASSWORD: root
-  #   ports:
-  #     - "5050:80"

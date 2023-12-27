@@ -1,17 +1,16 @@
 import django.contrib.auth.models
 import django.contrib.auth.validators
 from django.db import migrations, models
-import django.db.models.deletion
 import django.utils.timezone
 import larek.apps.user.models
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = [
         ("auth", "0012_alter_user_first_name_max_length"),
-        ("role", "0001_initial"),
     ]
 
     operations = [
@@ -132,17 +131,6 @@ class Migration(migrations.Migration):
                         related_query_name="user",
                         to="auth.group",
                         verbose_name="groups",
-                    ),
-                ),
-                (
-                    "role",
-                    models.ForeignKey(
-                        default=None,
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        related_name="user",
-                        to="role.role",
-                        verbose_name="Role",
                     ),
                 ),
                 (

@@ -1,17 +1,22 @@
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseBadRequest
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 
+from larek.apps.review.forms import CreateReviewForm
 from larek.apps.review.models import Review
-from larek.apps.review.serializers import ReviewSerializer
-from larek.authentication import CustomSessionAuthentication
 
 
-class ReviewViewSet(viewsets.ModelViewSet):
-    authentication_classes = (CustomSessionAuthentication,)
-    permission_classes = (IsAuthenticated,)
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
+class ReviewCreateView(LoginRequiredMixin, CreateView):
+    model = Review
+    form_class = CreateReviewForm
+    template_name = "review_detail.html"
+    login_url = reverse_lazy("login")
 
-    def create(self, request, *args, **kwargs):
-        request.data["user_id"] = request.user.id
-        return super().create(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class({**request.POST.dict(), "user_id": request.user.id})
+        if form.is_valid():
+            self.object = form.save()
+            return self.render_to_response({"review": self.object})
+        else:
+            return HttpResponseBadRequest(form.errors)

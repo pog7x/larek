@@ -1,21 +1,16 @@
-import logging
 from datetime import datetime
-from typing import Any
 
-from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
 
-from larek.apps.banner.models import BannerProductSeller
-
-logger = logging.getLogger(__name__)
+from larek.apps.banner.models import Banner
 
 
-class BannerProductSellerListView(ListView):
-    model = BannerProductSeller
-    template_name = "index.html"
+class BannerListView(ListView):
+    model = Banner
+    template_name = "banners_list.html"
     context_object_name = "banners"
 
-    def get_queryset(self) -> QuerySet[Any]:
+    def get_queryset(self):
         qs = self.model.objects.prefetch_related("product_seller").filter(
             expired_at__gt=datetime.now(),
         )
@@ -29,14 +24,13 @@ class BannerProductSellerListView(ListView):
         main_slider, limited_offers, popular_goods, limited_edition = [], [], [], []
 
         for banner in banners:
-            logger.info(f"{banner.is_main_slider} {banner.type}")
-            if banner.is_main_slider():
+            if banner.is_main_slider:
                 main_slider.append(banner)
-            elif banner.is_limited_offers():
+            elif banner.is_limited_offers:
                 limited_offers.append(banner)
-            elif banner.is_popular_goods():
+            elif banner.is_popular_goods:
                 popular_goods.append(banner)
-            elif banner.is_limited_edition():
+            elif banner.is_limited_edition:
                 limited_edition.append(banner)
 
         ctx["main_slider"] = main_slider

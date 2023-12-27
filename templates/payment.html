@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load stringfilters %}
 
 {% block title %}Payment{% endblock %}
 
@@ -9,7 +10,7 @@
     <div class="Middle-top">
         <div class="wrap">
             <div class="Middle-header">
-                <h1 class="Middle-title">Оплата $ {{ object.sum_to_str }}</h1>
+                <h1 class="Middle-title">Оплата ${{ object.sum|commaprice }}</h1>
                 <ul class="breadcrumbs Middle-breadcrumbs">
                     <li class="breadcrumbs-item">
                         <a href="{% url 'index' %}">Home</a>
@@ -27,10 +28,10 @@
                 {% csrf_token %}
                 <div class="Payment-card">
                     <div class="form-group">
-                        <label class="form-label">Номер карты</label>
+                        <label class="form-label" for="card_number" >Номер карты</label>
                         <input
                             class="form-input Payment-bill"
-                            id="numero1"
+                            id="card_number"
                             name="card_number"
                             type="text"
                             placeholder="9999 9999"

@@ -3,21 +3,15 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
-from rest_framework import viewsets
 
 from larek.apps.user.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 from larek.apps.user.models import User
-from larek.apps.user.serializers import UserSerializer
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 
 class UserRegistrationView(CreateView):
     model = User
     success_url = reverse_lazy("index")
+    template_name = "registration.html"
     form_class = UserRegistrationForm
 
 
