@@ -11,7 +11,7 @@ from larek.apps.payment.models import Payment
 from larek.apps.product_seller.models import ProductSeller
 
 
-class PaymentProcessView(LoginRequiredMixin, UpdateView):
+class PaymentInitView(LoginRequiredMixin, UpdateView):
     model = Payment
     login_url = reverse_lazy("login")
     form_class = PaymentProcessForm
@@ -21,7 +21,7 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
         self.object = self.get_object()
         if self.object.status == Payment.STATUS_PROCESSING:
             return HttpResponseRedirect(
-                reverse_lazy("progresspayment", args=[self.object.id])
+                reverse_lazy("payment_progress", args=[self.object.id])
             )
         elif self.object.status == Payment.STATUS_PAID:
             return HttpResponseRedirect(reverse_lazy("orders_history"))
@@ -36,7 +36,7 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
         return super().get(request, *args, **kwargs)
 
     def get_success_url(self, **kwargs):
-        return reverse_lazy("progresspayment", args=[self.object.id])
+        return reverse_lazy("payment_progress", args=[self.object.id])
 
     def form_valid(self, form):
         try:
@@ -52,7 +52,7 @@ class PaymentProcessView(LoginRequiredMixin, UpdateView):
             return HttpResponseRedirect(reverse_lazy("orders_history"))
 
 
-class PaymentWaitView(LoginRequiredMixin, DetailView):
+class PaymentProgressView(LoginRequiredMixin, DetailView):
     model = Payment
     login_url = reverse_lazy("login")
     template_name = "payment_progress.html"

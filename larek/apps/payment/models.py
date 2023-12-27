@@ -103,6 +103,3 @@ class Payment(models.Model):
 
             payment.save()
             order.save()
-
-    def sum_to_str(self):
-        return f"{self.sum:,.0f}"

@@ -11,6 +11,7 @@ from larek.apps.user.models import User
 class UserRegistrationView(CreateView):
     model = User
     success_url = reverse_lazy("index")
+    template_name = "registration.html"
     form_class = UserRegistrationForm
 
 

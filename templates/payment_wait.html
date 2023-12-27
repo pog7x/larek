@@ -2,7 +2,7 @@
     {% if object.status == 2 %}
         <div
             class="Section"
-            hx-get="{% url 'progresspayment' pk=object.id %}"
+            hx-get="{% url 'payment_progress' pk=object.id %}"
             hx-trigger="every 3.2s"
             hx-target="#payment-wait"
         >

@@ -21,10 +21,6 @@ python clear_migrations.py
 ## Load fixtures
 
 ```bash
-python manage.py loaddata fixtures/sample
-```
-
-```bash
 docker-compose exec app python manage.py loaddata fixtures/sample
 ```
 

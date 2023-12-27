@@ -48,6 +48,11 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
     template_name = "order_create.html"
     login_url = reverse_lazy("login")
 
+    def dispatch(self, request, *args, **kwargs):
+        if not Cart.user_has_carts(user_id=request.user.id):
+            return HttpResponseRedirect(reverse_lazy("catalog"))
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request: HttpRequest, *args: str, **kwargs):
         self.object = None
         form = self.get_form()
