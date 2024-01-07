@@ -1,11 +1,9 @@
-from datetime import datetime
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 def avatar_image_directory_path(instance: "User", filename):
-    return f"user/avatars/{instance.pk}/{int(datetime.now().timestamp())}{filename}"
+    return f"user/avatars/{instance.pk}/{filename}"
 
 
 class User(AbstractUser):
