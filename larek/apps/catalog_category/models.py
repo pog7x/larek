@@ -17,6 +17,16 @@ class CatalogCategory(models.Model):
         verbose_name="Catalog Category Icon",
     )
 
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            saved_image = self.icon
+            self.icon = None
+            super().save(*args, **kwargs)
+            self.icon = saved_image
+            self.save()
+        else:
+            super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 

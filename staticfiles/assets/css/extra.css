@@ -2297,6 +2297,7 @@ a.Cart-title {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #1f2126;
 }
 
 .CategoriesButton-content {
