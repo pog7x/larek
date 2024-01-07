@@ -74,7 +74,7 @@
                                     <label class="toggle">
                                         <input type="radio" name="delivery_id" value="{{ delivery.id }}" checked/>
                                         <span class="toggle-box"></span>
-                                        <span class="toggle-text">{{ delivery.verbose }} (Price: ${{ delivery.price }})</span>
+                                        <span class="toggle-text">{{ delivery.verbose }} (Price: ${{ delivery.price|commaprice }})</span>
                                     </label>
                                 </div>
                             </div>
