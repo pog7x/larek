@@ -34,3 +34,4 @@ class CatalogCategory(models.Model):
         db_table = "catalog_category"
         verbose_name = "Catalog Category"
         verbose_name_plural = "Catalog Categories"
+        ordering = ["name"]

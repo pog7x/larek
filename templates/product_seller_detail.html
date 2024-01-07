@@ -50,7 +50,7 @@
 									hx-trigger="load"
 								></div>
 							{% else %}
-								<div class="ProductCard-cart">Все раскупили</div>
+								<div class="ProductCard-cart">Нет в наличии</div>
 							{% endif %}
 						{% endif %}
 					</div>
@@ -73,7 +73,7 @@
 					<div class="Tabs-wrap">
 						<div class="Tabs-block" id="description">
 							<h2>{{ object.product.name }}</h2>
-							<p>{{ object.product.description }}</p>
+							<p class="ProdcutSeller_description">{{ object.product.description }}</p>
 							<img
 								class="pict pict_right"
 								src="{% get_media_prefix %}{{ object.product.images.all.0.image }}"
@@ -110,7 +110,7 @@
 																		hx-trigger="load"
 																	></div>
 																{% else %}
-																	<div class="ProductCard-cart">Все раскупили</div>
+																	<div class="ProductCard-cart">Нет в наличии</div>
 																{% endif %}
 															{% endif %}
 														</div>

@@ -75,5 +75,11 @@ class Payment(models.Model):
     def is_error(self):
         return self.status == self.STATUS_ERROR
 
+    def is_paid(self):
+        return self.status == self.STATUS_PAID
+
+    def is_processing(self):
+        return self.status == self.STATUS_PROCESSING
+
     def need_pay(self):
         return self.status in (self.STATUS_INIT, self.STATUS_ERROR)

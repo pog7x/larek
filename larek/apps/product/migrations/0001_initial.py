@@ -4,7 +4,6 @@ import larek.apps.product.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -27,7 +26,7 @@ class Migration(migrations.Migration):
                 (
                     "name",
                     models.TextField(
-                        max_length=30, null=True, verbose_name="Characteristic"
+                        max_length=128, null=True, verbose_name="Characteristic"
                     ),
                 ),
             ],

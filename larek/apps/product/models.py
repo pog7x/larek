@@ -5,7 +5,7 @@ from larek.apps.catalog_category.models import CatalogCategory
 
 class Product(models.Model):
     name = models.TextField(
-        max_length=30,
+        max_length=128,
         null=True,
         verbose_name="Product Name",
     )

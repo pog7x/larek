@@ -1,5 +1,5 @@
 <div id="payment-wait">
-    {% if object.status == 2 %}
+    {% if object.is_processing %}
         <div
             class="Section"
             hx-get="{% url 'payment_progress' pk=object.id %}"
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-    {% elif object.status == 3 %}
+    {% elif object.is_error %}
         <div class="Section">
             <div class="wrap">
                 <div class="ProgressPayment">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-    {% elif object.status == 4 %}
+    {% elif object.is_paid %}
         <div class="Section">
             <div class="wrap">
                 <div class="ProgressPayment">
