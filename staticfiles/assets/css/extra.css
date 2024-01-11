@@ -4920,7 +4920,30 @@ input[type="submit"] {
 
 .ProgressPayment-title-success {
     color: #3cb878;
-    font-size: 24px;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.checkmark-success {
+    color: #3cb878;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: 35px;
+}
+
+.ProgressPayment-title-failed {
+    color: #f26d7d;;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.checkmark-failed {
+    color: #f26d7d;;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: 35px;
 }
 
 .ProgressPayment-icon {
