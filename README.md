@@ -6,12 +6,6 @@
 python manage.py makemigrations user --no-header && python manage.py makemigrations --no-header
 ```
 
-## Format code
-
-```bash
-chmod +x scripts/format.sh && ./scripts/format.sh
-```
-
 ## Clear migrations script
 
 ```bash

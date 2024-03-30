@@ -22,4 +22,6 @@ exclude = '''
 [tool.autoflake]
 recursive = true
 in-place = true
+remove-all-unused-imports = true
+remove-unused-variables = true
 exclude = ["venv", "migrations"]
