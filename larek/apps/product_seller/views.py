@@ -102,7 +102,7 @@ class ProductSellerListView(ListView):
                 raise Http404("Page is not “last”, not can it be converted to an int.")
         try:
             page = paginator.page(page_number)
-            return (paginator, page, page.object_list, page.has_other_pages())
+            return paginator, page, page.object_list, page.has_other_pages()
         except InvalidPage as err:
             raise Http404(f"Invalid page {page_number} {err}.")
 

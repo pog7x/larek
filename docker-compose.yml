@@ -15,7 +15,7 @@ services:
         condition: service_healthy
     environment:
       - DEBUG=false
-      - SECRET_KEY=django-insecure-339&eig$uv6*6sfhnw_h9a*0@*$4^o76w$ip#x&k(sjs!0@$&_
+      - SECRET_KEY=django-insecure-339&eig$$uv6*6sfhnw_h9a*0@*$$4^o76w$$ip#x&k(sjs!0@$$&_
 
       - POSTGRES_HOST=pg
       - POSTGRES_PORT=5432
@@ -49,8 +49,8 @@ services:
       - RABBITMQ_DEFAULT_USER=larek_rmq
       - RABBITMQ_DEFAULT_PASS=larek_password
     ports:
-      - 35672:15672
-      - 25672:5672
+      - "35672:15672"
+      - "25672:5672"
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "5672" ]
       interval: 10s
