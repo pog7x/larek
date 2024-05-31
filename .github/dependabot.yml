@@ -1,13 +1,13 @@
 version: 2
 updates:
-  - package-ecosystem: 'pip'
-    directory: '/'
+  - package-ecosystem: "pip"
+    directory: "/"
     schedule:
-      interval: 'daily'
+      interval: "daily"
 
-    versioning-strategy: 'increase'
+    versioning-strategy: "increase"
 
     commit-message:
-      prefix: 'pip prod'
-      prefix-development: 'pip dev'
-      include: 'scope'
+      prefix: "pip prod"
+      prefix-development: "pip dev"
+      include: "scope"
