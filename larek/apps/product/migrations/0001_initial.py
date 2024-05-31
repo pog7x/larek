@@ -1,9 +1,11 @@
-from django.db import migrations, models
 import django.db.models.deletion
+from django.db import migrations, models
+
 import larek.apps.product.models
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = [
@@ -26,7 +28,7 @@ class Migration(migrations.Migration):
                 (
                     "name",
                     models.TextField(
-                        max_length=128, null=True, verbose_name="Characteristic"
+                        max_length=30, null=True, verbose_name="Characteristic"
                     ),
                 ),
             ],
@@ -52,7 +54,7 @@ class Migration(migrations.Migration):
                 (
                     "name",
                     models.TextField(
-                        max_length=30, null=True, verbose_name="Product Name"
+                        max_length=128, null=True, verbose_name="Product Name"
                     ),
                 ),
                 (
@@ -75,49 +77,6 @@ class Migration(migrations.Migration):
                 "verbose_name": "Product",
                 "verbose_name_plural": "Products",
                 "db_table": "product",
-            },
-        ),
-        migrations.CreateModel(
-            name="ProductImage",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "name",
-                    models.CharField(
-                        blank=True, max_length=128, verbose_name="Product Image Name"
-                    ),
-                ),
-                (
-                    "image",
-                    models.FileField(
-                        null=True,
-                        upload_to=larek.apps.product.models.product_image_directory_path,
-                        verbose_name="Product Image",
-                    ),
-                ),
-                (
-                    "product",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="images",
-                        to="product.product",
-                        verbose_name="Product",
-                    ),
-                ),
-            ],
-            options={
-                "verbose_name": "Product image",
-                "verbose_name_plural": "Product images",
-                "db_table": "product_image",
-                "ordering": ["pk"],
             },
         ),
         migrations.CreateModel(
@@ -161,6 +120,49 @@ class Migration(migrations.Migration):
                 "verbose_name": "Product Characteristic",
                 "verbose_name_plural": "Product Characteristics",
                 "db_table": "product_characteristic",
+                "ordering": ["pk"],
+            },
+        ),
+        migrations.CreateModel(
+            name="ProductImage",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        blank=True, max_length=128, verbose_name="Product Image Name"
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(
+                        null=True,
+                        upload_to=larek.apps.product.models.product_image_directory_path,
+                        verbose_name="Product Image",
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="images",
+                        to="product.product",
+                        verbose_name="Product",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "Product image",
+                "verbose_name_plural": "Product images",
+                "db_table": "product_image",
                 "ordering": ["pk"],
             },
         ),

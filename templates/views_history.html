@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load stringfilters %}
+
+{% block title %}Views History{% endblock %}
+
+{% block content %}
+<div class="Middle Middle_top">
+	<div class="Section">
+		<div class="wrap">
+            <h1 class="Section-header">
+                <strong class="Section-title">Views History</strong>
+            </h1>
+            <form
+                class="form" id="views-history-form"
+                hx-get="{% url 'views_history' %}"
+                hx-target="#views-history-list"
+                hx-push-url="true"
+                hx-include="this"
+                hx-trigger="pageChanged"
+            >
+                <input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}" />
+            </form>
+            <div id="views-history-list">
+                {% include "views_history_list.html" %}
+            </div>
+		</div>
+	</div>
+</div>
+<script>
+function changePage(value) {
+    console.log(value, "ahahahhah");
+	document.getElementById('form-page').value = value;
+	htmx.trigger('#views-history-form', 'pageChanged');
+}
+ </script>
+{% endblock %}

@@ -84,13 +84,15 @@ class OrderCreateView(LoginRequiredMixin, CreateView):
         }
 
         if self.request.method in ("POST", "PUT"):
-            kwargs.update({
-                "data": {
-                    **self.request.POST.dict(),
-                    "user_id": self.request.user.id,
-                },
-                "files": self.request.FILES,
-            })
+            kwargs.update(
+                {
+                    "data": {
+                        **self.request.POST.dict(),
+                        "user_id": self.request.user.id,
+                    },
+                    "files": self.request.FILES,
+                }
+            )
         return kwargs
 
     def perform_create(self, form: OrderCreateForm):
