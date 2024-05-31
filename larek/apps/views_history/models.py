@@ -10,7 +10,7 @@ class ViewsHistory(models.Model):
         default=None,
         null=True,
         on_delete=models.CASCADE,
-        verbose_name="Product",
+        verbose_name="Product Seller",
         related_name="views_history",
     )
     user = models.ForeignKey(
@@ -26,9 +26,14 @@ class ViewsHistory(models.Model):
         null=True,
         verbose_name="Count",
     )
+    updated_at = models.DateTimeField(
+        null=True,
+        auto_now=True,
+        verbose_name="Updated At",
+    )
 
     def __str__(self):
-        return f"{self.user} - {self.product}"
+        return f"{self.user} - {self.product_seller}"
 
     class Meta:
         db_table = "views_history"

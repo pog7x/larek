@@ -1,6 +1,6 @@
+import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
-import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -30,6 +30,12 @@ class Migration(migrations.Migration):
                     models.IntegerField(default=1, null=True, verbose_name="Count"),
                 ),
                 (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, null=True, verbose_name="Updated At"
+                    ),
+                ),
+                (
                     "product_seller",
                     models.ForeignKey(
                         default=None,
@@ -37,7 +43,7 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="views_history",
                         to="product_seller.productseller",
-                        verbose_name="Product",
+                        verbose_name="Product Seller",
                     ),
                 ),
                 (

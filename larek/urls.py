@@ -32,6 +32,7 @@ from larek.apps.user.views import (
     UserProfileView,
     UserRegistrationView,
 )
+from larek.apps.views_history.views import ViewsHistoryListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -92,6 +93,8 @@ urlpatterns = [
     ),
     # Review
     path("review/", ReviewCreateView.as_view(), name="review_create"),
+    # Views history
+    path("views_history/", ViewsHistoryListView.as_view(), name="views_history"),
     # Mediafiles
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]

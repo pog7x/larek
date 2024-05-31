@@ -1,5 +1,5 @@
-from django.db import migrations, models
 import django.db.models.deletion
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -7,8 +7,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("seller", "0001_initial"),
         ("product", "0001_initial"),
+        ("seller", "0001_initial"),
     ]
 
     operations = [

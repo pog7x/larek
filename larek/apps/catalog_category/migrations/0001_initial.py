@@ -1,4 +1,5 @@
 from django.db import migrations, models
+
 import larek.apps.catalog_category.models
 
 
@@ -41,6 +42,7 @@ class Migration(migrations.Migration):
                 "verbose_name": "Catalog Category",
                 "verbose_name_plural": "Catalog Categories",
                 "db_table": "catalog_category",
+                "ordering": ["name"],
             },
         ),
     ]

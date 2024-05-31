@@ -10,14 +10,14 @@ skip = ["venv", "migrations"]
 
 [tool.black]
 line-length = 88
-target-version = ["py310"]
+target-version = ["py312"]
 preview = true
-exclude = '''
+exclude = """
 /(
   | venv
   | migrations
 )/
-'''
+"""
 
 [tool.autoflake]
 recursive = true
