@@ -3838,13 +3838,12 @@ a.Cart-title {
     color: #9c9fa6;
 }
 
-.Pagination-element:after,
-.Pagination-element:before {
-    display: none;
+.Pagination-element__disabled {
+    opacity: 0.4;
 }
 
-@media screen and (min-width: 990px) {
-    .Pagination-element:hover {
+@media screen and (min-width: 480px) {
+    .Pagination-element__hover:hover {
         color: #0063d1;
         background: #a5cfff;
         border-bottom-color: transparent;
