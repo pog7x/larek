@@ -38,23 +38,44 @@
     <div class="Pagination">
         <div class="Pagination-ins">
             {% if page_obj.has_previous %}
-                <a class="Pagination-element" onclick="changePage('{{ page_obj.previous_page_number }}')">
+                <a class="Pagination-element Pagination-element__hover" onclick="changePage('{{ page_obj.previous_page_number }}')">
                     <img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="Previous page" />
                 </a>
-                <a class="Pagination-element" onclick="changePage('1')">
-                    <span class="Pagination-text">1</span>
+                <a class="Pagination-element Pagination-element__hover" onclick="changePage('1')">
+                    <span class="">1</span>
                 </a>
+                {% if page_obj.number > 2 %}
+                <span class="Pagination-element Pagination-element__disabled">
+                        <span class="">..</span>
+                    </span>
                 {% endif %}
-                <a class="Pagination-element Pagination-element_current">
-                    <span class="Pagination-text">{{ page_obj.number }}</span>
+            {% else %}
+                <span class="Pagination-element Pagination-element__disabled">
+                    <img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="Disabled Previous page" />
+                </span>
+            {% endif %}
+
+            <a class="Pagination-element Pagination-element_current">
+                <span class="">{{ page_obj.number }}</span>
+            </a>
+
+            {% if page_obj.has_next %}
+                {% if page_obj.paginator.num_pages|add:-1 > page_obj.number  %}
+                <span class="Pagination-element Pagination-element__disabled">
+                        <span class="">..</span>
+                    </span>
+                {% endif %}
+
+                <a class="Pagination-element Pagination-element__hover" onclick="changePage('{{ page_obj.paginator.num_pages }}')">
+                    <span class="">{{ page_obj.paginator.num_pages }}</span>
                 </a>
-                {% if page_obj.has_next %}
-                <a class="Pagination-element" onclick="changePage('{{ page_obj.paginator.num_pages }}')">
-                    <span class="Pagination-text">{{ page_obj.paginator.num_pages }}</span>
-                </a>
-                <a class="Pagination-element" onclick="changePage('{{ page_obj.next_page_number }}')">
+                <a class="Pagination-element Pagination-element__hover" onclick="changePage('{{ page_obj.next_page_number }}')">
                     <img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="Next page" />
                 </a>
+            {% else %}
+                <span class="Pagination-element Pagination-element__disabled" >
+                    <img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="Disabled Next page" />
+                </span>
             {% endif %}
         </div>
     </div>
