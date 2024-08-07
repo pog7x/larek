@@ -1,0 +1,51 @@
+{% load static %}
+
+<header>
+	<nav class="navbar navbar-light navbar-expand-lg border-bottom">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="d-block d-lg-none">
+                {% include "user_header.html" %}
+			</div>
+
+			<a class="navbar-brand d-none d-lg-block" href="{% url 'index' %}">
+				<img src="{% static 'assets/img/logo.png' %}" alt="To home page" />
+			</a>
+
+			<div class="collapse navbar-collapse flex-column" id="navbarToggler">
+				<div class="d-lg-flex justify-content-lg-between mb-3 w-100">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a href="{% url 'index' %}" class="nav-link make-hover">Home</a></li>
+						<li class="nav-item"><a href="{% url 'catalog' %}" class="nav-link make-hover">Catalog</a></li>
+						<li class="nav-item"><a href="{% url 'about' %}" class="nav-link make-hover">About Us</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle make-hover" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+							<ul class="dropdown-menu dropdown-menu-light">
+								{% for cc in catalog_categories %}
+								<li>
+									<a class="dropdown-item mb-3" href="{% url 'catalog'  %}?catalog_category={{ cc.id }}">
+										<img src="{% get_media_prefix %}{{ cc.icon }}" alt="{{ cc.name }}" />
+										{{ cc.name }}
+									</a>
+								</li>
+								{% endfor %}
+							</ul>
+						</li>
+					</ul>
+
+					<div class="d-none d-lg-block">
+                        {% include "user_header.html" %}
+					</div>
+				</div>
+
+				<form class="d-flex w-100" method="get" action="{% url 'catalog' %}">
+					<input type="search" class="form-control me-2" id="query" name="product_name" type="text" placeholder="NVIDIA GeForce RTX 3060" aria-label="Search" />
+					<button class="btn btn-primary" type="submit">Search</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+</header>

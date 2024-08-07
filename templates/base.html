@@ -11,6 +11,9 @@
 
 		<link type="image/png" sizes="32x32" rel="icon" href="{% static 'favicon.png' %}" />
 
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Regular.woff' %}" as="font" crossorigin />
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Italic.woff' %}" as="font" crossorigin />
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Bold.woff' %}" as="font" crossorigin />
@@ -19,8 +22,10 @@
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Light_Italic.woff' %}" as="font" crossorigin />
 
 		<link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}" />
-		<link rel="stylesheet" href="{% static 'assets/css/basic.css' %}" />
-		<link rel="stylesheet" href="{% static 'assets/css/extra.css' %}" />
+		<!-- <link rel="stylesheet" href="{% static 'assets/css/basic.css' %}" /> -->
+				<!-- <link rel="stylesheet" href="{% static 'assets/css/extra.css' %}" /> -->
+		<link rel="stylesheet" href="{% static 'assets/css/boots.css' %}" />
+
 
 		<script defer src="{% static 'assets/pkg/htmx/htmx.min.js' %}"></script>
 		<script defer src="{% static 'assets/pkg/CountDown/countdown.js' %}"></script>
@@ -33,247 +38,10 @@
 	</head>
 
 	<body class="Site" id="app">
-		<header class="Header">
-			<div class="ControlPanel">
-				<div class="wrap">
-					<div class="row ControlPanel-row">
-						<div class="row-block">
-							<div class="row ControlPanel-rowSplit">
-								<div class="row-block hide_700">
-									<ul class="menu menu_img menu_smallImg ControlPanel-menu">
-										<li class="menu-item">
-											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/tw.svg' %}" alt="Twitter" />
-											</a>
-										</li>
-										<li class="menu-item">
-											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/in.svg' %}" alt="LinkedIn" />
-											</a>
-										</li>
-										<li class="menu-item">
-											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/pt.svg' %}" alt="Pinterest" />
-											</a>
-										</li>
-										<li class="menu-item">
-											<a class="menu-link" href="#">
-												<img src="{% static 'assets/img/icons/socialHeader/mail.svg' %}" alt="Email" />
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<nav class="row-block">
-							<div class="row ControlPanel-rowSplit">
-								<div class="row-block">
-									{% if not user.is_authenticated %}
-										<a class="ControlPanel-title" href="{% url 'login' %}">Вход</a>
-										<a class="ControlPanel-title" href="{% url 'registration' %}">Регистрация</a>
-									{% endif %}
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-			</div>
-			<div class="wrap">
-				<div class="row Header-rowMain">
-					<div class="row-block Header-logo">
-						<a class="logo" href="{% url 'index' %}">
-							<img class="logo-image" src="{% static 'assets/img/logo.png' %}" alt="To home page" />
-						</a>
-					</div>
-					<nav class="row-block row-block_right Header-menu">
-						<div class="menuModal" id="navigate">
-							<ul class="menu menu_main">
-								<li class="menu-item">
-									<a class="menu-link" href="{% url 'index' %}">Главная</a>
-								</li>
-								<li class="menu-item">
-									<span class="menu-label menu-label_success">Скидки</span>
-									<a class="menu-link" href="{% url 'catalog' %}">Каталог</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-					{% if user.is_authenticated %}
-						<div class="row-block">
-							<div class="CartBlock">
-								<div class="dropdown">
-									<button class="dropbtn">
-										<img
-											class="CartBlock-img-avatar"
-											src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
-											alt="User avatar"
-										/>
-									</button>
-									<div class="dropdown-content">
-										<a class="dropdown-content-a" href="{% url 'profile' %}">Personal area</a>
-										<a class="dropdown-content-a" href="{% url 'logout' %}">Exit</a>
-									</div>
-								</div>
-								<div
-									hx-get="{% url 'cart_total_header' %}"
-									hx-swap="innerHTML"
-									hx-trigger="load, update_cart_total from:body delay:250ms"
-								></div>
-							</div>
-						</div>
-					{% endif %}
-					<div class="row-block Header-trigger">
-						<a class="menuTrigger" href="#navigate">
-							<div class="menuTrigger-content">Показать навигацию</div>
-							<span></span><span></span><span></span>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="Header-searchWrap">
-				<div class="wrap">
-					<div class="Header-categories">
-						<div class="CategoriesButton">
-							<div class="CategoriesButton-title">
-								<div class="CategoriesButton-icon">
-									<img src="{% static 'assets/img/icons/allDep.svg' %}" alt="All categories" />
-								</div>
-								<span class="CategoriesButton-text">Все категории</span>
-								<div class="CategoriesButton-arrow"></div>
-							</div>
-							<div class="CategoriesButton-content">
-								{% for cc in catalog_categories %}
-									<div class="CategoriesButton-link">
-										<a href="{% url 'catalog'  %}?catalog_category={{ cc.id }}">
-											<div class="CategoriesButton-icon">
-												<img
-													src="{% get_media_prefix %}{{ cc.icon }}"
-													alt="{{ cc.name }}"
-													style="max-width: 23px; max-height: 19px;"
-												/>
-											</div>
-											<span class="CategoriesButton-text">{{ cc.name }}</span>
-										</a>
-									</div>
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-					<div class="Header-searchLink">
-						<img src="{% static 'assets/img/icons/search.svg' %}" alt="Products search" />
-					</div>
-					<div class="Header-search">
-						<div class="search">
-							<form class="form form_search" method="get" action="{% url 'catalog' %}">
-								<input
-									class="search-input"
-									id="query"
-									name="product_name"
-									type="text"
-									placeholder="NVIDIA GeForce RTX 3060"
-								/>
-								<button class="search-button" type="submit" id="search">
-									<img src="{% static 'assets/img/icons/search.svg' %}" alt="Products search" />
-									Поиск
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+		{% include "header.html" %}
 
 		{% block content %}{% endblock %}
 
-		<footer class="Footer">
-			<div class="wrap">
-				<div class="row Footer-main">
-					<div class="row-block">
-						<a class="logo Footer-logo" href="{% url 'index' %}">
-							<img class="logo-image" src="{% static 'assets/img/logo_footer.png' %}" alt="To home page" />
-						</a>
-						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincid unt ut laoreet
-							dolore magna aliquam erat volutpat. Ut wisi enim ad
-						</p>
-						<ul class="menu menu_img menu_smallImg Footer-menuSoc">
-							<li class="menu-item">
-								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/fb.svg' %}" alt="Facebook" />
-								</a>
-							</li>
-							<li class="menu-item">
-								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/tw.svg' %}" alt="Twitter" />
-								</a>
-							</li>
-							<li class="menu-item">
-								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/in.svg' %}" alt="LinkedIn" />
-								</a>
-							</li>
-							<li class="menu-item">
-								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/pt.svg' %}" alt="Pinterest" />
-								</a>
-							</li>
-							<li class="menu-item">
-								<a class="menu-link" href="#">
-									<img src="{% static 'assets/img/icons/socialFooter/mail.svg' %}" alt="Email" />
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="row-block">
-						<strong class="Footer-title">Useful Links </strong>
-						<div class="Footer-menu-block">
-							<ul class="menu menu_vt Footer-menu">
-								<li class="menu-item"><a class="menu-link" href="{% url 'index' %}">Home</a></li>
-								<li class="menu-item"><a class="menu-link" href="{% url 'catalog' %}">Catalog</a></li>
-								<li class="menu-item"><a class="menu-link" href="{% url 'about' %}">About Us</a></li>
-							</ul>
-							<ul class="menu menu_vt Footer-menu">
-								<li class="menu-item"><a class="menu-link" href="{% url 'profile' %}">Profile</a></li>
-								<li class="menu-item"><a class="menu-link" href="{% url 'orders_history' %}">Orders history</a></li>
-								<li class="menu-item"><a class="menu-link" href="{% url 'cart' %}">My Cart</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row-block">
-						<strong class="Footer-title">Contacts</strong>
-						<p>
-							Phone: 8-800-200-600<br />
-							Email: support@larek.com<br />
-							Address: New York, north Avenue 26/7 0057<br />
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="Footer-copy">
-				<div class="wrap">
-					<div class="row row_space">
-						<div class="row-block">
-							© Copyright&#32;
-							<a href="{% url 'index' %}">Larek Store.</a>
-							&#32;All rights reserved.
-						</div>
-						<div class="row-block">
-							<span>Accepted Payments</span>
-							<div class="Footer-payments">
-								<div><img src="{% static 'assets/img/payments/visa.png' %}" alt="Visa" /></div>
-								<div><img src="{% static 'assets/img/payments/mastercard.png' %}" alt="Mastercard" /></div>
-								<div><img src="{% static 'assets/img/payments/paypal.png' %}" alt="PayPal" /></div>
-								<div><img src="{% static 'assets/img/payments/american.png' %}" alt="American" /></div>
-								<div><img src="{% static 'assets/img/payments/electron.png' %}" alt="Electron" /></div>
-								<div><img src="{% static 'assets/img/payments/maestro.png' %}" alt="Maestro" /></div>
-								<div><img src="{% static 'assets/img/payments/delta.png' %}" alt="Delta" /></div>
-								<div><img src="{% static 'assets/img/payments/e.png' %}" alt="E" /></div>
-								<div><img src="{% static 'assets/img/payments/dk.png' %}" alt="DK" /></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		{% include "footer.html" %}
 	</body>
 </html>
