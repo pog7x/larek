@@ -1,3 +1,24 @@
 .make-hover:hover {
-    opacity: .7;
+	opacity: 0.7;
+}
+
+.sort-by {
+	margin-right: 30px;
+}
+
+.sort-by_asc:after,
+.sort-by_desc:after {
+	content: '';
+	display: block;
+	position: absolute;
+	right: -25px;
+	top: 0;
+	width: 30px;
+	height: 30px;
+	background: url('../img/icons/upArrow.svg') center center no-repeat;
+	background-size: contain;
+}
+
+.sort-by_desc:after {
+	transform: rotate(180deg);
 }

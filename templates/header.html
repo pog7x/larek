@@ -8,7 +8,7 @@
 			</button>
 
 			<div class="d-block d-lg-none">
-                {% include "user_header.html" %}
+                {% include "profile_header.html" %}
 			</div>
 
 			<a class="navbar-brand d-none d-lg-block" href="{% url 'index' %}">
@@ -18,11 +18,11 @@
 			<div class="collapse navbar-collapse flex-column" id="navbarToggler">
 				<div class="d-lg-flex justify-content-lg-between mb-3 w-100">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"><a href="{% url 'index' %}" class="nav-link make-hover">Home</a></li>
-						<li class="nav-item"><a href="{% url 'catalog' %}" class="nav-link make-hover">Catalog</a></li>
-						<li class="nav-item"><a href="{% url 'about' %}" class="nav-link make-hover">About Us</a></li>
+						<li class="nav-item"><a href="{% url 'index' %}" class="nav-link make-hover fs-5">Home</a></li>
+						<li class="nav-item"><a href="{% url 'catalog' %}" class="nav-link make-hover fs-5">Catalog</a></li>
+						<li class="nav-item"><a href="{% url 'about' %}" class="nav-link make-hover fs-5">About Us</a></li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle make-hover" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+							<a class="nav-link dropdown-toggle make-hover fs-5" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
 							<ul class="dropdown-menu dropdown-menu-light">
 								{% for cc in catalog_categories %}
 								<li>
@@ -37,7 +37,7 @@
 					</ul>
 
 					<div class="d-none d-lg-block">
-                        {% include "user_header.html" %}
+                        {% include "profile_header.html" %}
 					</div>
 				</div>
 

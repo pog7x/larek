@@ -1,0 +1,30 @@
+{% load static %}
+
+{% if user.is_authenticated %}
+	<div class="dropdown">
+		<span hx-get="{% url 'cart_total_header' %}" hx-swap="innerHTML" hx-trigger="load, update_cart_total from:body delay:250ms"></span>
+		<a class="link-dark text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+			<img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}" alt="User avatar" class="rounded-circle" />
+		</a>
+
+    	<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+		<li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+		<li><hr class="dropdown-divider" /></li>
+		<li>
+			<form action="{% url 'logout' %}" method="post">
+				{% csrf_token %}
+				<button class="dropdown-item" type="submit">Logout</button>
+			</form>
+		</li>
+    </ul>
+  </div>
+{% else %}
+	<ul class="nav">
+	<li class="nav-item">
+		<a type="button" class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
+	</li>
+	<li class="nav-item">
+		<a type="button" class="btn btn-primary" href="{% url 'registration' %}">Sign&nbsp;Up</a>
+	</li>
+	</ul>
+{% endif %}
