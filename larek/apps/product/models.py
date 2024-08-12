@@ -4,6 +4,8 @@ from larek.apps.catalog_category.models import CatalogCategory
 
 
 class Product(models.Model):
+    MAX_CARD_NAME_LENGHT = 25
+
     name = models.TextField(
         max_length=128,
         null=True,
@@ -29,6 +31,9 @@ class Product(models.Model):
         db_table = "product"
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    def card_name(self):
+        return f"{self.name[:self.MAX_CARD_NAME_LENGHT]}..."
 
 
 def product_image_directory_path(instance: "ProductImage", filename):

@@ -12,12 +12,14 @@
 
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a class="text-decoration-none make-hover text-primary" href="{% url 'product_seller' pk=ps.id %}">{{ ps.product.name }}</a>
+                        <a class="text-decoration-none make-hover text-dark" href="{% url 'product_seller' pk=ps.id %}">{{ ps.product.card_name }}</a>
                     </h5>
-                    <p class="card-text">${{ ps.price|commaprice }}</p>
-                    <p class="card-text">{{ ps.seller.name }}</p>
                 </div>
-                <div class="card-footer text-muted">{{ ps.product.catalog_category }}</div>
+                <div class="card-footer ">
+                    <p class="text-success fw-bold">${{ ps.price|commaprice }}</p>
+                    <p>{{ ps.seller.name }}</p>
+                    <div class="text-muted">{{ ps.product.catalog_category }}</div>
+                </div>
             </div>
         </div>
     {% endfor %}

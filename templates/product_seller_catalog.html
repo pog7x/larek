@@ -6,77 +6,77 @@
 {% block title %}Catalog{% endblock %}
 
 {% block content %}
-<div class="row">
-	<div class="col-12 col-xl-3 mb-3">
-		<div class="container bg-dark text-white py-3">
-			<h2 class="fs-4">Filter</h2>
-			<form
-				id="catalog-form"
-				hx-get="{% url 'catalog' %}"
-				hx-target="#product-seller"
-				hx-push-url="true"
-				hx-include="this"
-				hx-trigger="submit, change, orderingChanged, pageChanged, input from:#title delay:400ms, input from:#price_gte delay:400ms, input from:#price_lte delay:400ms"
-			>
-				<input type="hidden" name="ordering" id="form-ordering" value="{{ request.GET.ordering }}" />
-				<input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}" />
-				<input type="hidden" name="catalog_category" value="{{ request.GET.catalog_category }}" />
-				<div class="mb-3">
-					<div class="form-label">Price, $</div>
-					<div class="d-flex">
-						<label for="price_gte"></label>
-						<input name="price_gte" class="form-control" id="price_gte" placeholder="from 0" value="{{ request.GET.price_gte }}"/>
-						<label for="price_lte"></label>
-						<input name="price_lte" class="form-control" id="price_lte" placeholder="up to 50,000" value="{{ request.GET.price_lte }}"/>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-xl-3 mb-3">
+			<div class="container bg-dark text-white py-3">
+				<h2 class="fs-4">Filter</h2>
+				<form
+					id="catalog-form"
+					hx-get="{% url 'catalog' %}"
+					hx-target="#product-seller"
+					hx-push-url="true"
+					hx-include="this"
+					hx-trigger="submit, change, orderingChanged, pageChanged, input from:#title delay:400ms, input from:#price_gte delay:400ms, input from:#price_lte delay:400ms"
+				>
+					<input type="hidden" name="ordering" id="form-ordering" value="{{ request.GET.ordering }}" />
+					<input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}" />
+					<input type="hidden" name="catalog_category" value="{{ request.GET.catalog_category }}" />
+					<div class="mb-3">
+						<div for="title" class="form-label fw-bold">Price, $</div>
+						<input name="price_gte" class="form-control mb-2" id="price_gte" placeholder="From 0" value="{{ request.GET.price_gte }}"/>
+						<input name="price_lte" class="form-control" id="price_lte" placeholder="Up to 50,000" value="{{ request.GET.price_lte }}"/>
 					</div>
-				</div>
+					<div class="mb-3">
+						<label for="title" class="form-label fw-bold">Product name</label>
+						<input
+							class="form-control"
+							id="title"
+							name="product_name"
+							type="text"
+							value="{{ request.GET.product_name }}"
+							placeholder="NVIDIA GeForce RTX 3060"
+						/>
+					</div>
+					<div class="form-check mb-3">
+						<input
+							class="form-check-input"
+							type="checkbox"
+							name="in_stock"
+							value="on"
+							id="flexCheckDefault"
+							{% if request.GET.in_stock == 'on' %}checked{% endif %}
+						/>
+						<label class="form-check-label fw-bold" for="flexCheckDefault">In stock</label>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div class="col-12 col-xl-9">
+			<div class="container py-3">
+				<h2 class="fs-4 text-dark">Sort by</h2>
 				<div class="mb-3">
-					<label for="title" class="form-label">Product name</label>
-					<input
-						class="form-control"
-						id="title"
-						name="product_name"
-						type="text"
-						value="{{ request.GET.product_name }}"
-						placeholder="NVIDIA GeForce RTX 3060"
-					/>
+					{% for ordering_key, ordering_value in ordering_map.items %}
+						<a
+							role ="button"
+							onclick="changeOrdering(this, '{{ ordering_key }}')"
+							class="sort-by position-relative text-decoration-none d-inline-block fs-5
+							{% if active_ordering|endswith:ordering_key %}
+								sort-by_{% if active_ordering|startswith:'-' %}desc{% else %}asc{% endif %}
+							{% endif %}"
+						>{{ ordering_value }}</a>
+					{% endfor %}
 				</div>
-				<div class="form-check mb-3">
-					<input
-						class="form-check-input"
-						type="checkbox"
-						name="in_stock"
-						value="on"
-						id="flexCheckDefault"
-						{% if request.GET.in_stock == 'on' %}checked{% endif %}
-					/>
-					<label class="form-check-label" for="flexCheckDefault">In stock</label>
+				<div id="product-seller">
+					{% include "product_seller_list.html" %}
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
-	</div>
-	<div class="col-12 col-xl-9">
-		<div class="container py-3">
-			<h2 class="fs-4 text-dark">Sort by</h2>
-			<div class="mb-3">
-				{% for ordering_key, ordering_value in ordering_map.items %}
-					<a
-						role ="button"
-						onclick="changeOrdering(this, '{{ ordering_key }}')"
-						class="sort-by position-relative text-decoration-none d-inline-block fs-5
-						{% if active_ordering|endswith:ordering_key %}
-							sort-by_{% if active_ordering|startswith:'-' %}desc{% else %}asc{% endif %}
-						{% endif %}"
-					>{{ ordering_value }}</a>
-				{% endfor %}
-			</div>
-			<div id="product-seller">
-				{% include "product_seller_list.html" %}
 			</div>
 		</div>
 	</div>
+
 </div>
+
 <script>
 const classNames = ['sort-by_desc', 'sort-by_asc'];
 
