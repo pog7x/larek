@@ -7,7 +7,7 @@
 
 {% block content %}
 {% if main_slider|length > 0  %}
-<div id="carouselMainSlider" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div id="carouselMainSlider" class="carousel carousel-dark slide bg-light" data-bs-ride="carousel">
 	<div class="carousel-indicators">
 		{% for _ in main_slider %}
 			<button
@@ -23,18 +23,16 @@
 		{% for banner in main_slider %}
 			<div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
 				<div class="container">
-					<div class="row">
-						<div class="col-12 col-md-4 d-flex justify-content-center">
+					<div class="row p-5">
+						<div class="col-12 col-md-6 text-center d-flex flex-column justify-content-center">
+							<h1 class="fs-1 fw-bold mb-3">{{ banner.product_seller.product.name }}</h1>
 							<div>
-								<h1>{{ banner.product_seller.product.name }}</h1>
-								<div>
-									<a class="btn btn-primary" href="{% url 'product_seller' pk=banner.product_seller.id  %}">Get Started</a>
-								</div>
+								<a class="btn btn-primary" href="{% url 'product_seller' pk=banner.product_seller.id  %}">Get Started</a>
 							</div>
 						</div>
-						<div class="col-12 col-md-8">
+						<div class="col-12 col-md-6">
 							<div class="d-flex justify-content-center">
-								<img class="img-fluid rounded-start m-auto" src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" alt="{{ banner.product_seller.product.name }}" />
+								<img height="400" style="height: 400px; object-fit: contain;" class="img-fluid rounded-start m-auto" src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" alt="{{ banner.product_seller.product.name }}" />
 							</div>
 						</div>
 					</div>
@@ -143,7 +141,7 @@
 			{% endif %}
 		</div>
 	</div>
-	{% if popular_goods|length > 0  %}
+	{% if limited_edition|length > 0  %}
 		<div class="Section Section_column Section_columnRight">
 			<div class="wrap">
 				<div class="Section-content">
