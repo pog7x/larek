@@ -5,149 +5,120 @@
 {% block title %}About Us{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-	<div class="Middle-top">
-		<div class="wrap">
-			<div class="Middle-header">
-				<h1 class="Middle-title">About Larek</h1>
-				<ul class="breadcrumbs Middle-breadcrumbs">
-					<li class="breadcrumbs-item"><a href="{% url 'index' %}">Home</a></li>
-					<li class="breadcrumbs-item breadcrumbs-item_current"><span>About Us</span></li>
-				</ul>
+
+<div class="container py-5">
+	<div class="row mb-4">
+		<div class="col-12 col-md-6 px-3">
+			<div class="row h-100">
+				<div class="col-12 mb-3">
+					<div class="card shadow">
+						<div class="d-flex flex-row">
+							<div class="col-3 d-flex justify-content-center">
+								<img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" class="img-fluid rounded-start m-auto" alt="Shipping & Returns">
+							</div>
+							<div class="col-9">
+								<div class="card-body">
+									<h5 class="card-title">Shipping & Returns</h5>
+									<p class="card-text">World wide shipping</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 mb-3">
+					<div class="card shadow">
+						<div class="d-flex flex-row">
+							<div class="col-3 d-flex justify-content-center">
+								<img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}"  class="img-fluid rounded-start m-auto" alt="Money Back">
+							</div>
+							<div class="col-9">
+								<div class="card-body">
+									<h5 class="card-title">Money Back</h5>
+									<p class="card-text">Guaranted payments</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 mb-3">
+					<div class="card shadow">
+						<div class="d-flex flex-row">
+							<div class="col-3 d-flex justify-content-center">
+								<img src="{% static 'assets/img/icons/advantages/support.svg' %}"  class="img-fluid rounded-start m-auto" alt="Support">
+							</div>
+							<div class="col-9">
+								<div class="card-body">
+									<h5 class="card-title">Support Policy</h5>
+									<p class="card-text">Fast support team</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 mb-4">
+					<div class="card shadow">
+						<div class="d-flex flex-row">
+							<div class="col-3 d-flex justify-content-center">
+								<img src="{% static 'assets/img/icons/advantages/quality.svg' %}"  class="img-fluid rounded-start m-auto" alt="Quality Guarantee">
+							</div>
+							<div class="col-9">
+								<div class="card-body">
+									<h5 class="card-title">Quality Guarantee</h5>
+									<p class="card-text">Best guaranted items</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 mb-4 mb-md-0">
+					<h3>Follow Us</h3>
+					<div class="d-flex">
+						<img class="d-block" src="{% static 'assets/img/icons/socialContent/fb.png' %}" alt="Facebook" />
+						<img class="d-block" src="{% static 'assets/img/icons/socialContent/tw.png' %}" alt="Twitter" />
+						<img class="d-block" src="{% static 'assets/img/icons/socialContent/gg.png' %}" alt="Google Plus" />
+						<img class="d-block" src="{% static 'assets/img/icons/socialContent/in.png' %}" alt="LinkedIn" />
+						<img class="d-block" src="{% static 'assets/img/icons/socialContent/pt.png' %}" alt="Pinterest" />
+						<img class="d-block" src="{% static 'assets/img/icons/socialContent/ml.png' %}" alt="Email" />
+					</div>
+				</div>
 			</div>
+		</div>
+		<div class="col-12 col-md-6 px-3 mb-4">
+			<h2>Why Choose Larek?</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit doli. Aenean commodo ligula eget dolor. Aenean
+				massa. Cumtipsu sociis natoque penatibus et magnis dis parturient montesti, nascetur ridiculus mus.
+				Donec quam felis, ultricies nec, pellentesque eutu, pretiumem.
+			</p>
+			<p>
+				Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+				enim justotuio, rhoncus ut loret, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
+				mollis pretium. Integer tincidunt. Cras dapibus. Vivamus element semper nisi. Aenean vulputate eleifend
+				tellus. Aenean leo ligula, porttitor eu, consequat vitae ligula eget dolor. Aenean massa. Cumtipsu
+				sociis natoque pena tibusetm t semper ni.
+			</p>
+			<a class="btn btn-primary d-block">Get Started</a>
 		</div>
 	</div>
-	<div class="Section Section_column Section_columnLeft Section_columnWide">
-		<div class="wrap">
-			<div class="Section-column">
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Shipping & Returns" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Shipping & Returns</strong>
-							<p class="media-text">World wide shipping</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Money Back" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Money Back</strong>
-							<p class="media-text">Guaranted payments</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Support" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Support Policy</strong>
-							<p class="media-text">Fast support team</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Quality Guarantee" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Quality Guarantee</strong>
-							<p class="media-text">Best guaranted items</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection">
-					<div class="Section-header">
-						<strong class="Section-title">Follow Us</strong>
-					</div>
-					<div class="Section-columnContent">
-						<div class="Footer-payments Footer-payments_column">
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/fb.png' %}" alt="Facebook" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/tw.png' %}" alt="Twitter" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/gg.png' %}" alt="Google Plus" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/in.png' %}" alt="LinkedIn" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/pt.png' %}" alt="Pinterest" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/ml.png' %}" alt="Email" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="Section-content">
-				<article class="Article">
-					<div class="Article-section">
-						<div class="row row_verticalCenter row_maxHalf">
-							<div class="row-block">
-								<h2>Why Choose Larek?</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit doli. Aenean commodo ligula eget dolor. Aenean
-									massa. Cumtipsu sociis natoque penatibus et magnis dis parturient montesti, nascetur ridiculus mus.
-									Donec quam felis, ultricies nec, pellentesque eutu, pretiumem.
-								</p>
-								<p>
-									Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-									enim justotuio, rhoncus ut loret, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-									mollis pretium. Integer tincidunt. Cras dapibus. Vivamus element semper nisi. Aenean vulputate eleifend
-									tellus. Aenean leo ligula, porttitor eu, consequat vitae ligula eget dolor. Aenean massa. Cumtipsu
-									sociis natoque pena tibusetm t semper ni.
-								</p>
-								<div>
-									<a class="btn btn_primary">Get Started</a>
-								</div>
-							</div>
-							<div class="row-block">
-								<div class="pict">
-									<img src="{% static 'assets/img/content/home/slider.png' %}" alt="Product Image" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="Article-section">
-						<div class="row row_verticalCenter row_maxHalf">
-							<div class="row-block">
-								<div class="pict">
-									<img src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="Product Image" />
-								</div>
-							</div>
-							<div class="row-block">
-								<h2>Larek Store History</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit doli. Aenean commodo ligula eget dolor. Aenean
-									massa. Cumtipsu sociis natoque penatibus et magnis dis parturient montesti, nascetur ridiculus mus.
-									Donec quam felis, ultricies nec, pellentesque eutu, pretiumem.
-								</p>
-								<ul>
-									<li>Lorem ipsum dolor sit amet, consectetuer</li>
-									<li>adipiscing elit doli. Aenean commodo ligula</li>
-									<li>eget dolor. Aenean massa. Cumtipsu sociis</li>
-									<li>natoque penatibus et magnis dis parturient</li>
-									<li>montesti, nascetur ridiculus mus. Donec</li>
-									<li>quam felis, ultricies nec, pellentesque eutu</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</article>
-			</div>
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<h2>Larek Store History</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit doli. Aenean commodo ligula eget dolor. Aenean
+				massa. Cumtipsu sociis natoque penatibus et magnis dis parturient montesti, nascetur ridiculus mus.
+				Donec quam felis, ultricies nec, pellentesque eutu, pretiumem.
+			</p>
+			<ul>
+				<li>Lorem ipsum dolor sit amet, consectetuer</li>
+				<li>Adipiscing elit doli. Aenean commodo ligula</li>
+				<li>Eget dolor. Aenean massa. Cumtipsu sociis</li>
+				<li>Natoque penatibus et magnis dis parturient</li>
+				<li>Montesti, nascetur ridiculus mus. Donec</li>
+				<li>Quam felis, ultricies nec, pellentesque eutu</li>
+			</ul>
+		</div>
+		<div class="col-12 col-md-6 d-flex justify-content-center">
+			<img class="mw-100" style="object-fit: contain" src="{% static 'assets/img/content/home/slider.png' %}" alt="Product Image" />
 		</div>
 	</div>
 </div>
