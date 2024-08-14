@@ -22,3 +22,35 @@
 .sort-by_desc:after {
 	transform: rotate(180deg);
 }
+
+@media (max-width: 767px) {
+	.carousel-inner-limited-edition .carousel-item > div {
+		display: none;
+	}
+	.carousel-inner-limited-edition .carousel-item > div:first-child {
+		display: block;
+	}
+}
+
+.carousel-inner-limited-edition .carousel-item.active,
+.carousel-inner-limited-edition .carousel-item-next,
+.carousel-inner-limited-edition .carousel-item-prev {
+	display: flex;
+}
+
+@media (min-width: 768px) {
+	.carousel-inner-limited-edition .carousel-item-end.active,
+	.carousel-inner-limited-edition .carousel-item-next {
+		transform: translateX(25%);
+	}
+
+	.carousel-inner-limited-edition .carousel-item-start.active,
+	.carousel-inner-limited-edition .carousel-item-prev {
+		transform: translateX(-25%);
+	}
+}
+
+.carousel-inner-limited-edition .carousel-item-end,
+.carousel-inner-limited-edition .carousel-item-start {
+	transform: translateX(0);
+}
