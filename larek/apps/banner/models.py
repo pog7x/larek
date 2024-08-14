@@ -36,7 +36,7 @@ class Banner(models.Model):
         verbose_name_plural = "Banners"
 
     def for_countdown(self):
-        return self.expired_at.strftime("%d.%m.%Y %H:%M")
+        return self.expired_at.strftime("%Y-%m-%dT%H:%M")
 
     @property
     def is_main_slider(self):
