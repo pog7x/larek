@@ -4,7 +4,12 @@
 	<div class="dropdown">
 		<span hx-get="{% url 'cart_total_header' %}" hx-swap="innerHTML" hx-trigger="load, update_cart_total from:body delay:250ms"></span>
 		<a class="link-dark text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-			<img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}" alt="User avatar" class="rounded-circle" />
+			<img
+				style="width: 45px; height: 45px;"
+				src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}" 
+				alt="User's avatar"
+				class="rounded-circle border object-fit-contain"
+			/>
 		</a>
 
     	<ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">

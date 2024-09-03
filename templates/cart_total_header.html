@@ -2,7 +2,7 @@
 {% load stringfilters %}
 
 {% if user.is_authenticated %}
-<span class="p-2 bg-light position-relative">
+<span class="p-1 bg-light position-relative me-3">
 	<a class="text-decoration-none text-reset make-hover" href="{% url 'cart' %}">
 		<img src="{% static 'assets/img/icons/cart.svg' %}" alt="Cart" />
 		${{ total_products_price|commaprice }}
