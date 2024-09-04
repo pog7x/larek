@@ -3,19 +3,36 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="wrapper">
-	<div class="header">
-		<h3 class="sign-in">Вход</h3>
-	</div>
-	<div class="clear"></div>
-	<form action="" method="post">
-		{% csrf_token %}
-		{{ form.as_div }}
-		<div>
-			<input type="submit" value="Войти" />
+<div class="container">
+	<div class="row d-flex justify-content-center p-5">
+		<div class="col col-lg-6">
+			<h3 class="mb-3 fs-3">Login</h3>
+			<form method="post">
+				{% csrf_token %}
+				<div class="mb-3">
+					<input type="text" name="username" class="form-control" autofocus="" class="user-input" placeholder="Username" id="username" autocapitalize="none" autocomplete="username" maxlength="150" required="">
+				</div>
+				<div class="mb-3">
+					<input type="password" name="password" class="form-control" autocomplete="current-password" id="password" placeholder="*********" required="">
+				</div>
+				<div class="mb-3">
+					<input class="btn btn-primary me-2" type="submit" value="Login" />
+				</div>
+			</form>
+			<div>
+				<a class="btn btn-outline-primary mb-2" href="{% url 'password_reset' %}">Forgot Password?</a>
+				<a class="btn btn-outline-primary mb-2" href="{% url 'registration' %}">Sign Up</a>
+			</div>
+			{% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+						<div class="text-danger">
+							{{ field.label }}: {{ error|escape }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+		  	{% endif %}
 		</div>
-		<a class="forgot-label" href="{% url 'password_reset' %}">Забыли пароль?</a>
-		<a class="registr" href="{% url 'registration' %}">Регистрация</a>
-	</form>
+	</div>
 </div>
 {% endblock %}
