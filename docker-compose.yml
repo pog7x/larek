@@ -29,7 +29,7 @@ services:
      - .:/app/
 
   pg:
-    image: postgres:12
+    image: postgres:13
     environment:
       - POSTGRES_DB=larek_db
       - POSTGRES_USER=larek_user

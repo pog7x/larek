@@ -51,7 +51,6 @@
 </div>
 <script>
 function changePage(value) {
-    console.log(value, "ahahahhah");
 	document.getElementById('form-page').value = value;
 	htmx.trigger('#views-history-form', 'pageChanged');
 }
