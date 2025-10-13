@@ -1,5 +1,5 @@
 Django==5.2.7
-psycopg2-binary==2.9.10
+psycopg2-binary==2.9.11
 whitenoise==6.11.0
 django-cors-headers==4.9.0
 django-htmx==1.26.0
