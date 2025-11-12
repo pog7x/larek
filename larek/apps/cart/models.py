@@ -1,13 +1,9 @@
-import logging
-
 from django.db import connection, models
 
 from larek.apps.order.models import Order
 from larek.apps.payment.models import Payment
 from larek.apps.product_seller.models import ProductSeller
 from larek.apps.user.models import User
-
-log = logging.getLogger(__name__)
 
 
 class Cart(models.Model):
@@ -59,11 +55,7 @@ class Cart(models.Model):
             )
             .values("user_id")
             .annotate(total_products_count=models.Sum("products_count"))
-            .annotate(
-                total_products_price=models.Sum(
-                    models.F("products_count") * models.F("product_seller__price")
-                )
-            )
+            .annotate(total_products_price=models.Sum(models.F("products_count") * models.F("product_seller__price")))
         )
         return res[0] if res else default
 
@@ -77,11 +69,7 @@ class Cart(models.Model):
             )
             .values("user_id")
             .annotate(total_products_count=models.Sum("products_count"))
-            .annotate(
-                total_products_price=models.Sum(
-                    models.F("products_count") * models.F("product_seller__price")
-                )
-            )
+            .annotate(total_products_price=models.Sum(models.F("products_count") * models.F("product_seller__price")))
         )
 
     @classmethod

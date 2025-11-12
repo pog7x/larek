@@ -24,6 +24,10 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy("index")
+    http_method_names = ["get", "post", "options"]
+
+    def get(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
 
 class UserProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
