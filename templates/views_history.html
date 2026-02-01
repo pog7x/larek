@@ -1,58 +1,69 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Views History{% endblock %}
+{% block title %}История просмотров{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-    <div class="Section Section_column Section_columnLeft">
-		<div class="wrap">
-            <div class="Section-column">
-                <div class="Section-columnSection">
-                    <h1 class="Section-header">
-                        <strong class="Section-title">Навигация</strong>
-                    </h1>
-                    <div class="Section-columnContent">
-                        <div class="NavigateProfile">
-                            <ul class="menu menu_vt">
-                                <li class="menu-item">
-                                    <a class="menu-link" href="{% url 'profile' %}">Profile</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a class="menu-link" href="{% url 'orders_history' %}">Orders history</a>
-                                </li>
-                                <li class="menu-item_ACTIVE menu-item">
-									<a class="menu-link" href="{% url 'views_history' %}">Views history</a>
-								</li>
-                            </ul>
-                        </div>
-                    </div>
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'profile' %}">Профиль</a></li>
+            <li class="breadcrumb-item active" aria-current="page">История просмотров</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person me-2"></i>Профиль
+                    </a>
+                    <a href="{% url 'orders_history' %}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-bag me-2"></i>История заказов
+                    </a>
+                    <a href="{% url 'views_history' %}" class="list-group-item list-group-item-action active">
+                        <i class="bi bi-clock-history me-2"></i>История просмотров
+                    </a>
                 </div>
             </div>
-            <div class="Section-content">
-                <form
-                    class="form" id="views-history-form"
-                    hx-get="{% url 'views_history' %}"
-                    hx-target="#views-history-list"
-                    hx-push-url="true"
-                    hx-include="this"
-                    hx-trigger="pageChanged"
-                >
-                    <input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}" />
-                </form>
-                <div id="views-history-list">
-                    {% include "views_history_list.html" %}
-                </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <h4 class="mb-4">
+                <i class="bi bi-clock-history me-2"></i>История просмотров
+            </h4>
+
+            <!-- Hidden form for HTMX pagination -->
+            <form
+                id="views-history-form"
+                hx-get="{% url 'views_history' %}"
+                hx-target="#views-history-list"
+                hx-push-url="true"
+                hx-include="this"
+                hx-trigger="pageChanged"
+            >
+                <input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}">
+            </form>
+
+            <div id="views-history-list">
+                {% include "views_history_list.html" %}
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
 <script>
 function changePage(value) {
-	document.getElementById('form-page').value = value;
-	htmx.trigger('#views-history-form', 'pageChanged');
+    document.getElementById('form-page').value = value;
+    htmx.trigger('#views-history-form', 'pageChanged');
 }
- </script>
+</script>
 {% endblock %}

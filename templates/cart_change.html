@@ -2,61 +2,110 @@
 
 <div id="cart-change-{{ product_seller_id }}">
     {% if not cart %}
-        <div class="ProductCard-cartElement">
-            <a
-                class="btn btn_primary"
-                hx-post="{% url 'cart_change' %}"
-                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                hx-vals='{"product_seller_id": "{{ product_seller_id }}", "products_count": 1}'
-                hx-target="#cart-change-{{ product_seller_id }}"
-            >
-                <img class="btn-icon" src="{% static 'assets/img/icons/cart/cart_white.svg' %}" alt="Add to cart" />
-                <span class="btn-content">В&nbsp;корзину</span>
-            </a>
-        </div>
+        <!-- Add to Cart Button -->
+        <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            hx-post="{% url 'cart_change' %}"
+            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+            hx-vals='{"product_seller_id": "{{ product_seller_id }}", "products_count": 1}'
+            hx-target="#cart-change-{{ product_seller_id }}"
+        >
+            <i class="bi bi-cart-plus me-2"></i>В корзину
+        </button>
     {% else %}
-        <div class="Cart-block Cart-block_row">
-            <div class="Cart-block Cart-block_amount">
-                <div class="Cart-amount">
-                    <div class="Amount">
-                        <button
-                            class="Amount-remove"
-                            type="button"
-                            hx-put="{% url 'cart_item' pk=cart.id %}"
-                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                            hx-target="#cart-change-{{ product_seller_id }}"
-                            hx-vals='{"products_count": {{ cart.products_count|add:-1 }}}'
-                        ></button>
-                        <input
-                            class="Amount-input form-input"
-                            name="products_count"
-                            value="{{ cart.products_count }}"
-                            type="text"
-                            hx-put="{% url 'cart_item' pk=cart.id %}"
-                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                            hx-target="#cart-change-{{ product_seller_id }}"
-                            hx-trigger="input delay:500ms"
-                        />
-                        <button
-                            class="Amount-add"
-                            type="button"
-                            hx-put="{% url 'cart_item' pk=cart.id %}"
-                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                            hx-target="#cart-change-{{ product_seller_id }}"
-                            hx-vals='{"products_count": {{ cart.products_count|add:1 }}}'
-                        ></button>
-                    </div>
-                </div>
+        <!-- Quantity Control -->
+        <div class="d-flex align-items-center gap-3">
+            <div class="quantity-control">
+                <button
+                    type="button"
+                    class="btn-decrease"
+                    hx-put="{% url 'cart_item' pk=cart.id %}"
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    hx-target="#cart-change-{{ product_seller_id }}"
+                    hx-vals='{"products_count": {{ cart.products_count|add:-1 }}}'
+                    {% if cart.products_count <= 1 %}disabled{% endif %}
+                >
+                    <i class="bi bi-dash"></i>
+                </button>
+                <input
+                    type="number"
+                    class="quantity-input"
+                    name="products_count"
+                    value="{{ cart.products_count }}"
+                    min="1"
+                    hx-put="{% url 'cart_item' pk=cart.id %}"
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    hx-target="#cart-change-{{ product_seller_id }}"
+                    hx-trigger="change delay:500ms"
+                >
+                <button
+                    type="button"
+                    class="btn-increase"
+                    hx-put="{% url 'cart_item' pk=cart.id %}"
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    hx-target="#cart-change-{{ product_seller_id }}"
+                    hx-vals='{"products_count": {{ cart.products_count|add:1 }}}'
+                >
+                    <i class="bi bi-plus"></i>
+                </button>
             </div>
-            <div class="Cart-block Cart-block_delete"
+            
+            <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
                 hx-delete="{% url 'cart_item' pk=cart.id %}"
                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                 hx-target="#cart-change-{{ product_seller_id }}"
+                title="Удалить из корзины"
             >
-                <a class="Cart-delete">
-                    <img src="{% static 'assets/img/icons/cart/delete.svg' %}" alt="Delete from cart" />
-                </a>
-            </div>
+                <i class="bi bi-trash"></i>
+            </button>
+            
+            <a href="{% url 'cart' %}" class="btn btn-success btn-sm">
+                <i class="bi bi-cart-check me-1"></i>В корзине
+            </a>
         </div>
     {% endif %}
 </div>
+
+<style>
+.quantity-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+.quantity-control button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.quantity-control button:hover:not(:disabled) {
+    background: #e9ecef;
+}
+.quantity-control button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.quantity-control .quantity-input {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    font-weight: 500;
+}
+.quantity-control .quantity-input:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--larek-primary);
+}
+</style>

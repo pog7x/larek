@@ -1,182 +1,315 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% load stringfilters %}
 
 {% block title %}{{ object.product.name }}{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-	<div class="Section">
-		<div class="wrap">
-			<div class="Product">
-				<div class="ProductCard">
-					{% if object.product.images %}
-					<div class="ProductCard-look">
-						<div class="ProductCard-photo ProductCard-photo__product">
-							<img
-								id="target-photo"
-								src="{% get_media_prefix %}{{ object.product.images.all.0.image }}"
-								alt="{{ object.product.images.all.0.name }}"
-							/>
-						</div>
-						<div class="ProductCard-picts">
-							{% for image in object.product.images.all %}
-							<a class="ProductCard-pict {% if forloop.counter0 == 0 %}ProductCard-pict_ACTIVE{% endif %}">
-								<img onclick="changePhoto(this)" src="{% get_media_prefix %}{{ image.image }}" alt="{{ image.name }}" />
-							</a>
-							{% endfor %}
-						</div>
-					</div>
-					{% endif %}
-					<div class="ProductCard-desc">
-						<div class="ProductCard-header">
-							<h2 class="ProductCard-title">{{ object.product.name }}</h2>
-							<div class="ProductCard-info">
-								<div class="ProductCard-cost">
-									<div class="ProductCard-price">${{ object.price|commaprice }}</div>
-								</div>
-							</div>
-						</div>
-						<div class="ProductCard-text">
-							<strong>{{ object.seller.name }}</strong>
-						</div>
-						{% if user.is_authenticated %}
-							{% if object.products_count > 0 %}
-								<div
-									class="ProductCard-cart"
-									hx-get="{% url 'cart_change' %}?product_seller_id={{ object.id }}"
-									hx-swap="innerHTML"
-									hx-trigger="load"
-								></div>
-							{% else %}
-								<div class="ProductCard-cart">Нет в наличии</div>
-							{% endif %}
-						{% endif %}
-					</div>
-				</div>
-				<div class="Tabs Tabs_default">
-					<div class="Tabs-links">
-						<a class="Tabs-link_ACTIVE Tabs-link" href="#description">
-							<span>Описание</span>
-						</a>
-						<a class="Tabs-link" href="#sellers">
-							<span>Продавцы</span>
-						</a>
-						<a class="Tabs-link" href="#addit">
-							<span>Характеристика</span>
-						</a>
-						<a class="Tabs-link" href="#reviews">
-							<span>Отзывы ({{ object.product.review.all.count }})</span>
-						</a>
-					</div>
-					<div class="Tabs-wrap">
-						<div class="Tabs-block" id="description">
-							<h2>{{ object.product.name }}</h2>
-							<p class="ProdcutSeller_description">{{ object.product.description }}</p>
-							<img
-								class="pict pict_right"
-								src="{% get_media_prefix %}{{ object.product.images.all.0.image }}"
-								alt="{% get_media_prefix %}{{ object.product.images.all.0.name }}"
-							/>
-							<ul>
-								<li>Lorem ipsum dolor sit amet, consectetuer</li>
-								<li>adipiscing elit doli.&#32;<em>Aenean</em>&#32;commodo ligula</li>
-								<li>eget dolor. Aenean massa. Cumtipsu sociis</li>
-								<li>natoque penatibus et magnis dis parturient</li>
-								<li>montesti, nascetur ridiculus mus. Donec</li>
-								<li>quam felis, ultricies nec, pellentesque eutu</li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<div class="Tabs-block" id="sellers">
-							<div class="Section-content">
-								<div class="Orders">
-									{% for ps in object.product.product_seller.all %}
-										{% if object.id != ps.id %}
-											<div class="Order Order_anons">
-												<div class="Order-personal">
-													<div class="row">
-														<div class="row-block">
-															<a class="Order-title"href="{% url 'product_seller' pk=ps.id %}">
-																{{ ps.seller.name }}
-															</a>
-															{% if user.is_authenticated %}
-																{% if ps.products_count > 0 %}
-																	<div
-																		class="ProductCard-cart"
-																		hx-get="{% url 'cart_change' %}?product_seller_id={{ ps.id }}"
-																		hx-swap="innerHTML"
-																		hx-trigger="load"
-																	></div>
-																{% else %}
-																	<div class="ProductCard-cart">Нет в наличии</div>
-																{% endif %}
-															{% endif %}
-														</div>
-														<div class="row-block">
-															<div class="Order-info Order-info_delivery">
-																<div class="Order-infoType">Тип доставки:</div>
-																<div class="Order-infoContent">Обычная доставка</div>
-															</div>
-															<div class="Order-info Order-info_pay">
-																<div class="Order-infoType">Оплата:</div>
-																<div class="Order-infoContent">Онлайн картой</div>
-															</div>
-															<div class="Order-info">
-																<div class="Order-infoType">Стоимость:</div>
-																<div class="Order-infoContent">
-																	<span class="Order-price">${{ ps.price|commaprice }}</span>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										{% endif %}
-									{% endfor %}
-								</div>
-							</div>
-						</div>
-						<div class="Tabs-block" id="addit">
-							{% for pc in object.product.product_characteristic.all %}
-								<div class="Product-props">
-									<div class="Product-prop">
-										<strong>{{ pc.characteristic.name }}</strong>
-										<span>{{ pc.description }}</span>
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-						<div class="Tabs-block" id="reviews">
-							<div class="Comments">
-								{% for review in object.product.review.all %}
-									{% include "review_detail.html" with review=review  %}
-								{% endfor %}
-							</div>
-							{% if user.is_authenticated %}
-								{% include "review_create.html" with product_id=object.product.id %}
-							{% endif %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'catalog' %}">Каталог</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'catalog' %}?catalog_category={{ object.product.catalog_category.id }}">{{ object.product.catalog_category }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ object.product.name|truncatewords:5 }}</li>
+        </ol>
+    </nav>
+
+    <!-- Product Card -->
+    <div class="row mb-5">
+        <!-- Product Images -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            {% if object.product.images.all %}
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <!-- Main Image -->
+                    <div class="text-center mb-3">
+                        <img 
+                            id="main-product-image"
+                            src="{% get_media_prefix %}{{ object.product.images.all.0.image }}"
+                            alt="{{ object.product.name }}"
+                            class="img-fluid rounded"
+                            style="max-height: 400px; object-fit: contain;"
+                        >
+                    </div>
+                    <!-- Thumbnails -->
+                    {% if object.product.images.all|length > 1 %}
+                    <div class="d-flex gap-2 justify-content-center flex-wrap">
+                        {% for image in object.product.images.all %}
+                        <a 
+                            href="javascript:void(0)" 
+                            class="product-thumbnail {% if forloop.first %}active{% endif %}"
+                            onclick="changeMainImage(this, '{% get_media_prefix %}{{ image.image }}')"
+                        >
+                            <img 
+                                src="{% get_media_prefix %}{{ image.image }}" 
+                                alt="{{ image.name }}"
+                                class="rounded border"
+                                style="width: 70px; height: 70px; object-fit: contain;"
+                            >
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex flex-column">
+                    <!-- Title -->
+                    <h1 class="h3 mb-3">{{ object.product.name }}</h1>
+
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <span class="badge bg-light text-dark">
+                            {{ object.product.catalog_category }}
+                        </span>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-4">
+                        <span class="product-price display-6 fw-bold text-primary">
+                            ${{ object.price|commaprice }}
+                        </span>
+                    </div>
+
+                    <!-- Seller -->
+                    <div class="mb-3">
+                        <span class="text-muted">Продавец:</span>
+                        <strong class="text-dark ms-2">{{ object.seller.name }}</strong>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="mb-4">
+                        {% if object.products_count > 0 %}
+                            <span class="text-success">
+                                <i class="bi bi-check-circle me-1"></i>В наличии ({{ object.products_count }} шт.)
+                            </span>
+                        {% else %}
+                            <span class="text-danger">
+                                <i class="bi bi-x-circle me-1"></i>Нет в наличии
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Add to Cart -->
+                    {% if user.is_authenticated %}
+                        {% if object.products_count > 0 %}
+                        <div 
+                            class="mt-auto"
+                            hx-get="{% url 'cart_change' %}?product_seller_id={{ object.id }}"
+                            hx-swap="innerHTML"
+                            hx-trigger="load"
+                        ></div>
+                        {% else %}
+                        <div class="alert alert-secondary mt-auto mb-0">
+                            <i class="bi bi-info-circle me-2"></i>Товар временно недоступен
+                        </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="mt-auto">
+                            <a href="{% url 'login' %}" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Войдите для покупки
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-header bg-white">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description" type="button">
+                        <i class="bi bi-file-text me-1"></i>Описание
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#characteristics" type="button">
+                        <i class="bi bi-list-ul me-1"></i>Характеристики
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sellers" type="button">
+                        <i class="bi bi-shop me-1"></i>Другие продавцы
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews" type="button">
+                        <i class="bi bi-chat-dots me-1"></i>Отзывы 
+                        <span class="badge bg-primary ms-1">{{ object.product.review.all.count }}</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <!-- Description Tab -->
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h4>{{ object.product.name }}</h4>
+                            <p class="text-muted">{{ object.product.description }}</p>
+                        </div>
+                        <div class="col-lg-4 d-none d-lg-block">
+                            <img 
+                                src="{% get_media_prefix %}{{ object.product.images.all.0.image }}" 
+                                alt="{{ object.product.name }}"
+                                class="img-fluid rounded"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Characteristics Tab -->
+                <div class="tab-pane fade" id="characteristics" role="tabpanel">
+                    {% if object.product.product_characteristic.all %}
+                    <table class="table table-striped">
+                        <tbody>
+                            {% for pc in object.product.product_characteristic.all %}
+                            <tr>
+                                <th scope="row" style="width: 30%;">{{ pc.characteristic.name }}</th>
+                                <td>{{ pc.description }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p class="text-muted">Характеристики не указаны</p>
+                    {% endif %}
+                </div>
+
+                <!-- Other Sellers Tab -->
+                <div class="tab-pane fade" id="sellers" role="tabpanel">
+                    {% for ps in object.product.product_seller.all %}
+                        {% if object.id != ps.id %}
+                        <div class="card mb-3 border">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <h6 class="mb-1">
+                                            <a href="{% url 'product_seller' pk=ps.id %}" class="text-decoration-none">
+                                                {{ ps.seller.name }}
+                                            </a>
+                                        </h6>
+                                        <span class="fs-4 fw-bold text-primary">${{ ps.price|commaprice }}</span>
+                                    </div>
+                                    <div class="col-md-4 text-muted small">
+                                        {% if ps.products_count > 0 %}
+                                            <span class="text-success">
+                                                <i class="bi bi-check-circle me-1"></i>В наличии
+                                            </span>
+                                        {% else %}
+                                            <span class="text-danger">
+                                                <i class="bi bi-x-circle me-1"></i>Нет в наличии
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        {% if user.is_authenticated and ps.products_count > 0 %}
+                                        <div 
+                                            hx-get="{% url 'cart_change' %}?product_seller_id={{ ps.id }}"
+                                            hx-swap="innerHTML"
+                                            hx-trigger="load"
+                                        ></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% empty %}
+                        <p class="text-muted">Других продавцов нет</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <!-- Reviews List -->
+                    <div class="reviews-list mb-4">
+                        {% for review in object.product.review.all %}
+                            {% include "review_detail.html" with review=review %}
+                        {% empty %}
+                            <p class="text-muted">Отзывов пока нет. Будьте первым!</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Add Review Form -->
+                    {% if user.is_authenticated %}
+                        {% include "review_create.html" with product_id=object.product.id %}
+                    {% else %}
+                        <div class="alert alert-info">
+                            <a href="{% url 'login' %}">Войдите</a>, чтобы оставить отзыв
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-function changePhoto(self) {
-	self.parentNode.classList.add('ProductCard-pict_ACTIVE');
+// Change main product image
+function changeMainImage(thumbnail, imageUrl) {
+    document.getElementById('main-product-image').src = imageUrl;
+    
+    // Update active state
+    document.querySelectorAll('.product-thumbnail').forEach(function(t) {
+        t.classList.remove('active');
+    });
+    thumbnail.classList.add('active');
+}
 
-	document.getElementById("target-photo").src = self.src;
-
-	const productPics = document.querySelectorAll('.ProductCard-pict');
-
-	productPics.forEach((pic) => {
-		if (pic !== self.parentNode) {
-			pic.classList.remove('ProductCard-pict_ACTIVE');
-		}
-	});
-};
+// Tab functionality (manual, since we're not using full Bootstrap JS)
+document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('[data-bs-toggle="tab"]');
+    
+    tabButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetSelector = this.getAttribute('data-bs-target');
+            const target = document.querySelector(targetSelector);
+            
+            // Remove active from all tabs
+            tabButtons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            
+            // Hide all panes
+            document.querySelectorAll('.tab-pane').forEach(function(pane) {
+                pane.classList.remove('show', 'active');
+            });
+            
+            // Show target
+            this.classList.add('active');
+            target.classList.add('show', 'active');
+        });
+    });
+});
 </script>
+<style>
+.product-thumbnail {
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.product-thumbnail:hover,
+.product-thumbnail.active {
+    opacity: 1;
+}
+.product-thumbnail.active img {
+    border-color: var(--larek-primary) !important;
+    border-width: 2px !important;
+}
+</style>
 {% endblock %}

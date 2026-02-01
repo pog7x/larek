@@ -1,26 +1,19 @@
 {% extends "base.html" %}
-
 {% load static %}
 
-{% block title %}Payment progress{% endblock %}
+{% block title %}Статус оплаты{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-    <div class="Middle-top">
-        <div class="wrap">
-            <div class="Middle-header">
-                <h1 class="Middle-title">Ожидание оплаты</h1>
-                <ul class="breadcrumbs Middle-breadcrumbs">
-                    <li class="breadcrumbs-item">
-                        <a href="{% url 'index' %}">Home</a>
-                    </li>
-                    <li class="breadcrumbs-item breadcrumbs-item_current">
-                        <span>Ожидание оплаты</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">Заказы</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Статус оплаты</li>
+        </ol>
+    </nav>
+
     {% include 'payment_wait.html' with object=object %}
 </div>
 {% endblock %}

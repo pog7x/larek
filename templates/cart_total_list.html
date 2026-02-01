@@ -1,1 +1,13 @@
-{% load stringfilters %}<strong class="Cart-title">Итого:</strong><span class="Cart-price">${{ total_products_price|commaprice }}</span>
+{% load stringfilters %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-muted">Товаров:</span>
+    <span class="fw-semibold">{{ total_products_count }} шт.</span>
+</div>
+
+<hr class="my-3">
+
+<div class="d-flex justify-content-between align-items-center">
+    <span class="fs-5">Итого:</span>
+    <span class="fs-4 fw-bold text-primary">${{ total_products_price|commaprice }}</span>
+</div>

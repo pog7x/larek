@@ -1,92 +1,185 @@
 {% extends "base.html" %}
-
 {% load static %}
 
-{% block title %}{{ user.username }}{% endblock %}
+{% block title %}Профиль — {{ user.username }}{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-	<div class="Section Section_column Section_columnLeft">
-		<div class="wrap">
-			<div class="Section-column">
-				<div class="Section-columnSection">
-					<h1 class="Section-header">
-						<strong class="Section-title">{{ user.username }}</strong>
-					</h1>
-					<div class="Section-columnContent">
-						<div class="NavigateProfile">
-							<ul class="menu menu_vt">
-								<li class="menu-item_ACTIVE menu-item">
-									<a class="menu-link" href="{% url 'profile' %}">Profile</a>
-								</li>
-								<li class="menu-item">
-									<a class="menu-link" href="{% url 'orders_history' %}">Orders history</a>
-								</li>
-                                <li class="menu-item">
-									<a class="menu-link" href="{% url 'views_history' %}">Views history</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="Section-content">
-				<div class="Profile">
-					<form class="form Profile-form" action="" method="post" enctype="multipart/form-data">
-						{% csrf_token %}
-						<div class="row">
-							<div class="row-block">
-								<div class="form-group">
-									{{ form.avatar }}
-								</div>
-							</div>
-							<div class="row-block">
-								<div class="form-group">
-									<label class="form-label" for="first_name">First name</label>
-									<input class="form-input" id="first_name" name="first_name" type="text" value="{{ user.first_name }}"/>
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="last_name">Last name</label>
-									<input class="form-input" id="last_name" name="last_name" type="text" value="{{ user.last_name }}"/>
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="phone">Phone</label>
-									<input class="form-input" id="phone" name="phone" type="text" value="{{ user.phone }}" placeholder="+70000000000" />
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="email">E-mail</label>
-									<input
-										class="form-input"
-										id="email"
-										name="email"
-										type="text"
-										value="{{ user.email }}"
-										data-validate="require"
-										placeholder="send@test.test"
-									/>
-								</div>
-								<div class="form-group">
-									<div class="Profile-btn">
-										<a class="btn btn_warning" href="{% url 'password_change' %}">Change password</a>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="Profile-btn">
-										
-										<button class="btn btn_success" type="submit">Сохранить</button>
-									</div>
-									{% if messages %}
-										{% for message in messages %}
-											<div class="Profile-success">{{ message }}</div>
-										{% endfor %}
-									{% endif %}
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Профиль</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-4">
+                    <img 
+                        src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
+                        alt="{{ user.username }}"
+                        class="rounded-circle mb-3"
+                        width="100"
+                        height="100"
+                        style="object-fit: cover;"
+                    >
+                    <h5 class="mb-1">{{ user.get_full_name|default:user.username }}</h5>
+                    <p class="text-muted small mb-0">{{ user.email }}</p>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'profile' %}" class="list-group-item list-group-item-action active">
+                        <i class="bi bi-person me-2"></i>Профиль
+                    </a>
+                    <a href="{% url 'orders_history' %}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-bag me-2"></i>История заказов
+                    </a>
+                    <a href="{% url 'views_history' %}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-clock-history me-2"></i>История просмотров
+                    </a>
+                    <a href="{% url 'password_change' %}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-key me-2"></i>Сменить пароль
+                    </a>
+                    <a href="{% url 'logout' %}" class="list-group-item list-group-item-action text-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i>Выход
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-gear me-2"></i>Редактирование профиля
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle me-2"></i>{{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Avatar -->
+                        <div class="mb-4">
+                            <label class="form-label">Аватар</label>
+                            <div class="d-flex align-items-center gap-3">
+                                <img 
+                                    src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
+                                    alt="Avatar preview"
+                                    id="avatar-preview"
+                                    class="rounded-circle"
+                                    width="80"
+                                    height="80"
+                                    style="object-fit: cover;"
+                                >
+                                <div>
+                                    {{ form.avatar }}
+                                    <div class="form-text">PNG, JPG до 2MB</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="first_name" class="form-label">Имя</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="first_name" 
+                                    name="first_name" 
+                                    value="{{ user.first_name }}"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="last_name" class="form-label">Фамилия</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="last_name" 
+                                    name="last_name" 
+                                    value="{{ user.last_name }}"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input 
+                                    type="tel" 
+                                    class="form-control" 
+                                    id="phone" 
+                                    name="phone" 
+                                    value="{{ user.phone }}"
+                                    data-mask="phone"
+                                    placeholder="+7 (___) ___-__-__"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input 
+                                    type="email" 
+                                    class="form-control" 
+                                    id="email" 
+                                    name="email" 
+                                    value="{{ user.email }}"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-2"></i>Сохранить изменения
+                            </button>
+                            <a href="{% url 'password_change' %}" class="btn btn-outline-warning">
+                                <i class="bi bi-key me-2"></i>Сменить пароль
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Phone mask
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput && typeof IMask !== 'undefined') {
+        IMask(phoneInput, {
+            mask: '+{7} (000) 000-00-00'
+        });
+    }
+
+    // Avatar preview
+    const avatarInput = document.querySelector('input[type="file"][name="avatar"]');
+    if (avatarInput) {
+        avatarInput.classList.add('form-control');
+        avatarInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatar-preview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+</script>
 {% endblock %}

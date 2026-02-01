@@ -1,21 +1,93 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Вход{% endblock %}
 
 {% block content %}
-<div class="wrapper">
-	<div class="header">
-		<h3 class="sign-in">Вход</h3>
-	</div>
-	<div class="clear"></div>
-	<form action="" method="post">
-		{% csrf_token %}
-		{{ form.as_div }}
-		<div>
-			<input type="submit" value="Войти" />
-		</div>
-		<a class="forgot-label" href="{% url 'password_reset' %}">Забыли пароль?</a>
-		<a class="registr" href="{% url 'registration' %}">Регистрация</a>
-	</form>
+<div class="container">
+    <div class="row justify-content-center py-5">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'assets/img/logo.png' %}" alt="Larek" height="50" class="mb-3">
+                        <h4>Вход в аккаунт</h4>
+                        <p class="text-muted">Введите ваши данные для входа</p>
+                    </div>
+
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Имя пользователя</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input 
+                                    type="text" 
+                                    class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+                                    id="id_username" 
+                                    name="username"
+                                    value="{{ form.username.value|default:'' }}"
+                                    placeholder="Username"
+                                    required
+                                    autofocus
+                                >
+                            </div>
+                            {% if form.username.errors %}
+                                <div class="text-danger small">{{ form.username.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">Пароль</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input 
+                                    type="password" 
+                                    class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
+                                    id="id_password" 
+                                    name="password"
+                                    placeholder="Пароль"
+                                    required
+                                >
+                            </div>
+                            {% if form.password.errors %}
+                                <div class="text-danger small">{{ form.password.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                <label class="form-check-label" for="remember">Запомнить меня</label>
+                            </div>
+                            <a href="{% url 'password_reset' %}" class="small">Забыли пароль?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                        </button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="text-muted mb-0">
+                            Нет аккаунта? 
+                            <a href="{% url 'registration' %}" class="fw-semibold">Зарегистрироваться</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

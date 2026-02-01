@@ -1,174 +1,325 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Главная{% endblock %}
 
 {% block content %}
-<div class="Header-slider">
-	{% if main_slider|length > 0  %}
-		<div class="Slider Slider_main">
-			<div class="Slider-box">
-				{% for banner in main_slider %}
-					<div class="Slider-item">
-						<div class="Slider-content">
-							<div class="row">
-								<div class="row-block">
-									<strong class="Slider-title">
-										{{ banner.product_seller.product.name }}
-									</strong>
-									<div class="Slider-footer">
-										<a class="btn btn_primary" href="{% url 'product_seller' pk=banner.product_seller.id  %}">Get Started</a>
-									</div>
-								</div>
-								<div class="row-block">
-									<div class="Slider-img">
-										<img src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" alt="{{ banner.product_seller.product.name }}" />
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			<div class="Slider-navigateWrap">
-				<div class="Slider-navigate"></div>
-			</div>
-		</div>
-	{% endif %}
-</div>
+<!-- Hero Slider -->
+{% if main_slider|length > 0 %}
+<section class="hero-slider mb-4">
+    <div class="container">
+        <div class="swiper hero-slider-swiper">
+            <div class="swiper-wrapper">
+                {% for banner in main_slider %}
+                <div class="swiper-slide">
+                    <div class="slide-content py-5">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <h1 class="slide-title display-5 fw-bold mb-4">
+                                    {{ banner.product_seller.product.name }}
+                                </h1>
+                                <p class="text-muted mb-4">
+                                    {{ banner.product_seller.product.description|truncatewords:20 }}
+                                </p>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <span class="fs-3 fw-bold text-primary">${{ banner.product_seller.price|commaprice }}</span>
+                                    <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-cart-plus me-2"></i>Подробнее
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <img 
+                                    src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" 
+                                    alt="{{ banner.product_seller.product.name }}"
+                                    class="img-fluid slide-image"
+                                    style="max-height: 350px; object-fit: contain;"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev d-none d-md-flex"></div>
+            <div class="swiper-button-next d-none d-md-flex"></div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
-<div class="Middle">
-	<div class="Section Section_column Section_columnLeft Section_columnDesktop">
-		<div class="wrap">
-			{% if limited_offers|length > 0  %}
-				<div class="Section-column">
-					<div class="Section-columnSection Section-columnSection_mark">
-						<div class="Section-columnHeader">
-							<strong class="Section-columnTitle">ОГРАНИЧЕННЫЕ ПРЕДЛОЖЕНИЯ</strong>
-						</div>
-						{% for banner in limited_offers %}
-							<div class="Card">
-								<a class="Card-picture" href="{% url 'product_seller' pk=banner.product_seller.id  %}">
-									<img src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" alt="{{ banner.product_seller.product.name }}" />
-								</a>
-								<div class="Card-content">
-									<strong class="Card-title">
-										<a href="{% url 'product_seller' pk=banner.product_seller.id  %}">
-											{{ banner.product_seller.product.name }}
-										</a>
-									</strong>
-									<div class="Card-description">
-										<div class="Card-cost">
-											<span class="Card-price">${{ banner.product_seller.price|commaprice }}</span>
-										</div>
-										<div class="Card-category">{{ banner.product_seller.product.catalog_category }}</div>
-									</div>
-									<div class="CountDown" data-date="{{ banner.for_countdown }}">
-										<div class="CountDown-block">
-											<div class="CountDown-wrap">
-												<div class="CountDown-days"></div>
-												<span class="CountDown-label">days</span>
-											</div>
-										</div>
-										<div class="CountDown-block">
-											<div class="CountDown-wrap">
-												<div class="CountDown-hours"></div>
-												<span class="CountDown-label">hours</span>
-											</div>
-										</div>
-										<div class="CountDown-block">
-											<div class="CountDown-wrap">
-												<div class="CountDown-minutes"></div>
-												<span class="CountDown-label">mins</span>
-											</div>
-										</div>
-										<div class="CountDown-block">
-											<div class="CountDown-wrap">
-												<div class="CountDown-secs"></div>
-												<span class="CountDown-label">secs</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-				</div>
-			{% endif %}
-			{% if popular_goods|length > 0  %}
-				<div class="Section-content">
-					<div class="Section-header">
-						<h2 class="Section-title">Популярные товары</h2>
-					</div>
-					<div class="Cards">
-						{% for banner in popular_goods %}
-							<div class="Card {% if 8 < forloop.counter %}hide_1450{% elif 4 < forloop.counter %}hide_md{% elif 0 < forloop.counter %}{% endif %}">
-								<a class="Card-picture" href="{% url 'product_seller' pk=banner.product_seller.id  %}">
-									<img src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" alt="{{ banner.product_seller.product.name }}" />
-								</a>
-								<div class="Card-content">
-									<strong class="Card-title">
-										<a href="{% url 'product_seller' pk=banner.product_seller.id  %}">
-											{{ banner.product_seller.product.name }}
-										</a>
-									</strong>
-									<div class="Card-description">
-										<div class="Card-cost">
-											<span class="Card-price">${{ banner.product_seller.price|commaprice }}</span>
-										</div>
-										<div class="Card-category">{{ banner.product_seller.product.catalog_category }}</div>
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-				</div>
-			{% endif %}
-		</div>
-	</div>
-	{% if popular_goods|length > 0  %}
-		<div class="Section Section_column Section_columnRight">
-			<div class="wrap">
-				<div class="Section-content">
-					<div class="Slider Slider_carousel">
-						<div class="Section-header Section-header_close">
-							<h2 class="Section-title">Ограниченный тираж</h2>
-							<div class="Section-control">
-								<div class="Slider-navigate"></div>
-							</div>
-						</div>
-						<div class="Slider-box Cards">
-							{% for banner in limited_edition %}
-								<div class="Slider-item">
-									<div class="Slider-content">
-										<div class="Card">
-											<a class="Card-picture" href="{% url 'product_seller' pk=banner.product_seller.id  %}">
-												<img class="img__slider__limited-edition" src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" alt="{{ banner.product_seller.product.name }}" />
-											</a>
-											<div class="Card-content">
-												<strong class="Card-title">
-													<a href="{% url 'product_seller' pk=banner.product_seller.id  %}">
-														{{ banner.product_seller.product.name }}
-													</a>
-												</strong>
-												<div class="Card-description">
-													<div class="Card-cost">
-														<span class="Card-price">${{ banner.product_seller.price|commaprice }}</span>
-													</div>
-													<div class="Card-category">{{ banner.product_seller.product.catalog_category }}</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	{% endif %}
+<div class="container">
+    <div class="row">
+        <!-- Sidebar: Limited Offers -->
+        {% if limited_offers|length > 0 %}
+        <div class="col-lg-3 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-fire me-2"></i>Ограниченные предложения
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% for banner in limited_offers %}
+                    <div class="text-center">
+                        <a href="{% url 'product_seller' pk=banner.product_seller.id %}">
+                            <img 
+                                src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" 
+                                alt="{{ banner.product_seller.product.name }}"
+                                class="img-fluid mb-3"
+                                style="max-height: 200px; object-fit: contain;"
+                            >
+                        </a>
+                        <h6 class="mb-2">
+                            <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="text-dark text-decoration-none">
+                                {{ banner.product_seller.product.name|truncatewords:8 }}
+                            </a>
+                        </h6>
+                        <div class="mb-2">
+                            <span class="fs-4 fw-bold text-primary">${{ banner.product_seller.price|commaprice }}</span>
+                        </div>
+                        <small class="text-muted">{{ banner.product_seller.product.catalog_category }}</small>
+                        
+                        <!-- Countdown Timer -->
+                        <div class="countdown mt-3" data-countdown="{{ banner.for_countdown }}">
+                            <div class="d-flex justify-content-center gap-2">
+                                <div class="countdown-item">
+                                    <span class="value countdown-days">0</span>
+                                    <span class="label">дн</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="value countdown-hours">0</span>
+                                    <span class="label">ч</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="value countdown-minutes">0</span>
+                                    <span class="label">мин</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="value countdown-seconds">0</span>
+                                    <span class="label">сек</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="btn btn-danger w-100 mt-3">
+                            Купить сейчас
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Main Content: Popular Products -->
+        <div class="{% if limited_offers|length > 0 %}col-lg-9{% else %}col-12{% endif %}">
+            {% if popular_goods|length > 0 %}
+            <section class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h4 mb-0">
+                        <i class="bi bi-star-fill text-warning me-2"></i>Популярные товары
+                    </h2>
+                    <a href="{% url 'catalog' %}?ordering=-products_count" class="btn btn-outline-primary btn-sm">
+                        Смотреть все <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+                
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                    {% for banner in popular_goods %}
+                    <div class="col">
+                        <div class="card product-card h-100 border-0 shadow-sm">
+                            <a href="{% url 'product_seller' pk=banner.product_seller.id %}">
+                                <img 
+                                    src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" 
+                                    class="card-img-top" 
+                                    alt="{{ banner.product_seller.product.name }}"
+                                >
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title mb-2">
+                                    <a href="{% url 'product_seller' pk=banner.product_seller.id %}">
+                                        {{ banner.product_seller.product.name|truncatewords:8 }}
+                                    </a>
+                                </h6>
+                                <p class="category text-muted small mb-2">
+                                    {{ banner.product_seller.product.catalog_category }}
+                                </p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="price">${{ banner.product_seller.price|commaprice }}</span>
+                                    <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Limited Edition Carousel -->
+    {% if limited_edition|length > 0 %}
+    <section class="py-5 bg-light rounded-3 mb-4">
+        <div class="px-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h4 mb-0">
+                    <i class="bi bi-gem text-info me-2"></i>Ограниченный тираж
+                </h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary btn-sm swiper-button-prev-limited">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm swiper-button-next-limited">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="swiper product-carousel limited-edition-swiper">
+                <div class="swiper-wrapper">
+                    {% for banner in limited_edition %}
+                    <div class="swiper-slide">
+                        <div class="card product-card h-100 border-0 shadow-sm">
+                            <a href="{% url 'product_seller' pk=banner.product_seller.id %}">
+                                <img 
+                                    src="{% get_media_prefix %}{{ banner.product_seller.product.images.all.0.image }}" 
+                                    class="card-img-top" 
+                                    alt="{{ banner.product_seller.product.name }}"
+                                >
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title mb-2">
+                                    <a href="{% url 'product_seller' pk=banner.product_seller.id %}">
+                                        {{ banner.product_seller.product.name|truncatewords:8 }}
+                                    </a>
+                                </h6>
+                                <p class="category text-muted small mb-2">
+                                    {{ banner.product_seller.product.catalog_category }}
+                                </p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="price">${{ banner.product_seller.price|commaprice }}</span>
+                                    <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Features/Advantages -->
+    <section class="py-4">
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Доставка" width="48" height="48">
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Бесплатная доставка</h6>
+                        <small class="text-muted">При заказе от $100</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Возврат" width="48" height="48">
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Возврат денег</h6>
+                        <small class="text-muted">Гарантия 30 дней</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Поддержка" width="48" height="48">
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Поддержка 24/7</h6>
+                        <small class="text-muted">Онлайн помощь</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Качество" width="48" height="48">
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-1">Качество</h6>
+                        <small class="text-muted">Оригинальные товары</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Hero Slider
+    const heroSwiper = document.querySelector('.hero-slider-swiper');
+    if (heroSwiper) {
+        new Swiper(heroSwiper, {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+    }
+
+    // Limited Edition Carousel
+    const limitedSwiper = document.querySelector('.limited-edition-swiper');
+    if (limitedSwiper) {
+        new Swiper(limitedSwiper, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.swiper-button-next-limited',
+                prevEl: '.swiper-button-prev-limited',
+            },
+            breakpoints: {
+                576: {
+                    slidesPerView: 2,
+                },
+                992: {
+                    slidesPerView: 3,
+                },
+                1400: {
+                    slidesPerView: 4,
+                },
+            },
+        });
+    }
+});
+</script>
 {% endblock %}

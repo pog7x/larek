@@ -1,129 +1,218 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Catalog{% endblock %}
+{% block title %}Каталог{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-	<div class="Section Section_column Section_columnLeft">
-		<div class="wrap">
-			<div class="Section-column">
-				<div class="Section-columnSection">
-					<h1 class="Section-header">
-						<strong class="Section-title">Фильтр</strong>
-					</h1>
-					<div class="Section-columnContent">
-						<form
-							class="form" id="catalog-form"
-							hx-get="{% url 'catalog' %}"
-							hx-target="#product-seller"
-							hx-push-url="true"
-							hx-include="this"
-							hx-trigger="submit, change, orderingChanged, pageChanged, input from:#title delay:400ms"
-						>
-							<input type="hidden" name="ordering" id="form-ordering" value="{{ request.GET.ordering }}" />
-							<input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}" />
-							<input type="hidden" name="catalog_category" value="{{ request.GET.catalog_category }}" />
-							<div class="form-group">
-								<div class="range Section-columnRange">
-									<input
-										class="range-line"
-										id="price"
-										type="text"
-										data-type="double"
-										data-min="1"
-										data-max="50000"
-										data-from="{{ request.GET.price_gte }}"
-										data-to="{{ request.GET.price_lte }}"
-									/>
-								</div>
-								<label for="price_gte">Цена от:</label>
-								<input class="filter-input form-input_full" name="price_gte" id="price_gte"/>
-								<label for="price_lte">Цена до:</label>
-								<input class="filter-input form-input_full" name="price_lte" id="price_lte"/>
-							</div>
-							<div class="form-group">
-								<input
-									class="filter-input form-input_full"
-									id="title"
-									name="product_name"
-									type="text"
-									value="{{ request.GET.product_name }}"
-									placeholder="Название"
-								/>
-							</div>
-							<div class="form-group">
-								<label class="toggle">
-									<input name="in_stock" type="checkbox" {% if request.GET.in_stock == 'on' %}checked{% endif %}/>
-									<span class="toggle-box"></span>
-									<span class="toggle-text">Только товары в наличии</span>
-								</label>
-							</div>
-							<div class="form-group">
-								<div class="buttons">
-									<button type="submit" class="btn btn_square btn_dark btn_narrow">Фильтр</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="Section-content">
-				<div class="Sort">
-					<div class="Sort-title">Сортировать по:</div>
-					<div class="Sort-variants">
-						{% for ordering_key, ordering_value in ordering_map.items %}
-							<a
-								onclick="changeOrdering(this, '{{ ordering_key }}')"
-								class="Sort-sortBy
-								{% if active_ordering|endswith:ordering_key %}
-								Sort-sortBy_{% if active_ordering|startswith:'-' %}inc{% else %}dec{% endif %}
-								{% endif %}"
-							>{{ ordering_value }}</a>
-						{% endfor %}
-					</div>
-				</div>
-				<div id="product-seller">
-					{% include "product_seller_list.html" %}
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Каталог</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <div class="col-lg-3 mb-4">
+            <div class="filter-sidebar">
+                <h5 class="filter-title">
+                    <i class="bi bi-funnel me-2"></i>Фильтры
+                </h5>
+
+                <form 
+                    id="catalog-form"
+                    hx-get="{% url 'catalog' %}"
+                    hx-target="#product-seller"
+                    hx-push-url="true"
+                    hx-include="this"
+                    hx-trigger="submit, change, orderingChanged, pageChanged, input from:#title delay:400ms"
+                >
+                    <!-- Hidden fields -->
+                    <input type="hidden" name="ordering" id="form-ordering" value="{{ request.GET.ordering }}">
+                    <input type="hidden" name="page" id="form-page" value="{{ request.GET.page }}">
+                    <input type="hidden" name="catalog_category" value="{{ request.GET.catalog_category }}">
+
+                    <!-- Price Range -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Цена</label>
+                        <div 
+                            id="price-range" 
+                            data-min="1" 
+                            data-max="50000"
+                            class="mb-2"
+                        ></div>
+                        <div id="price-display" class="price-display"></div>
+                        <div class="row g-2 mt-2">
+                            <div class="col-6">
+                                <input 
+                                    type="number" 
+                                    class="form-control form-control-sm" 
+                                    name="price_gte" 
+                                    id="price_gte"
+                                    placeholder="От"
+                                    value="{{ request.GET.price_gte }}"
+                                >
+                            </div>
+                            <div class="col-6">
+                                <input 
+                                    type="number" 
+                                    class="form-control form-control-sm" 
+                                    name="price_lte" 
+                                    id="price_lte"
+                                    placeholder="До"
+                                    value="{{ request.GET.price_lte }}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Name -->
+                    <div class="mb-4">
+                        <label for="title" class="form-label fw-semibold">Название</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="title" 
+                            name="product_name"
+                            value="{{ request.GET.product_name }}"
+                            placeholder="Поиск по названию..."
+                        >
+                    </div>
+
+                    <!-- In Stock -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                name="in_stock" 
+                                id="in_stock"
+                                {% if request.GET.in_stock == 'on' %}checked{% endif %}
+                            >
+                            <label class="form-check-label" for="in_stock">
+                                Только в наличии
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-2"></i>Применить
+                    </button>
+
+                    {% if request.GET.product_name or request.GET.price_gte or request.GET.price_lte or request.GET.in_stock or request.GET.catalog_category %}
+                    <a href="{% url 'catalog' %}" class="btn btn-outline-secondary w-100 mt-2">
+                        <i class="bi bi-x-circle me-2"></i>Сбросить
+                    </a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="col-lg-9">
+            <!-- Sorting -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                <h1 class="h4 mb-0">Товары</h1>
+                
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted small">Сортировка:</span>
+                    <div class="btn-group" role="group">
+                        {% for ordering_key, ordering_value in ordering_map.items %}
+                        <button 
+                            type="button" 
+                            class="btn btn-sm {% if active_ordering|endswith:ordering_key %}btn-primary{% else %}btn-outline-secondary{% endif %} sort-btn"
+                            data-ordering="{{ ordering_key }}"
+                            onclick="changeOrdering(this, '{{ ordering_key }}')"
+                        >
+                            {{ ordering_value }}
+                            {% if active_ordering|endswith:ordering_key %}
+                                <i class="bi bi-arrow-{% if active_ordering|startswith:'-' %}down{% else %}up{% endif %} ms-1"></i>
+                            {% endif %}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Container (HTMX target) -->
+            <div id="product-seller">
+                {% include "product_seller_list.html" %}
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-const classNames = ['Sort-sortBy_inc', 'Sort-sortBy_dec'];
+// Initialize price range slider
+document.addEventListener('DOMContentLoaded', function() {
+    const priceSlider = document.getElementById('price-range');
+    if (priceSlider && typeof noUiSlider !== 'undefined') {
+        const minInput = document.querySelector('input[name="price_gte"]');
+        const maxInput = document.querySelector('input[name="price_lte"]');
+        
+        const minVal = parseFloat(priceSlider.dataset.min) || 1;
+        const maxVal = parseFloat(priceSlider.dataset.max) || 50000;
+        const startMin = parseFloat(minInput?.value) || minVal;
+        const startMax = parseFloat(maxInput?.value) || maxVal;
 
-function changeOrdering(self, value) {
-	if (!classNames.some((className) => self.classList.contains(className))) {
-		document.getElementById('form-ordering').value = `-${value}`;
-		self.classList.toggle('Sort-sortBy_inc');
-	} else if (self.classList.contains('Sort-sortBy_dec')) {
-		document.getElementById('form-ordering').value = `-${value}`;
-		self.classList.toggle('Sort-sortBy_inc');
-		self.classList.toggle('Sort-sortBy_dec');
-	} else {
-		document.getElementById('form-ordering').value = value;
-		self.classList.toggle('Sort-sortBy_inc');
-		self.classList.toggle('Sort-sortBy_dec');
-	}
+        noUiSlider.create(priceSlider, {
+            start: [startMin, startMax],
+            connect: true,
+            range: {
+                'min': minVal,
+                'max': maxVal
+            },
+            format: {
+                to: function(value) {
+                    return Math.round(value);
+                },
+                from: function(value) {
+                    return Number(value);
+                }
+            }
+        });
 
-	htmx.trigger('#catalog-form', 'orderingChanged');
+        const priceDisplay = document.getElementById('price-display');
 
-	const sorting = document.querySelectorAll('.Sort-sortBy');
+        priceSlider.noUiSlider.on('update', function(values) {
+            if (minInput) minInput.value = values[0];
+            if (maxInput) maxInput.value = values[1];
+            if (priceDisplay) {
+                priceDisplay.textContent = '$' + values[0] + ' - $' + values[1];
+            }
+        });
+    }
+});
 
-	sorting.forEach((sort) => {
-		if (sort !== self) {
-			sort.classList.remove('Sort-sortBy_inc');
-			sort.classList.remove('Sort-sortBy_dec');
-		}
-	});
-};
+// Sorting functionality
+function changeOrdering(btn, value) {
+    const formOrdering = document.getElementById('form-ordering');
+    const currentValue = formOrdering.value;
+    
+    // Toggle direction
+    if (currentValue === '-' + value) {
+        formOrdering.value = value;
+    } else {
+        formOrdering.value = '-' + value;
+    }
+    
+    // Reset page to 1 when changing sort
+    document.getElementById('form-page').value = '1';
+    
+    // Trigger HTMX
+    htmx.trigger('#catalog-form', 'orderingChanged');
+}
 
+// Pagination functionality
 function changePage(value) {
-	document.getElementById('form-page').value = value;
-	htmx.trigger('#catalog-form', 'pageChanged');
-};
- </script>
+    document.getElementById('form-page').value = value;
+    htmx.trigger('#catalog-form', 'pageChanged');
+}
+</script>
 {% endblock %}

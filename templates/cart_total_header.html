@@ -2,13 +2,14 @@
 {% load stringfilters %}
 
 {% if user.is_authenticated %}
-    <div class="CartBlock">
-        <a class="CartBlock-block" href="{% url 'cart' %}">
-            <img class="CartBlock-img" src="{% static 'assets/img/icons/cart.svg' %}" alt="cart.svg"/>
-            <span class="CartBlock-amount">{{ total_products_count }}</span>
-        </a>
-        <div class="CartBlock-block">
-            <span class="CartBlock-price">${{ total_products_price|commaprice }}</span> 
-        </div>
-    </div>
+<a href="{% url 'cart' %}" class="btn btn-outline-secondary position-relative d-flex align-items-center gap-2">
+    <i class="bi bi-cart3 fs-5"></i>
+    <span class="d-none d-sm-inline">${{ total_products_price|commaprice }}</span>
+    {% if total_products_count > 0 %}
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+            {{ total_products_count }}
+            <span class="visually-hidden">товаров в корзине</span>
+        </span>
+    {% endif %}
+</a>
 {% endif %}

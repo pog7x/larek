@@ -1,154 +1,149 @@
 {% extends "base.html" %}
-
 {% load static %}
 
-{% block title %}About{% endblock %}
+{% block title %}О нас{% endblock %}
 
 {% block content %}
-<div class="Middle Middle_top">
-	<div class="Middle-top">
-		<div class="wrap">
-			<div class="Middle-header">
-				<h1 class="Middle-title">About Larek</h1>
-				<ul class="breadcrumbs Middle-breadcrumbs">
-					<li class="breadcrumbs-item"><a href="{% url 'index' %}">Home</a></li>
-					<li class="breadcrumbs-item breadcrumbs-item_current"><span>About Us</span></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="Section Section_column Section_columnLeft Section_columnWide">
-		<div class="wrap">
-			<div class="Section-column">
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Shipping & Returns" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Shipping & Returns</strong>
-							<p class="media-text">World wide shipping</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Money Back" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Money Back</strong>
-							<p class="media-text">Guaranted payments</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Support" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Support Policy</strong>
-							<p class="media-text">Fast support team</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection Section-columnSection_mark">
-					<div class="media media_advantage">
-						<div class="media-image">
-							<img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Quality Guarantee" />
-						</div>
-						<div class="media-content">
-							<strong class="media-title">Quality Guarantee</strong>
-							<p class="media-text">Best guaranted items</p>
-						</div>
-					</div>
-				</div>
-				<div class="Section-columnSection">
-					<div class="Section-header">
-						<strong class="Section-title">Follow Us</strong>
-					</div>
-					<div class="Section-columnContent">
-						<div class="Footer-payments Footer-payments_column">
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/fb.png' %}" alt="Facebook" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/tw.png' %}" alt="Twitter" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/gg.png' %}" alt="Google Plus" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/in.png' %}" alt="LinkedIn" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/pt.png' %}" alt="Pinterest" />
-							</div>
-							<div>
-								<img src="{% static 'assets/img/icons/socialContent/ml.png' %}" alt="Email" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="Section-content">
-				<article class="Article">
-					<div class="Article-section">
-						<div class="row row_verticalCenter row_maxHalf">
-							<div class="row-block">
-								<h2>Why Choose Larek?</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit doli. Aenean commodo ligula eget dolor. Aenean
-									massa. Cumtipsu sociis natoque penatibus et magnis dis parturient montesti, nascetur ridiculus mus.
-									Donec quam felis, ultricies nec, pellentesque eutu, pretiumem.
-								</p>
-								<p>
-									Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-									enim justotuio, rhoncus ut loret, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-									mollis pretium. Integer tincidunt. Cras dapibus. Vivamus element semper nisi. Aenean vulputate eleifend
-									tellus. Aenean leo ligula, porttitor eu, consequat vitae ligula eget dolor. Aenean massa. Cumtipsu
-									sociis natoque pena tibusetm t semper ni.
-								</p>
-								<div>
-									<a class="btn btn_primary">Get Started</a>
-								</div>
-							</div>
-							<div class="row-block">
-								<div class="pict">
-									<img src="{% static 'assets/img/content/home/slider.png' %}" alt="Product Image" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="Article-section">
-						<div class="row row_verticalCenter row_maxHalf">
-							<div class="row-block">
-								<div class="pict">
-									<img src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="Product Image" />
-								</div>
-							</div>
-							<div class="row-block">
-								<h2>Larek Store History</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit doli. Aenean commodo ligula eget dolor. Aenean
-									massa. Cumtipsu sociis natoque penatibus et magnis dis parturient montesti, nascetur ridiculus mus.
-									Donec quam felis, ultricies nec, pellentesque eutu, pretiumem.
-								</p>
-								<ul>
-									<li>Lorem ipsum dolor sit amet, consectetuer</li>
-									<li>adipiscing elit doli. Aenean commodo ligula</li>
-									<li>eget dolor. Aenean massa. Cumtipsu sociis</li>
-									<li>natoque penatibus et magnis dis parturient</li>
-									<li>montesti, nascetur ridiculus mus. Donec</li>
-									<li>quam felis, ultricies nec, pellentesque eutu</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</article>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">О нас</li>
+        </ol>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">О компании Larek</h1>
+        <p class="lead text-muted">Ваш надежный маркетплейс электроники и техники</p>
+    </div>
+
+    <!-- Advantages -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100 text-center p-4">
+                <div class="mb-3">
+                    <img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Доставка" width="64" height="64">
+                </div>
+                <h5>Доставка по всему миру</h5>
+                <p class="text-muted mb-0">Быстрая доставка в любую точку мира</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100 text-center p-4">
+                <div class="mb-3">
+                    <img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Возврат" width="64" height="64">
+                </div>
+                <h5>Возврат денег</h5>
+                <p class="text-muted mb-0">Гарантия возврата в течение 30 дней</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100 text-center p-4">
+                <div class="mb-3">
+                    <img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Поддержка" width="64" height="64">
+                </div>
+                <h5>Поддержка 24/7</h5>
+                <p class="text-muted mb-0">Команда поддержки всегда на связи</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm h-100 text-center p-4">
+                <div class="mb-3">
+                    <img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Качество" width="64" height="64">
+                </div>
+                <h5>Гарантия качества</h5>
+                <p class="text-muted mb-0">Только оригинальные товары</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2>Почему выбирают Larek?</h2>
+            <p class="text-muted">
+                Larek — это современный маркетплейс, который объединяет лучших продавцов электроники и техники. 
+                Мы предлагаем широкий ассортимент товаров по конкурентным ценам с гарантией качества.
+            </p>
+            <p class="text-muted">
+                Наша миссия — сделать покупку техники простой, безопасной и выгодной. 
+                Мы тщательно проверяем каждого продавца и гарантируем подлинность всех товаров.
+            </p>
+            <a href="{% url 'catalog' %}" class="btn btn-primary">
+                <i class="bi bi-bag me-2"></i>Перейти в каталог
+            </a>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'assets/img/content/home/slider.png' %}" alt="Larek Store" class="img-fluid rounded shadow">
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="bg-light rounded-3 p-5 mb-5">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h2 class="display-5 fw-bold text-primary">10K+</h2>
+                <p class="text-muted mb-0">Товаров</p>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h2 class="display-5 fw-bold text-primary">500+</h2>
+                <p class="text-muted mb-0">Продавцов</p>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h2 class="display-5 fw-bold text-primary">50K+</h2>
+                <p class="text-muted mb-0">Клиентов</p>
+            </div>
+            <div class="col-md-3">
+                <h2 class="display-5 fw-bold text-primary">99%</h2>
+                <p class="text-muted mb-0">Довольных покупателей</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+            <h2>История Larek</h2>
+            <p class="text-muted">
+                Компания Larek была основана в 2020 году с целью создать удобную платформу 
+                для покупки и продажи электроники. За эти годы мы выросли из небольшого стартапа 
+                в один из ведущих маркетплейсов страны.
+            </p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Широкий ассортимент товаров</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Проверенные продавцы</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Безопасные платежи</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Быстрая доставка</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Гарантия качества</li>
+            </ul>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <img src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="Larek History" class="img-fluid rounded shadow">
+        </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="text-center py-5">
+        <h4 class="mb-4">Следите за нами</h4>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#" class="btn btn-outline-primary btn-lg rounded-circle" style="width: 50px; height: 50px;">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="#" class="btn btn-outline-info btn-lg rounded-circle" style="width: 50px; height: 50px;">
+                <i class="bi bi-twitter"></i>
+            </a>
+            <a href="#" class="btn btn-outline-secondary btn-lg rounded-circle" style="width: 50px; height: 50px;">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="#" class="btn btn-outline-danger btn-lg rounded-circle" style="width: 50px; height: 50px;">
+                <i class="bi bi-pinterest"></i>
+            </a>
+            <a href="#" class="btn btn-outline-dark btn-lg rounded-circle" style="width: 50px; height: 50px;">
+                <i class="bi bi-envelope"></i>
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
