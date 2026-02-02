@@ -126,6 +126,7 @@
                             type="button" 
                             class="btn btn-sm {% if active_ordering|endswith:ordering_key %}btn-primary{% else %}btn-outline-secondary{% endif %} sort-btn"
                             data-ordering="{{ ordering_key }}"
+                            data-label="{{ ordering_value }}"
                             onclick="changeOrdering(this, '{{ ordering_key }}')"
                         >
                             {{ ordering_value }}
@@ -149,63 +150,37 @@
 
 {% block extra_js %}
 <script>
-// Initialize price range slider
-document.addEventListener('DOMContentLoaded', function() {
-    const priceSlider = document.getElementById('price-range');
-    if (priceSlider && typeof noUiSlider !== 'undefined') {
-        const minInput = document.querySelector('input[name="price_gte"]');
-        const maxInput = document.querySelector('input[name="price_lte"]');
-        
-        const minVal = parseFloat(priceSlider.dataset.min) || 1;
-        const maxVal = parseFloat(priceSlider.dataset.max) || 50000;
-        const startMin = parseFloat(minInput?.value) || minVal;
-        const startMax = parseFloat(maxInput?.value) || maxVal;
-
-        noUiSlider.create(priceSlider, {
-            start: [startMin, startMax],
-            connect: true,
-            range: {
-                'min': minVal,
-                'max': maxVal
-            },
-            format: {
-                to: function(value) {
-                    return Math.round(value);
-                },
-                from: function(value) {
-                    return Number(value);
-                }
-            }
-        });
-
-        const priceDisplay = document.getElementById('price-display');
-
-        priceSlider.noUiSlider.on('update', function(values) {
-            if (minInput) minInput.value = values[0];
-            if (maxInput) maxInput.value = values[1];
-            if (priceDisplay) {
-                priceDisplay.textContent = '$' + values[0] + ' - $' + values[1];
-            }
-        });
-    }
-});
-
 // Sorting functionality
 function changeOrdering(btn, value) {
-    const formOrdering = document.getElementById('form-ordering');
-    const currentValue = formOrdering.value;
-    
+    var formOrdering = document.getElementById('form-ordering');
+    var currentValue = formOrdering.value;
+
     // Toggle direction
     if (currentValue === '-' + value) {
         formOrdering.value = value;
     } else {
         formOrdering.value = '-' + value;
     }
-    
+
     // Reset page to 1 when changing sort
     document.getElementById('form-page').value = '1';
-    
-    // Trigger HTMX
+
+    // Update sort buttons and arrows in DOM (HTMX swaps only #product-seller)
+    var newValue = formOrdering.value;
+    var isDesc = newValue.indexOf('-') === 0;
+    var activeKey = isDesc ? newValue.slice(1) : newValue;
+    var arrowClass = 'bi bi-arrow-' + (isDesc ? 'down' : 'up') + ' ms-1';
+
+    document.querySelectorAll('.sort-btn').forEach(function(b) {
+        var key = b.getAttribute('data-ordering');
+        var isActive = (key === activeKey);
+        var label = b.getAttribute('data-label') || b.textContent.trim();
+
+        b.classList.remove('btn-primary', 'btn-outline-secondary');
+        b.classList.add(isActive ? 'btn-primary' : 'btn-outline-secondary');
+        b.innerHTML = label + (isActive ? ' <i class="' + arrowClass + '"></i>' : '');
+    });
+
     htmx.trigger('#catalog-form', 'orderingChanged');
 }
 

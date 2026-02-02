@@ -21,10 +21,9 @@
                     <img 
                         src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
                         alt="{{ user.username }}"
-                        class="rounded-circle mb-3"
+                        class="rounded-circle mb-3 u-object-cover"
                         width="100"
                         height="100"
-                        style="object-fit: cover;"
                     >
                     <h5 class="mb-1">{{ user.get_full_name|default:user.username }}</h5>
                     <p class="text-muted small mb-0">{{ user.email }}</p>
@@ -78,10 +77,9 @@
                                     src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
                                     alt="Avatar preview"
                                     id="avatar-preview"
-                                    class="rounded-circle"
+                                    class="rounded-circle u-object-cover"
                                     width="80"
                                     height="80"
-                                    style="object-fit: cover;"
                                 >
                                 <div>
                                     {{ form.avatar }}

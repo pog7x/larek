@@ -87,9 +87,9 @@ class ProductSellerListView(ListView):
         )
         page_kwarg = self.page_kwarg
         page = self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1
-        len_objects = len(self.object_list)
+        total = paginator.count
         max_page = (
-            int(len_objects / self.paginate_by) + (len_objects % self.paginate_by > 0)
+            (total // page_size) + (1 if total % page_size else 0)
         ) or 1
 
         try:

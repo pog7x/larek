@@ -1,284 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-{% load static %}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Larek - Маркетплейс электроники и техники">
-    <title>Larek | {% block title %}Маркетплейс{% endblock %}</title>
+	{% load static %}
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Larek - Маркетплейс электроники и техники" />
+		<title>Larek | {% block title %}Маркетплейс{% endblock %}</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon.png' %}">
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon.png' %}" />
 
-    <!-- Fonts preload -->
-    <link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Regular.woff' %}" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Bold.woff' %}" as="font" type="font/woff" crossorigin>
+		<!-- Fonts preload -->
+		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Regular.woff' %}" as="font" type="font/woff" crossorigin />
+		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Bold.woff' %}" as="font" type="font/woff" crossorigin />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/nouislider.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
-    {% block extra_css %}{% endblock %}
-</head>
+		<!-- CSS -->
+		<link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/nouislider.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
+		{% block extra_css %}{% endblock %}
+	</head>
 
-<body>
-    <!-- Toast Container -->
-    <div id="toast-container"></div>
+	<body>
+		<!-- Toast Container -->
+		<div id="toast-container"></div>
 
-    <!-- Top Bar -->
-    <div class="top-bar d-none d-md-block">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <!-- Social Links -->
-                <div class="d-flex gap-3">
-                    <a href="#" title="Twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" title="Pinterest"><i class="bi bi-pinterest"></i></a>
-                    <a href="#" title="Email"><i class="bi bi-envelope"></i></a>
-                </div>
-                <!-- Auth Links -->
-                <div>
-                    {% if not user.is_authenticated %}
-                        <a href="{% url 'login' %}" class="me-3">Вход</a>
-                        <a href="{% url 'registration' %}">Регистрация</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
+		<!-- Top Bar -->
+		<div class="top-bar d-none d-md-block">
+			<div class="container">
+				<div class="d-flex justify-content-between align-items-center">
+					<!-- Social Links -->
+					<div class="d-flex gap-3">
+						<a href="#" title="Twitter" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+						<a href="#" title="LinkedIn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+						<a href="#" title="Pinterest" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+						<a href="#" title="Email" aria-label="Email"><i class="bi bi-envelope"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- Main Header -->
-    <header class="bg-white shadow-sm sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light py-2">
-                <!-- Logo -->
-                <a class="navbar-brand" href="{% url 'index' %}">
-                    <img src="{% static 'assets/img/logo.png' %}" alt="Larek" height="40">
-                </a>
+		<!-- Main Header -->
+		<header class="bg-white shadow-sm sticky-top">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg navbar-light py-2">
+					<!-- Logo -->
+					<a class="navbar-brand" href="{% url 'index' %}">
+						<img src="{% static 'assets/img/logo.svg' %}" alt="Larek" height="56" class="site-logo" />
+					</a>
 
-                <!-- Mobile Toggle -->
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+					<!-- Mobile Toggle -->
+					<button
+						class="navbar-toggler border-0"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#mainNav"
+						aria-controls="mainNav"
+						aria-label="Открыть меню"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-                <!-- Navigation -->
-                <div class="collapse navbar-collapse" id="mainNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'index' %}">Главная</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'catalog' %}">
-                                Каталог
-                                <span class="badge bg-success ms-1">Скидки</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">О нас</a>
-                        </li>
-                    </ul>
+					<!-- Navigation -->
+					<div class="collapse navbar-collapse" id="mainNav">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'index' %}">Главная</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link nav-link-catalog position-relative d-inline-block" href="{% url 'catalog' %}">
+									<span class="badge badge-catalog-discount bg-success">Скидки</span>
+									Каталог
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'about' %}">О нас</a>
+							</li>
+						</ul>
 
-                    <!-- Search Form -->
-                    <form class="d-flex search-form me-3" method="get" action="{% url 'catalog' %}">
-                        <div class="input-group">
-                            <input 
-                                class="form-control" 
-                                type="search" 
-                                name="product_name" 
-                                placeholder="Поиск товаров..."
-                                aria-label="Поиск"
-                            >
-                            <button class="btn btn-primary" type="submit">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </form>
+						<!-- User Actions -->
+						<div class="d-flex align-items-center gap-3">
+							{% if user.is_authenticated %}
+							<!-- Cart -->
+							<div
+								class="cart-badge"
+								hx-get="{% url 'cart_total_header' %}"
+								hx-swap="innerHTML"
+								hx-trigger="load, update_cart_total from:body delay:250ms"
+							></div>
 
-                    <!-- User Actions -->
-                    <div class="d-flex align-items-center gap-3">
-                        {% if user.is_authenticated %}
-                            <!-- Cart -->
-                            <div 
-                                class="cart-badge"
-                                hx-get="{% url 'cart_total_header' %}"
-                                hx-swap="innerHTML"
-                                hx-trigger="load, update_cart_total from:body delay:250ms"
-                            ></div>
+							<!-- Profile Dropdown -->
+							<div class="dropdown profile-dropdown">
+								<button class="btn btn-link p-0 profile-trigger" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<img
+										src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
+										alt="{{ user.username }}"
+										class="rounded-circle"
+										width="40"
+										height="40"
+									/>
+								</button>
+								<ul class="dropdown-menu dropdown-menu-end">
+									<li>
+										<a class="dropdown-item" href="{% url 'profile' %}"> <i class="bi bi-person me-2"></i>Профиль </a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{% url 'orders_history' %}"> <i class="bi bi-bag me-2"></i>Мои заказы </a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{% url 'views_history' %}">
+											<i class="bi bi-clock-history me-2"></i>История просмотров
+										</a>
+									</li>
+									<li><hr class="dropdown-divider" /></li>
+									<li>
+										<a class="dropdown-item text-danger" href="{% url 'logout' %}"> <i class="bi bi-box-arrow-right me-2"></i>Выход </a>
+									</li>
+								</ul>
+							</div>
+							{% else %}
+							<a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm d-none d-lg-inline-block"> Вход </a>
+							<a href="{% url 'registration' %}" class="btn btn-primary btn-sm d-none d-lg-inline-block"> Регистрация </a>
+							{% endif %}
+						</div>
+					</div>
+				</nav>
+			</div>
 
-                            <!-- Profile Dropdown -->
-                            <div class="dropdown profile-dropdown">
-                                <button 
-                                    class="btn btn-link p-0 profile-trigger" 
-                                    type="button" 
-                                    data-bs-toggle="dropdown" 
-                                    aria-expanded="false"
-                                >
-                                    <img 
-                                        src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}" 
-                                        alt="{{ user.username }}"
-                                        class="rounded-circle"
-                                        width="40"
-                                        height="40"
-                                        style="object-fit: cover;"
-                                    >
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="{% url 'profile' %}">
-                                        <i class="bi bi-person me-2"></i>Профиль
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{% url 'orders_history' %}">
-                                        <i class="bi bi-bag me-2"></i>Мои заказы
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{% url 'views_history' %}">
-                                        <i class="bi bi-clock-history me-2"></i>История просмотров
-                                    </a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">
-                                        <i class="bi bi-box-arrow-right me-2"></i>Выход
-                                    </a></li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm d-none d-lg-inline-block">
-                                Вход
-                            </a>
-                            <a href="{% url 'registration' %}" class="btn btn-primary btn-sm d-none d-lg-inline-block">
-                                Регистрация
-                            </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </nav>
-        </div>
+			<!-- Categories & Search Bar -->
+			<div class="border-top bg-light py-2">
+				<div class="container">
+					<div class="d-flex align-items-center gap-3">
+						<!-- Categories Dropdown -->
+						<div class="categories-dropdown">
+							<button class="categories-trigger" type="button">
+								<i class="bi bi-grid-3x3-gap"></i>
+								<span class="d-none d-sm-inline">Все категории</span>
+								<i class="bi bi-chevron-down ms-1"></i>
+							</button>
+							<div class="categories-content">
+								{% for cc in catalog_categories %}
+								<a href="{% url 'catalog' %}?catalog_category={{ cc.id }}">
+									<img src="{% get_media_prefix %}{{ cc.icon }}" alt="{{ cc.name }}" />
+									<span>{{ cc.name }}</span>
+								</a>
+								{% endfor %}
+							</div>
+						</div>
 
-        <!-- Categories & Search Bar -->
-        <div class="border-top bg-light py-2">
-            <div class="container">
-                <div class="d-flex align-items-center gap-3">
-                    <!-- Categories Dropdown -->
-                    <div class="categories-dropdown">
-                        <button class="categories-trigger" type="button">
-                            <i class="bi bi-grid-3x3-gap"></i>
-                            <span class="d-none d-sm-inline">Все категории</span>
-                            <i class="bi bi-chevron-down ms-1"></i>
-                        </button>
-                        <div class="categories-content">
-                            {% for cc in catalog_categories %}
-                                <a href="{% url 'catalog' %}?catalog_category={{ cc.id }}">
-                                    <img src="{% get_media_prefix %}{{ cc.icon }}" alt="{{ cc.name }}">
-                                    <span>{{ cc.name }}</span>
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
+						<!-- Mobile Search Toggle -->
+						<button class="btn btn-link d-lg-none search-toggle p-0 ms-auto" type="button" aria-label="Открыть поиск">
+							<i class="bi bi-search fs-5"></i>
+						</button>
 
-                    <!-- Mobile Search Toggle -->
-                    <button class="btn btn-link d-lg-none search-toggle p-0 ms-auto" type="button">
-                        <i class="bi bi-search fs-5"></i>
-                    </button>
+						<!-- Quick Links -->
+						<div class="d-none d-md-flex gap-4 ms-auto">
+							<a href="{% url 'catalog' %}?ordering=-products_count" class="text-decoration-none text-muted small">
+								<i class="bi bi-fire text-danger"></i> Популярное
+							</a>
+							<a href="{% url 'catalog' %}?in_stock=on" class="text-decoration-none text-muted small">
+								<i class="bi bi-box-seam text-success"></i> В наличии
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
 
-                    <!-- Quick Links -->
-                    <div class="d-none d-md-flex gap-4 ms-auto">
-                        <a href="{% url 'catalog' %}?ordering=-products_count" class="text-decoration-none text-muted small">
-                            <i class="bi bi-fire text-danger"></i> Популярное
-                        </a>
-                        <a href="{% url 'catalog' %}?in_stock=on" class="text-decoration-none text-muted small">
-                            <i class="bi bi-box-seam text-success"></i> В наличии
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+		<!-- Search Bar -->
+		<section id="search-bar-section" class="bg-white border-bottom search-bar-section">
+			<div class="container py-3">
+				<form class="search-form w-100" method="get" action="{% url 'catalog' %}">
+					<div class="input-group w-100">
+						<input class="form-control" type="search" name="product_name" placeholder="Поиск товаров..." aria-label="Поиск" />
+						<button class="btn btn-primary" type="submit">
+							<i class="bi bi-search"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</section>
 
-    <!-- Main Content -->
-    <main class="py-4">
-        {% block content %}{% endblock %}
-    </main>
+		<!-- Main Content -->
+		<main class="py-4">{% block content %}{% endblock %}</main>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto">
-        <div class="container">
-            <div class="row gy-4">
-                <!-- About -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'assets/img/logo_footer.png' %}" alt="Larek" height="40" class="mb-3">
-                    </a>
-                    <p class="text-white-50">
-                        Larek — ваш надежный маркетплейс электроники и техники. Лучшие цены и широкий ассортимент товаров.
-                    </p>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="#" class="text-white-50"><i class="bi bi-facebook fs-5"></i></a>
-                        <a href="#" class="text-white-50"><i class="bi bi-twitter fs-5"></i></a>
-                        <a href="#" class="text-white-50"><i class="bi bi-linkedin fs-5"></i></a>
-                        <a href="#" class="text-white-50"><i class="bi bi-pinterest fs-5"></i></a>
-                        <a href="#" class="text-white-50"><i class="bi bi-envelope fs-5"></i></a>
-                    </div>
-                </div>
+		<!-- Footer -->
+		<footer class="footer mt-auto">
+			<div class="container">
+				<div class="row gy-4">
+					<!-- About -->
+					<div class="col-lg-4 col-md-6">
+						<a href="{% url 'index' %}">
+							<img src="{% static 'assets/img/logo-light.svg' %}" alt="Larek" height="56" class="footer-logo mb-3" />
+						</a>
+						<p class="text-white-50">Larek — ваш надежный маркетплейс электроники и техники. Лучшие цены и широкий ассортимент товаров.</p>
+						<div class="d-flex gap-3 mt-3">
+							<a href="#" class="text-white-50" aria-label="Facebook"><i class="bi bi-facebook fs-5"></i></a>
+							<a href="#" class="text-white-50" aria-label="Twitter"><i class="bi bi-twitter fs-5"></i></a>
+							<a href="#" class="text-white-50" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+							<a href="#" class="text-white-50" aria-label="Pinterest"><i class="bi bi-pinterest fs-5"></i></a>
+							<a href="#" class="text-white-50" aria-label="Email"><i class="bi bi-envelope fs-5"></i></a>
+						</div>
+					</div>
 
-                <!-- Quick Links -->
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="footer-title">Навигация</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{% url 'index' %}">Главная</a></li>
-                        <li class="mb-2"><a href="{% url 'catalog' %}">Каталог</a></li>
-                        <li class="mb-2"><a href="{% url 'about' %}">О нас</a></li>
-                    </ul>
-                </div>
+					<!-- Quick Links -->
+					<div class="col-lg-2 col-md-6">
+						<h6 class="footer-title">Навигация</h6>
+						<ul class="list-unstyled">
+							<li class="mb-2"><a href="{% url 'index' %}">Главная</a></li>
+							<li class="mb-2"><a href="{% url 'catalog' %}">Каталог</a></li>
+							<li class="mb-2"><a href="{% url 'about' %}">О нас</a></li>
+						</ul>
+					</div>
 
-                <!-- Account Links -->
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="footer-title">Аккаунт</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{% url 'profile' %}">Профиль</a></li>
-                        <li class="mb-2"><a href="{% url 'orders_history' %}">История заказов</a></li>
-                        <li class="mb-2"><a href="{% url 'cart' %}">Корзина</a></li>
-                    </ul>
-                </div>
+					<!-- Account Links -->
+					<div class="col-lg-2 col-md-6">
+						<h6 class="footer-title">Аккаунт</h6>
+						<ul class="list-unstyled">
+							<li class="mb-2"><a href="{% url 'profile' %}">Профиль</a></li>
+							<li class="mb-2"><a href="{% url 'orders_history' %}">История заказов</a></li>
+							<li class="mb-2"><a href="{% url 'cart' %}">Корзина</a></li>
+						</ul>
+					</div>
 
-                <!-- Contacts -->
-                <div class="col-lg-4 col-md-6">
-                    <h6 class="footer-title">Контакты</h6>
-                    <ul class="list-unstyled text-white-50">
-                        <li class="mb-2">
-                            <i class="bi bi-telephone me-2"></i>8-800-200-600
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-envelope me-2"></i>support@larek.com
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-geo-alt me-2"></i>Москва, ул. Примерная, д. 1
-                        </li>
-                    </ul>
-                </div>
-            </div>
+					<!-- Contacts -->
+					<div class="col-lg-4 col-md-6">
+						<h6 class="footer-title">Контакты</h6>
+						<ul class="list-unstyled text-white-50">
+							<li class="mb-2"><i class="bi bi-telephone me-2"></i>8-800-200-600</li>
+							<li class="mb-2"><i class="bi bi-envelope me-2"></i>support@larek.com</li>
+							<li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Москва, ул. Примерная, д. 1</li>
+						</ul>
+					</div>
+				</div>
 
-            <!-- Footer Bottom -->
-            <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
-                <div class="text-white-50 small">
-                    © 2024 <a href="{% url 'index' %}" class="text-white">Larek Store</a>. Все права защищены.
-                </div>
-                <div class="payment-icons d-flex align-items-center flex-wrap">
-                    <span class="text-white-50 small me-2">Способы оплаты:</span>
-                    <img src="{% static 'assets/img/payments/visa.png' %}" alt="Visa">
-                    <img src="{% static 'assets/img/payments/mastercard.png' %}" alt="Mastercard">
-                    <img src="{% static 'assets/img/payments/paypal.png' %}" alt="PayPal">
-                    <img src="{% static 'assets/img/payments/maestro.png' %}" alt="Maestro">
-                </div>
-            </div>
-        </div>
-    </footer>
+				<!-- Footer Bottom -->
+				<div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+					<div class="text-white-50 small">© 2026 <a href="{% url 'index' %}" class="text-white">Larek Store</a>. Все права защищены.</div>
+					<div class="payment-icons d-flex align-items-center flex-wrap">
+						<span class="text-white-50 small me-2">Способы оплаты:</span>
+						<img src="{% static 'assets/img/payments/visa.png' %}" alt="Visa" />
+						<img src="{% static 'assets/img/payments/mastercard.png' %}" alt="Mastercard" />
+						<img src="{% static 'assets/img/payments/paypal.png' %}" alt="PayPal" />
+						<img src="{% static 'assets/img/payments/maestro.png' %}" alt="Maestro" />
+					</div>
+				</div>
+			</div>
+		</footer>
 
-    <!-- JavaScript -->
-    <script src="{% static 'assets/js/htmx.min.js' %}"></script>
-    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'assets/js/nouislider.min.js' %}"></script>
-    <script src="{% static 'assets/js/imask.min.js' %}"></script>
-    <script src="{% static 'assets/js/app.js' %}"></script>
-    {% block extra_js %}{% endblock %}
-</body>
+		<!-- JavaScript -->
+		<script src="{% static 'assets/js/htmx.min.js' %}"></script>
+		<script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+		<script src="{% static 'assets/js/nouislider.min.js' %}"></script>
+		<script src="{% static 'assets/js/imask.min.js' %}"></script>
+		<script src="{% static 'assets/js/app.js' %}"></script>
+		{% block extra_js %}{% endblock %}
+	</body>
 </html>

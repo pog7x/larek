@@ -12,26 +12,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const App = {
     init: function() {
-        this.initSwiper();
-        this.initPriceRange();
-        this.initPhoneMask();
-        this.initMobileMenu();
-        this.initCategoriesDropdown();
-        this.initBootstrapDropdowns();
-        this.initNavbarCollapse();
-        this.initCountdown();
-        this.initHtmxEvents();
-        this.initSearchToggle();
-        this.initProfileDropdown();
+        var self = this;
+        var inits = [
+            'initSwiper',
+            'initPriceRange',
+            'initPhoneMask',
+            'initCategoriesDropdown',
+            'initBootstrapDropdowns',
+            'initNavbarCollapse',
+            'initCountdown',
+            'initHtmxEvents',
+            'initSearchToggle'
+        ];
+        inits.forEach(function(fn) {
+            try {
+                self[fn]();
+            } catch (e) {
+                console.error('Error in ' + fn + ':', e);
+            }
+        });
     },
 
     /**
      * Initialize Swiper sliders
      */
     initSwiper: function() {
-        // Main hero slider
-        const heroSlider = document.querySelector('.hero-slider');
-        if (heroSlider) {
+        // Helper to check if Swiper is already initialized
+        function isInitialized(el) {
+            return el && el.classList.contains('swiper-initialized');
+        }
+
+        // Main hero slider - use correct selector for swiper container
+        const heroSlider = document.querySelector('.hero-slider-swiper');
+        if (heroSlider && !isInitialized(heroSlider)) {
             new Swiper(heroSlider, {
                 loop: true,
                 autoplay: {
@@ -39,30 +52,44 @@ const App = {
                     disableOnInteraction: false,
                 },
                 pagination: {
-                    el: '.swiper-pagination',
+                    el: heroSlider.querySelector('.swiper-pagination'),
                     clickable: true,
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: heroSlider.querySelector('.swiper-button-next'),
+                    prevEl: heroSlider.querySelector('.swiper-button-prev'),
                 },
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                }
             });
         }
 
         // Product carousel slider
         const carouselSliders = document.querySelectorAll('.product-carousel');
         carouselSliders.forEach(function(slider) {
+            if (isInitialized(slider)) return;
+
+            // Find navigation buttons - check inside slider first, then in parent container
+            var parent = slider.closest('section') || slider.parentElement;
+            var nextBtn = slider.querySelector('.swiper-button-next') || 
+                          (parent ? parent.querySelector('[class*="swiper-button-next"]') : null);
+            var prevBtn = slider.querySelector('.swiper-button-prev') || 
+                          (parent ? parent.querySelector('[class*="swiper-button-prev"]') : null);
+            var pagination = slider.querySelector('.swiper-pagination');
+
             new Swiper(slider, {
                 slidesPerView: 1,
                 spaceBetween: 20,
                 navigation: {
-                    nextEl: slider.querySelector('.swiper-button-next'),
-                    prevEl: slider.querySelector('.swiper-button-prev'),
+                    nextEl: nextBtn,
+                    prevEl: prevBtn,
                 },
-                pagination: {
-                    el: slider.querySelector('.swiper-pagination'),
+                pagination: pagination ? {
+                    el: pagination,
                     clickable: true,
-                },
+                } : false,
                 breakpoints: {
                     576: {
                         slidesPerView: 2,
@@ -79,23 +106,27 @@ const App = {
 
         // Product detail gallery
         const productGallery = document.querySelector('.product-gallery');
-        if (productGallery) {
-            const thumbsSwiper = new Swiper('.product-thumbs', {
-                spaceBetween: 10,
-                slidesPerView: 4,
-                freeMode: true,
-                watchSlidesProgress: true,
-            });
+        const productThumbs = document.querySelector('.product-thumbs');
+        if (productGallery && !isInitialized(productGallery)) {
+            var thumbsSwiper = null;
+            if (productThumbs && !isInitialized(productThumbs)) {
+                thumbsSwiper = new Swiper(productThumbs, {
+                    spaceBetween: 10,
+                    slidesPerView: 4,
+                    freeMode: true,
+                    watchSlidesProgress: true,
+                });
+            }
 
             new Swiper(productGallery, {
                 spaceBetween: 10,
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: productGallery.querySelector('.swiper-button-next'),
+                    prevEl: productGallery.querySelector('.swiper-button-prev'),
                 },
-                thumbs: {
+                thumbs: thumbsSwiper ? {
                     swiper: thumbsSwiper,
-                },
+                } : undefined,
             });
         }
     },
@@ -105,16 +136,20 @@ const App = {
      */
     initPriceRange: function() {
         const priceSlider = document.getElementById('price-range');
-        if (priceSlider && typeof noUiSlider !== 'undefined') {
-            const minInput = document.querySelector('input[name="price_gte"]');
-            const maxInput = document.querySelector('input[name="price_lte"]');
-            
-            const minVal = parseFloat(priceSlider.dataset.min) || 0;
-            const maxVal = parseFloat(priceSlider.dataset.max) || 10000;
-            const startMin = parseFloat(minInput?.value) || minVal;
-            const startMax = parseFloat(maxInput?.value) || maxVal;
+        if (!priceSlider || typeof noUiSlider === 'undefined') return;
 
-            noUiSlider.create(priceSlider, {
+        if (priceSlider.noUiSlider) {
+            priceSlider.noUiSlider.destroy();
+        }
+
+        const minInput = document.querySelector('input[name="price_gte"]');
+        const maxInput = document.querySelector('input[name="price_lte"]');
+        const minVal = parseFloat(priceSlider.dataset.min) || 0;
+        const maxVal = parseFloat(priceSlider.dataset.max) || 10000;
+        const startMin = parseFloat(minInput ? minInput.value : null) || minVal;
+        const startMax = parseFloat(maxInput ? maxInput.value : null) || maxVal;
+
+        noUiSlider.create(priceSlider, {
                 start: [startMin, startMax],
                 connect: true,
                 range: {
@@ -133,59 +168,36 @@ const App = {
 
             const priceDisplay = document.getElementById('price-display');
 
-            priceSlider.noUiSlider.on('update', function(values) {
-                if (minInput) minInput.value = values[0];
-                if (maxInput) maxInput.value = values[1];
-                if (priceDisplay) {
-                    priceDisplay.textContent = `$${values[0]} - $${values[1]}`;
-                }
-            });
-        }
+        priceSlider.noUiSlider.on('update', function(values) {
+            if (minInput) minInput.value = values[0];
+            if (maxInput) maxInput.value = values[1];
+            if (priceDisplay) {
+                priceDisplay.textContent = '$' + values[0] + ' - $' + values[1];
+            }
+        });
     },
 
     /**
      * Initialize phone input mask using iMask
      */
     initPhoneMask: function() {
+        if (typeof IMask === 'undefined') return;
+
         const phoneInputs = document.querySelectorAll('[data-mask="phone"]');
-        if (typeof IMask !== 'undefined') {
-            phoneInputs.forEach(function(input) {
-                IMask(input, {
-                    mask: '+{7} (000) 000-00-00'
-                });
+        phoneInputs.forEach(function(input) {
+            IMask(input, {
+                mask: '+{7} (000) 000-00-00'
             });
-        }
+        });
 
         // Card number mask
         const cardInputs = document.querySelectorAll('[data-mask="card"]');
-        if (typeof IMask !== 'undefined') {
-            cardInputs.forEach(function(input) {
-                IMask(input, {
-                    mask: '0000 0000 0000 0000'
-                });
+        cardInputs.forEach(function(input) {
+            IMask(input, {
+                mask: '0000 0000 0000 0000'
             });
-        }
-    },
+        });
 
-    /**
-     * Mobile menu toggle
-     */
-    initMobileMenu: function() {
-        const toggler = document.querySelector('.navbar-toggler');
-        const menu = document.querySelector('.navbar-collapse');
-        
-        if (toggler && menu) {
-            toggler.addEventListener('click', function() {
-                menu.classList.toggle('show');
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!menu.contains(e.target) && !toggler.contains(e.target)) {
-                    menu.classList.remove('show');
-                }
-            });
-        }
     },
 
     /**
@@ -254,18 +266,27 @@ const App = {
     },
 
     /**
-     * Initialize Bootstrap navbar collapse
+     * Initialize Bootstrap navbar collapse (burger menu)
      */
     initNavbarCollapse: function() {
-        const togglers = document.querySelectorAll('[data-bs-toggle="collapse"]');
-        togglers.forEach(function(toggler) {
-            toggler.addEventListener('click', function(e) {
-                const targetSelector = toggler.getAttribute('data-bs-target');
-                const target = document.querySelector(targetSelector);
-                if (target) {
-                    target.classList.toggle('show');
-                }
-            });
+        var toggler = document.querySelector('[data-bs-toggle="collapse"]');
+        var menu = toggler ? document.querySelector(toggler.getAttribute('data-bs-target')) : null;
+        if (!toggler || !menu) return;
+
+        document.addEventListener('click', function(e) {
+            var trigger = e.target.closest('[data-bs-toggle="collapse"]');
+            if (trigger) {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.classList.toggle('show');
+                toggler.setAttribute('aria-expanded', menu.classList.contains('show'));
+                return;
+            }
+
+            if (!menu.contains(e.target) && !toggler.contains(e.target)) {
+                menu.classList.remove('show');
+                toggler.setAttribute('aria-expanded', 'false');
+            }
         });
     },
 
@@ -274,26 +295,40 @@ const App = {
      */
     initCountdown: function() {
         const countdowns = document.querySelectorAll('[data-countdown]');
-        
+        if (!countdowns.length) return;
+
+        const parsedCountdowns = [];
+
         countdowns.forEach(function(el) {
             const endDate = el.dataset.countdown;
             if (!endDate) return;
 
-            function updateCountdown() {
-                const parts = endDate.split(' ');
-                const dateParts = parts[0].split('.');
-                const timeParts = parts[1] ? parts[1].split(':') : ['0', '0'];
-                
-                const target = new Date(
-                    dateParts[2], 
-                    dateParts[1] - 1, 
-                    dateParts[0], 
-                    timeParts[0], 
-                    timeParts[1]
-                );
-                
-                const now = new Date();
-                const diff = target - now;
+            const parts = endDate.split(' ');
+            const dateParts = parts[0].split('.');
+            const timeParts = parts[1] ? parts[1].split(':') : ['0', '0'];
+
+            const target = new Date(
+                dateParts[2],
+                dateParts[1] - 1,
+                dateParts[0],
+                timeParts[0],
+                timeParts[1]
+            );
+
+            parsedCountdowns.push({
+                el: el,
+                target: target
+            });
+        });
+
+        if (!parsedCountdowns.length) return;
+
+        function updateAllCountdowns() {
+            const now = new Date();
+
+            parsedCountdowns.forEach(function(item) {
+                const diff = item.target - now;
+                const el = item.el;
 
                 if (diff <= 0) {
                     el.innerHTML = '<span class="text-danger">Expired</span>';
@@ -314,11 +349,11 @@ const App = {
                 if (hoursEl) hoursEl.textContent = hours;
                 if (minutesEl) minutesEl.textContent = minutes;
                 if (secondsEl) secondsEl.textContent = seconds;
-            }
+            });
+        }
 
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        });
+        updateAllCountdowns();
+        setInterval(updateAllCountdowns, 1000);
     },
 
     /**
@@ -355,41 +390,25 @@ const App = {
      * Search bar toggle on mobile
      */
     initSearchToggle: function() {
-        const searchToggle = document.querySelector('.search-toggle');
-        const searchForm = document.querySelector('.search-form');
+        var section = document.getElementById('search-bar-section');
+        if (!section) return;
 
-        if (searchToggle && searchForm) {
-            searchToggle.addEventListener('click', function(e) {
+        document.addEventListener('click', function(e) {
+            var toggle = e.target.closest('.search-toggle');
+            if (toggle) {
                 e.preventDefault();
-                searchForm.classList.toggle('show');
-            });
-        }
+                e.stopPropagation();
+                section.classList.toggle('is-open');
+                return;
+            }
+            if (section.classList.contains('is-open') && !section.contains(e.target)) {
+                section.classList.remove('is-open');
+            }
+        });
     },
 
-    /**
-     * Profile dropdown menu
-     */
-    initProfileDropdown: function() {
-        const dropdown = document.querySelector('.profile-dropdown');
-        if (dropdown) {
-            const trigger = dropdown.querySelector('.profile-trigger');
-            const menu = dropdown.querySelector('.dropdown-menu');
-
-            if (trigger && menu) {
-                trigger.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    menu.classList.toggle('show');
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (!dropdown.contains(e.target)) {
-                        menu.classList.remove('show');
-                    }
-                });
-            }
-        }
-    }
+    
+    
 };
 
 /**
@@ -400,18 +419,20 @@ const Utils = {
      * Format price with commas
      */
     formatPrice: function(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return Number(price).toLocaleString('en-US');
     },
 
     /**
      * Debounce function
      */
     debounce: function(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = function() {
+        var timeout;
+        return function() {
+            var context = this;
+            var args = arguments;
+            var later = function() {
                 clearTimeout(timeout);
-                func(...args);
+                func.apply(context, args);
             };
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
@@ -421,28 +442,38 @@ const Utils = {
     /**
      * Show toast notification
      */
-    showToast: function(message, type = 'success') {
-        const toastContainer = document.getElementById('toast-container');
+    showToast: function(message, type) {
+        type = type || 'success';
+        var toastContainer = document.getElementById('toast-container');
         if (!toastContainer) return;
 
-        const toast = document.createElement('div');
-        toast.className = `toast align-items-center text-bg-${type} border-0 show`;
+        var toast = document.createElement('div');
+        toast.className = 'toast align-items-center text-bg-' + type + ' border-0 show';
         toast.setAttribute('role', 'alert');
-        toast.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">${message}</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-            </div>
-        `;
+
+        var toastInner = document.createElement('div');
+        toastInner.className = 'd-flex';
+
+        var toastBody = document.createElement('div');
+        toastBody.className = 'toast-body';
+        toastBody.textContent = String(message);
+
+        var closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.className = 'btn-close btn-close-white me-2 m-auto';
+        closeButton.setAttribute('data-bs-dismiss', 'toast');
+        closeButton.setAttribute('aria-label', 'Close');
+
+        toastInner.appendChild(toastBody);
+        toastInner.appendChild(closeButton);
+        toast.appendChild(toastInner);
         
         toastContainer.appendChild(toast);
 
-        // Auto remove after 3 seconds
         setTimeout(function() {
             toast.remove();
         }, 3000);
 
-        // Close button
         toast.querySelector('.btn-close').addEventListener('click', function() {
             toast.remove();
         });

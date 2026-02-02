@@ -13,7 +13,6 @@
     --larek-success: #3cb878;
     --larek-warning: #f98561;
     --larek-danger: #f26d7d;
-    --larek-info: #e98338;
     --larek-light: #f9fafc;
     --larek-dark: #424650;
     --larek-muted: #7c8088;
@@ -23,6 +22,12 @@
 /* ============================================
    Bootstrap Overrides
    ============================================ */
+.site-logo,
+.footer-logo {
+    height: 56px;
+    width: auto;
+}
+
 .btn-primary {
     --bs-btn-bg: var(--larek-primary);
     --bs-btn-border-color: var(--larek-primary);
@@ -67,6 +72,16 @@ a:hover {
     color: var(--larek-primary-dark);
 }
 
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.form-control:focus-visible,
+.search-toggle:focus-visible,
+.categories-trigger:focus-visible {
+    outline: 2px solid var(--larek-primary);
+    outline-offset: 2px;
+}
+
 /* ============================================
    Layout
    ============================================ */
@@ -89,6 +104,13 @@ main {
     max-height: 40px;
 }
 
+.navbar-toggler {
+    position: relative;
+    z-index: 1020;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
 .top-bar {
     background-color: var(--larek-light);
     font-size: 0.875rem;
@@ -102,6 +124,21 @@ main {
 
 .top-bar a:hover {
     color: var(--larek-primary);
+}
+
+/* Catalog nav link with discount badge (шильдик) */
+.nav-link-catalog {
+    padding-right: 0.5rem;
+}
+
+.badge-catalog-discount {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.25rem;
+    font-size: 0.65rem;
+    padding: 0.2em 0.45em;
+    border-radius: 0.35rem;
+    white-space: nowrap;
 }
 
 /* Categories Dropdown */
@@ -170,7 +207,8 @@ main {
 
 /* Search Form */
 .search-form {
-    max-width: 600px;
+    max-width: 100%;
+    width: 100%;
 }
 
 .search-form .form-control {
@@ -197,11 +235,6 @@ main {
     padding: 0.35em 0.5em;
 }
 
-/* Profile Dropdown */
-.profile-dropdown {
-    position: relative;
-}
-
 .profile-trigger {
     display: flex;
     align-items: center;
@@ -220,14 +253,33 @@ main {
 }
 
 .profile-dropdown .dropdown-menu {
-    position: absolute;
     right: 0;
+    left: auto;
     top: 100%;
     min-width: 180px;
 }
 
-.profile-dropdown .dropdown-menu.show {
-    display: block;
+/* Превью аватара в форме профиля — ограничение размера */
+.profile-avatar-widget img,
+#avatar-preview {
+    max-width: 120px;
+    max-height: 120px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* На узких экранах выравниваем меню по левому краю триггера, чтобы не уходило за экран влево */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        overflow: visible;
+    }
+
+    .profile-dropdown .dropdown-menu {
+        left: 0;
+        right: auto;
+        max-width: min(220px, calc(100vw - 2rem));
+    }
 }
 
 /* ============================================
@@ -265,7 +317,7 @@ main {
         flex-direction: column-reverse;
         text-align: center;
     }
-    
+
     .hero-slider .slide-title {
         font-size: 1.5rem;
     }
@@ -277,6 +329,14 @@ main {
 .product-card {
     transition: transform 0.2s, box-shadow 0.2s;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card .card-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -352,6 +412,14 @@ main {
 /* ============================================
    Product Carousel
    ============================================ */
+.product-carousel .swiper-wrapper {
+    align-items: stretch;
+}
+
+.product-carousel .swiper-slide {
+    height: auto;
+}
+
 .product-carousel .swiper-button-next,
 .product-carousel .swiper-button-prev {
     color: var(--larek-primary);
@@ -611,10 +679,7 @@ main {
     display: none;
 }
 
-.htmx-request .htmx-indicator {
-    display: inline-block;
-}
-
+.htmx-request .htmx-indicator,
 .htmx-request.htmx-indicator {
     display: inline-block;
 }
@@ -630,6 +695,7 @@ main {
     0% {
         background-position: 200% 0;
     }
+
     100% {
         background-position: -200% 0;
     }
@@ -660,21 +726,93 @@ main {
     transform: translateY(-2px);
 }
 
+.u-object-cover {
+    object-fit: cover;
+}
+
+.u-object-contain {
+    object-fit: contain;
+}
+
+.u-size-50 {
+    width: 50px;
+    height: 50px;
+}
+
+.u-size-60 {
+    width: 60px;
+    height: 60px;
+}
+
+.u-size-70 {
+    width: 70px;
+    height: 70px;
+}
+
+.u-size-80 {
+    width: 80px;
+    height: 80px;
+}
+
+.u-size-4rem {
+    width: 4rem;
+    height: 4rem;
+}
+
+.u-max-w-400 {
+    max-width: 400px;
+}
+
+.u-max-h-150 {
+    max-height: 150px;
+}
+
+.u-max-h-200 {
+    max-height: 200px;
+}
+
+.u-max-h-350 {
+    max-height: 350px;
+}
+
+.u-max-h-400 {
+    max-height: 400px;
+}
+
+.u-sticky-top-100 {
+    top: 100px;
+}
+
+.u-badge-compact {
+    font-size: 0.65rem;
+    padding: 0.25em 0.45em;
+    top: -8px;
+    right: -8px;
+}
+
 /* Responsive utilities */
-@media (max-width: 991.98px) {
-    .search-form {
+@media (max-width: 992px) {
+    .search-toggle {
+        position: relative;
+        z-index: 1020;
+        cursor: pointer;
+        pointer-events: auto;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .search-bar-section {
         display: none;
     }
-    
-    .search-form.show {
-        display: flex;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        padding: 1rem;
-        background: #fff;
+
+    .search-bar-section.is-open {
+        display: block;
+        position: relative;
+        z-index: 1010;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-bar-section .search-form {
+        display: flex;
         max-width: none;
     }
 }
@@ -683,5 +821,5 @@ main {
 @font-face {
     font-family: "bootstrap-icons";
     src: url("../fonts/bootstrap-icons/bootstrap-icons.woff2") format("woff2"),
-         url("../fonts/bootstrap-icons/bootstrap-icons.woff") format("woff");
+        url("../fonts/bootstrap-icons/bootstrap-icons.woff") format("woff");
 }
