@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}О нас{% endblock %}
+{% block title %}About Us{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">О нас</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About Us</li>
         </ol>
     </nav>
 
     <!-- Hero Section -->
     <div class="text-center mb-5">
-        <h1 class="display-5 fw-bold">О компании Larek</h1>
-        <p class="lead text-muted">Ваш надежный маркетплейс электроники и техники</p>
+        <h1 class="display-5 fw-bold">About Larek</h1>
+        <p class="lead text-muted">Your trusted marketplace for electronics and tech</p>
     </div>
 
     <!-- Advantages -->
@@ -24,37 +24,37 @@
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100 text-center p-4">
                 <div class="mb-3">
-                    <img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Доставка" width="64" height="64">
+                <img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Shipping" width="64" height="64">
                 </div>
-                <h5>Доставка по всему миру</h5>
-                <p class="text-muted mb-0">Быстрая доставка в любую точку мира</p>
+                <h5>Worldwide Shipping</h5>
+                <p class="text-muted mb-0">Fast delivery anywhere in the world</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100 text-center p-4">
                 <div class="mb-3">
-                    <img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Возврат" width="64" height="64">
+                <img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Returns" width="64" height="64">
                 </div>
-                <h5>Возврат денег</h5>
-                <p class="text-muted mb-0">Гарантия возврата в течение 30 дней</p>
+                <h5>Money Back</h5>
+                <p class="text-muted mb-0">30-day return guarantee</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100 text-center p-4">
                 <div class="mb-3">
-                    <img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Поддержка" width="64" height="64">
+                <img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Support" width="64" height="64">
                 </div>
-                <h5>Поддержка 24/7</h5>
-                <p class="text-muted mb-0">Команда поддержки всегда на связи</p>
+                <h5>24/7 Support</h5>
+                <p class="text-muted mb-0">Support team always available</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100 text-center p-4">
                 <div class="mb-3">
-                    <img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Качество" width="64" height="64">
+                <img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Quality" width="64" height="64">
                 </div>
-                <h5>Гарантия качества</h5>
-                <p class="text-muted mb-0">Только оригинальные товары</p>
+                <h5>Quality Guarantee</h5>
+                <p class="text-muted mb-0">Only authentic products</p>
             </div>
         </div>
     </div>
@@ -62,17 +62,17 @@
     <!-- About Section -->
     <div class="row align-items-center mb-5">
         <div class="col-lg-6 mb-4 mb-lg-0">
-            <h2>Почему выбирают Larek?</h2>
+            <h2>Why choose Larek?</h2>
             <p class="text-muted">
-                Larek — это современный маркетплейс, который объединяет лучших продавцов электроники и техники. 
-                Мы предлагаем широкий ассортимент товаров по конкурентным ценам с гарантией качества.
+                Larek is a modern marketplace that brings together the best sellers of electronics and tech. 
+                We offer a wide range of products at competitive prices with a quality guarantee.
             </p>
             <p class="text-muted">
-                Наша миссия — сделать покупку техники простой, безопасной и выгодной. 
-                Мы тщательно проверяем каждого продавца и гарантируем подлинность всех товаров.
+                Our mission is to make buying tech simple, safe, and affordable. 
+                We thoroughly vet every seller and guarantee the authenticity of all products.
             </p>
             <a href="{% url 'catalog' %}" class="btn btn-primary">
-                <i class="bi bi-bag me-2"></i>Перейти в каталог
+                <i class="bi bi-bag me-2"></i>Go to Catalog
             </a>
         </div>
         <div class="col-lg-6">
@@ -85,19 +85,19 @@
         <div class="row text-center">
             <div class="col-md-3 mb-4 mb-md-0">
                 <h2 class="display-5 fw-bold text-primary">10K+</h2>
-                <p class="text-muted mb-0">Товаров</p>
+                <p class="text-muted mb-0">Products</p>
             </div>
             <div class="col-md-3 mb-4 mb-md-0">
                 <h2 class="display-5 fw-bold text-primary">500+</h2>
-                <p class="text-muted mb-0">Продавцов</p>
+                <p class="text-muted mb-0">Sellers</p>
             </div>
             <div class="col-md-3 mb-4 mb-md-0">
                 <h2 class="display-5 fw-bold text-primary">50K+</h2>
-                <p class="text-muted mb-0">Клиентов</p>
+                <p class="text-muted mb-0">Customers</p>
             </div>
             <div class="col-md-3">
                 <h2 class="display-5 fw-bold text-primary">99%</h2>
-                <p class="text-muted mb-0">Довольных покупателей</p>
+                <p class="text-muted mb-0">Happy buyers</p>
             </div>
         </div>
     </div>
@@ -105,18 +105,18 @@
     <!-- History Section -->
     <div class="row align-items-center mb-5">
         <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <h2>История Larek</h2>
+            <h2>Larek History</h2>
             <p class="text-muted">
-                Компания Larek была основана в 2020 году с целью создать удобную платформу 
-                для покупки и продажи электроники. За эти годы мы выросли из небольшого стартапа 
-                в один из ведущих маркетплейсов страны.
+                Larek was founded in 2020 with the goal of creating a convenient platform 
+                for buying and selling electronics. Over the years we have grown from a small startup 
+                into one of the leading marketplaces in the country.
             </p>
             <ul class="list-unstyled">
-                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Широкий ассортимент товаров</li>
-                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Проверенные продавцы</li>
-                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Безопасные платежи</li>
-                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Быстрая доставка</li>
-                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Гарантия качества</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Wide range of products</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Verified sellers</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Secure payments</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Fast delivery</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Quality guarantee</li>
             </ul>
         </div>
         <div class="col-lg-6 order-lg-1">
@@ -126,7 +126,7 @@
 
     <!-- Social Links -->
     <div class="text-center py-5">
-        <h4 class="mb-4">Следите за нами</h4>
+        <h4 class="mb-4">Follow Us</h4>
         <div class="d-flex justify-content-center gap-3">
             <a href="#" class="btn btn-outline-primary btn-lg rounded-circle u-size-50">
                 <i class="bi bi-facebook"></i>

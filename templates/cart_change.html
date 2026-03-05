@@ -11,7 +11,7 @@
             hx-vals='{"product_seller_id": "{{ product_seller_id }}", "products_count": 1}'
             hx-target="#cart-change-{{ product_seller_id }}"
         >
-            <i class="bi bi-cart-plus me-2"></i>В корзину
+            <i class="bi bi-cart-plus me-2"></i>Add to Cart
         </button>
     {% else %}
         <!-- Quantity Control -->
@@ -57,13 +57,13 @@
                 hx-delete="{% url 'cart_item' pk=cart.id %}"
                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                 hx-target="#cart-change-{{ product_seller_id }}"
-                title="Удалить из корзины"
+                title="Remove from Cart"
             >
                 <i class="bi bi-trash"></i>
             </button>
             
             <a href="{% url 'cart' %}" class="btn btn-success btn-sm">
-                <i class="bi bi-cart-check me-1"></i>В корзине
+                <i class="bi bi-cart-check me-1"></i>In Cart
             </a>
         </div>
     {% endif %}

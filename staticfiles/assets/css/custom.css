@@ -126,7 +126,7 @@ main {
     color: var(--larek-primary);
 }
 
-/* Catalog nav link with discount badge (шильдик) */
+/* Catalog nav link with discount badge */
 .nav-link-catalog {
     padding-right: 0.5rem;
 }
@@ -259,7 +259,7 @@ main {
     min-width: 180px;
 }
 
-/* Превью аватара в форме профиля — ограничение размера */
+/* Profile avatar preview — size constraint */
 .profile-avatar-widget img,
 #avatar-preview {
     max-width: 120px;
@@ -269,7 +269,7 @@ main {
     object-fit: cover;
 }
 
-/* На узких экранах выравниваем меню по левому краю триггера, чтобы не уходило за экран влево */
+/* On narrow screens align the dropdown to the left edge of the trigger to prevent it from going off-screen */
 @media (max-width: 992px) {
     .navbar-collapse {
         overflow: visible;
@@ -781,6 +781,7 @@ main {
 
 .u-sticky-top-100 {
     top: 100px;
+    z-index: 1;
 }
 
 .u-badge-compact {

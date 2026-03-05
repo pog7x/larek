@@ -18,5 +18,10 @@ def startswith(value: str, suffix):
 
 
 @register.filter(is_safe=True)
-def commaprice(value: int):
+def commaprice(value: int | float):
     return intcomma(floatformat(value, -1))
+
+
+@register.filter(is_safe=True)
+def multiply(value: int | float, arg: int):
+    return value * arg

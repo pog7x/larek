@@ -2,16 +2,16 @@
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}История просмотров{% endblock %}
+{% block title %}Browsing History{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'profile' %}">Профиль</a></li>
-            <li class="breadcrumb-item active" aria-current="page">История просмотров</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'profile' %}">Profile</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Browsing History</li>
         </ol>
     </nav>
 
@@ -21,13 +21,13 @@
             <div class="card border-0 shadow-sm">
                 <div class="list-group list-group-flush">
                     <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">
-                        <i class="bi bi-person me-2"></i>Профиль
+                        <i class="bi bi-person me-2"></i>Profile
                     </a>
                     <a href="{% url 'orders_history' %}" class="list-group-item list-group-item-action">
-                        <i class="bi bi-bag me-2"></i>История заказов
+                        <i class="bi bi-bag me-2"></i>Orders History
                     </a>
                     <a href="{% url 'views_history' %}" class="list-group-item list-group-item-action active">
-                        <i class="bi bi-clock-history me-2"></i>История просмотров
+                        <i class="bi bi-clock-history me-2"></i>Browsing History
                     </a>
                 </div>
             </div>
@@ -36,7 +36,7 @@
         <!-- Main Content -->
         <div class="col-lg-9">
             <h4 class="mb-4">
-                <i class="bi bi-clock-history me-2"></i>История просмотров
+                <i class="bi bi-clock-history me-2"></i>Browsing History
             </h4>
 
             <!-- Hidden form for HTMX pagination -->

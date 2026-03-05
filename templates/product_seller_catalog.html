@@ -2,15 +2,15 @@
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Каталог{% endblock %}
+{% block title %}Catalog{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Каталог</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Catalog</li>
         </ol>
     </nav>
 
@@ -19,7 +19,7 @@
         <div class="col-lg-3 mb-4">
             <div class="filter-sidebar">
                 <h5 class="filter-title">
-                    <i class="bi bi-funnel me-2"></i>Фильтры
+                    <i class="bi bi-funnel me-2"></i>Filters
                 </h5>
 
                 <form 
@@ -37,7 +37,7 @@
 
                     <!-- Price Range -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Цена</label>
+                        <label class="form-label fw-semibold">Price</label>
                         <div 
                             id="price-range" 
                             data-min="1" 
@@ -52,7 +52,7 @@
                                     class="form-control form-control-sm" 
                                     name="price_gte" 
                                     id="price_gte"
-                                    placeholder="От"
+                                    placeholder="From"
                                     value="{{ request.GET.price_gte }}"
                                 >
                             </div>
@@ -62,7 +62,7 @@
                                     class="form-control form-control-sm" 
                                     name="price_lte" 
                                     id="price_lte"
-                                    placeholder="До"
+                                    placeholder="To"
                                     value="{{ request.GET.price_lte }}"
                                 >
                             </div>
@@ -71,14 +71,14 @@
 
                     <!-- Product Name -->
                     <div class="mb-4">
-                        <label for="title" class="form-label fw-semibold">Название</label>
+                        <label for="title" class="form-label fw-semibold">Name</label>
                         <input 
                             type="text" 
                             class="form-control" 
                             id="title" 
                             name="product_name"
                             value="{{ request.GET.product_name }}"
-                            placeholder="Поиск по названию..."
+                            placeholder="Search by name..."
                         >
                     </div>
 
@@ -93,19 +93,19 @@
                                 {% if request.GET.in_stock == 'on' %}checked{% endif %}
                             >
                             <label class="form-check-label" for="in_stock">
-                                Только в наличии
+                                In Stock Only
                             </label>
                         </div>
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary w-100">
-                        <i class="bi bi-search me-2"></i>Применить
+                        <i class="bi bi-search me-2"></i>Apply
                     </button>
 
                     {% if request.GET.product_name or request.GET.price_gte or request.GET.price_lte or request.GET.in_stock or request.GET.catalog_category %}
                     <a href="{% url 'catalog' %}" class="btn btn-outline-secondary w-100 mt-2">
-                        <i class="bi bi-x-circle me-2"></i>Сбросить
+                        <i class="bi bi-x-circle me-2"></i>Reset
                     </a>
                     {% endif %}
                 </form>
@@ -116,10 +116,10 @@
         <div class="col-lg-9">
             <!-- Sorting -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
-                <h1 class="h4 mb-0">Товары</h1>
+                <h1 class="h4 mb-0">Products</h1>
                 
                 <div class="d-flex align-items-center gap-2">
-                    <span class="text-muted small">Сортировка:</span>
+                    <span class="text-muted small">Sort by:</span>
                     <div class="btn-group" role="group">
                         {% for ordering_key, ordering_value in ordering_map.items %}
                         <button 

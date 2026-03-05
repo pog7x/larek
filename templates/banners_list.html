@@ -2,7 +2,7 @@
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
 <!-- Hero Slider -->
@@ -25,7 +25,7 @@
                                 <div class="d-flex gap-3 align-items-center">
                                     <span class="fs-3 fw-bold text-primary">${{ banner.product_seller.price|commaprice }}</span>
                                     <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="btn btn-primary btn-lg">
-                                        <i class="bi bi-cart-plus me-2"></i>Подробнее
+                                        <i class="bi bi-cart-plus me-2"></i>View Details
                                     </a>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-danger text-white">
                     <h5 class="mb-0">
-                        <i class="bi bi-fire me-2"></i>Ограниченные предложения
+                        <i class="bi bi-fire me-2"></i>Limited Offers
                     </h5>
                 </div>
                 <div class="card-body">
@@ -83,25 +83,25 @@
                             <div class="d-flex justify-content-center gap-2">
                                 <div class="countdown-item">
                                     <span class="value countdown-days">0</span>
-                                    <span class="label">дн</span>
+                                    <span class="label">d</span>
                                 </div>
                                 <div class="countdown-item">
                                     <span class="value countdown-hours">0</span>
-                                    <span class="label">ч</span>
+                                    <span class="label">h</span>
                                 </div>
                                 <div class="countdown-item">
                                     <span class="value countdown-minutes">0</span>
-                                    <span class="label">мин</span>
+                                    <span class="label">min</span>
                                 </div>
                                 <div class="countdown-item">
                                     <span class="value countdown-seconds">0</span>
-                                    <span class="label">сек</span>
+                                    <span class="label">sec</span>
                                 </div>
                             </div>
                         </div>
                         
                         <a href="{% url 'product_seller' pk=banner.product_seller.id %}" class="btn btn-danger w-100 mt-3">
-                            Купить сейчас
+                            Buy Now
                         </a>
                     </div>
                     {% endfor %}
@@ -116,10 +116,10 @@
             <section class="mb-5">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="h4 mb-0">
-                        <i class="bi bi-star-fill text-warning me-2"></i>Популярные товары
+                        <i class="bi bi-star-fill text-warning me-2"></i>Popular Products
                     </h2>
                     <a href="{% url 'catalog' %}?ordering=-products_count" class="btn btn-outline-primary btn-sm">
-                        Смотреть все <i class="bi bi-arrow-right ms-1"></i>
+                        View All <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>
                 
@@ -164,9 +164,9 @@
     <section class="py-5 bg-light rounded-3 mb-4">
         <div class="px-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="h4 mb-0">
-                    <i class="bi bi-gem text-info me-2"></i>Ограниченный тираж
-                </h2>
+                    <h2 class="h4 mb-0">
+                        <i class="bi bi-gem text-info me-2"></i>Limited Edition
+                    </h2>
                 <div class="d-flex gap-2">
                     <button class="btn btn-outline-secondary btn-sm swiper-button-prev-limited">
                         <i class="bi bi-chevron-left"></i>
@@ -220,44 +220,44 @@
             <div class="col-md-3 col-6">
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
-                        <img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Доставка" width="48" height="48">
+                        <img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="Shipping" width="48" height="48">
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-1">Бесплатная доставка</h6>
-                        <small class="text-muted">При заказе от $100</small>
+                        <h6 class="mb-1">Free Shipping</h6>
+                        <small class="text-muted">On orders over $100</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
-                        <img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Возврат" width="48" height="48">
+                        <img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="Returns" width="48" height="48">
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-1">Возврат денег</h6>
-                        <small class="text-muted">Гарантия 30 дней</small>
+                        <h6 class="mb-1">Money Back</h6>
+                        <small class="text-muted">30-day guarantee</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
-                        <img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Поддержка" width="48" height="48">
+                        <img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="Support" width="48" height="48">
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-1">Поддержка 24/7</h6>
-                        <small class="text-muted">Онлайн помощь</small>
+                        <h6 class="mb-1">24/7 Support</h6>
+                        <small class="text-muted">Online help</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
-                        <img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Качество" width="48" height="48">
+                        <img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="Quality" width="48" height="48">
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-1">Качество</h6>
-                        <small class="text-muted">Оригинальные товары</small>
+                        <h6 class="mb-1">Quality</h6>
+                        <small class="text-muted">Original products</small>
                     </div>
                 </div>
             </div>

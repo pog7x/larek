@@ -2,16 +2,16 @@
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Оплата{% endblock %}
+{% block title %}Payment{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">Заказы</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Оплата</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">Orders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Payment</li>
         </ol>
     </nav>
 
@@ -20,7 +20,7 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-primary text-white text-center py-4">
                     <i class="bi bi-credit-card display-4"></i>
-                    <h2 class="h4 mt-3 mb-0">Оплата заказа</h2>
+                    <h2 class="h4 mt-3 mb-0">Order Payment</h2>
                 </div>
                 <div class="card-body p-4">
                     <div class="text-center mb-4">
@@ -31,7 +31,7 @@
                         {% csrf_token %}
                         
                         <div class="mb-4">
-                            <label for="card_number" class="form-label">Номер карты</label>
+                            <label for="card_number" class="form-label">Card Number</label>
                             <div class="input-group input-group-lg">
                                 <span class="input-group-text">
                                     <i class="bi bi-credit-card"></i>
@@ -47,18 +47,18 @@
                                     autocomplete="off"
                                 >
                             </div>
-                            <div class="form-text">Введите 8 цифр номера карты</div>
+                            <div class="form-text">Enter 8 digits of your card number</div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg w-100">
-                            <i class="bi bi-lock me-2"></i>Оплатить ${{ object.sum|commaprice }}
+                            <i class="bi bi-lock me-2"></i>Pay ${{ object.sum|commaprice }}
                         </button>
                     </form>
 
                     <div class="text-center mt-4">
                         <small class="text-muted">
                             <i class="bi bi-shield-check me-1"></i>
-                            Безопасная оплата
+                            Secure Payment
                         </small>
                     </div>
                 </div>

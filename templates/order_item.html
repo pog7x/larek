@@ -2,22 +2,22 @@
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Заказ #{{ object.id }}{% endblock %}
+{% block title %}Order #{{ object.id }}{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">История заказов</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Заказ #{{ object.id }}</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">Orders History</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Order #{{ object.id }}</li>
         </ol>
     </nav>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4 class="mb-0">
-            <i class="bi bi-bag me-2"></i>Заказ #{{ object.id }}
+            <i class="bi bi-bag me-2"></i>Order #{{ object.id }}
         </h4>
         {% if object.is_error %}
             <span class="badge bg-danger fs-6">{{ object.status_verbose }}</span>
@@ -36,11 +36,11 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-white">
-                            <h6 class="mb-0"><i class="bi bi-person me-2"></i>Контактные данные</h6>
+                            <h6 class="mb-0"><i class="bi bi-person me-2"></i>Contact Details</h6>
                         </div>
                         <div class="card-body">
-                            <p class="mb-2"><strong>ФИО:</strong> {{ object.full_name }}</p>
-                            <p class="mb-2"><strong>Телефон:</strong> {{ object.phone }}</p>
+                            <p class="mb-2"><strong>Full Name:</strong> {{ object.full_name }}</p>
+                            <p class="mb-2"><strong>Phone:</strong> {{ object.phone }}</p>
                             <p class="mb-0"><strong>Email:</strong> {{ object.email }}</p>
                         </div>
                     </div>
@@ -48,14 +48,14 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-white">
-                            <h6 class="mb-0"><i class="bi bi-truck me-2"></i>Доставка и оплата</h6>
+                            <h6 class="mb-0"><i class="bi bi-truck me-2"></i>Delivery & Payment</h6>
                         </div>
                         <div class="card-body">
-                            <p class="mb-2"><strong>Доставка:</strong> {{ object.delivery }}</p>
-                            <p class="mb-2"><strong>Адрес:</strong> {{ object.address }}</p>
-                            <p class="mb-2"><strong>Оплата:</strong> Онлайн картой</p>
+                            <p class="mb-2"><strong>Delivery:</strong> {{ object.delivery }}</p>
+                            <p class="mb-2"><strong>Address:</strong> {{ object.address }}</p>
+                            <p class="mb-2"><strong>Payment:</strong> Online by card</p>
                             <p class="mb-0">
-                                <strong>Статус платежа:</strong>
+                                <strong>Payment Status:</strong>
                                 {% if object.payment.all.0.is_error %}
                                     <span class="text-danger">{{ object.payment.all.0.status_verbose }}</span>
                                 {% elif object.payment.all.0.is_paid %}
@@ -72,7 +72,7 @@
             <!-- Order Items -->
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white">
-                    <h6 class="mb-0"><i class="bi bi-box me-2"></i>Товары в заказе</h6>
+                    <h6 class="mb-0"><i class="bi bi-box me-2"></i>Items in Order</h6>
                 </div>
                 <div class="card-body p-0">
                     {% for cart in object.cart.all %}
@@ -90,10 +90,10 @@
                                     {{ cart.product_seller.product.name|truncatewords:10 }}
                                 </a>
                             </h6>
-                            <small class="text-muted">{{ cart.products_count }} шт. × ${{ cart.product_seller.price|commaprice }}</small>
+                            <small class="text-muted">{{ cart.products_count }} pcs. × ${{ cart.product_seller.price|commaprice }}</small>
                         </div>
                         <div class="text-end">
-                            <span class="fw-bold text-primary">${{ cart.product_seller.price|commaprice }}</span>
+                            <span class="fw-bold text-primary">${{ cart.product_seller.price|multiply:cart.products_count|commaprice }}</span>
                         </div>
                     </div>
                     {% endfor %}
@@ -105,30 +105,30 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm sticky-top u-sticky-top-100">
                 <div class="card-header bg-white">
-                    <h6 class="mb-0">Итого по заказу</h6>
+                    <h6 class="mb-0">Order Total</h6>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Дата заказа:</span>
+                        <span class="text-muted">Order Date:</span>
                         <span>{{ object.created_at|date:"d.m.Y H:i" }}</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="fs-5">Итого:</span>
+                        <span class="fs-5">Total:</span>
                         <span class="fs-4 fw-bold text-primary">${{ object.total_products_price|commaprice }}</span>
                     </div>
                 </div>
                 {% if object.payment.all.0.need_pay %}
                 <div class="card-footer bg-white">
                     <a href="{% url 'payment' pk=object.payment.all.0.id %}" class="btn btn-primary w-100">
-                        <i class="bi bi-credit-card me-2"></i>Оплатить
+                        <i class="bi bi-credit-card me-2"></i>Pay
                     </a>
                 </div>
                 {% endif %}
             </div>
 
             <a href="{% url 'orders_history' %}" class="btn btn-outline-secondary w-100 mt-3">
-                <i class="bi bi-arrow-left me-2"></i>Все заказы
+                <i class="bi bi-arrow-left me-2"></i>All Orders
             </a>
         </div>
     </div>

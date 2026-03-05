@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Вход{% endblock %}
+{% block title %}Sign In{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -11,8 +11,8 @@
                 <div class="card-body p-4">
                     <div class="text-center mb-4">
                         <img src="{% static 'assets/img/logo.svg' %}" alt="Larek" height="50" class="mb-3">
-                        <h4>Вход в аккаунт</h4>
-                        <p class="text-muted">Введите ваши данные для входа</p>
+                        <h4>Sign In</h4>
+                        <p class="text-muted">Enter your credentials to sign in</p>
                     </div>
 
                     <form method="post" action="">
@@ -27,7 +27,7 @@
                         {% endif %}
 
                         <div class="mb-3">
-                            <label for="id_username" class="form-label">Имя пользователя</label>
+                            <label for="id_username" class="form-label">Username</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-person"></i></span>
                                 <input 
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="id_password" class="form-label">Пароль</label>
+                            <label for="id_password" class="form-label">Password</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                 <input 
@@ -55,7 +55,7 @@
                                     class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
                                     id="id_password" 
                                     name="password"
-                                    placeholder="Пароль"
+                                    placeholder="Password"
                                     required
                                 >
                             </div>
@@ -67,13 +67,13 @@
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember" name="remember">
-                                <label class="form-check-label" for="remember">Запомнить меня</label>
+                                <label class="form-check-label" for="remember">Remember me</label>
                             </div>
-                            <a href="{% url 'password_reset' %}" class="small">Забыли пароль?</a>
+                            <a href="{% url 'password_reset' %}" class="small">Forgot password?</a>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 mb-3">
-                            <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
                         </button>
                     </form>
 
@@ -81,8 +81,8 @@
 
                     <div class="text-center">
                         <p class="text-muted mb-0">
-                            Нет аккаунта? 
-                            <a href="{% url 'registration' %}" class="fw-semibold">Зарегистрироваться</a>
+                            Don't have an account? 
+                            <a href="{% url 'registration' %}" class="fw-semibold">Sign Up</a>
                         </p>
                     </div>
                 </div>

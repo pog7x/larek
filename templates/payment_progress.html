@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Статус оплаты{% endblock %}
+{% block title %}Payment Status{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">Заказы</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Статус оплаты</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'orders_history' %}">Orders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Payment Status</li>
         </ol>
     </nav>
 

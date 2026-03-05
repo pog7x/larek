@@ -15,10 +15,10 @@ class ProductSellerListView(ListView):
     ORDERING_PRICE = "price"
 
     ORDERING_MAP = {
-        ORDERING_POPULARITY: "Популярности",
-        ORDERING_REVIEW_COUNT: "Отзывам",
-        ORDERING_ID: "Новизне",
-        ORDERING_PRICE: "Цене",
+        ORDERING_POPULARITY: "Popularity",
+        ORDERING_REVIEW_COUNT: "Reviews",
+        ORDERING_ID: "Newest",
+        ORDERING_PRICE: "Price",
     }
 
     model = ProductSeller

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Профиль — {{ user.username }}{% endblock %}
+{% block title %}Profile — {{ user.username }}{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Профиль</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
         </ol>
     </nav>
 
@@ -30,19 +30,19 @@
                 </div>
                 <div class="list-group list-group-flush">
                     <a href="{% url 'profile' %}" class="list-group-item list-group-item-action active">
-                        <i class="bi bi-person me-2"></i>Профиль
+                        <i class="bi bi-person me-2"></i>Profile
                     </a>
                     <a href="{% url 'orders_history' %}" class="list-group-item list-group-item-action">
-                        <i class="bi bi-bag me-2"></i>История заказов
+                        <i class="bi bi-bag me-2"></i>Orders History
                     </a>
                     <a href="{% url 'views_history' %}" class="list-group-item list-group-item-action">
-                        <i class="bi bi-clock-history me-2"></i>История просмотров
+                        <i class="bi bi-clock-history me-2"></i>Browsing History
                     </a>
                     <a href="{% url 'password_change' %}" class="list-group-item list-group-item-action">
-                        <i class="bi bi-key me-2"></i>Сменить пароль
+                        <i class="bi bi-key me-2"></i>Change Password
                     </a>
                     <a href="{% url 'logout' %}" class="list-group-item list-group-item-action text-danger">
-                        <i class="bi bi-box-arrow-right me-2"></i>Выход
+                        <i class="bi bi-box-arrow-right me-2"></i>Logout
                     </a>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white">
                     <h5 class="mb-0">
-                        <i class="bi bi-person-gear me-2"></i>Редактирование профиля
+                        <i class="bi bi-person-gear me-2"></i>Edit Profile
                     </h5>
                 </div>
                 <div class="card-body">
@@ -71,7 +71,7 @@
                         
                         <!-- Avatar -->
                         <div class="mb-4">
-                            <label class="form-label">Аватар</label>
+                            <label class="form-label">Avatar</label>
                             <div class="d-flex align-items-center gap-3">
                                 <img 
                                     src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'assets/img/icons/loon-icon.svg' %}{% endif %}"
@@ -83,14 +83,14 @@
                                 >
                                 <div>
                                     {{ form.avatar }}
-                                    <div class="form-text">PNG, JPG до 2MB</div>
+                                    <div class="form-text">PNG, JPG up to 2MB</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="first_name" class="form-label">Имя</label>
+                                <label for="first_name" class="form-label">First Name</label>
                                 <input 
                                     type="text" 
                                     class="form-control" 
@@ -100,7 +100,7 @@
                                 >
                             </div>
                             <div class="col-md-6">
-                                <label for="last_name" class="form-label">Фамилия</label>
+                                <label for="last_name" class="form-label">Last Name</label>
                                 <input 
                                     type="text" 
                                     class="form-control" 
@@ -110,7 +110,7 @@
                                 >
                             </div>
                             <div class="col-md-6">
-                                <label for="phone" class="form-label">Телефон</label>
+                                <label for="phone" class="form-label">Phone</label>
                                 <input 
                                     type="tel" 
                                     class="form-control" 
@@ -138,10 +138,10 @@
 
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-lg me-2"></i>Сохранить изменения
+                                <i class="bi bi-check-lg me-2"></i>Save Changes
                             </button>
                             <a href="{% url 'password_change' %}" class="btn btn-outline-warning">
-                                <i class="bi bi-key me-2"></i>Сменить пароль
+                                <i class="bi bi-key me-2"></i>Change Password
                             </a>
                         </div>
                     </form>

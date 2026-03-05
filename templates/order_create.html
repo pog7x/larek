@@ -2,21 +2,21 @@
 {% load static %}
 {% load stringfilters %}
 
-{% block title %}Оформление заказа{% endblock %}
+{% block title %}Checkout{% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'cart' %}">Корзина</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Оформление заказа</li>
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'cart' %}">Cart</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
         </ol>
     </nav>
 
     <h1 class="h3 mb-4">
-        <i class="bi bi-bag-check me-2"></i>Оформление заказа
+        <i class="bi bi-bag-check me-2"></i>Checkout
     </h1>
 
     <div class="row">
@@ -31,14 +31,14 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-step="1">
                                 <span class="badge bg-primary rounded-circle me-3">1</span>
-                                Контактные данные
+                                Contact Details
                             </button>
                         </h2>
                         <div class="accordion-collapse collapse show" id="step1">
                             <div class="accordion-body">
                                 <div class="row g-3">
                                     <div class="col-md-12">
-                                        <label for="order-full_name" class="form-label">ФИО</label>
+                                        <label for="order-full_name" class="form-label">Full Name</label>
                                         <input 
                                             type="text" 
                                             class="form-control" 
@@ -52,7 +52,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="order-phone" class="form-label">Телефон</label>
+                                        <label for="order-phone" class="form-label">Phone</label>
                                         <input 
                                             type="tel" 
                                             class="form-control" 
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="mt-4">
                                     <button type="button" class="btn btn-primary" onclick="goToStep(2)">
-                                        Продолжить <i class="bi bi-arrow-right ms-2"></i>
+                                        Continue <i class="bi bi-arrow-right ms-2"></i>
                                     </button>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-step="2">
                                 <span class="badge bg-secondary rounded-circle me-3">2</span>
-                                Способ доставки
+                                Delivery Method
                             </button>
                         </h2>
                         <div class="accordion-collapse collapse" id="step2">
@@ -117,19 +117,19 @@
                                             <span>{{ delivery.verbose }}</span>
                                             <span class="fw-bold text-primary">${{ delivery.price|commaprice }}</span>
                                         </div>
-                                        <small class="text-muted">Бесплатно при заказе от ${{ delivery.order_sum|commaprice }}</small>
+                                        <small class="text-muted">Free on orders over ${{ delivery.order_sum|commaprice }}</small>
                                     </label>
                                 </div>
                                 {% endfor %}
 
                                 <div class="mt-3">
-                                    <label for="order-address" class="form-label">Адрес доставки</label>
+                                    <label for="order-address" class="form-label">Delivery Address</label>
                                     <textarea 
                                         class="form-control" 
                                         id="order-address" 
                                         name="address" 
                                         rows="3"
-                                        placeholder="Город, улица, дом, квартира"
+                                        placeholder="City, street, house, apartment"
                                         required
                                     >{{ user.address }}</textarea>
                                     {% if form.errors.address %}
@@ -139,10 +139,10 @@
 
                                 <div class="mt-4 d-flex gap-2">
                                     <button type="button" class="btn btn-outline-secondary" onclick="goToStep(1)">
-                                        <i class="bi bi-arrow-left me-2"></i>Назад
+                                        <i class="bi bi-arrow-left me-2"></i>Back
                                     </button>
                                     <button type="button" class="btn btn-primary" onclick="goToStep(3)">
-                                        Продолжить <i class="bi bi-arrow-right ms-2"></i>
+                                        Continue <i class="bi bi-arrow-right ms-2"></i>
                                     </button>
                                 </div>
                             </div>
@@ -154,30 +154,30 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-step="3">
                                 <span class="badge bg-secondary rounded-circle me-3">3</span>
-                                Способ оплаты
+                                Payment Method
                             </button>
                         </h2>
                         <div class="accordion-collapse collapse" id="step3">
                             <div class="accordion-body">
                                 <div class="form-check mb-3 p-3 border rounded border-primary bg-light">
                                     <input class="form-check-input" type="radio" name="pay" id="pay-online" value="online" checked>
-                                    <label class="form-check-label" for="pay-online">
-                                        <i class="bi bi-credit-card me-2"></i>Онлайн картой
+                                        <label class="form-check-label" for="pay-online">
+                                        <i class="bi bi-credit-card me-2"></i>Online by card
                                     </label>
                                 </div>
                                 <div class="form-check mb-3 p-3 border rounded">
                                     <input class="form-check-input" type="radio" name="pay" id="pay-someone" value="someone">
                                     <label class="form-check-label" for="pay-someone">
-                                        <i class="bi bi-shuffle me-2"></i>Онлайн со случайного счета
+                                        <i class="bi bi-shuffle me-2"></i>Online from random account
                                     </label>
                                 </div>
 
                                 <div class="mt-4 d-flex gap-2">
                                     <button type="button" class="btn btn-outline-secondary" onclick="goToStep(2)">
-                                        <i class="bi bi-arrow-left me-2"></i>Назад
+                                        <i class="bi bi-arrow-left me-2"></i>Back
                                     </button>
                                     <button type="button" class="btn btn-primary" onclick="goToStep(4)">
-                                        Продолжить <i class="bi bi-arrow-right ms-2"></i>
+                                        Continue <i class="bi bi-arrow-right ms-2"></i>
                                     </button>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-step="4">
                                 <span class="badge bg-secondary rounded-circle me-3">4</span>
-                                Подтверждение заказа
+                                Order Confirmation
                             </button>
                         </h2>
                         <div class="accordion-collapse collapse" id="step4">
@@ -199,9 +199,9 @@
                                     <div class="col-md-6">
                                         <div class="card bg-light border-0">
                                             <div class="card-body">
-                                                <h6 class="card-title"><i class="bi bi-person me-2"></i>Контакты</h6>
-                                                <p class="mb-1"><strong>ФИО:</strong> <span id="order-info-full_name"></span></p>
-                                                <p class="mb-1"><strong>Телефон:</strong> <span id="order-info-phone"></span></p>
+                                                <h6 class="card-title"><i class="bi bi-person me-2"></i>Contacts</h6>
+                                                <p class="mb-1"><strong>Full Name:</strong> <span id="order-info-full_name"></span></p>
+                                                <p class="mb-1"><strong>Phone:</strong> <span id="order-info-phone"></span></p>
                                                 <p class="mb-0"><strong>Email:</strong> <span id="order-info-email"></span></p>
                                             </div>
                                         </div>
@@ -209,17 +209,17 @@
                                     <div class="col-md-6">
                                         <div class="card bg-light border-0">
                                             <div class="card-body">
-                                                <h6 class="card-title"><i class="bi bi-truck me-2"></i>Доставка и оплата</h6>
-                                                <p class="mb-1"><strong>Доставка:</strong> <span id="order-info-delivery"></span></p>
-                                                <p class="mb-1"><strong>Адрес:</strong> <span id="order-info-address"></span></p>
-                                                <p class="mb-0"><strong>Оплата:</strong> <span id="order-info-pay"></span></p>
+                                                <h6 class="card-title"><i class="bi bi-truck me-2"></i>Delivery & Payment</h6>
+                                                <p class="mb-1"><strong>Delivery:</strong> <span id="order-info-delivery"></span></p>
+                                                <p class="mb-1"><strong>Address:</strong> <span id="order-info-address"></span></p>
+                                                <p class="mb-0"><strong>Payment:</strong> <span id="order-info-pay"></span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Cart Items -->
-                                <h6 class="mb-3">Товары в заказе:</h6>
+                                <h6 class="mb-3">Items in Order:</h6>
                                 {% for cart in carts %}
                                 <div class="d-flex align-items-center gap-3 py-2 border-bottom">
                                     <img 
@@ -229,17 +229,17 @@
                                     >
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold">{{ cart.product_seller.product.name|truncatewords:8 }}</div>
-                                        <small class="text-muted">{{ cart.products_count }} шт. × ${{ cart.product_seller.price|commaprice }}</small>
+                                        <small class="text-muted">{{ cart.products_count }} pcs. × ${{ cart.product_seller.price|commaprice }}</small>
                                     </div>
                                 </div>
                                 {% endfor %}
 
                                 <div class="mt-4 d-flex gap-2">
                                     <button type="button" class="btn btn-outline-secondary" onclick="goToStep(3)">
-                                        <i class="bi bi-arrow-left me-2"></i>Назад
+                                        <i class="bi bi-arrow-left me-2"></i>Back
                                     </button>
                                     <button type="submit" class="btn btn-success btn-lg">
-                                        <i class="bi bi-check-circle me-2"></i>Подтвердить и оплатить
+                                        <i class="bi bi-check-circle me-2"></i>Confirm & Pay
                                     </button>
                                 </div>
                             </div>
@@ -253,30 +253,30 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm sticky-top u-sticky-top-100">
                 <div class="card-header bg-white">
-                    <h5 class="mb-0">Ваш заказ</h5>
+                    <h5 class="mb-0">Your Order</h5>
                 </div>
                 <div class="card-body">
                     {% for cart in carts %}
                     <div class="d-flex justify-content-between align-items-start mb-2 pb-2 border-bottom">
                         <div>
                             <div class="small">{{ cart.product_seller.product.name|truncatewords:5 }}</div>
-                            <small class="text-muted">{{ cart.products_count }} шт.</small>
+                            <small class="text-muted">{{ cart.products_count }} pcs.</small>
                         </div>
                         <span class="text-nowrap">${{ cart.product_seller.price|commaprice }}</span>
                     </div>
                     {% endfor %}
                     
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Товары ({{ total_products_count }}):</span>
+                        <span class="text-muted">Items ({{ total_products_count }}):</span>
                         <span>${{ total_products_price|commaprice }}</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Доставка:</span>
+                        <span class="text-muted">Delivery:</span>
                         <span id="delivery-price">—</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="fs-5 fw-semibold">Итого:</span>
+                        <span class="fs-5 fw-semibold">Total:</span>
                         <span class="fs-4 fw-bold text-primary" id="total-price">${{ total_products_price|commaprice }}</span>
                     </div>
                 </div>
@@ -330,7 +330,7 @@ function updateOrderInfo() {
     document.getElementById('order-info-delivery').textContent = deliveriesMap[deliveryId];
     
     const payMethod = document.querySelector('input[name="pay"]:checked').value;
-    document.getElementById('order-info-pay').textContent = payMethod === 'online' ? 'Онлайн картой' : 'Случайный счет';
+    document.getElementById('order-info-pay').textContent = payMethod === 'online' ? 'Online by card' : 'Random account';
 }
 
 // Select delivery option
