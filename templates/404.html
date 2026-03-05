@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block extra_css %}
+<style>
+	@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+	@keyframes scan { 0%{top:0} 100%{top:100%} }
+	@keyframes flicker { 0%,100%{opacity:1} 50%{opacity:.4} }
+	@keyframes drift-left { 0%{transform:translateX(0) rotate(0)} 100%{transform:translateX(-12px) rotate(-8deg)} }
+	@keyframes drift-right { 0%{transform:translateX(0) rotate(0)} 100%{transform:translateX(12px) rotate(8deg)} }
+	@keyframes blink-cursor { 0%,100%{opacity:1} 50%{opacity:0} }
+	.anim-float { animation: float 3s ease-in-out infinite }
+	.anim-scan { position:relative; overflow:hidden }
+	.anim-scan::after { content:""; position:absolute; left:0; width:100%; height:2px; background:linear-gradient(90deg,transparent,rgba(0,99,209,.4),transparent); animation:scan 2.5s linear infinite }
+	.anim-flicker { animation: flicker 3s ease-in-out infinite }
+	.anim-drift-l { animation: drift-left 3s ease-in-out infinite alternate }
+	.anim-drift-r { animation: drift-right 3s ease-in-out infinite alternate }
+	.anim-blink { animation: blink-cursor 1s step-end infinite }
+	.shelf-line { height:3px; background:linear-gradient(90deg,transparent 5%,var(--bs-secondary) 50%,transparent 95%); border-radius:2px }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-lg-7 col-md-9 text-center py-5">
+
+			<!-- Floating icon -->
+			<div class="anim-float mb-4">
+				<div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle" style="width:130px;height:130px">
+					<div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-25 rounded-circle" style="width:100px;height:100px">
+						<i class="bi bi-binoculars text-primary" style="font-size:48px"></i>
+					</div>
+				</div>
+			</div>
+
+			<!-- Big 404 -->
+			<h1 class="display-1 fw-bolder text-primary opacity-75 mb-0 lh-1" style="font-size:clamp(6rem,15vw,10rem);letter-spacing:-4px">
+				4<span class="anim-flicker d-inline-block">0</span>4
+			</h1>
+
+			<!-- Title & description -->
+			<h2 class="fw-bold text-dark mt-3 mb-3">Page Not Found</h2>
+			<p class="text-muted fs-5 mb-4 px-md-5">
+				This page doesn't exist or has been moved.
+			</p>
+
+			<!-- Warehouse shelves -->
+			<div class="d-flex flex-column align-items-center gap-0 mb-4">
+				<div class="d-flex gap-3 mb-2">
+					<div class="d-flex align-items-center justify-content-center bg-light border border-2 border-dashed rounded-3 text-muted anim-drift-l" style="width:60px;height:60px">
+						<i class="bi bi-question-lg fs-4"></i>
+					</div>
+					<div class="d-flex align-items-center justify-content-center bg-light border rounded-3 text-primary anim-scan" style="width:60px;height:60px">
+						<i class="bi bi-cpu fs-4"></i>
+					</div>
+					<div class="d-flex align-items-center justify-content-center bg-light border border-2 border-dashed rounded-3 text-muted anim-drift-r" style="width:60px;height:60px">
+						<i class="bi bi-question-lg fs-4"></i>
+					</div>
+				</div>
+				<div class="shelf-line mb-3" style="width:220px"></div>
+				<div class="d-flex gap-3 mb-2">
+					<div class="d-flex align-items-center justify-content-center bg-light border rounded-3 text-primary" style="width:60px;height:60px">
+						<i class="bi bi-headphones fs-4"></i>
+					</div>
+					<div class="d-flex align-items-center justify-content-center bg-light border border-2 border-dashed rounded-3 text-muted anim-flicker" style="width:60px;height:60px">
+						<i class="bi bi-question-lg fs-4"></i>
+					</div>
+					<div class="d-flex align-items-center justify-content-center bg-light border rounded-3 text-primary" style="width:60px;height:60px">
+						<i class="bi bi-laptop fs-4"></i>
+					</div>
+				</div>
+				<div class="shelf-line" style="width:220px"></div>
+			</div>
+
+			<!-- Actions -->
+			<div class="d-flex gap-3 justify-content-center flex-wrap">
+				<a href="{% url 'index' %}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm" tabindex="0" aria-label="Go to homepage">
+					<i class="bi bi-house-door me-2"></i>Back to Home
+				</a>
+				<a href="{% url 'catalog' %}" class="btn btn-outline-primary btn-lg rounded-pill px-4" tabindex="0" aria-label="Browse catalog">
+					<i class="bi bi-grid me-2"></i>Browse Catalog
+				</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endblock %}
