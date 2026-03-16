@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 	{% load static %}
+	{% load django_htmx %}
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,6 +14,8 @@
 		<!-- Fonts preload -->
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Regular.woff' %}" as="font" type="font/woff" crossorigin />
 		<link rel="preload" href="{% static 'assets/fonts/Roboto/Roboto-Bold.woff' %}" as="font" type="font/woff" crossorigin />
+
+		{% htmx_script %}
 
 		<!-- CSS -->
 		<link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}" />
@@ -252,7 +255,6 @@
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="{% static 'assets/js/htmx.min.js' %}"></script>
 		<script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
 		<script src="{% static 'assets/js/nouislider.min.js' %}"></script>
 		<script src="{% static 'assets/js/imask.min.js' %}"></script>
