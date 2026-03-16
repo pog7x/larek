@@ -24,7 +24,7 @@ services:
       - POSTGRES_PASSWORD=larek_password
 
       - RMQ_URL=amqp://larek_rmq:larek_password@rmq:5672/
-    command: bash -c "python manage.py migrate && celery -A larek worker -l info --detach && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && celery -A larek worker -l info --detach && python manage.py runserver 0.0.0.0:8000"
     volumes:
      - .:/app/
 
